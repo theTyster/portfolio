@@ -1,4 +1,6 @@
-body {
+input {
+	border:none;
+	outline:none;
 	transition: background-color, 3s;
 }
 p, form, input {
@@ -12,8 +14,17 @@ p, form, input {
 	opacity: 0;
 }
 
-p.result {
-animation: 3s, once, right, slidein;
+.phaseOne {
+	transition: display, 1s;
+}
+
+.phaseTwo {
+	display: none;
+	transition: display, 1s;
+}
+.phaseThree {
+	display: none;
+	transition: display, 1s;
 }
 
 .inline {
