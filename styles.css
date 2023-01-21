@@ -1,0 +1,22 @@
+body {
+	transition: background-color, 3s;
+}
+p, form, input {
+	display: inherit;
+}
+.hidden_submit {
+	display: inline;
+	position: absolute;
+	width:0;
+	height: 0;
+	opacity: 0;
+}
+
+p.result {
+animation: 3s, once, right, slidein;
+}
+
+.inline {
+	display: inline;
+}
+
