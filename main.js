@@ -32,16 +32,17 @@ document.addEventListener('keyup', (event) => {
          }
       };
    setTimeout(checkInput, 3000);
-      //MAKE A CONSTRUCTOR FUNCTION FOR THESE
-   let phaseTwoFN = function showPhaseTwoText() {
-      let phaseTwo = document.querySelector('p.phaseTwo');
-      phaseTwo.style.display = "block";
-   }
-   let phaseThreeFN = function showPhaseThreeText() {
-      let phaseThree = document.querySelector('div.phaseThree');
-      phaseThree.style.display = "block";
-   }
-   setTimeout(phaseTwoFN, 6000);
-   setTimeout(phaseThreeFN, 8000);
+   let phase = function(phaseNo, tag, time) {
+      this.fn = function() {
+         this.no = document.querySelector(`${tag}.${phaseNo}`),
+         this.no.style.display = "block";
+      },
+      this.timeout = function() {setTimeout(this.fn, time)}
+   };
+
+   let phaseTwo = new phase("phaseTwo", "p", 6000);
+      phaseTwo.timeout();
+   let phaseThree = new phase("phaseThree", "div", 8000);
+      phaseThree.timeout();
    };
 });
