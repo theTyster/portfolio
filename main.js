@@ -33,11 +33,11 @@ document.addEventListener('keyup', (event) => {
       };
    setTimeout(checkInput, 3000);
    let phase = function(phaseNo, tag, time) {
+      this.no = document.querySelector(`${tag}.${phaseNo}`)
       this.fn = function() {
-         this.no = document.querySelector(`${tag}.${phaseNo}`),
          this.no.style.display = "block";
-      },
-      this.timeout = function() {setTimeout(this.fn, time)}
+      }
+      this.timeout = function() {setTimeout(this.fn.bind(this), time)}
    };
 
    let phaseTwo = new phase("phaseTwo", "p", 6000);
