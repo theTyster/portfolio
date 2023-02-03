@@ -1,4 +1,29 @@
 @import "animate_water_flow.css";
+/*FOR TESTING ONLY*/
+.testing {
+	margin: 5px;
+	padding: 7px;
+	background-color: darkred;
+	color: white;
+	border-radius: 7px;
+}
+/*FOR TESTING ONLY*/
+
+
+.flex-container{ display: flex; }
+.flex-container > aside { transition: flex, ease, 10s; }
+.flex-container > aside:nth-of-type(2) { flex: 1; }
+
+/* SET BY JS
+.container{
+  flex: 1;
+} */
+
+article {
+	flex-basis: 500px;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
 
 input[name="duck_color"] {
 	border:none;
@@ -11,11 +36,9 @@ span.inline > * {
 }
 
 .phasedDisplay > * {
-/*	position: absolute;
 	opacity: 0;
-*/
 	visibility: collapse;
-	transition: all, 4s;
+	transition: all, 1s;
 }
 
 .storyStart{
@@ -25,4 +48,25 @@ span.inline > * {
 #duck {
 	position: relative;
 	bottom: -1.7rem;
+}
+
+#print {
+	display: none;
+}
+/*MEDIA QUERIES*/
+@media print {
+	.flex-container{
+		display:none;
+	}
+	#print {
+		display:block;
+		font-size:20pt;
+	}
+}
+
+@media (max-width: 499px) {
+article {
+		max-width: 355px;
+		min-width: unset;
+	}
 }

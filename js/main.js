@@ -1,68 +1,72 @@
 "use strict";
+//duck Object for duck quality persistance
 const duck = {
-   water: document.querySelector("pre#water"),
-   illust: document.querySelector("pre#duck"),
+	water: document.querySelectorAll("pre.water_flow"),
+	illust: document.querySelector("pre#duck"),
 };
+//commonly used tags
 const page = {
-   body:  document.querySelector('body'),
-   container: document.querySelector(".container")
-}
+	body:  document.querySelector("body"),
+	container: document.getElementsByClassName("container"),
+	duckInput: document.querySelector("input#duck_color")
+};
+const phase = function(tag) {
+	this.tag = document.querySelector(tag),
+	this.fn = function() {
+		this.tag.style.visibility = "unset";
+		this.tag.style.opacity = 1;
+	}
+//	this.transit = function(arg) {
+//		this.tag.addEventListener("transitionend", (arg) => arg);
+//	},
+//	this.timeout = function() {
+//		setTimeout(this.fn.bind(this), time)
+//	}
+};
+//fires after enter is hit
 document.addEventListener('keyup', (event) => {
-   const keyName = event.key;
-   let duckInput = document.querySelector("input[name='duck_color']");
-   const phase = function(phaseNo, tag, time) {
-         this.no = document.querySelector(`${tag}.${phaseNo}`),
-         this.fn = function() {
-              this.no.style.visibility = "unset";
-//            this.no.style.position = "relative";
-//            this.no.style.opacity = 1;
-         },
-         this.timeout = function() {
-            setTimeout(this.fn.bind(this), time)
-         }
-   }
-   let colorizeDuck = function saveDuckColorToObject() {
-      duckInput.style.backgroundColor = duckInput.value;
-      //saves input to memory.
-      return duck.color = duckInput.value;
-      }
-   // defined duck phases:
-   const phaseOne = new phase("storyStart", "p", 3000) 
-   const phaseTwo = new phase("phaseTwo", "p", 6000);
-   const phaseThree = new phase("phaseThree", "div", 8000);
-   // listens for Enter and then... 
-   if (keyName === 'Enter') {
-      //Colors the Duck based on the input...
-      colorizeDuck();
-      phaseOne.fn();
-      phaseOne.no.innerHTML = `<p class="storyStart">Hmmmmmmm....</p>`
-      // And checks to see if it was a valid color.
-      let checkInput = () => {
-         let currentDuckStyle = window.getComputedStyle(duckInput).getPropertyValue("background-color");
-         let regex = /rgb\(255, 255, 255\)/g;
-         let match = currentDuckStyle.match(regex);
-         if (match) {
-         phaseOne.no.innerHTML = `<p class="storyStart">No, that wasn't it...</p>`;
-         }
-         else {
-         phaseOne.no.innerHTML = `<p class="storyStart">Ah, yes. It was definitely a ${duck.color} duck.</p>`;
-         duckInput.disabled = true;
-         }
-      };
-      //executes checks and story phases.
-      setTimeout(checkInput, 3000);
-      // got frustrated trying to control CSS with JS and decided I needed to learn more.
-      page.body.insertAdjacentHTML("afterbegin", '<div class="container">');
-      page.body.insertAdjacentHTML("beforeend", '</div>');
-      page.container.style.width = "auto";
-      page.container.style.marginLeft = "33%";
-      page.container.style.marginRight = "33%";
-      page.container.style.paddingLeft = "5%";
-      page.container.style.paddingRight = "5%";
-
-      phaseTwo.timeout();
-      phaseThree.timeout();
-      duck.illust.style.color = duck.color;
-      duck.water.style.color = "blue";
-   };
+	const keyName = event.key;
+	if (keyName === "Enter") {
+		letUsBegin();
+	};
 });
+
+const letUsBegin = function fireTheShootyGunRay(){
+	const phaseOne = new phase("div.storyStart");
+	//Colors the Duck based on the input.
+	const colorizeDuck = function saveDuckColorToObject() {
+		page.duckInput.style.backgroundColor = page.duckInput.value;
+		//saves input to memory.
+		duck.color = page.duckInput.value;
+		}
+	phaseOne.tag.innerHTML = `<p class="storyStart">Hmmmmm.... </p>`;
+	phaseOne.fn();
+	colorizeDuck();
+	page.duckInput.addEventListener("transitionend", () => {
+		const checkInput = () => {
+			page.duckInput.disabled = true;
+			phaseOne.tag.innerHTML = `<p class="storyStart">Ah, yes. It was definitely a ${duck.color} duck.</p>`;
+			phaseOne.fn();
+		};
+			checkInput();
+	});
+}
+page.duckInput.addEventListener("transitionend", () => {
+	const phaseTwo = new phase("div.phaseTwo");
+	setTimeout(() => {
+		phaseTwo.fn();
+		let eyes = [document.querySelector("pre#two"), document.querySelector("pre#three")]
+		for (let i of eyes)
+			i.style.visibility = "collapse";
+	for (let i of page.container)
+	i.style.flex = 1;
+	}, 1000);
+})
+
+//	phaseTwo.timeout();
+//	const phaseThree = new phase("phaseThree", "div", 8000);
+//	phaseThree.timeout();
+//	duck.illust.style.color = duck.color;
+//	for (let i of duck.water){
+//	i.style.color = "blue";
+//	}

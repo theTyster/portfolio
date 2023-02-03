@@ -4,50 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<title>The Duck Story</title>
 </head>
 <body>
-   <h1 id="welcome"> Welcome to story time</h1>
-   <p>Once upon a time there was a duck.</p>
-   <br>
-   <p>Now, what was the color of that duck again?</p>
-   <span class="inline">
-     <p>I think it was a</p>
-    <div id="insert_form">
-      <input 
-         id="duck_color" 
-         name="duck_color" 
-         type="text" 
-         placeholder="color" 
-         size="3">
-     </div>
-     <p>duck.</p>
-   </span>
-   <div class="phasedDisplay">
-      <p class="storyStart"></p>
-      <p class="phaseTwo">Now, where is that duck? he was just around here somewhere... let's see.</p>
-      <div class="phaseThree">
-         <p>Ah! There he is.</p>
-         <pre id="duck">
-                       __
-                     =(0 )___
-                      (  _> /  
-         </pre>
-         <pre class="water_flow" id="water">
-         ----^--^------^--^--^--^------^--^
-            --^----^--        --^----^--
-         </pre>
+   <main class="flex-container">
+      <aside class="container">
+      </aside>
+      <article>
+         <button class="testing">fire the lazer</button>
+         <h1> Welcome to story time</h1>
+         <p>Once upon a time there was a duck.</p>
+         <br>
+         <p>Now, what was the color of that duck again?</p>
+         <span class="inline">
+           <p>I think it was a</p>
+            <input 
+               id="duck_color" 
+               name="duck_color" 
+               type="text" 
+               placeholder="color" 
+               size="3">
+           <p>duck.</p>
+         </span>
+         <div class="phasedDisplay">
+            <div class="storyStart">
+            </div>
+            <div class="phaseTwo">
+            	<p id="one">Now, where is that duck? he was just around here somewhere... let's see.</p>
+		<pre id="two">
+	👀
+		</pre>
+		<pre id="three">
+				👀
+		</pre>
+            </div>
+            <div class="phaseThree">
+               <p>Ah! There he is.</p>
+               <div class="flex-container">
+                  <div >
+                     </div>
+                  <div >
+                <pre id="duck">
+              __
+            =(0 )___
+             (  _> /  
+                </pre>
+                <pre class="water_flow" id="water1">
+----^--^------^--^--^--^------^--^
+                </pre>
+                <pre class="water_flow" id="water2">
+   --^----^--        --^----^--
+                </pre>
+                  </div>
+                  <div >
+                     </div>
+                </div>
+            </div>
+            <p>This duck was special because of three things.</p>
+            <ol>
+               <li>He was big/extra medium/small</li>
+               <li>He had a best friend named "" the frog.</li>
+               <li>He can fly when you scroll.</li>
+            </ol>
+         </div>
+      </article>
+      <aside class="container">
+      </aside>
+   </main>
+   <div id="print">
+      <pre>
+                                   ___
+                               ,-""   `.
+                             ,'  _   0 )`-._
+                            /  ,' `-._:.===-'
+                           /  /
+                          /  ;
+              _.--.__    /   ;
+ (`._    _.-""       "--'    |
+ |_  `-""                     \
+  |`-                          :
+   (__   |__.                  ;
+     `-.   '-.__.      _.'    /
+        \      `-.__,-'    _,'
+         `._    ,    /__,-'
+            ""._\__,'| |____
+                 | |  `----.`.
+                 | |        \ `.
+                 ; |___      \-``
+                 \   --|
+                  `.`.|
+      </pre>
       </div>
-      <p>This duck was special because of three things.</p>
-      <ol>
-         <li>He was big/extra medium/small</li>
-         <li>He had a best friend named "" the frog.</li>
-         <li>He can fly when you scroll.</li>
-      </ol>
-   </div>
-</body>
 <footer>
-<script src="js/main.js"></script>
-<script src="js/utils.js"></script>
 </footer>
+</body>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
 </html>
 
