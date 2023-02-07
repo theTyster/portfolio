@@ -1,4 +1,4 @@
-#water1{
+#water1, .water_flow{
   animation-delay: 1s;
   animation-name: water_flow1;
   animation-timing-function: ease-in-out;

@@ -1,4 +1,5 @@
 @import "animate_water_flow.css";
+@import "animate_rain.css";
 /*FOR TESTING ONLY*/
 .testing {
 	margin: 5px;
@@ -14,16 +15,22 @@
 .flex-container > aside { transition: flex, ease, 10s; }
 .flex-container > aside:nth-of-type(2) { flex: 1; }
 
+
 /* SET BY JS
 .container{
   flex: 1;
-} */
+} 
+*/
+
+body {
+	transition: background-color, 7s;
+}
+
 
 article {
-	flex-basis: 500px;
-	flex-grow: 0;
-	flex-shrink: 0;
+	flex: 0 0 500px;
 }
+
 
 input[name="duck_color"] {
 	border:none;
@@ -31,9 +38,11 @@ input[name="duck_color"] {
 	transition: background-color, 3s;
 }
 
+
 span.inline > * {
 	display: inline;
 }
+
 
 .phasedDisplay > * {
 	opacity: 0;
@@ -41,19 +50,19 @@ span.inline > * {
 	transition: all, 1s;
 }
 
-.storyStart{
-	transition: display, 1s;
-}
 
 #duck {
 	position: relative;
 	bottom: -1.7rem;
 }
 
+
+
+
+/*MEDIA QUERIES*/
 #print {
 	display: none;
 }
-/*MEDIA QUERIES*/
 @media print {
 	.flex-container{
 		display:none;
@@ -63,6 +72,7 @@ span.inline > * {
 		font-size:20pt;
 	}
 }
+
 
 @media (max-width: 499px) {
 article {
