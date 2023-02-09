@@ -25,8 +25,8 @@ const phase = function(tag) {
 //	}
 };
 
-const randomNum = function randomNumberGenerator(max){
-	return Math.floor(Math.random(max));
+const ranNumG= function randomNumberGenerator(max){
+	return Math.floor(Math.random() * max);
 }
 
 

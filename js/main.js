@@ -9,9 +9,9 @@ document.addEventListener('keyup', (event) => {
 
 
 const storyStart = function storyStart(){
-	const phaseOne = new phase("div.storyStart");
+	const phaseOne = new phase("div.storyStart"),
 	//Colors the Duck based on the input.
-	const colorizeDuck = function saveDuckColorToObject() {
+	colorizeDuck = function saveDuckColorToObject() {
 		page.duckInput.style.backgroundColor = page.duckInput.value;
 		duck.color = page.duckInput.value;
 		//saves input to memory.
@@ -45,19 +45,88 @@ page.duckInput.addEventListener("transitionend", () => {
 		eyes[0].style.fontSize = "30pt";
 		setTimeout(() => {
 		eyes[0].style.visibility = "collapse";
-		}, 2000);
+		}, 3000);
 		setTimeout(() => {
 			eyes[1].style.visibility = "unset";
 			eyes[1].style.fontSize = "30pt";
 		}, 3000);
 		setTimeout(() => {
 		eyes[1].style.visibility = "collapse";
-		}, 5000);
+		}, 6000);
 		
-		let document.querySelector(`#rain_${randomNum(10)}`);
-		//need to assign display randomly so that drops fall in random order.
+
+		const makeItRain = function letItRain() {
+			const rainArray = [],
+			ranListGen = function randomListGenerator() {
+				let ranNum = ranNumG(9) + 1;
+				const raindrops = 10;
+				while (rainArray.length < raindrops) {
+					if (rainArray.some((match) => match === ranNum))
+						ranNum = ranNumG(9) + 1;
+					else 
+						rainArray.push(ranNum);
+				}
+			}
+			ranListGen();
+			for (let i of rainArray){
+				setTimeout(() => {
+					let rainSelector = document.querySelector(`#rain_${i}`);
+					rainSelector.style.display = "unset";
+					rainSelector.style.opacity = 1;
+				}, rainArray[i/3] * 1000)
+			}
+		};
+		makeItRain();
 	});
 });
+
+
+
+// ALRIGHT screw the random number generator just use this:
+// const rainOrder = [5,9,7,2,4,1,6,10,8,3]
+// have the makeItRain function iterate through this array after a one second delay on each item.
+// If you really want to you can look at how to generate a unique array with no repeating numbers again.
+//
+// You are getting hung up on this promise await statement stuff though.
+// generate a workable list and THEN iterate through it.
+// stop trying to generate the list AS you iterate through it.
+//
+// This was, still, a lot of fun.
+// 
+
+
+
+// OLD PLAN BELOW
+//		const repeats = [];
+//		let ranNum = randomNum(9) + 1;
+//		const rainDrops = 10;
+//		const rainRep = function raindropRepeaterFn(rainfall){
+//			console.log(repeats);
+//				if (repeats.some((e) => {e === ranNum})){
+//					ranNum = randomNum(9) + 1;
+//					rainRep();
+//					}
+//				else {
+//					const ranRain = document.querySelector(`#rain_${ranNum}`);
+//					ranRain.style.display = "unset";
+//					ranRain.style.opacity = 1;
+//					rainfall(ranNum);
+//				}
+//		}
+//		const promRep = function promiseMeAgain(){
+//			const rainWillFall = new Promise((rainfall) => {
+//				setTimeout(() => {rainRep(rainfall)}, 1000);
+//			})
+//			rainWillFall.then((passedValue) => {
+//				repeats.push(passedValue);
+//				while (repeats.length < rainDrops){
+//					ranNum = randomNum(9) + 1;
+//					promRep();
+//				};
+//			});
+//		}
+//		promRep();
+
 
 
 //	phaseTwo.timeout();

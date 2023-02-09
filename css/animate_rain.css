@@ -29,10 +29,7 @@
 	height: 5px;
 	flex: 0 0 5px;
 	position: relative;
-	/* opacity: 0;
-	 * top: -20; 
-	 * display: none;
-	 * 
-	 * Uncomment when it is ready.*/
-	
+	 opacity: 0;
+	 top: -20px; 
+	 display: none;
 }
