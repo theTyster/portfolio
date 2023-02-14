@@ -22,7 +22,7 @@
 .raindrop {
 	animation-name: slideOutDown;
 	animation-iteration-count: infinite;
-	animation-duration: 5s;
+	animation-duration: .3s;
 	animation-timing-function: linear;
 	background-color: blue;
 	border-radius: 50%;
