@@ -54,30 +54,251 @@ page.duckInput.addEventListener("transitionend", () => {
 		eyes[1].style.visibility = "collapse";
 		}, 6000);
 		
+		// remember that the arg is an index range the number of falling raindrops will be one more than this number.
+		const makeItRain = function letItRain(storminess) {
+			const raindrops = 20;
+			const rainArray = shuffle([...Array(raindrops).keys()].map((x) => ++x));
 
-		const makeItRain = function letItRain() {
-			const rainArray = [],
-			ranListGen = function randomListGenerator() {
-				let ranNum = ranNumG(9) + 1;
-				const raindrops = 10;
-				while (rainArray.length < raindrops) {
-					if (rainArray.some((match) => match === ranNum))
-						ranNum = ranNumG(9) + 1;
-					else 
-						rainArray.push(ranNum);
+			const rainfall = function rainFromASetRange(){
+				const chosenDrop = shuffle([...Array(raindrops).keys()].map((x) => ++x));
+				let rainSelector = document.querySelector(`#rain_${chosenDrop}`);
+			       	rainSelector.style.display = "unset";
+			       	rainSelector.style.opacity = 1;
+			}
+
+			new Promise((next) =>{
+				if(storminess--){
+					setTimeout(() => {
+						next();
+					}, 777);
 				}
-			}
-			ranListGen();
-			for (let i of rainArray){
-				setTimeout(() => {
-					let rainSelector = document.querySelector(`#rain_${i}`);
-					rainSelector.style.display = "unset";
-					rainSelector.style.opacity = 1;
-				}, rainArray[i/3] * 1000)
-			}
-			// ^^^ this still isn't working as it should. Need to look into how to make a loop delay after each iteration.
-			// take a look at async/await stuff using promises.
+				else throw new Error("All done");
+			})
+			.then(() =>{
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+				return new Promise((next) => {
+					if(storminess--){
+						setTimeout(() => {
+							next();
+						}, 777);
+					}
+					else throw new Error("All done");
+				});
+			})
+			.then(() => {
+				rainfall();
+			})
+			.catch((e) => console.log(e));
 		};
-		makeItRain();
+	makeItRain(20);
 	});
 });
