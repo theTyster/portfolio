@@ -19,25 +19,29 @@ const phase = function(tag) {
 	}
 };
 
-const ranNumG= function randomNumberGenerator(max){
+const ranNumG = function randomNumberGenerator(max){
 	return Math.floor(Math.random() * max);
 }
 
-let shuffle = function fisherYatesArrayShuffler( // HERES THE PROBLEM ){
-	// You need a way to pass an array into this function.
-	//
-	// Here is your hint:
-	// https://stackoverflow.com/questions/2856059/passing-an-array-as-a-function-parameter-in-javascript
-	// Goodluck.
-	//
-	//
-	const deleterArr = [...Array(inputArr.length).keys()].map((x) => ++x);
-	let len = deleterArr.length;
-	while (len){
-		let ran = ranNumG(len--)
-		[inputArr[ran], deleterArr[len]] = [deleterArr[len], inputArr[ran]];
+const makeArray = function arrayFromMaxIndex(maxIndex){
+	return [...Array(maxIndex).keys()].map((x) => ++x);
+}
+
+let shuffle = function fisherYatesArrayShuffler(inputArr){
+	let applyShuffler = () => {
+		const shuffledArr = [...Array(inputArr.length).keys()].map((x) => ++x);
+		let len = shuffledArr.length;
+		let placeholder;
+		while (len){
+			let ran = ranNumG(len--);
+//			[inputArr[ran], shuffledArr[len]] = [shuffledArr[len], inputArr[ran]];
+			placeholder = inputArr[ran];
+			inputArr[ran] = shuffledArr[len];
+			shuffledArr[len] = placeholder;
+		}
+		return shuffledArr;
 	}
-	return inputArr;
+	return applyShuffler.apply(this, inputArr)
 }
 
 //for testing usage only.

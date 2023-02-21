@@ -54,14 +54,16 @@ page.duckInput.addEventListener("transitionend", () => {
 		eyes[1].style.visibility = "collapse";
 		}, 6000);
 		
-		// remember that the arg is an index range the number of falling raindrops will be one more than this number.
+		// remember that the arg is a range 1-100.
 		const makeItRain = function letItRain(storminess) {
 			const raindrops = 20;
-			const rainArray = shuffle([...Array(raindrops).keys()].map((x) => ++x));
+			storminess = Math.floor(raindrops*(storminess/100));
+			const rainArray = shuffle(makeArray(storminess));
 
 			const rainfall = function rainFromASetRange(){
-				const chosenDrop = shuffle([...Array(raindrops).keys()].map((x) => ++x));
-				let rainSelector = document.querySelector(`#rain_${chosenDrop}`);
+				const chosenDrop = shuffle(makeArray(raindrops));
+				let rainCycle = rainArray.length;
+				let rainSelector = document.querySelector(`#rain_${chosenDrop[rainArray[--rainCycle]]}`);
 			       	rainSelector.style.display = "unset";
 			       	rainSelector.style.opacity = 1;
 			}
@@ -299,6 +301,6 @@ page.duckInput.addEventListener("transitionend", () => {
 			})
 			.catch((e) => console.log(e));
 		};
-	makeItRain(20);
+	makeItRain(50);
 	});
 });
