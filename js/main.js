@@ -56,20 +56,23 @@ page.duckInput.addEventListener("transitionend", () => {
 		
 		// remember that the arg is a range 1-100.
 		const makeItRain = function letItRain(storminess) {
-			const raindrops = 20;
-			storminess = Math.floor(raindrops*(storminess/100));
+			const hiddenRaindrops = 20;
+			storminess = Math.floor(hiddenRaindrops*(storminess/100));
 			const rainArray = shuffle(makeArray(storminess));
+			const shuffledDrops = shuffle(makeArray(hiddenRaindrops));
+			let rDropIteration = rainArray.length;
+
 
 			const rainfall = function rainFromASetRange(){
-				const chosenDrop = shuffle(makeArray(raindrops));
-				let rainCycle = rainArray.length;
-				let rainSelector = document.querySelector(`#rain_${chosenDrop[rainArray[--rainCycle]]}`);
+				let rainCycle = rainArray[rDropIteration - 1];
+				let chosenDrop = shuffledDrops[rainCycle];
+				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration--]]}`);
 			       	rainSelector.style.display = "unset";
 			       	rainSelector.style.opacity = 1;
 			}
 
 			new Promise((next) =>{
-				if(storminess--){
+				if(chosenDrop){
 					setTimeout(() => {
 						next();
 					}, 777);
@@ -79,7 +82,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() =>{
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -90,7 +93,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -101,7 +104,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -112,7 +115,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -123,7 +126,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -134,7 +137,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -145,7 +148,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -156,7 +159,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -167,7 +170,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -178,7 +181,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -189,7 +192,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -200,7 +203,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -211,7 +214,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -222,7 +225,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -233,7 +236,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -244,7 +247,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -255,7 +258,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -266,7 +269,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -277,7 +280,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -288,7 +291,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(storminess--){
+					if(chosenDrop){
 						setTimeout(() => {
 							next();
 						}, 777);

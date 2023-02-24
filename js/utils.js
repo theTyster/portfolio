@@ -23,23 +23,25 @@ const ranNumG = function randomNumberGenerator(max){
 	return Math.floor(Math.random() * max);
 }
 
+
 const makeArray = function arrayFromMaxIndex(maxIndex){
 	return [...Array(maxIndex).keys()].map((x) => ++x);
 }
 
+
 let shuffle = function fisherYatesArrayShuffler(inputArr){
 	let applyShuffler = () => {
-		const shuffledArr = [...Array(inputArr.length).keys()].map((x) => ++x);
-		let len = shuffledArr.length;
+		let len = inputArr.length;
 		let placeholder;
 		while (len){
 			let ran = ranNumG(len--);
-//			[inputArr[ran], shuffledArr[len]] = [shuffledArr[len], inputArr[ran]];
-			placeholder = inputArr[ran];
-			inputArr[ran] = shuffledArr[len];
-			shuffledArr[len] = placeholder;
+			[inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
+			//placeholder = inputArr[ran];
+			//inputArr[ran] = inputArr[len];
+			//inputArr[len] = placeholder;
+			//something is wrong with this I think.
 		}
-		return shuffledArr;
+		return inputArr;
 	}
 	return applyShuffler.apply(this, inputArr)
 }
