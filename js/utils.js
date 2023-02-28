@@ -36,14 +36,10 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 		while (len){
 			let ran = ranNumG(len--);
 			[inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
-			//placeholder = inputArr[ran];
-			//inputArr[ran] = inputArr[len];
-			//inputArr[len] = placeholder;
-			//something is wrong with this I think.
 		}
 		return inputArr;
 	}
-	return applyShuffler.apply(this, inputArr)
+	return applyShuffler(...inputArr);
 }
 
 //for testing usage only.

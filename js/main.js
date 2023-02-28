@@ -61,18 +61,18 @@ page.duckInput.addEventListener("transitionend", () => {
 			const rainArray = shuffle(makeArray(storminess));
 			const shuffledDrops = shuffle(makeArray(hiddenRaindrops));
 			let rDropIteration = rainArray.length;
+			let rainCycle = rainArray[rDropIteration - 1];
+			let chosenDrop = shuffledDrops[rainCycle];
+			let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[storminess--]]}`);
 
 
 			const rainfall = function rainFromASetRange(){
-				let rainCycle = rainArray[rDropIteration - 1];
-				let chosenDrop = shuffledDrops[rainCycle];
-				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration--]]}`);
 			       	rainSelector.style.display = "unset";
 			       	rainSelector.style.opacity = 1;
 			}
 
 			new Promise((next) =>{
-				if(chosenDrop){
+				if(storminess){
 					setTimeout(() => {
 						next();
 					}, 777);
@@ -82,7 +82,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() =>{
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -93,7 +93,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -104,7 +104,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -115,7 +115,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -126,7 +126,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -137,7 +137,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -148,7 +148,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -159,7 +159,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -170,7 +170,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -181,7 +181,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -192,7 +192,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -203,7 +203,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -214,7 +214,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -225,7 +225,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -236,7 +236,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -247,7 +247,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -258,7 +258,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -269,7 +269,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -280,7 +280,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
@@ -291,7 +291,7 @@ page.duckInput.addEventListener("transitionend", () => {
 			.then(() => {
 				rainfall();
 				return new Promise((next) => {
-					if(chosenDrop){
+					if(storminess){
 						setTimeout(() => {
 							next();
 						}, 777);
