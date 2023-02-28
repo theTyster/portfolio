@@ -54,6 +54,15 @@ page.duckInput.addEventListener("transitionend", () => {
 		eyes[1].style.visibility = "collapse";
 		}, 6000);
 		
+		// While this function is Technically producing some desired results,
+		// it is not behaving 100% correctly yet. As the function iterates through 
+		// the promises, there are selections to the DOM that are duplicates.
+		// Thus, not all of the elements are selected even when storminess=100.
+		//
+		// Check the testing branch to see current attempts to fix this.
+		// This bug is being shelved for a while.
+		
+
 		// remember that the arg is a range 1-100.
 		const makeItRain = function letItRain(storminess) {
 			const raindrops = 20;
@@ -301,6 +310,6 @@ page.duckInput.addEventListener("transitionend", () => {
 			})
 			.catch((e) => console.log(e));
 		};
-	makeItRain(50);
+	makeItRain(100);
 	});
 });
