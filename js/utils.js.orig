@@ -54,7 +54,16 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 		let placeholder;
 		while (len){
 			let ran = ranNumG(len--);
+<<<<<<< HEAD
+			[inputArr[ran], shuffledArr[len]] = [shuffledArr[len], inputArr[ran]];
+||||||| c127659
+//			[inputArr[ran], shuffledArr[len]] = [shuffledArr[len], inputArr[ran]];
+			placeholder = inputArr[ran];
+			inputArr[ran] = shuffledArr[len];
+			shuffledArr[len] = placeholder;
+=======
 			[inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
+>>>>>>> testing
 		}
 		return inputArr;
 	}
