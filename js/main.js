@@ -71,12 +71,24 @@ page.duckInput.addEventListener("transitionend", () => {
 
 			const rainfall = function rainFromASetRange(){
 				const chosenDrop = shuffle(makeArray(raindrops));
-				let rainCycle = rainArray.length;
+				let rainCycle = rainArray.length - 1;
 				let rainSelector = document.querySelector(`#rain_${chosenDrop[rainArray[--rainCycle]]}`);
 			       	rainSelector.style.display = "unset";
 			       	rainSelector.style.opacity = 1;
 			}
-
+//			async function rain(){
+//				if(storminess--){
+//					setTimeout(() => {
+//						rainfall();
+//					}, 777);
+//				}
+//				else throw new Error("All done");
+//				while(storminess--){
+//					await setTimeout(() => {
+//						rainfall();
+//					}, 777);
+//				}
+//			}
 			new Promise((next) =>{
 				if(storminess--){
 					setTimeout(() => {
