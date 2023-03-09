@@ -61,248 +61,29 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 	return applyShuffler(...inputArr);
 }
 
+
+async function sleep(time){ return new Promise((next) => setTimeout(next, time)); }
+
+
 // remember that the arg is a range 1-100.
 const makeItRain = function letItRain(storminess) {
 	const hiddenRaindrops = 20;
 	storminess = Math.floor(hiddenRaindrops*(storminess/100));
-	const rainArray = shuffle(makeArray(storminess, false));
-	const shuffledDrops = shuffle(makeArray(hiddenRaindrops, true));
-	let rDropIteration = rainArray.length - 1;
+	const rainArray = shuffle(makeArray(storminess));
+	const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
 
-
-	const rainfall = function rainFromASetRange(){
-		let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
-		rainSelector.style.display = "unset";
-		rainSelector.style.opacity = 1;
-	}
-
-	new Promise((next) =>{
-		if(rDropIteration){
-			setTimeout(() => {
-				next();
-			}, 777);
+	let delayedRain = async () => {
+		try {
+			for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
+				await sleep(777);
+				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
+				rainSelector.style.display = "unset";
+				rainSelector.style.opacity = 1;
+			}
 		}
-		else throw new Error("What a beautiful sunny day.");
-	})
-	.then(() =>{
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("Getting a little drizzly...");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("Getting a little drizzly...");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("Getting a little drizzly...");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("Getting a little drizzly...");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("It's raining pretty hard.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("The storm rages.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("The storm rages.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("The storm rages.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("The storm rages.");
-		});
-	})
-	.then(() => {
-		rainfall();
-		return new Promise((next) => {
-			if(rDropIteration--){
-				setTimeout(() => {
-					next();
-				}, 777);
-			}
-			else throw new Error("The storm rages.");
-		});
-	})
-	.catch((e) => console.log(e));
-};
+		catch (e){
+			console.log(e);
+		}
+	}
+	delayedRain();
+}
