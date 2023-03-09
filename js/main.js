@@ -15,6 +15,7 @@ const storyStart = function storyStart(){
 		page.duckInput.style.backgroundColor = page.duckInput.value;
 		duck.color = page.duckInput.value;
 		//saves input to memory.
+		localStorage.setItem("duck", JSON.stringify(duck));
 		return duck.color;
 		}
 	phaseOne.tag.innerHTML = `<p class="storyStart">Hmmmmm.... </p>`;
