@@ -24,11 +24,15 @@ const page = {
 };
 
 
-const phase = function(tag) {
+const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
-	this.fn = function() {
+	this.show = function(){
 		this.tag.style.visibility = "unset";
 		this.tag.style.opacity = 1;
+	},
+	this.hide = function(){
+		this.tag.style.opacity = 0;
+		this.tag.style.visibility = "collapse";
 	}
 };
 
@@ -62,7 +66,7 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 }
 
 
-async function sleep(time){ return new Promise((next) => setTimeout(next, time)); }
+async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time)); }
 
 
 // remember that the arg is a range 1-100.

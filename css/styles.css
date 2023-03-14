@@ -36,6 +36,7 @@ input[name="duck_color"] {
 	border:none;
 	outline:none;
 	transition: background-color, 3s;
+
 }
 
 
@@ -48,6 +49,7 @@ span.inline > * {
 	opacity: 0;
 	visibility: collapse;
 	transition: all, 1s;
+	position: absolute;
 }
 
 

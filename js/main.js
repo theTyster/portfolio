@@ -1,6 +1,49 @@
 "use strict";
-//fires after enter is hit
-document.addEventListener('keyup', (event) => {
+
+async function storyStart(){
+	//const phaseOne = new displayFunc("div.storyStart"),
+	const phaseOne_hmm = new displayFunc("p.storyStart_hm"),
+		phaseOne_no = new displayFunc("p.storyStart_no"),
+		phaseOne_yes = new displayFunc("p.storyStart_yes"),
+		regex = /#f/gui,
+		colorizeDuck = function saveDuckColorToObject() {
+	//Colors the Duck based on the input.
+		page.duckInput.style.backgroundColor = page.duckInput.value;
+		duck.color = page.duckInput.value;
+		//saves input to memory.
+		localStorage.setItem("duck", JSON.stringify(duck));
+		return duck.color;
+		}
+	phaseOne_hmm.show(); 
+	await sleep (1500);
+	phaseOne_hmm.hide();
+	await sleep (700);
+
+	colorizeDuck(); 
+	if (!page.duckInput.style.backgroundColor){
+		phaseOne_no.show();
+		await sleep(1500);
+		phaseOne_no.hide();
+	}
+	else if(page.duckInput.style.backgroundColor === "white" || page.duckInput.value.match(regex)){
+		phaseOne_no.show();
+		await sleep(1500);
+		phaseOne_no.hide();
+	}
+
+	// verifies the input. If the transition occurred, then transitionend will detect it.
+	page.duckInput.addEventListener("transitionend", function storyStartListener(){
+		page.duckInput.disabled = true;
+		phaseOne_yes.tag.style.position = "relative";
+		phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely a ${duck.color} duck.`;
+		phaseOne_yes.show();
+		document.removeEventListener("keyup", storyStartListener);
+	});
+}
+
+
+//fires after enter is hit. 
+document.addEventListener("keyup", function storyStartListener(event){
 	const keyName = event.key;
 	if (keyName === "Enter") {
 		storyStart();
@@ -8,34 +51,12 @@ document.addEventListener('keyup', (event) => {
 });
 
 
-const storyStart = function storyStart(){
-	//Colors the Duck based on the input.
-	const phaseOne = new phase("div.storyStart"),
-	colorizeDuck = function saveDuckColorToObject() {
-		page.duckInput.style.backgroundColor = page.duckInput.value;
-		duck.color = page.duckInput.value;
-		//saves input to memory.
-		localStorage.setItem("duck", JSON.stringify(duck));
-		return duck.color;
-		}
-	phaseOne.tag.innerHTML = `<p class="storyStart">Hmmmmm.... </p>`;
-	phaseOne.fn();
-	colorizeDuck();
-	// verifies the input.
-	page.duckInput.addEventListener("transitionend", () => {
-			page.duckInput.disabled = true;
-			phaseOne.tag.innerHTML = `<p class="storyStart">Ah, yes. It was definitely a ${duck.color} duck.</p>`;
-			phaseOne.fn();
-	});
-}
-
-
-page.duckInput.addEventListener("transitionend", () => {
-	const phaseTwo = new phase("div.phaseTwo");
+page.duckInput.addEventListener("transitionend", function phaseTwoListener(){
+	const phaseTwo = new displayFunc("div.phaseTwo");
 	let eyes = [document.querySelector("pre#phTwo_pt2"), document.querySelector("pre#phTwo_pt3")]
 	page.body.style.backgroundColor = "#888"
 	setTimeout(() => {
-		phaseTwo.fn();
+		phaseTwo.show();
 		for (let i of eyes)
 			i.style.visibility = "collapse";
 	for (let i of page.container)
@@ -56,4 +77,5 @@ page.duckInput.addEventListener("transitionend", () => {
 		}, 6000);
 	makeItRain(33);
 	});
+	document.removeEventListener("transitionend", phaseTwoListener);
 });
