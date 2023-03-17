@@ -1,39 +1,37 @@
 "use strict";
-//for testing usage only.
-const refresh = function pageRefresher(time){
-	let re = () => location.reload();
-	setTimeout(re, time);
-}
 
-
-//let testerButton = 
-
-
-//duck Object for duck quality persistance
+//commonly used objects
 const duck = {
 	water: document.querySelectorAll("pre.water_flow"),
 	illust: document.querySelector("pre#duck"),
 };
 
+//constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
+const displayFunc = function(tag) {
+	this.tag = document.querySelector(tag),
+	this.show = async function(){
+		let sleepRegex = /[0-9]+s|[0-9]*\.[0-9]+s/
+		let seconds = parseFloat(document.defaultView.getComputedStyle(this.tag).transition.match(sleepRegex)) * 1000;
+		this.tag.style.visibility = "unset";
+		this.tag.style.opacity = 1;
+		await sleep(seconds);
+	},
+	this.hide = async function(){
+		let sleepRegex = /[0-9]+s|[0-9]*\.[0-9]+s/
+		let seconds = parseFloat(document.defaultView.getComputedStyle(this.tag).transition.match(sleepRegex)) * 1000;
+		this.tag.style.opacity = 0;
+		await sleep(seconds);
+		this.tag.style.visibility = "collapse";
+	}
+};
 
 //commonly used tags
 const page = {
-	body:  document.querySelector("body"),
+	body: document.querySelector("body"),
 	container: document.getElementsByClassName("container"),
-	duckInput: document.querySelector("input#duck_color")
-};
-
-
-const displayFunc = function(tag) {
-	this.tag = document.querySelector(tag),
-	this.show = function(){
-		this.tag.style.visibility = "unset";
-		this.tag.style.opacity = 1;
-	},
-	this.hide = function(){
-		this.tag.style.opacity = 0;
-		this.tag.style.visibility = "collapse";
-	}
+	duckInput: document.querySelector("input#duck_color"),
+	duckInlineInput: new displayFunc("span.inline"),
+	duckWhatColor: new displayFunc("p.whatColor")
 };
 
 
