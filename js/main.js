@@ -51,7 +51,10 @@ async function storyStart(){
 	// after colorizeDuck() is run, verifies the input. If the transition on duckInput occurred, then transitionend will detect it.
 	page.duckInput.addEventListener("transitionend", async function storyStartListener(event){
 		document.removeEventListener("keyup", storyStartListener);
-		phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely a ${duck.color} duck.`;
+		if (page.duckInput.value.match(/^[aeiou]/m))
+			phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely an ${duck.color} duck.`;
+		else
+			phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely a ${duck.color} duck.`;
 		await page.duckInlineInput.hide();
 		await page.duckWhatColor.hide();
 		await phaseOne_yes.show();
@@ -65,7 +68,6 @@ async function storyStart(){
 		phaseTwo.show();
 
 		for (let i of eyes){
-			i.tag.style.textShadow = "1px 1px 2px black";
 			i.hide();
 		}
 		await sleep(2500);// allow the animation time.
@@ -88,18 +90,20 @@ async function storyStart(){
 		}
 
 		//eyes animation
-		eyes[0].tag.style.fontSize = "30pt";
 		await eyes[0].show();
 
 		await sleep(3000);
 		await eyes[0].hide();
 
-		eyes[1].tag.style.fontSize = "30pt";
+		eyes[1].tag.style.transform = "rotate(0.5turn)"
+
 		await eyes[1].show();
 		await sleep(3000);
 
 		for (let i of eyes)
 		await i.hide();
+
+		document.querySelector(".eyes_container").style.display = "none";
 
 		const phaseThree = new displayFunc("div.phaseThree");
 		await phaseThree.show();

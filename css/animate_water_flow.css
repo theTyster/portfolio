@@ -4,6 +4,7 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-duration: 5s;
+  color: blue;
 }
 
 @keyframes water_flow1 {
@@ -32,6 +33,7 @@
   animation-duration: 4s;
   position: relative;
   top: -25px;
+  color: blue;
 }
 
 @keyframes water_flow2 {
