@@ -3,10 +3,21 @@
 //waits for content to load and then adds a listener to the button.
 document.addEventListener("DOMContentLoaded", () => {
 	const oneTime = new displayFunc("p.oneTime"),
-		startButton = new displayFunc("button.startButton");
+		startButton = new displayFunc("button.startButton"),
+		closeNotice = function(){
+		document.querySelector("header").style.display = "none";
+		document.querySelector("header > button").removeEventListener("click", closeNotice);
+		}
+
+	document.querySelector("header > button").addEventListener("click", closeNotice)
 
 	//listener for button that starts off the story.
 	return startButton.tag.addEventListener("click", async function startButtonListener(){
+
+		//if parent notice is open, close it.
+		closeNotice();
+		document.querySelector("header > button").removeEventListener("click", closeNotice);
+
 		await startButton.hide();
 		startButton.tag.style.display = "none"; //won't be used again. Easier than putting it in the constructor to hide it.
 		await oneTime.show();
@@ -35,7 +46,6 @@ async function storyStart(){
 	const phaseOne_hmm = new displayFunc("p.storyStart_hm"),
 		phaseOne_no = new displayFunc("p.storyStart_no"),
 		phaseOne_yes = new displayFunc("p.storyStart_yes"),
-		inputRegex = /#/gui,
 		colorizeDuck = function saveDuckColorToObject() {
 		page.duckInput.style.backgroundColor = page.duckInput.value;
 		duck.color = page.duckInput.value;
@@ -52,7 +62,7 @@ async function storyStart(){
 	page.duckInput.addEventListener("transitionend", async function storyStartListener(event){
 		document.removeEventListener("keyup", storyStartListener);
 		if (page.duckInput.value.match(/^[aeiou]/m))
-			phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely an ${duck.color} duck.`;
+			phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was a very normal looking ${duck.color} duck.`;
 		else
 			phaseOne_yes.tag.innerText = `Ah, yes! That's it. He was definitely a ${duck.color} duck.`;
 		await page.duckInlineInput.hide();
@@ -122,10 +132,16 @@ async function storyStart(){
 		page.duckInput.disabled = false;
 	}
 	//checks to ensure that no hex colors were used and that the duck is not colored white.
-	else if(page.duckInput.style.backgroundColor === "white" || page.duckInput.value.match(inputRegex)){
-		await phaseOne_no.show();
-		await phaseOne_no.hide();
-		page.duckInput.disabled = false;
+	const inputRegex = /#/gu;
+	switch(true){
+		case page.duckInput.style.backgroundColor === "white":
+		case Boolean(page.duckInput.value.match(inputRegex)):{
+			await phaseOne_no.show();
+			await phaseOne_no.hide();
+			page.duckInput.disabled = false;
+			break;
+		}
 	}
+	
 
 }

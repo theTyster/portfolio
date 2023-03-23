@@ -13,14 +13,13 @@
 .flex-container > aside:nth-of-type(2) { flex: 1; }
 
 
-.container{
-  /* flex: 1; This is set by JS*/
-} 
-
 body {
 	transition: background-color, 7s;
 }
 
+header {
+	display: none;
+}
 
 article {
 	flex: 0 0 500px;
@@ -66,7 +65,7 @@ span.inline > * {
 
 .phasedDisplay > .phaseTwo > .eyes_container > *{
 	opacity: 0;
-	visibility: collapse;
+	/* visibility: collapse; */
 	transition: opacity 1500ms;
 	font-size: 30pt;
 	text-shadow: 1px 1px 3px black;
@@ -102,8 +101,36 @@ span.inline > * {
 
 
 @media (max-width: 499px) {
-article {
-		max-width: 355px;
-		min-width: unset;
+	article {
+			max-width: 355px;
+			min-width: unset;
+	}
+}
+
+@media (max-width: 810px){
+	header {
+		padding: 15px;
+		background-color: darkgoldenrod;
+		display: flex;
+		border-radius: 4px;
+	}
+
+	header > p {
+		margin: 0;
+		color: white;
+	}
+
+	header > button {
+		height: fit-content;
+		background-color: goldenrod;
+		border-radius: 7px;
+		border: 1px solid white;
+	}
+
+	header > button:active {
+		height: fit-content;
+		background-color: #9C7616;
+		border-radius: 7px;
+		border: 1px solid white;
 	}
 }

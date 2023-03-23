@@ -6,6 +6,9 @@ const duck = {
 	illust: document.querySelector("pre#duck"),
 };
 
+// custom sleep function.
+async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time)); }
+
 //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
 const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
@@ -64,7 +67,6 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 }
 
 
-async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time)); }
 
 
 // remember that the arg is a range 1-100.
