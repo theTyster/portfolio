@@ -58,23 +58,13 @@ span.inline > * {
 
 
 .phasedDisplay > * {
-	opacity: 0;
-	visibility: collapse;
-	transition: opacity 1500ms;
+	display: none;
 }
 
 .phasedDisplay > .phaseTwo > .eyes_container > *{
-	opacity: 0;
-	/* visibility: collapse; */
-	transition: opacity 1500ms;
+	display: none;
 	font-size: 30pt;
 	text-shadow: 1px 1px 3px black;
-}
-
-.phasedDisplay.flex-container, .phaseTwo {
-}
-
-.flex-container.eyes_container{
 }
 
 #duck {

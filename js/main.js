@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		await startButton.hide();
 		startButton.tag.style.display = "none"; //won't be used again. Easier than putting it in the constructor to hide it.
-		await oneTime.show();
+		await oneTime.show(1.5);
 		await oneTime.hide();
 		await page.duckWhatColor.show();
-		await page.duckInlineInput.show();
+		await page.duckInlineInput.show(0);
 		page.duckInput.focus();
 		//resizes the box based on how many characters are in it.
 		//css declares monospace font so no sizing issues.
@@ -68,19 +68,17 @@ async function storyStart(){
 		await page.duckInlineInput.hide();
 		await page.duckWhatColor.hide();
 		await phaseOne_yes.show();
-		await sleep(3000);// allow reading the message...
+		await sleep(3);// allow reading the message...
 
 
 		const phaseTwo = new displayFunc("div.phaseTwo"),
-		eyes = [new displayFunc("pre#phTwo_eyes1"), new displayFunc("pre#phTwo_eyes2")]
+			eyes = new displayFunc("pre#phTwo_eyes");
 
 		await phaseOne_yes.hide();
-		phaseTwo.show();
+		phaseTwo.show(0);
+		eyes.hide(0);
 
-		for (let i of eyes){
-			i.hide();
-		}
-		await sleep(2500);// allow the animation time.
+		await sleep(2.5);// allow the bg animation time to center.
 
 		//styles the background and activates the flex box centering.
 		for (let i of page.container)
@@ -100,20 +98,12 @@ async function storyStart(){
 		}
 
 		//eyes animation
-		await eyes[0].show();
+		await eyes.show(3);
+		eyes.tag.style.transform = "rotate(0.5turn)"
+		await sleep(3);
+		await eyes.hide(0);
 
-		await sleep(3000);
-		await eyes[0].hide();
-
-		eyes[1].tag.style.transform = "rotate(0.5turn)"
-
-		await eyes[1].show();
-		await sleep(3000);
-
-		for (let i of eyes)
-		await i.hide();
-
-		document.querySelector(".eyes_container").style.display = "none";
+//		document.querySelector(".eyes_container").style.display = "none";
 
 		const phaseThree = new displayFunc("div.phaseThree");
 		await phaseThree.show();

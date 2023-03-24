@@ -18,12 +18,52 @@ there she is.
              (  _> /
 ----^--^------^--^--^--^------^--^
    --^----^--        --^----^--
-One day duck was splashing in the pond with his best friend:
+One day duck was splashing in the pond with her best friend:
 
 -Frog
+```
+       _   _
+      (•)_(•)
+   _ (   _   ) _
+  / \/`-----'\/ \
+__\ ( (     ) ) /__
+)   /\ \___/ /\   (
+ )_/ /|\   /|\ \_(
+
+     _ _
+    (•T•)
+ _.-(___)-._
+`/`(     )`\`
+ __/'---'\__
+ \_/     \_/
+```
 -dog
+```
+     __
+(___()•`;
+/,    /`
+\\"--\\
+```
 -hog
+```
+^..^_____  
+(00)     \9
+  \______/ 
+   WW  WW
+```
 -eggnog
+```
+
+ ____
+|____|      
+/___/_\      
+|   | |      
+|nog| |      
+|   | |      
+|___|_|      
+            
+            
+```
 
 Ducks best friend was a [frog, dog, hog, carton of eggnog] named {friend}.
 

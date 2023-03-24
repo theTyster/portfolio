@@ -7,24 +7,18 @@ const duck = {
 };
 
 // custom sleep function.
-async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time)); }
+async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
 
 //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
 const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
-	this.show = async function(){
-		let sleepRegex = /[0-9]+s|[0-9]*\.[0-9]+s/
-		let seconds = parseFloat(document.defaultView.getComputedStyle(this.tag).transition.match(sleepRegex)) * 1000;
-		this.tag.style.visibility = "unset";
-		this.tag.style.opacity = 1;
-		await sleep(seconds);
+	this.show = async function(seconds = 1){
+		this.tag.style.display = "unset";
+		await sleep(seconds * 1);
 	},
-	this.hide = async function(){
-		let sleepRegex = /[0-9]+s|[0-9]*\.[0-9]+s/
-		let seconds = parseFloat(document.defaultView.getComputedStyle(this.tag).transition.match(sleepRegex)) * 1000;
-		this.tag.style.opacity = 0;
-		await sleep(seconds);
-		this.tag.style.visibility = "collapse";
+	this.hide = async function(seconds = .5){
+		this.tag.style.display = "none";
+		await sleep(seconds * 1);
 	}
 };
 
@@ -79,7 +73,7 @@ const makeItRain = function letItRain(storminess) {
 	let delayedRain = async () => {
 		try {
 			for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
-				await sleep(777);
+				await sleep(7.77);
 				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
 				rainSelector.style.display = "unset";
 				rainSelector.style.opacity = 1;
