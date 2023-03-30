@@ -65,14 +65,9 @@
 		 <p class="oneTime">Once upon a time there was a duck.</p>
 		 <p class="whatColor">Now, what was the color of that duck again?</p>
 		 <span class="inline secondLine"><p>I think it was a </p>
-			 <input 
-			 id="duck_color"
-			 type="text" 
-			 name="duck_color"
-			 placeholder="color"
-			 maxlength="24"
-			 size="5">
+			 <input id="duck_color" type="text" name="duck_color" placeholder="color" maxlength="24" size="5">
 			 <p> duck.</p></span>
+		 <span class="helper">Hit "Enter" on your keyboard.</span>
 		 <span class="inline"><p>Type a color and then hit "Enter" on your keyboard.</p></span>
 	    <p class="storyStart_hm thirdLine">Hmmmmmm.....</p>
 	    <p class="storyStart_no thirdLine">No, that wasn't it.</p>
@@ -90,23 +85,40 @@
                <h3>ah!</h3>
 		<p>there she is.</p>
                <div class="flex-container duck_container">
-                  <div>
-		  </div>
-                  <div>
-                <pre id="duck">
+                    <div>
+		    </div>
+                    <div>
+                  <pre id="duck">
               __
             =(• )___
              (  _> /  
-                </pre>
-                <pre class="water_flow" id="water1">
+                  </pre>
+                  <pre class="water_flow" id="water1">
 ----^--^------^--^--^--^------^--^
-                </pre>
-                <pre class="water_flow" id="water2">
+                  </pre>
+                  <pre class="water_flow" id="water2">
    --^----^--        --^----^--
-                </pre>
-                  </div>
-                  <div>
-                  </div>
+                  </pre>
+                    </div>
+                    <div>
+                    </div>
+		    <p class="splashing">One day duck was splashing in the pond with her best friend:</p>
+			<form>
+			<fieldset>
+			<legend>Please Choose one friend for Duck.</legend>
+				<input id="frogSelect" type="radio" name="friend" value="frog">
+				<label for="frogSelect">Frog</label><br>
+
+				<input id="dogSelect" type="radio" name="friend" value="dog">
+				<label for="dogSelect">Dog</label><br>
+
+				<input id="hogSelect" type="radio" name="friend" value="hog">
+				<label for="hogSelect">Hog</label><br>
+
+				<input id="eggnogSelect" type="radio" name="friend" value="eggnog">
+				<label for="eggnogSelect">Eggnog</label><br>
+			</fieldset>
+			</form>
                 </div>
       </article>
       <aside class="container">

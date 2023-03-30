@@ -56,6 +56,10 @@ span.inline > * {
 	display: inline;
 }
 
+span.helper{
+	font-size: x-small;
+	margin-left: 10em;
+}
 
 .phasedDisplay > * {
 	display: none;

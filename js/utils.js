@@ -1,14 +1,5 @@
 "use strict";
 
-//commonly used objects
-const duck = {
-	water: document.querySelectorAll("pre.water_flow"),
-	illust: document.querySelector("pre#duck"),
-};
-
-// custom sleep function.
-async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
-
 //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
 const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
@@ -22,14 +13,38 @@ const displayFunc = function(tag) {
 	}
 };
 
-//commonly used tags
+
+//tags to ascii graphics
+const duck = {
+	water: document.querySelectorAll("pre.water_flow"),
+	illust: document.querySelector("pre#duck"),
+};
+
+//page tags
 const page = {
 	body: document.querySelector("body"),
-	container: document.getElementsByClassName("container"),
-	duckInput: document.querySelector("input#duck_color"),
-	duckInlineInput: new displayFunc("span.inline"),
-	duckWhatColor: new displayFunc("p.whatColor")
+	container: document.querySelector(".container"),
+	oneTime: new displayFunc("p.oneTime"),
+	startButton: new displayFunc("button.startButton"),
+	phaseOne:{
+		duckColorInput: document.querySelector("input#duck_color"),
+		duckInlineInput: new displayFunc("span.inline"),
+		duckWhatColor: new displayFunc("p.whatColor"),
+		hmm:  new displayFunc("p.storyStart_hm"),
+		no: new displayFunc("p.storyStart_no"),
+		yes: new displayFunc("p.storyStart_yes")
+	},
+	phaseTwo:{
+		body: new displayFunc("div.phaseTwo"),
+		eyes:  new displayFunc("pre#phTwo_eyes")
+	},
+	phaseThree: new displayFunc("div.phaseThree")
+
 };
+
+
+// custom sleep function.
+async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
 
 
 const ranNumG = function randomNumberGenerator(max){
@@ -62,9 +77,7 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 
 
 
-
-// remember that the arg is a range 1-100.
-const makeItRain = function letItRain(storminess) {
+const makeItRain = function letItRain(storminess) { // remember that the arg is a range 1-100.
 	const hiddenRaindrops = 20;
 	storminess = Math.floor(hiddenRaindrops*(storminess/100));
 	const rainArray = shuffle(makeArray(storminess));
