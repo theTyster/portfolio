@@ -17,7 +17,7 @@ const displayFunc = function(tag) {
 //tags to ascii graphics
 const duck = {
 	water: document.querySelectorAll("pre.water_flow"),
-	illust: document.querySelector("pre#duck"),
+	illust: document.querySelector("#duck"),
 };
 
 //page tags
@@ -26,6 +26,7 @@ const page = {
 	container: document.querySelector(".container"),
 	oneTime: new displayFunc("p.oneTime"),
 	startButton: new displayFunc("button.startButton"),
+	helper: new displayFunc(".helper"),
 	phaseOne:{
 		duckColorInput: document.querySelector("input#duck_color"),
 		duckInlineInput: new displayFunc("span.inline"),
@@ -45,6 +46,18 @@ const page = {
 
 // custom sleep function.
 async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
+
+// Waits for Enter to be pressed before continuing.
+const waitForEnter = function(){
+	return new Promise((resolve) => {
+		document.addEventListener("keyup", function enterWasHit(event){
+			if (event.key === "Enter"){
+			document.removeEventListener("keyup", enterWasHit);
+				resolve();
+			}
+		});
+	})
+}
 
 
 const ranNumG = function randomNumberGenerator(max){

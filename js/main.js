@@ -20,13 +20,15 @@ document.addEventListener("DOMContentLoaded", function DOMEventListenerMain(){
 		await page.startButton.hide();
 		page.startButton.tag.style.display = "none"; //won't be used again. Easier than putting it in the constructor to hide it.
 		await page.oneTime.show(1.5);
+		page.oneTime.tag.after(page.helper.tag);
+		page.helper.show();
+		await waitForEnter();
+		page.helper.hide();
 		await page.oneTime.hide();
 		await page.phaseOne.duckWhatColor.show();
 		await page.phaseOne.duckInlineInput.show(0);
 		page.phaseOne.duckColorInput.focus();
-		page.phaseOne.duckColorInput.addEventListener("keyup", function inputListener(){
-			document.querySelector("span.helper").style.display = "unset";
-		});
+		document.querySelector("span.inline").after(page.helper.tag);
 		//resizes the box based on how many characters are in it.
 		//css declares monospace font so no sizing issues.
 		let inputResizer = page.phaseOne.duckColorInput.addEventListener("input", (event) => {
@@ -36,7 +38,10 @@ document.addEventListener("DOMContentLoaded", function DOMEventListenerMain(){
 		//fires after enter is hit when inputting the duck color.
 		return document.addEventListener("keyup", function storyStartListener(event){
 			const keyName = event.key;
+			page.helper.show();
 			if (keyName === "Enter") {
+				document.removeEventListener("keyup", storyStartListener);
+				page.helper.hide();
 				storyStart();
 			};
 		});
@@ -46,16 +51,16 @@ document.addEventListener("DOMContentLoaded", function DOMEventListenerMain(){
 
 async function storyStart(){
 	const colorizeDuck = () => {
-	page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;
-	duck.color = page.phaseOne.duckColorInput.value;
-	duck.illust.style.color = duck.color;
-	}
-	//a little easter egg in case anyone puts in the same color that is used for the background later on.
-	if (duck.color === "paleTurquoise"){
-		duck.bonusLevel = true;
-		//saves input to memory.
-		localStorage.setItem("duck", JSON.stringify(duck));
-		return duck;
+		page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;
+		duck.color = page.phaseOne.duckColorInput.value;
+		duck.illust.style.color = duck.color;
+		//a little easter egg in case anyone puts in the same color that is used for the background later on.
+		if (duck.color === "paleTurquoise"){
+			duck.bonusLevel = true;
+			//saves input to memory.
+			localStorage.setItem("duck", JSON.stringify(duck));
+			return duck;
+		}
 	}
 
 	// after colorizeDuck() is run, verifies the input. If the transition on duckColorInput occurred, then transitionend will detect it.
@@ -78,23 +83,20 @@ async function storyStart(){
 
 		//styles the background and activates the flex box centering.
 		page.container.style.flex = 1;
-		page.body.style.background = "paleTurquoise";
+		page.body.style.background = "#B3DCBD"; // light green
 
 		//easter egg styles.
 		if (duck.bonusLevel){
 			page.body.style.filter = "invert(100%)";
 			page.body.style.background = "MidnightBlue";
-			for (let i of page.phaseTwo.eyes){
-				i.tag.style.filter = "invert(100%)";
-				i.tag.style.transition = "opacity 2s";
-			}
-				
-
+			page.phaseTwo.eyes.tag.style.filter = "invert(100%)";
+			page.phaseTwo.eyes.tag.style.transition = "opacity 2s";
 		}
 
 		//eyes animation
 		await page.phaseTwo.eyes.show(3);
 		page.phaseTwo.eyes.tag.style.transform = "rotate(0.5turn)"
+		page.phaseTwo.eyes.tag.style.textShadow = "-1px -1px 3px black"
 		await sleep(3);
 		await page.phaseTwo.eyes.hide(0);
 

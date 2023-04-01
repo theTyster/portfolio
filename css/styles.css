@@ -56,13 +56,13 @@ span.inline > * {
 	display: inline;
 }
 
-span.helper{
+.helper{
 	font-size: x-small;
 	margin-left: 10em;
 }
 
 .phasedDisplay > * {
-	display: none;
+	/* display: none; */
 }
 
 .phasedDisplay > .phaseTwo > .eyes_container > *{
@@ -73,9 +73,18 @@ span.helper{
 
 #duck {
 	position: relative;
-	bottom: -1.7rem;
+	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
+	font-size: 18pt;
+	font-weight: 950;
 }
 
+.waterBody{
+	background-color: blue;
+	border-radius: 100%;
+	padding-top:30px;
+	width:320px;
+	box-shadow: blue 0 0 50px ;
+}
 
 
 
