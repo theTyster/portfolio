@@ -1,4 +1,4 @@
-#water1, .water_flow{
+#water1, .water_flow, #water2{
   animation-delay: 1s;
   animation-name: water_flow1;
   animation-timing-function: ease-in-out;
@@ -26,14 +26,11 @@
 }
 
 #water2{
-  animation-delay: 1s;
+/* this line was changed for science. */
   animation-name: water_flow2;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
   animation-duration: 4s;
   position: relative;
   top: -25px;
-  color: white;
 }
 
 @keyframes water_flow2 {

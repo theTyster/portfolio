@@ -4,7 +4,7 @@
 const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
 	this.show = async function(seconds = 1){
-		this.tag.style.display = "unset";
+		this.tag.style.display = "block";
 		await sleep(seconds * 1);
 	},
 	this.hide = async function(seconds = .5){
@@ -13,46 +13,61 @@ const displayFunc = function(tag) {
 	}
 };
 
+//declares the object for easter egg features.
+const bonusLevel = {}
 
 //tags to ascii graphics
-const duck = {
-	water: document.querySelectorAll("pre.water_flow"),
-	illust: document.querySelector("#duck"),
+const ascii = {
+	water: new displayFunc("#waterBody"),
+	duck: new displayFunc("#duck"),
+	frog: new displayFunc("#frog"),
+	dog: new displayFunc("#dog"),
+	hog: new displayFunc("#hog"),
+	eggnog: new displayFunc("eggnog")
 };
 
 //page tags
 const page = {
 	body: document.querySelector("body"),
 	container: document.querySelector(".container"),
-	oneTime: new displayFunc("p.oneTime"),
-	startButton: new displayFunc("button.startButton"),
-	helper: new displayFunc(".helper"),
+	mobileNotice: new displayFunc("header"),
+	oneTime: new displayFunc("#oneTime"),
+	startButton: new displayFunc("button#startButton"),
+	helper: new displayFunc("#helper"),
 	phaseOne:{
 		duckColorInput: document.querySelector("input#duck_color"),
 		duckInlineInput: new displayFunc("span.inline"),
-		duckWhatColor: new displayFunc("p.whatColor"),
-		hmm:  new displayFunc("p.storyStart_hm"),
-		no: new displayFunc("p.storyStart_no"),
-		yes: new displayFunc("p.storyStart_yes")
+		duckWhatColor: new displayFunc("#whatColor"),
+		hmm:  new displayFunc("#storyStart_hm"),
+		no: new displayFunc("#storyStart_no"),
+		yes: new displayFunc("#storyStart_yes")
 	},
 	phaseTwo:{
 		body: new displayFunc("div.phaseTwo"),
-		eyes:  new displayFunc("pre#phTwo_eyes")
+		where: new displayFunc("#where"),
+		letsSee: new displayFunc("#letsSee"),
+		eyes:  new displayFunc("#eyes"),
+		ah: new displayFunc("#ah"),
+		thereSheIs: new displayFunc("#thereSheIs"),
+		splashing: new displayFunc("#splashing"),
+		chooseAfriend: new displayFunc("chooseAFriend")
 	},
-	phaseThree: new displayFunc("div.phaseThree")
-
+	phaseThree:{
+		body: new displayFunc("div.phaseThree"),
+		chooseAFriend: new displayFunc("#chooseAFriend"),
+	}
 };
 
 
 // custom sleep function.
 async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
 
-// Waits for Enter to be pressed before continuing.
-const waitForEnter = function(){
+// Listens for Enter to be pressed before continuing.
+const listen4Enter = function(){
 	return new Promise((resolve) => {
-		document.addEventListener("keyup", function enterWasHit(event){
+		document.addEventListener("keyup", function enterInputListener(event){
 			if (event.key === "Enter"){
-			document.removeEventListener("keyup", enterWasHit);
+				document.removeEventListener("keyup", enterInputListener);
 				resolve();
 			}
 		});

@@ -17,15 +17,12 @@ body {
 	transition: background-color, 7s;
 }
 
-header {
-	display: none;
-}
 
 article {
 	flex: 0 0 500px;
 }
 
-button {
+button, button:active {
 	margin-left: 30px;
 	padding: 7px;
 	background-color: #888;
@@ -34,12 +31,7 @@ button {
 	transition: opacity 1s;
 }
 button:active {
-	margin-left: 30px;
-	padding: 7px;
 	background-color: #666;
-	color: white;
-	border: none;
-	transition: opacity 1s;
 }
 
 input[name="duck_color"] {
@@ -56,17 +48,16 @@ span.inline > * {
 	display: inline;
 }
 
-.helper{
+#helper{
 	font-size: x-small;
 	margin-left: 10em;
 }
 
-.phasedDisplay > * {
-	/* display: none; */
+#print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo {
+	display: none;
 }
 
-.phasedDisplay > .phaseTwo > .eyes_container > *{
-	display: none;
+.phasedDisplay > .phaseTwo > #eyes {
 	font-size: 30pt;
 	text-shadow: 1px 1px 3px black;
 }
@@ -76,9 +67,13 @@ span.inline > * {
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
 	font-size: 18pt;
 	font-weight: 950;
+	transition-property: left, top;
+	transition-duration: 1s;
+	left: 0;
+	top: 0;
 }
 
-.waterBody{
+#waterBody{
 	background-color: blue;
 	border-radius: 100%;
 	padding-top:30px;
@@ -89,9 +84,6 @@ span.inline > * {
 
 
 /*MEDIA QUERIES*/
-#print {
-	display: none;
-}
 @media print {
 	.flex-container{
 		display:none;

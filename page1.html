@@ -1,117 +1,113 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="css/styles.css">
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-<title>The Duck Story</title>
-</head>
-<body>
-	<div class="sky">
-		<div class="air"></div>
-		<div class="raindrop" id="rain_1"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_2"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_3"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_4"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_5"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_6"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_7"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_8"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_9"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_10"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_11"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_12"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_13"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_14"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_15"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_16"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_17"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_18"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_19"></div>
-		<div class="air"></div>
-		<div class="raindrop" id="rain_20"></div>
-		<div class="air"></div>
-	</div>
-	<header>
-		<p><b>Note to Parents:</b> The Duck story is meant to be read on a desktop computer or laptop. It's a great way to help kids learn how to interface with computers. Most children grow up with an ability to navigate mobile devices better than they can a mouse and keyboard. Consider making this an activity that you can do with your child! The story encourages engagement between kids and parents.</p>
-		<button>X</button>
-	</header>
-   <main class="flex-container main_container">
-      <aside class="container">
-      </aside>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <title>The Duck Story</title>
+  </head>
+  <body>
+    <div class="sky">
+      <div class="air"></div>
+      <div class="raindrop" id="rain_1"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_2"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_3"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_4"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_5"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_6"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_7"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_8"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_9"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_10"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_11"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_12"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_13"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_14"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_15"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_16"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_17"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_18"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_19"></div>
+      <div class="air"></div>
+      <div class="raindrop" id="rain_20"></div>
+      <div class="air"></div>
+    </div>
+    <header>
+      <p>
+        <b>Note to Parents:</b> The Duck story is meant to be read on a desktop computer or laptop. It's a great way to help kids learn how to interface with computers. Most children grow up with an ability to navigate mobile devices better than they can a mouse and keyboard. Consider making this an activity that you can do with your child! The story encourages engagement between kids and parents.
+      </p>
+      <button>X</button>
+    </header>
+    <main class="flex-container main_container">
+      <aside class="container"></aside>
       <article>
-         <h1> Welcome to story time</h1>
-	 <button class="startButton">click to start</button>
-         <div class="phasedDisplay flex-container">
-		 <p class="oneTime">Once upon a time there was a duck.</p>
-		 <p class="whatColor">Now, what was the color of that duck again?</p>
-		 <span class="inline"><p>I think it was a </p>
-			 <input id="duck_color" type="text" name="duck_color" placeholder="Type a color." maxlength="24" size="13">
-			 <p> duck.</p></span>
-		 <p class="helper">Hit "Enter" on your keyboard.</p>
-	    <p class="storyStart_hm thirdLine">Hmmmmmm.....</p>
-	    <p class="storyStart_no thirdLine">No, that wasn't it.</p>
-	    <p class="storyStart_yes"></p>
-            <div class="phaseTwo">
-	        <p id="phTwo_where">Now, where is that duck? She was just around here somewhere. <p>
-		<p id="phTwo_where">Let's see.......</p>
-		<div class="flex-container eyes_container">
-		  <pre id="phTwo_eyes">
+        <h1> Welcome to story time</h1>
+        <button id="startButton">click to start</button>
+        <div class="phasedDisplay flex-container">
+          <p id="oneTime">Once upon a time there was a duck.</p>
+          <p id="whatColor">Now, what was the color of that duck again?</p>
+          <span class="inline">
+            <p>I think she was a </p>
+            <input id="duck_color" type="text" name="duck_color" placeholder="Type a color." maxlength="24" size="13">
+            <p> duck.</p>
+          </span>
+          <p id="helper">Hit "Enter" on your keyboard.</p>
+          <p id="storyStart_hm">Hmmmmmm.....</p>
+          <p id="storyStart_no">No, that wasn't it.</p>
+          <p id="storyStart_yes"></p>
+          <div class="phaseTwo">
+            <p id="where">Now, where is that duck? She was just around here somewhere. </p>
+            <p id="letsSee">Let's see.......</p>
+            <pre id="eyes">
 👀
 		  </pre>
-	        </div>
-            </div>
-            <div class="phaseThree">
-               <h3>ah!</h3>
-		<p>there she is.</p>
-               <div class="flex-container duck_container">
-                    <div>
-		    </div>
-		  <pre id="duck">
+            <h2 id="ah">ah! </h2>
+              <p id="thereSheIs">there she is.</p>
+                <pre id="duck">
   __
 =(• )___
  (  _> /  
 		  </pre>
-                    </div>
-                    <div>
-                    </div>
-		    <p class="splashing">One day duck was splashing in the pond with her best friend:</p>
-			<form>
-			<fieldset>
-			<legend>Please Choose one friend for Duck.</legend>
-				<input id="frogSelect" type="radio" name="friend" value="frog">
-				<label for="frogSelect">Frog</label><br>
-
-				<input id="dogSelect" type="radio" name="friend" value="dog">
-				<label for="dogSelect">Dog</label><br>
-
-				<input id="hogSelect" type="radio" name="friend" value="hog">
-				<label for="hogSelect">Hog</label><br>
-
-				<input id="eggnogSelect" type="radio" name="friend" value="eggnog">
-				<label for="eggnogSelect">Eggnog</label><br>
-			</fieldset>
-			</form>
-		  <pre id="frog">
+              <p id="splashing">One day duck was splashing in the pond with her best friend.</p>
+          </div>
+          <div class="phaseThree">
+            <form id=chooseAFriend>
+              <fieldset>
+                <legend>Please Choose one friend for Duck.</legend>
+                <input id="frogSelect" type="radio" name="friend" value="frog">
+                <label for="frogSelect">Frog</label>
+                <br>
+                <input id="dogSelect" type="radio" name="friend" value="dog">
+                <label for="dogSelect">Dog</label>
+                <br>
+                <input id="hogSelect" type="radio" name="friend" value="hog">
+                <label for="hogSelect">Hog</label>
+                <br>
+                <input id="eggnogSelect" type="radio" name="friend" value="eggnog">
+                <label for="eggnogSelect">Eggnog</label>
+                <br>
+              </fieldset>
+            </form>
+            <pre id="frog">
        _   _
       (•)_(•)
    _ (   _   ) _
@@ -120,19 +116,19 @@ __\ ( (     ) ) /__
 )   /\ \___/ /\   (
  )_/ /|\   /|\ \_(
 		  </pre>
-		  <pre class="dog">
+            <pre id="dog">
      __
 (___()•`;
 /,    /`
 \\'--\\
 		  </pre>
-		  <pre class="hog">
+            <pre id="hog">
 ^..^_____  
 (00)     \9
   \______/ 
    WW  WW
 		  </pre>
-		  <pre class="eggnog">
+            <pre id="eggnog">
  ____
 |____|      
 /___/_\      
@@ -141,19 +137,19 @@ __\ ( (     ) ) /__
 |   | |      
 |___|_|      
 		  </pre>
-		  <div class="waterBody">
-			  <pre class="water_flow" id="water1">
+            <div id="waterBody">
+              <pre class="water_flow" id="water1">
     ----^--^------^--^--^--^------^--^
 			  </pre>
-			  <pre class="water_flow" id="water2">
+              <pre class="water_flow" id="water2">
        --^----^--        --^----^--
 			  </pre>
-                </div>
+            </div>
+	  </div>
       </article>
-      <aside class="container">
-      </aside>
-   </main>
-   <div id="print">
+      <aside class="container"></aside>
+    </main>
+    <div id="print">
       <pre>
                                    ___
                                ,-""   `.
@@ -176,11 +172,8 @@ __\ ( (     ) ) /__
                  \   --)
                   `.`.)
       </pre>
-      </div>
-<footer>
-</footer>
-</body>
-<script type="text/javascript" src="js/utils.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </html>
-
