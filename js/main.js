@@ -10,19 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function startButtonListener(){
-	const colorizeDuck = () => {
-		page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;
-		ascii.duck.color = page.phaseOne.duckColorInput.value;
-		ascii.duck.tag.style.color = ascii.duck.color;
-		//a little easter egg in case anyone puts in the same color that is used for the background later on.
-		if (page.phaseOne.duckColorInput.value === "paleTurquoise"){
-			bonusLevel.enabled = true;
-			//saves input to memory.
-			localStorage.setItem("duck", JSON.stringify(ascii.duck));
+	const checkcolorInput = async function checkInputForColor(){
+		const colorizeDuck = () => {
+			page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;
+			ascii.duck.color = page.phaseOne.duckColorInput.value;
+			ascii.duck.tag.style.color = ascii.duck.color;
+			//a little easter egg in case anyone puts in the same color that is used for the background later on.
+			if (page.phaseOne.duckColorInput.value === "paleTurquoise"){
+				bonusLevel.enabled = true;
+				//saves input to memory.
+				localStorage.setItem("duck", JSON.stringify(ascii.duck));
+			}
 		}
-	}
 
-	const checkDuckColorInput = async function(){
 		//moves helper text to after the input box.
 		document.querySelector("span.inline").after(page.helper.tag);
 		await listen4Enter(); // wait for enter to be hit after inputing the color
@@ -46,7 +46,7 @@ async function startButtonListener(){
 			await page.phaseOne.no.show();
 			await page.phaseOne.no.hide();
 			page.phaseOne.duckColorInput.disabled = false;
-			checkDuckColorInput();
+			checkcolorInput();
 		}
 		//checks to ensure that no hex colors were used and that the duck is not colored white.
 		switch(true){
@@ -55,7 +55,7 @@ async function startButtonListener(){
 				await page.phaseOne.no.show();
 				await page.phaseOne.no.hide();
 				page.phaseOne.duckColorInput.disabled = false;
-				checkDuckColorInput();
+				checkcolorInput();
 				break;
 			}
 		}
@@ -81,10 +81,46 @@ async function startButtonListener(){
 		page.helper.show();
 	})
 
-	await checkDuckColorInput();
+	await checkcolorInput();
 };
 
 async function storyStartListener(event){
+	const obtainAFriend = async () => {
+		const frog = document.querySelector("#frogSelect"),
+			dog = document.querySelector("#dogSelect"),
+			hog = document.querySelector("#hogSelect"),
+			eggnog = document.querySelector("#eggnogSelect");
+		switch(true){
+			case (frog.checked):{
+				ascii.duck.friend = ascii.frog;
+				console.log(ascii.duck.friend);
+				break;
+			}
+			case(dog.checked):{
+				ascii.duck.friend = ascii.dog;
+				console.log(ascii.duck.friend);
+				break;
+			}
+			case(hog.checked):{
+				ascii.duck.friend = ascii.hog;
+				console.log(ascii.duck.friend);
+				break;
+			}
+			case(eggnog.checked):{
+				friend = eggnog.checked
+				ascii.duck.friend = ascii.eggnog;
+				console.log(ascii.duck.friend);
+				break;
+			}
+			default:{
+				await page.phaseThree.tryAgain.show(1.5);
+				await page.helper.show();
+				await listen4Enter();
+				await page.phaseThree.tryAgain.hide();
+				obtainAFriend();
+			}
+		}
+	}
 	page.phaseOne.yes.tag.innerText = `Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} duck.`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
@@ -149,8 +185,12 @@ async function storyStartListener(event){
 	ascii.duck.tag.style.left = "100px";
 	ascii.duck.tag.style.top = "77px";
 	page.phaseThree.body.show();
+	//working on getting data from a form
 	page.phaseThree.chooseAFriend.show();
+	page.phaseThree.chooseAFriend.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
+// Checks to ensure a friend was selected and assigns the value.
+	obtainAFriend();
 }

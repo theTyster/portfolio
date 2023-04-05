@@ -55,6 +55,7 @@ const page = {
 	phaseThree:{
 		body: new displayFunc("div.phaseThree"),
 		chooseAFriend: new displayFunc("#chooseAFriend"),
+		tryAgain: new displayFunc("#tryAgain")
 	}
 };
 
