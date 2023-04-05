@@ -148,6 +148,8 @@ async function storyStartListener(event){
 	//move the duck onto the water.
 	ascii.duck.tag.style.left = "100px";
 	ascii.duck.tag.style.top = "77px";
+	page.phaseThree.body.show();
+	page.phaseThree.chooseAFriend.show();
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();

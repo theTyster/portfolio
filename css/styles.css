@@ -53,7 +53,7 @@ span.inline > * {
 	margin-left: 10em;
 }
 
-#print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo {
+#print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > * {
 	display: none;
 }
 
