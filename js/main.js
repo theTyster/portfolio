@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function startButtonListener(){
+
+	// THIS FUNCTION NEEDS TO BE MADE RE-USABLE
+	
 	const checkcolorInput = async function checkInputForColor(){
 		const colorizeDuck = () => {
 			page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;

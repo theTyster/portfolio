@@ -5,6 +5,7 @@
   animation-iteration-count: infinite;
   animation-duration: 5s;
   color: white;
+  font-weight: 950;
 }
 
 @keyframes water_flow1 {
