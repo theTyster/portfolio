@@ -1,5 +1,4 @@
 "use strict";
-
 //waits for content to load and then adds a listener to the start button.
 document.addEventListener("DOMContentLoaded", () => {
 	//closes the mobile notice once the "x" button is clicked.
