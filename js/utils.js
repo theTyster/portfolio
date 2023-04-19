@@ -34,13 +34,13 @@ const page = {
 	oneTime: new displayFunc("#oneTime"),
 	startButton: new displayFunc("button#startButton"),
 	helper: new displayFunc("#helper"),
+	hmm:  new displayFunc("#hm"),
+	no: new displayFunc("#no"),
+	yes: new displayFunc("#yes"),
 	phaseOne:{
 		duckColorInput: document.querySelector("input#duck_color"),
 		duckInlineInput: new displayFunc("span.inline"),
-		duckWhatColor: new displayFunc("#whatColor"),
-		hmm:  new displayFunc("#storyStart_hm"),
-		no: new displayFunc("#storyStart_no"),
-		yes: new displayFunc("#storyStart_yes")
+		duckWhatColor: new displayFunc("#whatColor")
 	},
 	phaseTwo:{
 		body: new displayFunc("div.phaseTwo"),

@@ -34,7 +34,7 @@ button:active {
 	background-color: #666;
 }
 
-input[name="duck_color"] {
+input {
 	border:none;
 	outline:none;
 	background-color: white;

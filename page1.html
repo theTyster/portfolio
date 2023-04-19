@@ -63,19 +63,19 @@
         <h1> Welcome to story time</h1>
         <button id="startButton">click to start</button>
         <div class="phasedDisplay flex-container">
-          <p id="oneTime">Once upon a time there was a duck.</p>
-          <p id="whatColor">Now, what was the color of that duck again?</p>
+          <p id="oneTime">Once upon a time there was a <span id="duck_type">duck</span>.</p>
+          <p id="whatColor">Now, what was the color of that <span id="duck_type">duck</span> again?</p>
           <span class="inline">
             <p>I think she was a </p>
-            <input id="duck_color" type="text" name="duck_color" placeholder="Type a color." maxlength="24" size="13">
-            <p> duck.</p>
+            <input id="duck_color" type="text" name="duck_color" placeholder="Type a color" maxlength="24" size="12">
+            <p> <span id="duck_type">duck</span>.</p>
           </span>
           <p id="helper">Hit "Enter" on your keyboard.</p>
-          <p id="storyStart_hm">Hmmmmmm.....</p>
-          <p id="storyStart_no">No, that wasn't it.</p>
-          <p id="storyStart_yes"></p>
+          <p id="hm">Hmmmmmm.....</p>
+          <p id="no">No, that wasn't it.</p>
+          <p id="yes"></p>
           <div class="phaseTwo">
-            <p id="where">Now, where is that duck? She was just around here somewhere. </p>
+            <p id="where">Now, where is that <span id="duck_type">duck</span>? She was just around here somewhere. </p>
             <p id="letsSee">Let's see.......</p>
             <pre id="eyes">
 👀
@@ -87,12 +87,11 @@
 =(• )___
  (  _> /  
 		  </pre>
-              <p id="splashing">One day duck was splashing in the pond with her best friend.</p>
+              <p id="splashing">One day <span id="duck_type">duck</span> was splashing in the pond with her best friend.</p>
           </div>
           <div class="phaseThree">
-	  <form id=chooseAFriend>
-              <fieldset>
-                <legend>Please Choose one friend for Duck.</legend>
+              <fieldset id="chooseAFriend">
+                <legend>Please Choose one friend for <span id="duck_type">duck</span>.</legend>
                 <input id="frogSelect" type="radio" name="friend" value="frog">
                 <label for="frogSelect">Frog</label>
                 <br>
@@ -106,8 +105,7 @@
                 <label for="eggnogSelect">Eggnog</label>
                 <br>
               </fieldset>
-            </form>
-	    <p id="tryAgain">You have to pick a friend for Duck first!</p>
+	    <p id="tryAgain">You have to pick a friend for <span id="duck_type">duck</span> first!</p>
             <pre id="frog">
        _   _
       (•)_(•)
@@ -138,6 +136,84 @@ __\ ( (     ) ) /__
 |   | |      
 |___|_|      
 		  </pre>
+		  <p id="friend_declare"><span id="duck_type">duck</span>'s best friend was a <span id="friend_type"></span> named
+		     <span class="inline">
+		     	<input id="friend_name" type="text" name="friend_name" placeholder="Type a name" maxlength="24" size="11">.
+		     </span>
+		  </p>
+		  <p id="friend_colorQuestion">I always forget what color <span id="friend"></span> is. Do you remember?</p>
+		  <span class="inline">
+			  <p>Maybe they were a </p>
+			  <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxlength="24" size="12">
+			  <span id="friend_type"></span>.
+		  </span>
+		  <p id="friend_declare">delete this line. This should be written with JS using the page.yes.tag object/node.</p>
+		  <p id="friend_goofy">"You sure are one goofy <span id="friend_type"></span>, <span id="friend"></span>." <span id="duck_type">duck</span> said as they splashed together.</p>
+		  <p id="friend_laugh"><span id="friend_type"></span> laughed.</p>
+		  <p id="duck_laugh"><span id="duck_type"></span> laughed.</p>
+		  <p id="rain_start">After a little while it started to rain.</p>
+		  <p id="rain_howBad">How bad was the storm?</p>
+		  <span id="notBad">Not too bad. </span><input id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" value="25"><span id="reallyBad"> Really Bad.</span>
+		  <p id="rain_getOut">"We should get out of the water during a rainstorm." said <span id="friend_type"></span></p>
+		  <p id="rain_hungry">"Yeah. I'm hungry anyways. What should we eat today?" said <span id="duck_type">duck</span>.</p>
+		  <fieldset id="eat_choose">
+			<legend id="eat_what">What should they eat?</legend>  
+		  	<input id="pizzaSelect" type="radio" name="food" value="pizza">
+			  <label for="pizzaSelect">Pizza</label><br>
+		  	<input id="puddingSelect" type="radio" name="food" value="pudding">
+			  <label for="puddingSelect">Pudding</label><br>
+		  	<input id="grapesSelect" type="radio" name="food" value="grapes">
+			  <label for="grapesSelect">Grapes</label><br>
+		  </fieldset>
+		  <p id="lets_eat">"Let's eat <span id="foodSelect"></span>", said <span id="friend_type"></span></p>
+		  <h1 class="pizza_story">They eata the pizza</h1>
+		  <p id="visit_pizza">So, <span id="duck_type">duck</span> and <span id="friend_type"></span> decided to head into town to visit a piza shop they had seen a few times.</p>
+		  <p id="pizza_fantastic">It was called Pizza Fantastic. And it was truly the most fantastic pizza place they had ever seen.</p>
+		  <p id="scream">As soon as they walked in the door, a lady screamed!</p>
+		  <h2 id="karenWords1">"AAAAAAAAAHHHHHHHHHHH</h2>
+		  <h2 id="karenWords2">OHHH</h2>
+		  <h2 id="karenWords3">EMMM</h2>
+		  <h2 id="karenWords4">GEEEEE</h2>
+		  <h2 id="karenWords5">IT'S A DUCK AND A <span id="friend_typeCaps"></span>!!!!!!!!!!</h2>
+		  <h2 id="karenWords6">SHOOOO SHOOOO!!!!!!!!!!</h2>
+		  <p id="mrFantastic">The owner, Mr. Fantastic, came over.</p>
+		  <p id="sorryGuys">"Sorry, guys", He said. "I can only serve paying customers today."</p>
+		  <p id="leave"><span id="duck_type">Duck</span> and <span id="friend_type"></span> had to leave.</p>
+		  <p id="notFantastic">"That wasn't very fantastic", said <span id="friend_type"></span>.</p>
+		  <p id="duck_nod"><span id="duck_type">Duck</span> nodded.</p>
+		  <p id="sneaky">"But, I bet we could still get some pizza if we are sneaky." said <span id="duck_type">duck</span>.</p>
+		  <p id="sneaky_how">"How is that?" asked <span id="friend_type"></span>.</p>
+		  <p id="start_band">"We'll start a band! And then, when we play music people will pay us money and we can use that to buy pizza!", said <span id="duck_type">duck</span>.</p>
+		  <p id="sounds_awesome">"That sounds awesome!", said <span id="friend_type"></span>.</p>
+		  <p id="music_practice">So, they went and stole some music stuff and practiced real hard.</p>
+		  <p id="finally_ready">Finally, they felt like they were ready.</p>
+		  <p id="back_4_more">They went back to Pizza Fantastic and started playing one of the songs they had practiced.</p>
+		  <fieldset id="song_choose">
+		  	<legend id="song_which">Which song should they play?</legend>
+		  	<input id="song1Select" type="radio" name="song" value="song1">
+		  	<label for="song1Select">Song #1</label><br>
+		  	<input id="song2" type="radio" name="song" value="song2">
+		  	<label for="song2Select">Song #2</label><br>
+		  	<input id="song3Select" type="radio" name="song" value="song3">
+		  	<label for="song3Select">Song #3</label><br>
+		  </fieldset>
+		  <p id="play_song"><em>The song is playing.</em></p>
+		  <p id="how_good">Did you like that song?</p>
+		  <span id="song_reallyGood">That song was boring!</span><input id="song_review" type="range" name="song_review" max="100" min="0" step="5" value="0"><span id="song_reallyBad">That song was awesome!</span>
+		  <p id="rating">That was a <span id="songRating"></span> song! <span id="duck_type">Duck</span> and <span id="friend_type"></span> made <span id="song_moneyEarned"></span> they still need <span id="song_moneyNeeded"></span> so that they can buy a pizza at Pizza Fantastic!</p>
+		  <p id="song_playAgain">What should they play next?</p>
+		  <p id="pizza_finally">FINALLY!!! They had enough money to buy a pizza!</p>
+		  <p id="sneakInside">"Now we just have to find a way to sneak inside without getting caught by that scary scremaing lady." said <span id="friend_type"></span>.</p>
+		  <p id="slipIntheBack">"Let's go around the back." said <span id="duck_type">Duck</span>.</p>
+		  <p id="outback">So, they went around the back.</p>
+		  <p id="pizza_wait">They waited......................</p>
+		  <p id="ninjaSneak">When Mr. Fantastic came outside to take out the trash, they slipped in the door behind him, grabbed a pizza, and left the cash on the counter.</p>
+		  <p id="YAY">YAYYY!!</p>
+		  <p id="pizzaDance"><span id="duck_type">Duck</span> and <span id="friend_type"></span> were so happy, they did a little dance in their pizza.</p>
+		  <p id="PizzaEnd">The End.</p>
+		  <button id="pizza_playAgain">Play again?</button>
+		  <h1 class="pudding_story">Time to slurp the pud</h1>
+		  <h1 class="grapes_story">The grape story (for brave souls)</h1>
             <div id="waterBody">
               <pre class="water_flow" id="water1">
     ----^--^------^--^--^--^------^--^

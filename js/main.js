@@ -1,4 +1,5 @@
 "use strict";
+
 //waits for content to load and then adds a listener to the start button.
 document.addEventListener("DOMContentLoaded", () => {
 	//closes the mobile notice once the "x" button is clicked.
@@ -11,53 +12,62 @@ document.addEventListener("DOMContentLoaded", () => {
 async function startButtonListener(){
 
 	// THIS FUNCTION NEEDS TO BE MADE RE-USABLE
+	// The only thing that needs to be passed into this function should be the selector for the input box.
 	
-	const checkcolorInput = async function checkInputForColor(){
-		const colorizeDuck = () => {
-			page.phaseOne.duckColorInput.style.backgroundColor = page.phaseOne.duckColorInput.value;
-			ascii.duck.color = page.phaseOne.duckColorInput.value;
-			ascii.duck.tag.style.color = ascii.duck.color;
+	const checkColorInput = async function checkInputForColor(inputSelector, asciiObj){
+		const colorizeAscii = () => {
+			inputSelector.style.backgroundColor = inputSelector.value;
+			asciiObj.color = page.phaseOne.duckColorInput.value;
+			asciiObj.tag.style.color = asciiObj.color;
 			//a little easter egg in case anyone puts in the same color that is used for the background later on.
-			if (page.phaseOne.duckColorInput.value === "paleTurquoise"){
+			if (inputSelector.value === "paleTurquoise"){
 				bonusLevel.enabled = true;
 				//saves input to memory.
-				localStorage.setItem("duck", JSON.stringify(ascii.duck));
+				localStorage.setItem("duck", JSON.stringify(asciiObj));
 			}
 		}
 
-		//moves helper text to after the input box.
-		document.querySelector("span.inline").after(page.helper.tag);
+		//moves helper text to after the input box. If the input box is in an inline class.
+		if (inputSelector.parentNode.classList.toString() === "inline"){
+			inputSelector.parentNode.after(page.helper.tag);
+			inputSelector.parentNode.after(page.hmm.tag)
+			inputSelector.parentNode.after(page.no.tag)
+			inputSelector.parentNode.after(page.yes.tag)
+		}
+		else{
+			inputSelector.after(page.helper.tag);
+		}
 		await listen4Enter(); // wait for enter to be hit after inputing the color
 		page.helper.hide();
 
 		//blocks the input while it is being checked.
-		page.phaseOne.duckColorInput.disabled = true;
-		await page.phaseOne.hmm.show(); 
-		await page.phaseOne.hmm.hide();
+		inputSelector.disabled = true;
+		await page.hmm.show(); 
+		await page.hmm.hide();
 
-		// event listener verifies the input. If the transition on duckColorInput occurred after colorizeDuck ran, then transitionend will detect it.
-		page.phaseOne.duckColorInput.addEventListener("transitionend", storyStartListener, {once: true});
+		// event listener verifies the input. If the transition on duckColorInput occurred after colorizeAscii ran, then transitionend will detect it.
+		inputSelector.addEventListener("transitionend", storyStartListener, {once: true});
 
 		//Colors the Duck based on the input.
 		//saves details to object and local storage.
-		colorizeDuck(); 
+		colorizeAscii(); 
 
 		const inputRegex = /#/gu;
 		// checks if the background color has a value.
-		if (!page.phaseOne.duckColorInput.style.backgroundColor){
-			await page.phaseOne.no.show();
-			await page.phaseOne.no.hide();
-			page.phaseOne.duckColorInput.disabled = false;
-			checkcolorInput();
+		if (!inputSelector.style.backgroundColor){
+			await page.no.show();
+			await page.no.hide();
+			inputSelector.disabled = false;
+			checkColorInput(inputSelector, asciiObj);
 		}
 		//checks to ensure that no hex colors were used and that the duck is not colored white.
 		switch(true){
-			case page.phaseOne.duckColorInput.style.backgroundColor === "white":
-			case Boolean(page.phaseOne.duckColorInput.value.match(inputRegex)):{
-				await page.phaseOne.no.show();
-				await page.phaseOne.no.hide();
-				page.phaseOne.duckColorInput.disabled = false;
-				checkcolorInput();
+			case inputSelector.style.backgroundColor === "white":
+			case Boolean(inputSelector.value.match(inputRegex)):{
+				await page.no.show();
+				await page.no.hide();
+				inputSelector.disabled = false;
+				checkColorInput(inputSelector, asciiObj);
 				break;
 			}
 		}
@@ -83,7 +93,7 @@ async function startButtonListener(){
 		page.helper.show();
 	})
 
-	await checkcolorInput();
+	await checkColorInput(page.phaseOne.duckColorInput, ascii.duck);
 };
 
 async function storyStartListener(event){
@@ -92,6 +102,7 @@ async function storyStartListener(event){
 			dog = document.querySelector("#dogSelect"),
 			hog = document.querySelector("#hogSelect"),
 			eggnog = document.querySelector("#eggnogSelect");
+		// A switch statement here is probably not best practice since IF is faster. But I need the practice.
 		switch(true){
 			case (frog.checked):{
 				ascii.duck.friend = ascii.frog;
@@ -123,17 +134,17 @@ async function storyStartListener(event){
 			}
 		}
 	}
-	page.phaseOne.yes.tag.innerText = `Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} duck.`;
+	page.yes.tag.innerText = `Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} duck.`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
 	await page.phaseOne.duckWhatColor.hide(.5);
 
-	await page.phaseOne.yes.show(1.5);
-	page.phaseOne.yes.tag.after(page.helper.tag);
+	await page.yes.show(1.5);
+	page.yes.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	page.phaseOne.yes.hide();
+	page.yes.hide();
 
 	page.phaseTwo.body.show();
 	await page.phaseTwo.where.show(2);

@@ -2,9 +2,9 @@ Once upon a time there was a duck.
 
 Now what was the color of tha duck again?
 
-I think it was a {color} duck.
+I think it was a {DuckColor} duck.
 
-Ah, yes! That's it! It was a very normal looking {color} duck.
+Ah, yes! That's it! It was a very normal looking {DuckColor} duck.
 
 Now, where is that duck? She was just around here somewhere.
 
@@ -13,14 +13,17 @@ Let's see......
 ah!
 there she is.
 
+```
               __
             =(0 )___
              (  _> /
 ----^--^------^--^--^--^------^--^
    --^----^--        --^----^--
+```
 One day duck was splashing in the pond with her best friend:
 
 -Frog
+
 ```
        _   _
       (•)_(•)
@@ -30,28 +33,28 @@ __\ ( (     ) ) /__
 )   /\ \___/ /\   (
  )_/ /|\   /|\ \_(
 
-     _ _
-    (•T•)
- _.-(___)-._
-`/`(     )`\`
- __/'---'\__
- \_/     \_/
 ```
+
 -dog
+
 ```
      __
 (___()•`;
 /,    /`
 \\'--\\
 ```
+
 -hog
+
 ```
 ^..^_____  
 (00)     \9
   \______/ 
    WW  WW
 ```
+
 -eggnog
+
 ```
  ____
 |____|      
@@ -65,6 +68,10 @@ __\ ( (     ) ) /__
 ```
 
 Ducks best friend was a [frog, dog, hog, carton of eggnog] named {friend}.
+
+I always forget what color {friend} was. Do you remember?
+
+Oh, how could I forget. {friend} was a beautiful shade of {friendColor} of course!
 
 
 "You sure are one goofy friend, {friend}." Duck said as they splashed together.
