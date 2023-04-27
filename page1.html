@@ -63,19 +63,19 @@
         <h1> Welcome to story time</h1>
         <button id="startButton">click to start</button>
         <div class="phasedDisplay flex-container">
-          <p id="oneTime">Once upon a time there was a <span id="duck_type">duck</span>.</p>
-          <p id="whatColor">Now, what was the color of that <span id="duck_type">duck</span> again?</p>
+          <p id="oneTime">Once upon a time there was a <span class="duck_type">duck</span>.</p>
+          <p id="whatColor">Now, what was the color of that <span class="duck_type">duck</span> again?</p>
           <span class="inline">
             <p>I think she was a </p>
             <input id="duck_color" type="text" name="duck_color" placeholder="Type a color" maxlength="24" size="12">
-            <p> <span id="duck_type">duck</span>.</p>
+            <p> <span class="duck_type">duck</span>.</p>
           </span>
           <p id="helper">Hit "Enter" on your keyboard.</p>
           <p id="hm">Hmmmmmm.....</p>
           <p id="no">No, that wasn't it.</p>
           <p id="yes"></p>
           <div class="phaseTwo">
-            <p id="where">Now, where is that <span id="duck_type">duck</span>? She was just around here somewhere. </p>
+            <p id="where">Now, where is that <span class="duck_type">duck</span>? She was just around here somewhere. </p>
             <p id="letsSee">Let's see.......</p>
             <pre id="eyes">
 👀
@@ -87,11 +87,11 @@
 =(• )___
  (  _> /  
 		  </pre>
-              <p id="splashing">One day <span id="duck_type">duck</span> was splashing in the pond with her best friend.</p>
+              <p id="splashing">One day <span class="duck_type">duck</span> was splashing in the pond with her best friend.</p>
           </div>
           <div class="phaseThree">
               <fieldset id="chooseAFriend">
-                <legend>Please Choose one friend for <span id="duck_type">duck</span>.</legend>
+                <legend>Please Choose one friend for <span class="duck_type">duck</span>.</legend>
                 <input id="frogSelect" type="radio" name="friend" value="frog">
                 <label for="frogSelect">Frog</label>
                 <br>
@@ -105,7 +105,52 @@
                 <label for="eggnogSelect">Eggnog</label>
                 <br>
               </fieldset>
-	    <p id="tryAgain">You have to pick a friend for <span id="duck_type">duck</span> first!</p>
+		<p id="tryAgain">You have to pick a friend for <span class="duck_type">duck</span> first!</p>
+		<p id="friend_declare"><span class="duck_type">duck</span>'s best friend was a <span class="friend_type">test</span> named
+		   <span class="inline">
+			<input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxlength="24" size="11">.
+		   </span>
+		</p>
+		  <p id="friend_colorQuestion">I always forget what color <span class="friend_name"></span> is. Do you remember?</p>
+		  <span class="inline">
+			  <p>Maybe they were a </p>
+			  <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxlength="24" size="12">
+			  <span class="friend_type"></span>.
+		  </span>
+		  <p id="friend_goofy">"You sure are one goofy <span class="friend_type"></span>, <span class="friend_name"></span>." <span class="duck_type">duck</span> said as they splashed together.</p>
+		  <p id="friend_laugh"><span class="friend_name"></span> laughed.</p>
+		  <p id="duck_laugh"><span class="duck_type"></span> laughed.</p>
+		  <p id="rain_start">After a little while it started to rain.</p>
+		  <p id="rain_howBad">How bad was the storm?</p>
+		  <div id="rain_input_node">
+		  	<span id="notBad">Not too bad. </span><input id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" value="25"><span id="reallyBad"> Really Bad.</span>
+		  </div>
+		  <p id="rain_getOut">"We should get out of the water during a rainstorm." said <span class="friend_name"></span></p>
+		  <p id="rain_hungry">"Yeah. I'm hungry anyways. What should we eat today?" said <span class="duck_type">duck</span>.</p>
+		  <fieldset id="eat_choose">
+			<legend id="eat_what">What should they eat?</legend>  
+		  	<input id="pizzaSelect" type="radio" name="food" value="pizza">
+			  <label for="pizzaSelect">Pizza</label><br>
+		  	<input id="puddingSelect" type="radio" name="food" value="pudding">
+			  <label for="puddingSelect">Pudding</label><br>
+		  	<input id="grapesSelect" type="radio" name="food" value="grapes">
+			  <label for="grapesSelect">Grapes</label><br>
+		  </fieldset>
+		  <p id="lets_eat">"Let's eat <span id="foodSelect"></span>", said <span class="friend_name"></span></p>
+		  <h1 class="pudding_story">Time to slurp the pud</h1>
+		  <h1 class="grapes_story">The grape story (for brave souls)</h1>
+            <div id="waterBody">
+              <pre class="water_flow" id="water1">
+    ----^--^------^--^--^--^------^--^
+			  </pre>
+              <pre class="water_flow" id="water2">
+       --^----^--        --^----^--
+			  </pre>
+            </div>
+	  </div>
+      </article>
+      <aside class="container"></aside>
+    </main>
             <pre id="frog">
        _   _
       (•)_(•)
@@ -136,51 +181,6 @@ __\ ( (     ) ) /__
 |   | |      
 |___|_|      
 		  </pre>
-		  <p id="friend_declare"><span id="duck_type">duck</span>'s best friend was a <span id="friend_type"></span> named
-		     <span class="inline">
-		     	<input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxlength="24" size="11">.
-		     </span>
-		  </p>
-		  <p id="friend_colorQuestion">I always forget what color <span id="friend_name"></span> is. Do you remember?</p>
-		  <span class="inline">
-			  <p>Maybe they were a </p>
-			  <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxlength="24" size="12">
-			  <span id="friend_type"></span>.
-		  </span>
-		  <p id="friend_goofy">"You sure are one goofy <span id="friend_type"></span>, <span id="friend_name"></span>." <span id="duck_type">duck</span> said as they splashed together.</p>
-		  <p id="friend_laugh"><span id="friend_name"></span> laughed.</p>
-		  <p id="duck_laugh"><span id="duck_type"></span> laughed.</p>
-		  <p id="rain_start">After a little while it started to rain.</p>
-		  <p id="rain_howBad">How bad was the storm?</p>
-		  <div id="rain_input_node">
-		  	<span id="notBad">Not too bad. </span><input id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" value="25"><span id="reallyBad"> Really Bad.</span>
-		  </div>
-		  <p id="rain_getOut">"We should get out of the water during a rainstorm." said <span id="friend_name"></span></p>
-		  <p id="rain_hungry">"Yeah. I'm hungry anyways. What should we eat today?" said <span id="duck_type">duck</span>.</p>
-		  <fieldset id="eat_choose">
-			<legend id="eat_what">What should they eat?</legend>  
-		  	<input id="pizzaSelect" type="radio" name="food" value="pizza">
-			  <label for="pizzaSelect">Pizza</label><br>
-		  	<input id="puddingSelect" type="radio" name="food" value="pudding">
-			  <label for="puddingSelect">Pudding</label><br>
-		  	<input id="grapesSelect" type="radio" name="food" value="grapes">
-			  <label for="grapesSelect">Grapes</label><br>
-		  </fieldset>
-		  <p id="lets_eat">"Let's eat <span id="foodSelect"></span>", said <span id="friend_name"></span></p>
-		  <h1 class="pudding_story">Time to slurp the pud</h1>
-		  <h1 class="grapes_story">The grape story (for brave souls)</h1>
-            <div id="waterBody">
-              <pre class="water_flow" id="water1">
-    ----^--^------^--^--^--^------^--^
-			  </pre>
-              <pre class="water_flow" id="water2">
-       --^----^--        --^----^--
-			  </pre>
-            </div>
-	  </div>
-      </article>
-      <aside class="container"></aside>
-    </main>
     <div id="print">
       <pre>
                                    ___

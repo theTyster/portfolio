@@ -84,7 +84,6 @@ async function startButtonListener(){
 	})
 
 	await checkColorInput(duck_color, ascii.duck);
-	duck_color.removeEventListener("input", inputResizeListener);
 };
 
 async function storyStartListener(event){
@@ -200,13 +199,13 @@ async function storyStartListener(event){
 	obtainAFriend();
 	page.phaseTwo.splashing.hide();
 	page.phaseThree.chooseAFriend.hide();
-	//assigns the friend animal to each span element for friend type
+	//assigns the friend animal to each span element with ".friend_type"
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
 	page.phaseThree.friendDeclare.show();
 	page.phaseThree.friendDeclare.tag.after(helper);
-	page.phaseThree.friend_name_input.addEventListener("input", function inputResizeListener(event){
-		page.phaseThree.friend_name_input.style.width = page.phaseThree.friend_name_input.value.length + "ch";
+	friend_name_input.addEventListener("input", function inputResizeListener(event){
+		friend_name_input.style.width = friend_name_input.value.length + "ch";
 		page.helper.show();
 	})
 	await listen4Enter();
