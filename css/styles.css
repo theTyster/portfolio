@@ -54,7 +54,7 @@ span.inline > * {
 }
 
 #print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > * {
-	/* display: none; */
+	display: none;
 }
 
 .phasedDisplay > .phaseTwo > #eyes {

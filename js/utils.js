@@ -23,40 +23,7 @@ const ascii = {
 	frog: new displayFunc("#frog"),
 	dog: new displayFunc("#dog"),
 	hog: new displayFunc("#hog"),
-	eggnog: new displayFunc("eggnog")
-};
-
-//page tags
-const page = {
-	body: document.querySelector("body"),
-	container: document.querySelector(".container"),
-	mobileNotice: new displayFunc("header"),
-	oneTime: new displayFunc("#oneTime"),
-	startButton: new displayFunc("button#startButton"),
-	helper: new displayFunc("#helper"),
-	hmm:  new displayFunc("#hm"),
-	no: new displayFunc("#no"),
-	yes: new displayFunc("#yes"),
-	phaseOne:{
-		duckColorInput: document.querySelector("input#duck_color"),
-		duckInlineInput: new displayFunc("span.inline"),
-		duckWhatColor: new displayFunc("#whatColor")
-	},
-	phaseTwo:{
-		body: new displayFunc("div.phaseTwo"),
-		where: new displayFunc("#where"),
-		letsSee: new displayFunc("#letsSee"),
-		eyes:  new displayFunc("#eyes"),
-		ah: new displayFunc("#ah"),
-		thereSheIs: new displayFunc("#thereSheIs"),
-		splashing: new displayFunc("#splashing"),
-		chooseAfriend: new displayFunc("chooseAFriend")
-	},
-	phaseThree:{
-		body: new displayFunc("div.phaseThree"),
-		chooseAFriend: new displayFunc("#chooseAFriend"),
-		tryAgain: new displayFunc("#tryAgain")
-	}
+	eggnog: new displayFunc("#eggnog")
 };
 
 
@@ -127,3 +94,63 @@ const makeItRain = function letItRain(storminess) { // remember that the arg is 
 	}
 	delayedRain();
 }
+
+
+	const checkColorInput = async function checkInputForColor(inputSelector, asciiObj){
+		const colorizeAscii = () => {
+			inputSelector.style.backgroundColor = inputSelector.value;
+			asciiObj.color = inputSelector.value;
+			asciiObj.tag.style.color = asciiObj.color;
+			//a little easter egg in case anyone puts in the same color that is used for the background later on.
+			if (inputSelector.value === "paleTurquoise"){
+				bonusLevel.enabled = true;
+				//saves input to memory.
+				localStorage.setItem("duck", JSON.stringify(asciiObj));
+			}
+		}
+
+		//moves helper text to after the input box. If the input box is in an inline class.
+		if (inputSelector.parentNode.classList.toString() === "inline"){
+			inputSelector.parentNode.after(helper);
+			inputSelector.parentNode.after(hm)
+			inputSelector.parentNode.after(no)
+			inputSelector.parentNode.after(yes)
+		}
+		else{
+			inputSelector.after(helper);
+		}
+		await listen4Enter(); // wait for enter to be hit after inputing the color
+		page.helper.hide();
+
+		//blocks the input while it is being checked.
+		inputSelector.disabled = true;
+		await page.hm.show(); 
+		await page.hm.hide();
+
+		// event listener verifies the input. If the transition on duckColorInput occurred after colorizeAscii ran, then transitionend will detect it.
+		inputSelector.addEventListener("transitionend", storyStartListener, {once: true});
+
+		//Colors the Duck based on the input.
+		//saves details to object and local storage.
+		colorizeAscii(); 
+
+		const inputRegex = /#/gu;
+		// checks if the background color has a value.
+		if (!inputSelector.style.backgroundColor){
+			await page.no.show();
+			await page.no.hide();
+			inputSelector.disabled = false;
+			checkColorInput(inputSelector, asciiObj);
+		}
+		//checks to ensure that no hex colors were used and that the duck is not colored white.
+		switch(true){
+			case inputSelector.style.backgroundColor === "white":
+			case Boolean(inputSelector.value.match(inputRegex)):{
+				await page.no.show();
+				await page.no.hide();
+				inputSelector.disabled = false;
+				checkColorInput(inputSelector, asciiObj);
+				break;
+			}
+		}
+	}
