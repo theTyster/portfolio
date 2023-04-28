@@ -83,7 +83,7 @@ async function startButtonListener(){
 		page.helper.show();
 	})
 
-	await checkColorInput(duck_color, ascii.duck);
+	await checkColorInput(duck_color, ascii.duck, storyStartListener);
 };
 
 async function storyStartListener(event){
@@ -236,12 +236,13 @@ async function storyStartListener(event){
 	//assigns the friend animal to each span element with ".friend_type"
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
-	chooseFriendName();
-	friendColorQuestion.show();
-	friendColorInput.show();
-	//YOU SHOULD BE ABLE TO SEE THE INPUT NOW. TIME TO SANITIZE THAT FIELD AND CHECK
-	//IF CHECKCOLORINPUT() IS REALLY REUSABLE.
-	//ALSO. DON'T FORGET TO ADD A RULE FOR PICKING THE FRIEND NAME SO THAT USERS CAN'T
+	await chooseFriendName();
+	page.phaseThree.friendColorQuestion.show();
+	page.phaseThree.friendColorInput.show();
+	page.phaseThree.friendColorInput.tag.focus();
+	await checkColorInput(friend_color, ascii.duck.friend, () => {});
+	//THE INPUT FOR THE FRIEND COLOR ISN'T RESIZING AS INFO IS TYPED.
+	//DON'T FORGET TO ADD A RULE FOR PICKING THE FRIEND NAME SO THAT USERS CAN'T
 	//RETURN A BLANK FIELD.
 	//ALSO. DON'T FORGET TO ADD COLOR TO ALL OF THESE INPUTS. DUCK, FRIEND NAME, AND FRIEND TYPE SHOULD ALL BE COLORIZED.
 }

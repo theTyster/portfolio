@@ -96,7 +96,10 @@ const makeItRain = function letItRain(storminess) { // remember that the arg is 
 }
 
 
-	const checkColorInput = async function checkInputForColor(inputSelector, asciiObj){
+	const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
+		//inputSelector = The selector ID for the text input box being used to choose a color.
+		//asciiObj = the ascii picture that the color is going to be applied to.
+		
 		const colorizeAscii = () => {
 			inputSelector.style.backgroundColor = inputSelector.value;
 			asciiObj.color = inputSelector.value;
@@ -128,7 +131,7 @@ const makeItRain = function letItRain(storminess) { // remember that the arg is 
 		await page.hm.hide();
 
 		// event listener verifies the input. If the transition on duckColorInput occurred after colorizeAscii ran, then transitionend will detect it.
-		inputSelector.addEventListener("transitionend", storyStartListener, {once: true});
+		inputSelector.addEventListener("transitionend", transFunc, {once: true});
 
 		//Colors the Duck based on the input.
 		//saves details to object and local storage.
