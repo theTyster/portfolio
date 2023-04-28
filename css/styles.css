@@ -48,14 +48,16 @@ span.inline > * {
 	display: inline;
 }
 
+#print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > *, div.hidden_ascii {
+	display: none;
+}
+
 #helper{
 	font-size: x-small;
 	margin-left: 10em;
 }
 
-#print, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > * {
-	display: none;
-}
+
 
 .phasedDisplay > .phaseTwo > #eyes {
 	font-size: 30pt;

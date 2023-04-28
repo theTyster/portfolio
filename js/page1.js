@@ -31,10 +31,10 @@ const page = {
 		body: new displayFunc("div.phaseThree"),
 		chooseAFriend: new displayFunc("#chooseAFriend"),
 		tryAgain: new displayFunc("#tryAgain"),
-		friendName: new displayFunc("#friend_name"),
-		friendColorQuestion: new displayFunc("#friend_colorQuestion"),
-		friendColorInput: new displayFunc("input#friend_color"),
 		friendDeclare: new displayFunc("#friend_declare"),
+		friendNameCheck: new displayFunc(".input_name_check"),
+		friendColorQuestion: new displayFunc("#friend_colorQuestion"),
+		friendColorInput: new displayFunc("#friend_colorQuestion_input"),
 		friendGoofy: new displayFunc("#friend_goofy"),
 		friendLaugh: new displayFunc("#friend_laugh"),
 		duckLaugh: new displayFunc("#duck_laugh"),
@@ -125,6 +125,40 @@ async function storyStartListener(event){
 			}
 		}
 	}
+	const chooseFriendName = async () => {
+		page.phaseThree.friendDeclare.show();
+		friend_name_input.focus();
+		friend_declare.after(helper)
+		//choose a name for duck's friend.
+		friend_name_input.addEventListener("input", function inputResizeListener(event){
+			friend_name_input.style.width = friend_name_input.value.length + "ch";
+			page.helper.show();
+		})
+		await listen4Enter();
+		page.helper.hide();
+		page.phaseThree.friendDeclare.hide(); //hide input box to remove focus.
+		friend_name_input.disabled = true;
+		document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
+		page.phaseThree.friendNameCheck.show();
+		page.phaseThree.friendNameCheck.tag.after(helper);
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
+		if (name_check_yes.checked){
+			ascii.duck.friend.name = friend_name_input.value
+			page.phaseThree.friendNameCheck.hide();
+			for(let i of page.friendName){
+				i.innerText = ascii.duck.friend.name
+			}
+		}
+		else if(name_check_no.checked){
+			page.phaseThree.friendNameCheck.hide();
+			friend_name_input.style.width = "11ch";
+			friend_name_input.value = "";
+			friend_name_input.disabled = false;
+			chooseFriendName();
+		}
+	}
 	yes.innerText = `Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} duck.`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
@@ -195,19 +229,19 @@ async function storyStartListener(event){
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	// Checks to ensure a friend was selected and assigns the value.
+	// Checks to ensure a friend was selected and assigns the value to the duck object.
 	obtainAFriend();
 	page.phaseTwo.splashing.hide();
 	page.phaseThree.chooseAFriend.hide();
 	//assigns the friend animal to each span element with ".friend_type"
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
-	page.phaseThree.friendDeclare.show();
-	page.phaseThree.friendDeclare.tag.after(helper);
-	friend_name_input.addEventListener("input", function inputResizeListener(event){
-		friend_name_input.style.width = friend_name_input.value.length + "ch";
-		page.helper.show();
-	})
-	await listen4Enter();
-	page.helper.hide();
+	chooseFriendName();
+	friendColorQuestion.show();
+	friendColorInput.show();
+	//YOU SHOULD BE ABLE TO SEE THE INPUT NOW. TIME TO SANITIZE THAT FIELD AND CHECK
+	//IF CHECKCOLORINPUT() IS REALLY REUSABLE.
+	//ALSO. DON'T FORGET TO ADD A RULE FOR PICKING THE FRIEND NAME SO THAT USERS CAN'T
+	//RETURN A BLANK FIELD.
+	//ALSO. DON'T FORGET TO ADD COLOR TO ALL OF THESE INPUTS. DUCK, FRIEND NAME, AND FRIEND TYPE SHOULD ALL BE COLORIZED.
 }

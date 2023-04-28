@@ -106,13 +106,22 @@
                 <br>
               </fieldset>
 		<p id="tryAgain">You have to pick a friend for <span class="duck_type">duck</span> first!</p>
-		<p id="friend_declare"><span class="duck_type">duck</span>'s best friend was a <span class="friend_type">test</span> named
+		<p id="friend_declare"><span class="duck_type">duck</span>'s best friend was a <span class="friend_type"></span> named
 		   <span class="inline">
-			<input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxlength="24" size="11">.
+			<input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxlength="23" size="11">.
 		   </span>
 		</p>
+		<fieldset class="input_name_check">
+			<legend>Does <span class="friend_name"></span> sound right?</legend>
+			<input id="name_check_yes" type="radio" name="name_check" value="yes">
+			<label for="name_check">Yes</label>
+			<br>
+			<input id="name_check_no" type="radio" name="name_check" value="no">
+			<label for="name_check">No</label>
+			<br>
+		</fieldset>
 		  <p id="friend_colorQuestion">I always forget what color <span class="friend_name"></span> is. Do you remember?</p>
-		  <span class="inline">
+		  <span id="friend_colorQuestion_input" class="inline">
 			  <p>Maybe they were a </p>
 			  <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxlength="24" size="12">
 			  <span class="friend_type"></span>.
@@ -142,6 +151,7 @@
             <div id="waterBody">
               <pre class="water_flow" id="water1">
     ----^--^------^--^--^--^------^--^
+
 			  </pre>
               <pre class="water_flow" id="water2">
        --^----^--        --^----^--
@@ -151,7 +161,8 @@
       </article>
       <aside class="container"></aside>
     </main>
-            <pre id="frog">
+    <div class="hidden_ascii">
+	   <pre id="frog">
        _   _
       (•)_(•)
    _ (   _   ) _
@@ -159,20 +170,20 @@
 __\ ( (     ) ) /__
 )   /\ \___/ /\   (
  )_/ /|\   /|\ \_(
-		  </pre>
-            <pre id="dog">
+	  </pre>
+          <pre id="dog">
      __
 (___()•`;
 /,    /`
 \\'--\\
-		  </pre>
-            <pre id="hog">
+	  </pre>
+          <pre id="hog">
 ^..^_____  
 (00)     \9
   \______/ 
    WW  WW
-		  </pre>
-            <pre id="eggnog">
+	  </pre>
+	  <pre id="eggnog">
  ____
 |____|      
 /___/_\      
@@ -180,7 +191,8 @@ __\ ( (     ) ) /__
 |nog| |      
 |   | |      
 |___|_|      
-		  </pre>
+	  </pre>
+    </div>
     <div id="print">
       <pre>
                                    ___
