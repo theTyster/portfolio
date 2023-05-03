@@ -110,7 +110,7 @@ async function storyStartListener(event){
 				break;
 			}
 			case(eggnog.checked):{
-				friend = eggnog.checked
+				ascii.duck.friend = eggnog.checked
 				ascii.duck.friend = ascii.eggnog;
 				ascii.duck.friend.type = "eggnog";
 				break;
@@ -126,6 +126,10 @@ async function storyStartListener(event){
 		}
 	}
 	const chooseFriendName = async () => {
+		while true {
+////NEED A WHILE LOOP TO LOOP THIS FUNCTION SO THAT CODE AFTER IT DOESN'T EXECUTE
+////IF IT NEEDS TO BE REPEATED.
+		}
 		page.phaseThree.friendDeclare.show();
 		friend_name_input.focus();
 		friend_declare.after(helper)
@@ -223,7 +227,6 @@ async function storyStartListener(event){
 	duck.style.left = "100px";
 	duck.style.top = "77px";
 	page.phaseThree.body.show();
-	//working on getting data from a form
 	page.phaseThree.chooseAFriend.show();
 	chooseAFriend.after(helper);
 	page.helper.show();
@@ -237,9 +240,13 @@ async function storyStartListener(event){
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
 	await chooseFriendName();
-	page.phaseThree.friendColorQuestion.show();
+	await page.phaseThree.friendColorQuestion.show();
 	page.phaseThree.friendColorInput.show();
 	page.phaseThree.friendColorInput.tag.focus();
+	friend_color.addEventListener("input", function inputResizeListener(event){
+		friend_color.style.width = friend_color.value.length + "ch";
+		page.helper.show();
+	})
 	await checkColorInput(friend_color, ascii.duck.friend, () => {});
 	//THE INPUT FOR THE FRIEND COLOR ISN'T RESIZING AS INFO IS TYPED.
 	//DON'T FORGET TO ADD A RULE FOR PICKING THE FRIEND NAME SO THAT USERS CAN'T

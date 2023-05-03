@@ -28,11 +28,11 @@ const ascii = {
 
 
 // custom sleep function.
-async function sleep(time){ return new Promise((resolve) => setTimeout(resolve, time * 1000)); }
+const sleep = async time => new Promise(resolve => setTimeout(resolve, time * 1000));
 
 // Listens for Enter to be pressed before continuing.
 const listen4Enter = function(){
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		document.addEventListener("keyup", function enterInputListener(event){
 			if (event.key === "Enter"){
 				document.removeEventListener("keyup", enterInputListener);
@@ -43,14 +43,14 @@ const listen4Enter = function(){
 }
 
 
-const ranNumG = function randomNumberGenerator(max){
+const ranNumG = function(max){
 	return Math.floor(Math.random() * max);
 }
 
 
 const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
 	if (useKeysBool){
-	return [...Array(maxIndex).keys()].map((x) => ++x);
+	return [...Array(maxIndex).keys()].map(x => ++x);
 	}
 	else {
 	return [...Array(maxIndex).keys()];
@@ -73,7 +73,7 @@ let shuffle = function fisherYatesArrayShuffler(inputArr){
 
 
 
-const makeItRain = function letItRain(storminess) { // remember that the arg is a range 1-100.
+const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
 	const hiddenRaindrops = 20;
 	storminess = Math.floor(hiddenRaindrops*(storminess/100));
 	const rainArray = shuffle(makeArray(storminess));
