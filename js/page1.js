@@ -52,7 +52,7 @@ const page = {
 };
 
 //waits for content to load and then adds a listener to the start button.
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function(){
 	//closes the mobile notice once the "x" button is clicked.
 	document.querySelector("header > button").addEventListener("click", page.mobileNotice.hide, {once:true})
 	//listener for button that starts off the story.
@@ -83,87 +83,12 @@ async function startButtonListener(){
 		page.helper.show();
 	})
 
+	ascii.duck.type = page.duckType;
 	await checkColorInput(duck_color, ascii.duck, storyStartListener);
 };
 
 async function storyStartListener(event){
-	const obtainAFriend = async () => {
-		const frog = document.querySelector("#frogSelect"),
-			dog = document.querySelector("#dogSelect"),
-			hog = document.querySelector("#hogSelect"),
-			eggnog = document.querySelector("#eggnogSelect");
-		// A switch statement here is probably not best practice since IF is faster. But I need the practice.
-		switch(true){
-			case (frog.checked):{
-				ascii.duck.friend = ascii.frog;
-				ascii.duck.friend.type = "frog";
-				break;
-			}
-			case(dog.checked):{
-				ascii.duck.friend = ascii.dog;
-				ascii.duck.friend.type= "dog";
-				break;
-			}
-			case(hog.checked):{
-				ascii.duck.friend = ascii.hog;
-				ascii.duck.friend.type = "hog";
-				break;
-			}
-			case(eggnog.checked):{
-				ascii.duck.friend = eggnog.checked
-				ascii.duck.friend = ascii.eggnog;
-				ascii.duck.friend.type = "eggnog";
-				break;
-			}
-			default:{
-				await page.helper.hide();
-				await page.phaseThree.tryAgain.show(1.5);
-				await page.phaseThree.tryAgain.hide();
-				await page.helper.show();
-				await listen4Enter();
-				obtainAFriend();
-			}
-		}
-	}
-	const chooseFriendName = async () => {
-		while true {
-////NEED A WHILE LOOP TO LOOP THIS FUNCTION SO THAT CODE AFTER IT DOESN'T EXECUTE
-////IF IT NEEDS TO BE REPEATED.
-		}
-		page.phaseThree.friendDeclare.show();
-		friend_name_input.focus();
-		friend_declare.after(helper)
-		//choose a name for duck's friend.
-		friend_name_input.addEventListener("input", function inputResizeListener(event){
-			friend_name_input.style.width = friend_name_input.value.length + "ch";
-			page.helper.show();
-		})
-		await listen4Enter();
-		page.helper.hide();
-		page.phaseThree.friendDeclare.hide(); //hide input box to remove focus.
-		friend_name_input.disabled = true;
-		document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
-		page.phaseThree.friendNameCheck.show();
-		page.phaseThree.friendNameCheck.tag.after(helper);
-		page.helper.show();
-		await listen4Enter();
-		page.helper.hide();
-		if (name_check_yes.checked){
-			ascii.duck.friend.name = friend_name_input.value
-			page.phaseThree.friendNameCheck.hide();
-			for(let i of page.friendName){
-				i.innerText = ascii.duck.friend.name
-			}
-		}
-		else if(name_check_no.checked){
-			page.phaseThree.friendNameCheck.hide();
-			friend_name_input.style.width = "11ch";
-			friend_name_input.value = "";
-			friend_name_input.disabled = false;
-			chooseFriendName();
-		}
-	}
-	yes.innerText = `Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} duck.`;
+	yes.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
 	await page.phaseOne.duckWhatColor.hide(.5);
@@ -233,13 +158,110 @@ async function storyStartListener(event){
 	await listen4Enter();
 	page.helper.hide();
 	// Checks to ensure a friend was selected and assigns the value to the duck object.
-	obtainAFriend();
+	await (async function obtainAFriend(){
+		const frog = document.querySelector("#frogSelect"),
+			dog = document.querySelector("#dogSelect"),
+			hog = document.querySelector("#hogSelect"),
+			eggnog = document.querySelector("#eggnogSelect");
+		// A switch statement here is probably not best practice since IF is faster. But I need the practice so
+		switch(true){
+			case (frog.checked):{
+				ascii.duck.friend = ascii.frog;
+				ascii.duck.friend.type = "frog";
+				break;
+			}
+			case(dog.checked):{
+				ascii.duck.friend = ascii.dog;
+				ascii.duck.friend.type= "dog";
+				break;
+			}
+			case(hog.checked):{
+				ascii.duck.friend = ascii.hog;
+				ascii.duck.friend.type = "hog";
+				break;
+			}
+			case(eggnog.checked):{
+				ascii.duck.friend = ascii.eggnog;
+				ascii.duck.friend.type = "eggnog";
+				break;
+			}
+			default:{
+				await page.helper.hide();
+				await page.phaseThree.tryAgain.show(1.5);
+				await page.phaseThree.tryAgain.hide();
+				await page.helper.show();
+				await listen4Enter();
+				obtainAFriend();
+			}
+		}
+	})();
 	page.phaseTwo.splashing.hide();
 	page.phaseThree.chooseAFriend.hide();
 	//assigns the friend animal to each span element with ".friend_type"
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
-	await chooseFriendName();
+	await (async () => {
+		let l = true;
+		while (l){
+			page.phaseThree.friendDeclare.show();
+			friend_name_input.focus();
+			friend_declare.after(helper)
+			//choose a name for duck's friend.
+			friend_name_input.addEventListener("input", function inputResizeListener(event){
+				friend_name_input.style.width = friend_name_input.value.length + "ch";
+				page.helper.show();
+			})
+			await listen4Enter();
+			page.helper.hide();
+			page.phaseThree.friendDeclare.hide(); //hide input box to remove focus.
+			friend_name_input.disabled = true;
+			// If the inputed name has a space, is blank, or is a number have them try again.
+			if(friend_name_input.value.indexOf(" ") > -1){
+				const friend_nameError = document.createElement("p");
+				const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
+				friend_nameError.append(friend_nameError_content);
+				//friend_nameError.append("Sorry, names can't contain spaces. Try again.");
+				friend_declare.after(friend_nameError);
+				friend_nameError.style.display = "block";
+				await sleep(4);
+				friend_nameError.remove();
+				friend_name_input.disabled = false;
+				continue;
+			}
+			else if (!(friend_name_input.value) || friend_name_input.value.match(/[0-9]/)){
+				const friend_nameError = document.createElement("p");
+				const friend_nameError_content = document.createTextNode("That name won't work! Try again.");
+				friend_nameError.append(friend_nameError_content);
+				//friend_nameError.append("Sorry, names can't contain spaces. Try again.");
+				friend_declare.after(friend_nameError);
+				friend_nameError.style.display = "block";
+				await sleep(4);
+				friend_nameError.remove();
+				friend_name_input.disabled = false;
+				continue;
+			}
+			document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
+			page.phaseThree.friendNameCheck.show();
+			page.phaseThree.friendNameCheck.tag.after(helper);
+			page.helper.show();
+			await listen4Enter();
+			page.helper.hide();
+			if (name_check_yes.checked){
+				ascii.duck.friend.name = friend_name_input.value
+				page.phaseThree.friendNameCheck.hide();
+				for(let i of page.friendName){
+					i.innerText = ascii.duck.friend.name
+				}
+				l = false;
+			}
+			else if(name_check_no.checked){
+				page.phaseThree.friendNameCheck.hide();
+				friend_name_input.style.width = "11ch";
+				friend_name_input.value = "";
+				friend_name_input.disabled = false;
+			}
+		}
+	})();
 	await page.phaseThree.friendColorQuestion.show();
 	page.phaseThree.friendColorInput.show();
 	page.phaseThree.friendColorInput.tag.focus();
@@ -247,9 +269,8 @@ async function storyStartListener(event){
 		friend_color.style.width = friend_color.value.length + "ch";
 		page.helper.show();
 	})
+	ascii.duck.friend.type = page.friendType;
 	await checkColorInput(friend_color, ascii.duck.friend, () => {});
-	//THE INPUT FOR THE FRIEND COLOR ISN'T RESIZING AS INFO IS TYPED.
-	//DON'T FORGET TO ADD A RULE FOR PICKING THE FRIEND NAME SO THAT USERS CAN'T
-	//RETURN A BLANK FIELD.
-	//ALSO. DON'T FORGET TO ADD COLOR TO ALL OF THESE INPUTS. DUCK, FRIEND NAME, AND FRIEND TYPE SHOULD ALL BE COLORIZED.
+	//TIME TO PUT THE FRIEND IN THE WATER WITH THE DUCK.
+	//NEXT PROGRAM IN THE STORM INPUT.
 }

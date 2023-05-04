@@ -99,18 +99,7 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 	const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
 		//inputSelector = The selector ID for the text input box being used to choose a color.
 		//asciiObj = the ascii picture that the color is going to be applied to.
-		
-		const colorizeAscii = () => {
-			inputSelector.style.backgroundColor = inputSelector.value;
-			asciiObj.color = inputSelector.value;
-			asciiObj.tag.style.color = asciiObj.color;
-			//a little easter egg in case anyone puts in the same color that is used for the background later on.
-			if (inputSelector.value === "paleTurquoise"){
-				bonusLevel.enabled = true;
-				//saves input to memory.
-				localStorage.setItem("duck", JSON.stringify(asciiObj));
-			}
-		}
+		//transFunc = the function which fires after the check is complete.
 
 		//moves helper text to after the input box. If the input box is in an inline class.
 		if (inputSelector.parentNode.classList.toString() === "inline"){
@@ -135,7 +124,24 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 
 		//Colors the Duck based on the input.
 		//saves details to object and local storage.
-		colorizeAscii(); 
+		const colorizeAscii = (() => {
+			inputSelector.style.backgroundColor = inputSelector.value;
+			asciiObj.color = inputSelector.value;
+			asciiObj.tag.style.color = asciiObj.color;
+			try{
+				for (let i of asciiObj.type)
+					i.style.color = asciiObj.color;
+			}
+			catch(e){
+				console.log(e);
+			}
+			//a little easter egg in case anyone puts in the same color that is used for the background later on.
+			if (inputSelector.value === "paleTurquoise"){
+				bonusLevel.enabled = true;
+				//saves input to memory.
+				localStorage.setItem("duck", JSON.stringify(asciiObj));
+			}
+		})();
 
 		const inputRegex = /#/gu;
 		// checks if the background color has a value.
