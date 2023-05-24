@@ -119,17 +119,17 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 		await page.hm.show(); 
 		await page.hm.hide();
 
-		// event listener verifies the input. If the transition on duckColorInput occurred after colorizeAscii ran, then transitionend will detect it.
+		// event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
 		inputSelector.addEventListener("transitionend", transFunc, {once: true});
 
 		//Colors the Duck based on the input.
 		//saves details to object and local storage.
-		const colorizeAscii = (() => {
+		const colorizeAscii = (async () => {
 			inputSelector.style.backgroundColor = inputSelector.value;
 			asciiObj.color = inputSelector.value;
 			asciiObj.tag.style.color = asciiObj.color;
 			try{
-				for (let i of asciiObj.type)
+				for (let i of asciiObj.typeSpans)
 					i.style.color = asciiObj.color;
 			}
 			catch(e){

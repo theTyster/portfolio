@@ -65,14 +65,25 @@ span.inline > * {
 }
 
 #duck {
-	position: relative;
-	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
-	font-size: 18pt;
-	font-weight: 950;
 	transition-property: left, top;
 	transition-duration: 1s;
 	left: 0;
 	top: 0;
+}
+
+#frog {
+	font-size: 10pt;
+}
+
+#eggnog {
+	font-size: 12pt;
+}
+
+.ascii-animal {
+	position: relative;
+	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
+	font-size: 18pt;
+	font-weight: 950;
 }
 
 #waterBody{

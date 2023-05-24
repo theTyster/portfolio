@@ -83,7 +83,7 @@ async function startButtonListener(){
 		page.helper.show();
 	})
 
-	ascii.duck.type = page.duckType;
+	ascii.duck.typeSpans = page.duckType;
 	await checkColorInput(duck_color, ascii.duck, storyStartListener);
 };
 
@@ -269,8 +269,19 @@ async function storyStartListener(event){
 		friend_color.style.width = friend_color.value.length + "ch";
 		page.helper.show();
 	})
-	ascii.duck.friend.type = page.friendType;
-	await checkColorInput(friend_color, ascii.duck.friend, () => {});
+	ascii.duck.friend.typeSpans = page.friendType;
+	await checkColorInput(friend_color, ascii.duck.friend, async () => {
+
+		await page.phaseThree.friendColorInput.hide()
+		page.yes.hide()
+		yes.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
+		page.phaseThree.friendColorInput.tag.after(yes)
+		await page.phaseThree.friendColorQuestion.hide()
+		page.yes.show()
+		ascii.duck.tag.before(ascii.duck.friend.tag)
+		ascii.duck.friend.show()
+		ascii.duck.friend.tag.style.top = "240px"
 	//TIME TO PUT THE FRIEND IN THE WATER WITH THE DUCK.
 	//NEXT PROGRAM IN THE STORM INPUT.
+	});
 }
