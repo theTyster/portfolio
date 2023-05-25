@@ -81,13 +81,14 @@ async function startButtonListener(){
 	duck_color.addEventListener("input", function inputResizeListener(event){
 		duck_color.style.width = duck_color.value.length + "ch";
 		page.helper.show();
-	})
+	});
 
 	ascii.duck.typeSpans = page.duckType;
 	await checkColorInput(duck_color, ascii.duck, storyStartListener);
 };
 
 async function storyStartListener(event){
+	duck_color.blur();
 	yes.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
@@ -102,7 +103,7 @@ async function storyStartListener(event){
 
 	page.phaseTwo.body.show();
 	await page.phaseTwo.where.show(2);
-	where.after(helper)
+	where.after(helper);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -124,15 +125,15 @@ async function storyStartListener(event){
 
 	//eyes animation
 	await page.phaseTwo.eyes.show(3);
-	eyes.style.transform = "rotate(0.5turn)"
-	eyes.style.textShadow = "-1px -1px 3px black"
+	eyes.style.transform = "rotate(0.5turn)";
+	eyes.style.textShadow = "-1px -1px 3px black";
 	await sleep(3);
 	page.phaseTwo.eyes.hide();
 
 	await page.phaseTwo.letsSee.hide();
 
 	await page.phaseTwo.ah.show(.5);
-	await page.phaseTwo.thereSheIs.show()
+	await page.phaseTwo.thereSheIs.show();
 	//duck is in a flex container. Needs to be made visible.
 	//page.phaseTwo.body.tag.querySelector(".duck_container").style.display = "block";
 	await ascii.duck.show();
@@ -143,7 +144,7 @@ async function storyStartListener(event){
 	page.helper.hide();
 	await page.phaseTwo.ah.hide();
 	await page.phaseTwo.thereSheIs.hide();
-	splashing.after(helper)
+	splashing.after(helper);
 	page.phaseTwo.splashing.show();
 	duck.after(ascii.water.tag);
 	await ascii.water.show();
@@ -205,22 +206,22 @@ async function storyStartListener(event){
 		while (l){
 			page.phaseThree.friendDeclare.show();
 			friend_name_input.focus();
-			friend_declare.after(helper)
+			friend_declare.after(helper);
 			//choose a name for duck's friend.
 			friend_name_input.addEventListener("input", function inputResizeListener(event){
 				friend_name_input.style.width = friend_name_input.value.length + "ch";
 				page.helper.show();
-			})
+			});
 			await listen4Enter();
+			friend_name_input.blur();
 			page.helper.hide();
-			page.phaseThree.friendDeclare.hide(); //hide input box to remove focus.
+			page.phaseThree.friendDeclare.hide();
 			friend_name_input.disabled = true;
 			// If the inputed name has a space, is blank, or is a number have them try again.
 			if(friend_name_input.value.indexOf(" ") > -1){
 				const friend_nameError = document.createElement("p");
 				const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
 				friend_nameError.append(friend_nameError_content);
-				//friend_nameError.append("Sorry, names can't contain spaces. Try again.");
 				friend_declare.after(friend_nameError);
 				friend_nameError.style.display = "block";
 				await sleep(4);
@@ -232,7 +233,6 @@ async function storyStartListener(event){
 				const friend_nameError = document.createElement("p");
 				const friend_nameError_content = document.createTextNode("That name won't work! Try again.");
 				friend_nameError.append(friend_nameError_content);
-				//friend_nameError.append("Sorry, names can't contain spaces. Try again.");
 				friend_declare.after(friend_nameError);
 				friend_nameError.style.display = "block";
 				await sleep(4);
@@ -247,10 +247,10 @@ async function storyStartListener(event){
 			await listen4Enter();
 			page.helper.hide();
 			if (name_check_yes.checked){
-				ascii.duck.friend.name = friend_name_input.value
+				ascii.duck.friend.name = friend_name_input.value;
 				page.phaseThree.friendNameCheck.hide();
 				for(let i of page.friendName){
-					i.innerText = ascii.duck.friend.name
+					i.innerText = ascii.duck.friend.name;
 				}
 				l = false;
 			}
@@ -264,23 +264,31 @@ async function storyStartListener(event){
 	})();
 	await page.phaseThree.friendColorQuestion.show();
 	page.phaseThree.friendColorInput.show();
-	page.phaseThree.friendColorInput.tag.focus();
+	friend_color.focus();
 	friend_color.addEventListener("input", function inputResizeListener(event){
 		friend_color.style.width = friend_color.value.length + "ch";
 		page.helper.show();
-	})
+	});
 	ascii.duck.friend.typeSpans = page.friendType;
 	await checkColorInput(friend_color, ascii.duck.friend, async () => {
 
-		await page.phaseThree.friendColorInput.hide()
-		page.yes.hide()
+		friend_color.blur();
+		await page.phaseThree.friendColorInput.hide();
+		page.yes.hide();
 		yes.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
-		page.phaseThree.friendColorInput.tag.after(yes)
-		await page.phaseThree.friendColorQuestion.hide()
-		page.yes.show()
-		ascii.duck.tag.before(ascii.duck.friend.tag)
-		ascii.duck.friend.show()
-		ascii.duck.friend.tag.style.top = "240px"
+		page.phaseThree.friendColorInput.tag.after(yes);
+		await page.phaseThree.friendColorQuestion.hide();
+		page.yes.show();
+		ascii.animalsBlock.tag.append(ascii.duck.tag, ascii.duck.friend.tag);
+		ascii.duck.friend.show();
+		ascii.duck.show();
+		ascii.animalsBlock.show();
+		ascii.water.tag.before(ascii.animalsBlock.tag);
+		//style the duck and friend next.
+//		ascii.duck.friend.tag.style.paddingLeft = "220px";
+//		ascii.duck.tag.style.paddingLeft = "165px";
+
+
 	//TIME TO PUT THE FRIEND IN THE WATER WITH THE DUCK.
 	//NEXT PROGRAM IN THE STORM INPUT.
 	});

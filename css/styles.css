@@ -67,8 +67,6 @@ span.inline > * {
 #duck {
 	transition-property: left, top;
 	transition-duration: 1s;
-	left: 0;
-	top: 0;
 }
 
 #frog {
@@ -79,8 +77,8 @@ span.inline > * {
 	font-size: 12pt;
 }
 
-.ascii-animal {
-	position: relative;
+.ascii_animal {
+	position: absolute;
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
 	font-size: 18pt;
 	font-weight: 950;

@@ -23,7 +23,8 @@ const ascii = {
 	frog: new displayFunc("#frog"),
 	dog: new displayFunc("#dog"),
 	hog: new displayFunc("#hog"),
-	eggnog: new displayFunc("#eggnog")
+	eggnog: new displayFunc("#eggnog"),
+	animalsBlock: new displayFunc(".ascii_animals_block")
 };
 
 
