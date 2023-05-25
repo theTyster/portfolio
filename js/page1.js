@@ -280,6 +280,16 @@ async function storyStartListener(event){
 		await page.phaseThree.friendColorQuestion.hide();
 		page.yes.show();
 		ascii.animalsBlock.tag.append(ascii.duck.tag, ascii.duck.friend.tag);
+
+		//change the show function to respect inline-block.
+		const inline_show = async function(seconds){
+			this.tag.style.display = 'inline-block';
+			await sleep(seconds * 1);
+		}
+		ascii.duck.friend.show = inline_show
+		ascii.duck.show = inline_show
+
+
 		ascii.duck.friend.show();
 		ascii.duck.show();
 		ascii.animalsBlock.show();
