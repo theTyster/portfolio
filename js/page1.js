@@ -138,7 +138,10 @@ async function storyStartListener(event){
 	//page.phaseTwo.body.tag.querySelector(".duck_container").style.display = "block";
 	await ascii.duck.show();
 
-	duck.after(helper);
+	//trying to find a way to position the duck so that it appears before 
+	//the helper text even though it is appearing after it currently.
+	//despite actually being before it in the dom
+	duck.before(helper);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -146,12 +149,17 @@ async function storyStartListener(event){
 	await page.phaseTwo.thereSheIs.hide();
 	splashing.after(helper);
 	page.phaseTwo.splashing.show();
-	duck.after(ascii.water.tag);
+	page.phaseTwo.splashing.tag.before(ascii.water.tag);
+	ascii.animalsBlock.tag.append(duck);
+	ascii.animalsBlock.tag.before(ascii.water.tag);
+	ascii.animalsBlock.tag.style.height = "55px";
 	await ascii.water.show();
 	
 	//move the duck onto the water.
-	duck.style.left = "100px";
-	duck.style.top = "77px";
+	//NEED TO FIND A WAY TO POSITION THE DUCK RELATIVE TO ITS CONTAINER
+	//AND NOT THE PAGE.
+	ascii.animalsBlock.show();
+	duck.style.paddingLeft = "100px";
 	page.phaseThree.body.show();
 	page.phaseThree.chooseAFriend.show();
 	chooseAFriend.after(helper);
@@ -279,7 +287,7 @@ async function storyStartListener(event){
 		page.phaseThree.friendColorInput.tag.after(yes);
 		await page.phaseThree.friendColorQuestion.hide();
 		page.yes.show();
-		ascii.animalsBlock.tag.append(ascii.duck.tag, ascii.duck.friend.tag);
+		ascii.animalsBlock.tag.append(ascii.duck.friend.tag);
 
 		//change the show function to respect inline-block.
 		const inline_show = async function(seconds){
@@ -292,11 +300,14 @@ async function storyStartListener(event){
 
 		ascii.duck.friend.show();
 		ascii.duck.show();
-		ascii.animalsBlock.show();
 		ascii.water.tag.before(ascii.animalsBlock.tag);
-		//style the duck and friend next.
-//		ascii.duck.friend.tag.style.paddingLeft = "220px";
-//		ascii.duck.tag.style.paddingLeft = "165px";
+		//NEED TO FIND A WAY TO POSITION THE DUCK RELATIVE TO ITS CONTAINER
+		//AND NOT THE PAGE.
+		//see line 156
+		//see line 143
+		ascii.duck.tag.style.paddingLeft = "180px";
+		ascii.duck.tag.style.paddingTop = "10px";
+		ascii.animalsBlock.tag.style.height = "90px";
 
 
 	//TIME TO PUT THE FRIEND IN THE WATER WITH THE DUCK.

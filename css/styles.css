@@ -65,7 +65,7 @@ span.inline > * {
 }
 
 #duck {
-	transition-property: left, top;
+	transition-property: padding, top;
 	transition-duration: 1s;
 }
 
@@ -77,11 +77,16 @@ span.inline > * {
 	font-size: 12pt;
 }
 
+.ascii_animals_block {
+	transition: height 1s;
+}
+
 .ascii_animal {
 	position: absolute;
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
 	font-size: 18pt;
 	font-weight: 950;
+	transition: padding,top 1s;
 }
 
 #waterBody{
