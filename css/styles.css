@@ -13,8 +13,10 @@
 .flex-container > aside:nth-of-type(2) { flex: 1; }
 
 
-body {
+html, body {
 	transition: background-color, 7s;
+	margin: 0;
+	height: 100%;
 }
 
 
@@ -77,6 +79,7 @@ span.inline > * {
 
 #eggnog {
 	font-size: 12pt;
+	margin-left: 40px;
 }
 
 .ascii_animals_block {
@@ -102,6 +105,9 @@ span.inline > * {
 	padding-left: 11%;
 }
 
+.sky {
+	height: 0;
+}
 
 
 /*MEDIA QUERIES*/

@@ -3,6 +3,7 @@
 //page tags
 const page = {
 	body: document.querySelector("body"),
+	lightGreenBG:  "#B3DCBD",
 	container: document.querySelector(".container"),
 	mobileNotice: new displayFunc("header"),
 	oneTime: new displayFunc("#oneTime"),
@@ -112,7 +113,7 @@ async function storyStartListener(event){
 
 	//styles the background and activates the flex box centering.
 	page.container.style.flex = 1;
-	page.body.style.background = "#B3DCBD"; // light green
+	page.body.style.background = page.lightGreenBG; // light green
 
 	//easter egg styles.
 	if (bonusLevel.enabled){
@@ -214,28 +215,33 @@ async function storyStartListener(event){
 
 		}
 	})();
-	page.phaseTwo.splashing.hide();
-	page.phaseThree.chooseAFriend.hide();
+	await page.phaseTwo.splashing.hide();
+	await page.phaseThree.chooseAFriend.hide();
+
 	//assigns the friend animal to each span element with ".friend_type"
 	for (let i of page.friendType)
 		i.innerHTML = ascii.duck.friend.type;
+
+
 	await (async () => {
 		let l = true;
 		while (l){
 			name_check_no.checked = true;
-			page.phaseThree.friendDeclare.show();
+			await page.phaseThree.friendDeclare.show();
 			friend_name_input.focus();
 			friend_declare.after(helper);
+
 			//choose a name for duck's friend.
 			friend_name_input.addEventListener("input", function inputResizeListener(event){
 				friend_name_input.style.width = friend_name_input.value.length + "ch";
 				page.helper.show();
 			});
+
 			await listen4Enter();
-			friend_name_input.blur();
 			page.helper.hide();
-			page.phaseThree.friendDeclare.hide();
+			await page.phaseThree.friendDeclare.hide();
 			friend_name_input.disabled = true;
+
 			// If the inputed name has a space, is blank, or is a number have them try again.
 			const tryAgain = async (friend_nameError, friend_nameError_content) => {
 				friend_nameError.append(friend_nameError_content);
@@ -244,40 +250,56 @@ async function storyStartListener(event){
 				await sleep(4);
 				friend_nameError.remove();
 				friend_name_input.disabled = false;
-				l = false;
 			}
-			if(friend_name_input.value.indexOf(" ") > -1){
+
+			if (friend_name_input.value.indexOf(" ") > -1){
 				const friend_nameError = document.createElement("p");
 				const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
 				tryAgain(friend_nameError, friend_nameError_content);
+				continue;
 			}
 			else if (!(friend_name_input.value) || friend_name_input.value.match(/[0-9]/)){
 				const friend_nameError = document.createElement("p");
 				const friend_nameError_content = document.createTextNode("That name won't work! Try again.");
-				tryAgain();
+				tryAgain(friend_nameError, friend_nameError_content);
+				continue;
 			}
+			else if (!friend_name_input.value.match(/^[A-Z]/m)){
+				const friend_nameError = document.createElement("p");
+				const friend_nameError_content = document.createTextNode("Don't forget to capitalize names!")
+				tryAgain(friend_nameError, friend_nameError_content);
+				continue;
+			}
+
+
 			document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
 			page.phaseThree.friendNameCheck.show();
 			page.phaseThree.friendNameCheck.tag.after(helper);
 			page.helper.show();
 			await listen4Enter();
 			page.helper.hide();
+
 			if (name_check_yes.checked){
 				ascii.duck.friend.name = friend_name_input.value;
-				page.phaseThree.friendNameCheck.hide();
+				await page.phaseThree.friendNameCheck.hide();
 				for(let i of page.friendName){
 					i.innerText = ascii.duck.friend.name;
+					i.style.color = ascii.duck.friend.color;
 				}
 				l = false;
+				friend_name_input.blur();
 			}
+
 			else if(name_check_no.checked){
-				page.phaseThree.friendNameCheck.hide();
+				await page.phaseThree.friendNameCheck.hide();
 				friend_name_input.style.width = "11ch";
 				friend_name_input.value = "";
 				friend_name_input.disabled = false;
 			}
 		}
 	})();
+
+
 	await page.phaseThree.friendColorQuestion.show();
 	page.phaseThree.friendColorInput.show();
 	friend_color.focus();
@@ -287,6 +309,10 @@ async function storyStartListener(event){
 	});
 	ascii.duck.friend.typeSpans = page.friendType;
 	await checkColorInput(friend_color, ascii.duck.friend, async () => {
+
+		//colors the friends name according to the users selection.
+		for (let i of page.friendName)
+			i.style.color = ascii.duck.friend.color;
 
 		friend_color.blur();
 		await page.phaseThree.friendColorInput.hide();
@@ -326,37 +352,79 @@ async function storyStartListener(event){
 
 		await page.phaseThree.rainStart.show();
 		await page.phaseThree.rainHowBad.show();
-		await page.phaseThree.rainInputNode.show();
+		page.phaseThree.rainInputNode.show();
 
-		page.phaseThree.rainInputNode.after(helper);
+		page.phaseThree.rainInputNode.tag.after(helper);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
 
 		makeItRain(rain_range.value);
 
-		//consider adding a lightning effect or a dark sky to the scene here.
-		//also consider how much time that will take and whether it is really worth it.
-		//there are so many other things to do rather than wrestle with CSS.
-		//here's something to warm you up:
-		//
-		//let currentBG = page.body.style.background;
-		//
-		//page.body.style.background = `linear-gradient(to bottom right, darkblue, ${currentBG})`;
-		//
-		//note that this will not work correctly since the current background is a computed rbg
-		//with some kind of scroll value.
-		//set it to something more usable in CSS first if you plan to do this
-
-
+		// simulate a lightning flash
+		page.body.style.background = `#666`;
 		await sleep(3);
+		page.body.style.transition = "unset";
+		page.body.style.background = "paleGoldenRod";
+		await sleep(.2)
+		page.body.style.background = `#666`;
+		await sleep(.2)
+		page.body.style.background = "paleGoldenRod";
+		await sleep(.2)
+		page.body.style.background = `#666`;
+		await sleep(.2)
+		page.body.style.transition = "background 5s"
 
 		await page.phaseThree.rainStart.hide();
 		await page.phaseThree.rainHowBad.hide();
 		await page.phaseThree.rainInputNode.hide();
 
-		
+		await page.phaseThree.rainGetOut.show();
+		await page.phaseThree.rainHungry.show();
+		await page.phaseThree.eatChoose.show();
 
+		page.phaseThree.eatChoose.tag.after(helper);
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
 
+		await (async () => {
+			const pizza = document.querySelector("#pizzaSelect"),
+				pudding = document.querySelector("#puddingSelect"),
+				grapes = document.querySelector("#grapesSelect");
+
+			while (true){
+				if (pizza.checked){
+					window.open("eata-the-pizza.html", "_self");
+					page.helper.show();
+					await listen4Enter();
+					page.helper.hide();
+				}
+				else if (pudding.checked){
+					window.open("yummy-puhd.html", "_self");
+					page.helper.show();
+					await listen4Enter();
+					page.helper.hide();
+				}
+				else if (grapes.checked){
+					window.open("got-any-grapes.html", "_self");
+					page.helper.show();
+					await listen4Enter();
+					page.helper.hide();
+				}
+				else{
+					const p = document.createElement("p");
+					p.append(document.createTextNode("You must make a selection to continue."));
+					page.phaseThree.eatChoose.tag.after(p);
+					p.style.display = "block";
+					page.helper.show();
+					await listen4Enter();
+					page.helper.hide();
+					p.remove();
+				}
+
+			}
+
+		})();
 	});
 }

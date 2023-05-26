@@ -87,7 +87,7 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 	let delayedRain = async () => {
 		try {
 			for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
-				await sleep(7.77);
+				await sleep(3.77);
 				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
 				rainSelector.style.display = "unset";
 				rainSelector.style.opacity = 1;
@@ -133,13 +133,9 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 			inputSelector.style.backgroundColor = inputSelector.value;
 			asciiObj.color = inputSelector.value;
 			asciiObj.tag.style.color = asciiObj.color;
-			try{
-				for (let i of asciiObj.typeSpans)
-					i.style.color = asciiObj.color;
-			}
-			catch(e){
-				console.log(e);
-			}
+			for (let i of asciiObj.typeSpans)
+				i.style.color = asciiObj.color;
+
 			//a little easter egg in case anyone puts in the same color that is used for the background later on.
 			if (inputSelector.value === "paleTurquoise"){
 				bonusLevel.enabled = true;
