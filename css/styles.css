@@ -55,6 +55,7 @@ span.inline > * {
 #helper{
 	font-size: x-small;
 	margin-left: 10em;
+	display: none;
 }
 
 
@@ -65,7 +66,8 @@ span.inline > * {
 }
 
 #duck {
-	transition-property: padding, top;
+	position: relative;
+	transition-property: margin;
 	transition-duration: 1s;
 }
 
@@ -78,15 +80,16 @@ span.inline > * {
 }
 
 .ascii_animals_block {
-	transition: height 1s;
+	display: flex;
+	margin: 20px;
 }
 
 .ascii_animal {
-	position: absolute;
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
 	font-size: 18pt;
 	font-weight: 950;
-	transition: padding,top 1s;
+	transition-property: margin;
+	transition-duration: 1s;
 }
 
 #waterBody{
@@ -94,7 +97,9 @@ span.inline > * {
 	border-radius: 100%;
 	padding-top:30px;
 	width:320px;
-	box-shadow: blue 0 0 50px ;
+	box-shadow: blue 0 0 50px;
+	margin: 20px;
+	padding-left: 11%;
 }
 
 

@@ -3,13 +3,17 @@
 //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
 const displayFunc = function(tag) {
 	this.tag = document.querySelector(tag),
-	this.show = async function(seconds = 1){
-		this.tag.style.display = "block";
-		await sleep(seconds * 1);
+		this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
+			this.tag.style.display = disp;
+		if (rel)
+			this.tag.style.position = "relative";
+		if (!rel)
+			this.tag.style.position = "absolute";
+		await sleep(sec * 1);
 	},
-	this.hide = async function(seconds = .5){
+	this.hide = async function(sec = .5){
 		this.tag.style.display = "none";
-		await sleep(seconds * 1);
+		await sleep(sec * 1);
 	}
 };
 

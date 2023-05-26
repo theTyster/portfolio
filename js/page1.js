@@ -99,7 +99,7 @@ async function storyStartListener(event){
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	page.yes.hide();
+	await page.yes.hide();
 
 	page.phaseTwo.body.show();
 	await page.phaseTwo.where.show(2);
@@ -128,40 +128,41 @@ async function storyStartListener(event){
 	eyes.style.transform = "rotate(0.5turn)";
 	eyes.style.textShadow = "-1px -1px 3px black";
 	await sleep(3);
-	page.phaseTwo.eyes.hide();
 
+	page.phaseTwo.eyes.hide();
 	await page.phaseTwo.letsSee.hide();
 
 	await page.phaseTwo.ah.show(.5);
 	await page.phaseTwo.thereSheIs.show();
-	//duck is in a flex container. Needs to be made visible.
-	//page.phaseTwo.body.tag.querySelector(".duck_container").style.display = "block";
 	await ascii.duck.show();
-
-	//trying to find a way to position the duck so that it appears before 
-	//the helper text even though it is appearing after it currently.
-	//despite actually being before it in the dom
-	duck.before(helper);
 	page.helper.show();
+
+	page.phaseTwo.body.tag.after(helper);
+	page.phaseTwo.thereSheIs.tag.after(duck);
 	await listen4Enter();
+
 	page.helper.hide();
 	await page.phaseTwo.ah.hide();
 	await page.phaseTwo.thereSheIs.hide();
-	splashing.after(helper);
+	await ascii.duck.hide();
+	ascii.water.hide();
+
+	page.phaseTwo.splashing.tag.after(ascii.animalsBlock.tag);
+	ascii.animalsBlock.tag.append(ascii.water.tag, duck);
+
 	page.phaseTwo.splashing.show();
-	page.phaseTwo.splashing.tag.before(ascii.water.tag);
-	ascii.animalsBlock.tag.append(duck);
-	ascii.animalsBlock.tag.before(ascii.water.tag);
-	ascii.animalsBlock.tag.style.height = "55px";
-	await ascii.water.show();
-	
-	//move the duck onto the water.
-	//NEED TO FIND A WAY TO POSITION THE DUCK RELATIVE TO ITS CONTAINER
-	//AND NOT THE PAGE.
-	ascii.animalsBlock.show();
-	duck.style.paddingLeft = "100px";
-	page.phaseThree.body.show();
-	page.phaseThree.chooseAFriend.show();
+	await ascii.animalsBlock.show({sec: 2, disp: "flex"});
+	ascii.water.show({sec: 0});
+	ascii.duck.show({sec:0, rel: false});
+
+	ascii.water.tag.style.flex = 1;
+	ascii.animalsBlock.tag.style.Top = "55px";
+	duck.style.marginLeft = "50%";
+	duck.style.marginTop = "-40px";
+
+	page.phaseThree.body.show({sec: 0});
+  page.phaseThree.chooseAFriend.show();
+
 	chooseAFriend.after(helper);
 	page.helper.show();
 	await listen4Enter();
@@ -172,36 +173,45 @@ async function storyStartListener(event){
 			dog = document.querySelector("#dogSelect"),
 			hog = document.querySelector("#hogSelect"),
 			eggnog = document.querySelector("#eggnogSelect");
-		// A switch statement here is probably not best practice since IF is faster. But I need the practice so
-		switch(true){
-			case (frog.checked):{
-				ascii.duck.friend = ascii.frog;
-				ascii.duck.friend.type = "frog";
-				break;
-			}
-			case(dog.checked):{
-				ascii.duck.friend = ascii.dog;
-				ascii.duck.friend.type= "dog";
-				break;
-			}
-			case(hog.checked):{
-				ascii.duck.friend = ascii.hog;
-				ascii.duck.friend.type = "hog";
-				break;
-			}
-			case(eggnog.checked):{
-				ascii.duck.friend = ascii.eggnog;
-				ascii.duck.friend.type = "eggnog";
-				break;
-			}
-			default:{
-				await page.helper.hide();
-				await page.phaseThree.tryAgain.show(1.5);
-				await page.phaseThree.tryAgain.hide();
-				await page.helper.show();
-				await listen4Enter();
-				obtainAFriend();
-			}
+		let friendObtained = false;
+
+		while (!friendObtained === true){
+			// A switch statement here is probably not best practice since IF is faster. But I need the practice so
+			switch(true){
+				case (frog.checked):{
+					ascii.duck.friend = ascii.frog;
+					ascii.duck.friend.type = "frog";
+					friendObtained = true;
+					break;
+				}
+				case(dog.checked):{
+					ascii.duck.friend = ascii.dog;
+					ascii.duck.friend.type= "dog";
+					friendObtained = true;
+					break;
+				}
+				case(hog.checked):{
+					ascii.duck.friend = ascii.hog;
+					ascii.duck.friend.type = "hog";
+					friendObtained = true;
+					break;
+				}
+				case(eggnog.checked):{
+					ascii.duck.friend = ascii.eggnog;
+					ascii.duck.friend.type = "eggnog";
+					friendObtained = true;
+					break;
+				}
+				default:{
+					await page.helper.hide();
+					await page.phaseThree.tryAgain.show({sec: 1.5});
+					await page.phaseThree.tryAgain.hide();
+					await page.helper.show();
+					await listen4Enter();
+					break;
+				}
+		}
+
 		}
 	})();
 	page.phaseTwo.splashing.hide();
@@ -212,6 +222,7 @@ async function storyStartListener(event){
 	await (async () => {
 		let l = true;
 		while (l){
+			name_check_no.checked = true;
 			page.phaseThree.friendDeclare.show();
 			friend_name_input.focus();
 			friend_declare.after(helper);
@@ -226,27 +237,24 @@ async function storyStartListener(event){
 			page.phaseThree.friendDeclare.hide();
 			friend_name_input.disabled = true;
 			// If the inputed name has a space, is blank, or is a number have them try again.
-			if(friend_name_input.value.indexOf(" ") > -1){
-				const friend_nameError = document.createElement("p");
-				const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
+			const tryAgain = async (friend_nameError, friend_nameError_content) => {
 				friend_nameError.append(friend_nameError_content);
 				friend_declare.after(friend_nameError);
 				friend_nameError.style.display = "block";
 				await sleep(4);
 				friend_nameError.remove();
 				friend_name_input.disabled = false;
-				continue;
+				l = false;
+			}
+			if(friend_name_input.value.indexOf(" ") > -1){
+				const friend_nameError = document.createElement("p");
+				const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
+				tryAgain(friend_nameError, friend_nameError_content);
 			}
 			else if (!(friend_name_input.value) || friend_name_input.value.match(/[0-9]/)){
 				const friend_nameError = document.createElement("p");
 				const friend_nameError_content = document.createTextNode("That name won't work! Try again.");
-				friend_nameError.append(friend_nameError_content);
-				friend_declare.after(friend_nameError);
-				friend_nameError.style.display = "block";
-				await sleep(4);
-				friend_nameError.remove();
-				friend_name_input.disabled = false;
-				continue;
+				tryAgain();
 			}
 			document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
 			page.phaseThree.friendNameCheck.show();
@@ -286,31 +294,13 @@ async function storyStartListener(event){
 		yes.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
 		page.phaseThree.friendColorInput.tag.after(yes);
 		await page.phaseThree.friendColorQuestion.hide();
-		page.yes.show();
 		ascii.animalsBlock.tag.append(ascii.duck.friend.tag);
 
-		//change the show function to respect inline-block.
-		const inline_show = async function(seconds){
-			this.tag.style.display = 'inline-block';
-			await sleep(seconds * 1);
-		}
-		ascii.duck.friend.show = inline_show
-		ascii.duck.show = inline_show
+		page.yes.show();
+		ascii.duck.friend.show({rel: false, disp: "inline-block"});
+		ascii.duck.show({rel: false, disp: "inline-block"});
 
-
-		ascii.duck.friend.show();
-		ascii.duck.show();
-		ascii.water.tag.before(ascii.animalsBlock.tag);
-		//NEED TO FIND A WAY TO POSITION THE DUCK RELATIVE TO ITS CONTAINER
-		//AND NOT THE PAGE.
-		//see line 156
-		//see line 143
-		ascii.duck.tag.style.paddingLeft = "180px";
-		ascii.duck.tag.style.paddingTop = "10px";
-		ascii.animalsBlock.tag.style.height = "90px";
-
-
-	//TIME TO PUT THE FRIEND IN THE WATER WITH THE DUCK.
-	//NEXT PROGRAM IN THE STORM INPUT.
+		ascii.duck.friend.tag.style.marginTop = "-60px";
+		ascii.animalsBlock.tag.style.marginTop = "50px";
 	});
 }
