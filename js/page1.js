@@ -296,11 +296,67 @@ async function storyStartListener(event){
 		await page.phaseThree.friendColorQuestion.hide();
 		ascii.animalsBlock.tag.append(ascii.duck.friend.tag);
 
-		page.yes.show();
 		ascii.duck.friend.show({rel: false, disp: "inline-block"});
 		ascii.duck.show({rel: false, disp: "inline-block"});
 
 		ascii.duck.friend.tag.style.marginTop = "-60px";
 		ascii.animalsBlock.tag.style.marginTop = "50px";
+
+		await page.yes.show({sec: 1.5});
+
+		yes.after(helper)
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
+
+		await page.yes.hide();
+
+		await page.phaseThree.friendGoofy.show();
+		await page.phaseThree.friendLaugh.show();
+		await page.phaseThree.duckLaugh.show();
+
+		page.phaseThree.duckLaugh.tag.after(helper);
+		page.helper.show();
+		await listen4Enter();
+		await page.helper.hide();
+
+		await page.phaseThree.friendGoofy.hide();
+		await page.phaseThree.friendLaugh.hide();
+		await page.phaseThree.duckLaugh.hide();
+
+		await page.phaseThree.rainStart.show();
+		await page.phaseThree.rainHowBad.show();
+		await page.phaseThree.rainInputNode.show();
+
+		page.phaseThree.rainInputNode.after(helper);
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
+
+		makeItRain(rain_range.value);
+
+		//consider adding a lightning effect or a dark sky to the scene here.
+		//also consider how much time that will take and whether it is really worth it.
+		//there are so many other things to do rather than wrestle with CSS.
+		//here's something to warm you up:
+		//
+		//let currentBG = page.body.style.background;
+		//
+		//page.body.style.background = `linear-gradient(to bottom right, darkblue, ${currentBG})`;
+		//
+		//note that this will not work correctly since the current background is a computed rbg
+		//with some kind of scroll value.
+		//set it to something more usable in CSS first if you plan to do this
+
+
+		await sleep(3);
+
+		await page.phaseThree.rainStart.hide();
+		await page.phaseThree.rainHowBad.hide();
+		await page.phaseThree.rainInputNode.hide();
+
+		
+
+
 	});
 }
