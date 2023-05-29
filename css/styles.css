@@ -69,6 +69,7 @@ span.inline > * {
 
 #duck {
 	position: relative;
+	margin-left: 20px;
 	transition-property: margin;
 	transition-duration: 1s;
 }
@@ -77,9 +78,16 @@ span.inline > * {
 	font-size: 10pt;
 }
 
+#dog {
+	margin-left: 20px;
+}
+
+#hog {
+}
+
 #eggnog {
 	font-size: 12pt;
-	margin-left: 40px;
+	margin-left: 45px;
 }
 
 .ascii_animals_block {
