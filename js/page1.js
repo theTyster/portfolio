@@ -388,6 +388,9 @@ async function storyStartListener(event){
 		await listen4Enter();
 		page.helper.hide();
 
+		localStorage.setItem("ascii", JSON.stringify(ascii));
+		localStorage.setItem("bonus", JSON.stringify(bonusLevel));
+
 		await (async () => {
 			const pizza = document.querySelector("#pizzaSelect"),
 				pudding = document.querySelector("#puddingSelect"),

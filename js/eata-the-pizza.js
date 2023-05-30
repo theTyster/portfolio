@@ -48,4 +48,10 @@ const page = {
 	pizzaEndButtons: new displayFunc("#pizza_end_buttons")
 }
 
-document.addEventListener("DOMContentLoaded", () => page.pizzaHeading.show())
+document.addEventListener("DOMContentLoaded", () => {
+	page.body.style.background = page.lightGreenBG;
+	page.pizzaHeading.show()
+	await sleep(2)
+	
+});
+

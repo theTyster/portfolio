@@ -137,11 +137,8 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 				i.style.color = asciiObj.color;
 
 			//a little easter egg in case anyone puts in the same color that is used for the background later on.
-			if (inputSelector.value === "paleTurquoise"){
+			if (inputSelector.value === "paleTurquoise")
 				bonusLevel.enabled = true;
-				//saves input to memory.
-				localStorage.setItem("duck", JSON.stringify(asciiObj));
-			}
 		})();
 
 		const inputRegex = /#/gu;
