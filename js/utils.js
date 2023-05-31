@@ -20,6 +20,18 @@ const displayFunc = function(tag) {
 //declares the object for easter egg features.
 const bonusLevel = {}
 
+//function to invert styles if easter egg is activated.
+const bonusEgg = function(){
+	const invert = "invert(100%)";
+	if (bonusLevel.enabled){
+		page.body.style.background = "MidnightBlue";
+		const selectorTexts = document.querySelectorAll(".bonus_egg");
+		for (let i of selectorTexts){
+			i.style.filter = invert;
+		}
+	}
+}
+
 //tags to ascii graphics
 const ascii = {
 	water: new displayFunc("#waterBody"),

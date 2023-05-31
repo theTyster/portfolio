@@ -48,10 +48,46 @@ const page = {
 	pizzaEndButtons: new displayFunc("#pizza_end_buttons")
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	page.body.style.background = page.lightGreenBG;
-	page.pizzaHeading.show()
-	await sleep(2)
-	
-});
 
+	//parse local storage for saved data.
+	const parsedJson = JSON.parse(localStorage.getItem("duck"));
+
+	switch (parsedJson.friend.type){
+		case ("frog"):
+			ascii.duck.friend = ascii.frog;
+			break;
+		case ("dog"):
+			ascii.duck.friend = ascii.dog;
+			break;
+		case ("hog"):
+			ascii.duck.friend = ascii.hog;
+			break;
+		case ("eggnog"):
+			ascii.duck.friend = ascii.eggnog;
+			break;
+	}
+	
+	ascii.duck.color = parsedJson.color;
+	ascii.duck.friend.name = parsedJson.friend.name;
+	ascii.duck.friend.color = parsedJson.friend.color;
+	ascii.duck.friend.type = parsedJson.friend.type;
+
+	bonusLevel.enabled = JSON.parse(localStorage.getItem("bonus")).enabled;
+	bonusEgg();
+
+	for (let i of page.duckType)
+		i.style.color = ascii.duck.color;
+	for (let i of page.friendName){
+		i.innerText = ascii.duck.friend.name;
+		i.style.color = ascii.duck.friend.color;
+	}
+	// finish writing the conditional above.
+	// also fix the css it is not inverting colors correctly.
+
+	await page.pizzaHeading.show(5);
+	page.visitPizza.show();
+
+
+});

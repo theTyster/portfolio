@@ -116,13 +116,7 @@ async function storyStartListener(event){
 	page.body.style.background = page.lightGreenBG; // light green
 
 	//easter egg styles.
-	if (bonusLevel.enabled){
-		page.body.style.filter = "invert(100%)";
-		page.body.style.background = "MidnightBlue";
-		duck.style.filter = "invert(100%)";
-		eyes.style.filter = "invert(100%)";
-		eyes.style.transition = "opacity 2s";
-	}
+	bonusEgg();
 
 	//eyes animation
 	await page.phaseTwo.eyes.show(3);
@@ -310,6 +304,9 @@ async function storyStartListener(event){
 	ascii.duck.friend.typeSpans = page.friendType;
 	await checkColorInput(friend_color, ascii.duck.friend, async () => {
 
+		// checks to see if easterEgg applies
+		bonusEgg();
+
 		//colors the friends name according to the users selection.
 		for (let i of page.friendName)
 			i.style.color = ascii.duck.friend.color;
@@ -388,7 +385,8 @@ async function storyStartListener(event){
 		await listen4Enter();
 		page.helper.hide();
 
-		localStorage.setItem("ascii", JSON.stringify(ascii));
+		localStorage.setItem("duck", JSON.stringify(ascii.duck));
+		localStorage.setItem("friend", JSON.stringify(ascii.duck.friend));
 		localStorage.setItem("bonus", JSON.stringify(bonusLevel));
 
 		await (async () => {

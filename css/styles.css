@@ -1,6 +1,3 @@
-@import "animate_water_flow.css";
-@import "animate_rain.css";
-
 .flex-container{
 	display: flex;
 	flex-direction: column;
@@ -102,21 +99,6 @@ span.inline > * {
 	transition-property: margin;
 	transition-duration: 1s;
 }
-
-#waterBody{
-	background-color: blue;
-	border-radius: 100%;
-	padding-top:30px;
-	width:320px;
-	box-shadow: blue 0 0 50px;
-	margin: 20px;
-	padding-left: 11%;
-}
-
-.sky {
-	height: 0;
-}
-
 
 /*MEDIA QUERIES*/
 @media print {

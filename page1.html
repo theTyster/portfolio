@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/page1-styles.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>The Duck Story</title>
   </head>
-  <body>
+  <body class="bonus_egg">
     <div class="sky">
       <div class="air"></div>
       <div class="raindrop" id="rain_1"></div>
@@ -77,7 +78,7 @@
           <div class="phaseTwo">
             <p id="where">Now, where is that <span class="duck_type">duck</span>? She was just around here somewhere. </p>
             <p id="letsSee">Let's see.......</p>
-            <pre id="eyes">
+            <pre id="eyes" class="bonus_egg">
 👀
 		  </pre>
             <h2 id="ah">ah! </h2>
@@ -108,13 +109,13 @@
                 <br>
               </fieldset>
 		<p id="tryAgain">You have to pick a friend for <span class="duck_type">duck</span> first!</p>
-		<p id="friend_declare"><span class="duck_type">duck</span>'s best friend was a <span class="friend_type"></span> named
+		<p id="friend_declare"><span class="duck_type">duck</span>'s best friend was a <span class="friend_type bonus_egg"></span> named
 		   <span class="inline">
 			<input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxlength="23" size="11">.
 		   </span>
 		</p>
 		<fieldset class="input_name_check">
-			<legend>Does <span class="friend_name"></span> sound right?</legend>
+			<legend>Does <span class="friend_name bonus_egg"></span> sound right?</legend>
 			<input id="name_check_yes" type="radio" name="name_check" value="yes">
 			<label for="name_check">Yes</label>
 			<br>
@@ -122,21 +123,21 @@
 			<label for="name_check">No</label>
 			<br>
 		</fieldset>
-		  <p id="friend_colorQuestion">I always forget what color <span class="friend_name"></span> is. Do you remember?</p>
+		  <p id="friend_colorQuestion">I always forget what color <span class="friend_name bonus_egg"></span> is. Do you remember?</p>
 		  <span id="friend_colorQuestion_input" class="inline">
 			  <p>Maybe they were a </p>
 			  <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxlength="24" size="12">
-			  <span class="friend_type"></span>.
+			  <span class="friend_type bonus_egg"></span>.
 		  </span>
-		  <p id="friend_goofy">"You sure are one goofy <span class="friend_type"></span>, <span class="friend_name"></span>." <span class="duck_type">duck</span> said as they splashed together.</p>
-		  <p id="friend_laugh"><span class="friend_name"></span> laughed.</p>
+		  <p id="friend_goofy">"You sure are one goofy <span class="friend_type bonus_egg"></span>, <span class="friend_name bonus_egg"></span>." <span class="duck_type">duck</span> said as they splashed together.</p>
+		  <p id="friend_laugh"><span class="friend_name bonus_egg"></span> laughed.</p>
 		  <p id="duck_laugh"><span class="duck_type">Duck</span> laughed.</p>
       <p id="rain_start">After a little while it started to <span style="color: blue;">rain</span>.</p>
 		  <p id="rain_howBad">How bad was the storm?</p>
 		  <div id="rain_input_node">
 		  	<span id="notBad">Not too bad. </span><input id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" value="25"><span id="reallyBad"> Really Bad.</span>
 		  </div>
-		  <p id="rain_getOut">"We should get out of the water during a rainstorm." said <span class="friend_name"></span></p>
+		  <p id="rain_getOut">"We should get out of the water during a rainstorm." said <span class="friend_name bonus_egg"></span></p>
 		  <p id="rain_hungry">"Yeah. I'm hungry anyways. What should we eat today?" said <span class="duck_type">duck</span>.</p>
 		  <fieldset id="eat_choose">
 			<legend id="eat_what">What should they eat?</legend>  
@@ -147,7 +148,7 @@
 		  	<input id="grapesSelect" type="radio" name="food" value="grapes">
 			  <label for="grapesSelect">Grapes</label><br>
 		  </fieldset>
-		  <p id="lets_eat">"Let's eat <span id="foodSelect"></span>", said <span class="friend_name"></span></p>
+		  <p id="lets_eat">"Let's eat <span id="foodSelect"></span>", said <span class="friend_name bonus_egg"></span></p>
 		  <h1 class="pudding_story">Time to slurp the pud</h1>
 		  <h1 class="grapes_story">The grape story (for brave souls)</h1>
             <div id="waterBody">
