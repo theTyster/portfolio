@@ -83,11 +83,196 @@ document.addEventListener("DOMContentLoaded", async () => {
 		i.innerText = ascii.duck.friend.name;
 		i.style.color = ascii.duck.friend.color;
 	}
-	// finish writing the conditional above.
-	// also fix the css it is not inverting colors correctly.
+	for (let i of page.friendType){
+		i.innerText = ascii.duck.friend.type;
+		i.style.color = ascii.duck.friend.color;
+	}
 
-	await page.pizzaHeading.show(5);
-	page.visitPizza.show();
+	await page.pizzaHeading.show({sec: .5}); //testing only
+	await page.visitPizza.show();
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide()
+	await page.pizzaHeading.hide();
+	await page.visitPizza.hide();
 
+	await page.scream.show()
+	await page.karenWords1.show({sec: .25}); //testing only
+	await page.karenWords2.show({sec: .5}); //actual
+	await page.karenWords3.show({sec: .5}); //actual
+	await page.karenWords4.show();
+	const friendCaps = document.createTextNode(ascii.duck.friend.type.toUpperCase());
+	document.querySelector("#friend_typeCaps").append(friendCaps);
+	await page.karenWords5.show({sec: .2}); //testing only
+	await page.karenWords6.show();
+
+	page.karenWords6.tag.after(helper);
+	page.helper.show()
+	await listen4Enter();
+	page.helper.hide();
+	await page.scream.hide()
+	await page.karenWords1.hide();
+	await page.karenWords2.hide();
+	await page.karenWords3.hide();
+	await page.karenWords4.hide();
+	await page.karenWords5.hide();
+	await page.karenWords6.hide();
+
+	await page.mrFantastic.show();
+	await page.sorryGuys.show();
+	await page.leave.show()
+	
+	page.leave.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+
+	await page.mrFantastic.hide();
+	await page.sorryGuys.hide();
+	await page.leave.hide()
+	
+	await page.notFantastic.show();
+	await page.duckNod.show();
+	await page.sneaky.show();
+
+	page.sneaky.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+
+	await page.notFantastic.hide();
+	await page.duckNod.hide();
+	await page.sneaky.hide();
+
+	await page.sneakyHow.show();
+	await page.startBand.show();
+	await page.soundsAwesome.show();
+
+	page.soundsAwesome.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+
+	await page.sneakyHow.hide();
+	await page.startBand.hide();
+	await page.soundsAwesome.hide();
+	
+	await page.musicPractice.show();
+	await page.finallyReady.show();
+	await page.back4More.show();
+
+	page.back4More.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+
+	await page.musicPractice.hide();
+	await page.finallyReady.hide();
+	await page.back4More.hide();
+	
+	await page.songChoose.show();
+	page.songChoose.tag.after(helper);
+
+	const songDebut = async () => {
+
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
+
+		const songOptions1 = [
+			"duck_sounds/1/funny-story.mp3",
+			"duck_sounds/1/journey-to-the-sun.mp3",
+			"duck_sounds/1/positive-way.mp3",
+			"duck_sounds/1/spring-upbeat.mp3",
+			"duck_sounds/1/that-good-feeling.mp3",
+			"duck_sounds/1/upbeat-funky-retro.mp3",
+			"duck_sounds/1/upbeat-summer-pop.mp3"
+		]
+
+		const songOptions2 = [
+			"duck_sounds/2/beyond.mp3",
+			"duck_sounds/2/electro-jazz.mp3",
+			"duck_sounds/2/flashes.mp3",
+			"duck_sounds/2/future-bass-hot-night.mp3",
+			"duck_sounds/2/space.mp3",
+			"duck_sounds/2/synthwave-80s.mp3",
+			"duck_sounds/2/synthwave-outrun.mp3"
+		]
+
+		const songOptions3 = [
+			"duck_sounds/3/calm-and-light-breakbeat.mp3",
+			"duck_sounds/3/disco-groove.mp3",
+			"duck_sounds/3/first.mp3",
+			"duck_sounds/3/go_guy.mp3",
+			"duck_sounds/3/rock-dedication.mp3",
+			"duck_sounds/3/tango-hip-hop.mp3",
+			"duck_sounds/3/tropical-summer.mp3"
+		]
+
+		let songPlayer = async function(songOptions){
+
+			let playSelect = songOptions[ranNumG(6)],
+//			    song = new Audio(playSelect),
+					song = new Audio("duck_sounds/kim_possible.mp3"), //testing file only.
+			    node = document.createElement("p"),
+			    content = document.createTextNode("Loading."),
+			    dot = document.createTextNode("."),
+			    unableToPlay = true;
+
+			node.append(content);
+			page.songChoose.tag.after(node);
+			node.style.display = "block";
+
+			song.addEventListener("canplaythrough", e => {
+				song.play();
+				unableToPlay = false;
+				node.remove();
+				page.playSong.show();
+			});
+
+			while (unableToPlay){
+				node.append(dot);
+				dot = document.createTextNode(`.`);
+				await sleep(1);
+			}
+
+			return song;
+		}
+
+		
+		if (song1Select.checked){
+			let song = songPlayer(songOptions1);
+			return song;
+		}
+		if (song2Select.checked){
+			let song = songPlayer(songOptions2);
+			return song;
+		}
+		if (song3Select.checked){
+			let song = songPlayer(songOptions3);
+			return song;
+		}
+		else{
+			let node = document.createElement("p");
+			let content = document.createTextNode("You have to pick something for them to play first!")
+			node.append(content);
+			node.style.display = "block";
+			page.songChoose.tag.after(node);
+			await sleep(3);
+			node.remove();
+			songDebut()
+
+		}
+	}
+
+	let song = await songDebut();
+	await new Promise((resolve) => {
+			song.addEventListener("ended", async () => {
+			console.log("the song is done.")
+			await page.playSong.hide();
+			resolve();
+		});
+	});
+	await page.howGood.show();
 
 });
