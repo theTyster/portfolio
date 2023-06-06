@@ -220,7 +220,6 @@ async function storyStartListener(event){
 	await (async () => {
 		let l = true;
 		while (l){
-			name_check_no.checked = true;
 			await page.phaseThree.friendDeclare.show();
 			friend_name_input.focus();
 			friend_declare.after(helper);

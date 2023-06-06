@@ -31,6 +31,7 @@ const page = {
 	finallyReady: new displayFunc("#finally_ready"),
 	back4More: new displayFunc("#back_4_more"),
 	songChoose: new displayFunc("#song_choose"),
+	playButton: new displayFunc("#play_button"),
 	playSong: new displayFunc("#play_song"),
 	howGood: new displayFunc("#how_good"),
 	songRating: new displayFunc("#song_rating"),
@@ -172,6 +173,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 	
 	await page.songChoose.show();
 	page.songChoose.tag.after(helper);
+
+	// my first canvas.
+	(() => {
+		page.playButton.tag.wdith = 100;
+		page.playButton.tag.height = 100;
+		ctx = page.playButton.tag.getContext("2d");
+		cxy = 100;
+	})();
+
+	
 
 	const songDebut = async () => {
 

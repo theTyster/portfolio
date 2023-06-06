@@ -42,10 +42,20 @@
 		  			<label for="song1Select">A Happy Song</label><br>
 		  			<input id="song2Select" type="radio" name="song" value="song2">
 		  			<label for="song2Select">An Electric Song</label><br>
-		  			<input id="song3Select" type="radio" name="song" value="song3">
+						<input id="song3Select" type="radio" name="song" value="song3">
 		  			<label for="song3Select">A Dancing Song</label><br>
 		  		</fieldset>
 		  		<p id="play_song"><em>The song is playing.</em></p>
+					<svg id="playButton" width=50 height=50 style="padding: 20px;"> 
+						<path d="m0,0 l0,50 l50,-25 z" stroke=0 fill=#444>
+					</svg>
+					<svg id="pauseButton" width=50 height=50 style="padding: 20px;">
+						<rect x=10 y=0 width=10 height=50 />
+						<rect x=30 y=0 width=10 height=50 />
+					</svg>
+					<svg width=75 height=50 style="padding: 20px;">
+						<path d="m0,0 l0,50 l25,-17 l0,17 l30,-25 l-30,-25 l0,17 z">
+					</svg>
 		  		<p id="how_good">Did you like that song?</p>
 		  		<div class="song_rating">
 		  			<span id="song_reallyBad">Boring!</span><input id="song_review" type="range" name="song_review" max="100" min="0" step="5" value="0"><span id="song_reallyGood">Awesome!</span>
