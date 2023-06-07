@@ -32,10 +32,12 @@ const page = {
 	back4More: new displayFunc("#back_4_more"),
 	songChoose: new displayFunc("#song_choose"),
 	playButton: new displayFunc("#play_button"),
+	pauseButton: new displayFunc("#pause_button"),
+	ffwdButton: new displayFunc("#ffwd_button"),
 	playSong: new displayFunc("#play_song"),
 	howGood: new displayFunc("#how_good"),
-	songRating: new displayFunc("#song_rating"),
-	rating: new displayFunc("#rating"),
+	songRatingSlide: new displayFunc("#song_rating_slide"),
+	songRatingDisplay: new displayFunc("#song_rating_display"),
 	song_playAgain: new displayFunc("#song_playAgain"),
 	pizzaFinally: new displayFunc("#pizza_finally"),
 	sneakInside: new displayFunc("#sneak_inside"),
@@ -174,16 +176,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.songChoose.show();
 	page.songChoose.tag.after(helper);
 
-	// my first canvas.
-	(() => {
-		page.playButton.tag.wdith = 100;
-		page.playButton.tag.height = 100;
-		ctx = page.playButton.tag.getContext("2d");
-		cxy = 100;
-	})();
-
-	
-
 	const songDebut = async () => {
 
 		page.helper.show();
@@ -239,6 +231,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 				unableToPlay = false;
 				node.remove();
 				page.playSong.show();
+				player_buttons.style.display = "block";
+				page.pauseButton.show({sec: 0, disp: "inline"});
+				page.ffwdButton.show({sec: 0, disp: "inline"});
+				page.playButton.hide({sec: 0})
 			});
 
 			while (unableToPlay){
@@ -276,14 +272,52 @@ document.addEventListener("DOMContentLoaded", async () => {
 		}
 	}
 
+	let money = 0;
+	do{
+
 	let song = await songDebut();
+
+	page.pauseButton.tag.addEventListener("click", function pauseButtonListener(){
+		song.pause();
+		page.pauseButton.hide({sec: 0});
+		page.playButton.show({sec: 0, disp: "inline"});
+	});
+
+	page.playButton.tag.addEventListener("click", function playButtonListener(){
+		song.play();
+		song.playbackRate = 1;
+		page.playButton.hide({sec: 0});
+		page.pauseButton.show({sec: 0, disp: "inline"});
+	})
+
+	page.ffwdButton.tag.addEventListener("click", function ffwdButtonListener(){
+		song.playbackRate = 4;
+		song.preservePitch = false;
+	})
 	await new Promise((resolve) => {
 			song.addEventListener("ended", async () => {
 			console.log("the song is done.")
 			await page.playSong.hide();
+			player_buttons.style.display = "none";
 			resolve();
 		});
 	});
 	await page.howGood.show();
+	await page.songRatingSlide.show();
+
+	page.songRatingSlide.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+	
+	page.howGood.hide();
+	page.songRatingSlide.hide();
+
+	money += parseFloat(song_review.value);
+	console.log(money);
+	console.log(typeof(money))
+	} while (money < 20);
+
+	
 
 });

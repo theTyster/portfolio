@@ -57,7 +57,11 @@ span.inline > * {
 	display: none;
 }
 
-
+#player_buttons > *{
+	stroke: none;
+	fill: #444;
+	padding: 20px;
+}
 
 .phasedDisplay > .phaseTwo > #eyes {
 	font-size: 30pt;

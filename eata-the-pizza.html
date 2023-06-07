@@ -46,21 +46,23 @@
 		  			<label for="song3Select">A Dancing Song</label><br>
 		  		</fieldset>
 		  		<p id="play_song"><em>The song is playing.</em></p>
-					<svg id="playButton" width=50 height=50 style="padding: 20px;"> 
-						<path d="m0,0 l0,50 l50,-25 z" stroke=0 fill=#444>
-					</svg>
-					<svg id="pauseButton" width=50 height=50 style="padding: 20px;">
-						<rect x=10 y=0 width=10 height=50 />
-						<rect x=30 y=0 width=10 height=50 />
-					</svg>
-					<svg width=75 height=50 style="padding: 20px;">
-						<path d="m0,0 l0,50 l25,-17 l0,17 l30,-25 l-30,-25 l0,17 z">
-					</svg>
+					<div id="player_buttons">
+						<svg id="play_button" width=50 height=50> 
+							<path d="m0,0 l0,50 l50,-25 z" /> 
+						</svg>
+						<svg id="pause_button" width=50 height=50>
+							<rect x=10 y=0 width=10 height=50 />
+							<rect x=30 y=0 width=10 height=50 />
+						</svg>
+						<svg id="ffwd_button" width=60 height=50>
+							<path d="m0,0 l0,50 l25,-17 l0,17 l30,-25 l-30,-25 l0,17 z" />
+						</svg>
+					</div>
 		  		<p id="how_good">Did you like that song?</p>
-		  		<div class="song_rating">
-		  			<span id="song_reallyBad">Boring!</span><input id="song_review" type="range" name="song_review" max="100" min="0" step="5" value="0"><span id="song_reallyGood">Awesome!</span>
+		  		<div id="song_rating_slide">
+		  			<span id="song_reallyBad">Boring!</span><input id="song_review" type="range" name="song_review" max="10" min="0" step="5" value="0"><span id="song_reallyGood">Awesome!</span>
 		  		</div>
-		  		<p id="rating">That was a <span id="songRating"></span> song! <span class="duck_type bonus_egg">Duck</span> and <span class="friend_name bonus_egg"></span> made <span id="song_moneyEarned"></span>. They still need <span id="song_moneyNeeded"></span> so that they can buy a pizza at Pizza Fantastic!</p>
+		  		<p id="rating">That was a <span id="song_rating_display"></span> song! <span class="duck_type bonus_egg">Duck</span> and <span class="friend_name bonus_egg"></span> made <span id="song_moneyEarned"></span>. They still need <span id="song_moneyNeeded"></span> so that they can buy a pizza at Pizza Fantastic!</p>
 		  		<p id="song_playAgain">What should they play next?</p>
 		  		<p id="pizza_finally">FINALLY!!! They had enough money to buy a pizza!</p>
 		  		<p id="sneak_inside">"Now we just have to find a way to sneak inside without getting caught by that scary scremaing lady." said <span class="friend_name bonus_egg"></span>.</p>
@@ -83,7 +85,7 @@
   			<div class="ascii_animals_block">
   			</div>
 					<pre class="ascii_animal" id="duck">
-    __
+  __
 =(• )___
  (  _> /  
 					</pre>
