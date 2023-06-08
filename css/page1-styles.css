@@ -14,3 +14,9 @@
 .sky {
 	height: 0;
 }
+
+@media (max-width: 499px){
+	#waterBody{
+		padding-left: 3%;
+	}
+}

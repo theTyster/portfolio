@@ -28,6 +28,8 @@ button, button:active {
 	color: white;
 	border: none;
 	transition: opacity 1s;
+	border-radius: 3px;
+	border: 1px solid #444;
 }
 button:active {
 	background-color: #666;
@@ -54,6 +56,12 @@ span.inline > * {
 #helper{
 	font-size: x-small;
 	margin-left: 10em;
+	display: none;
+}
+#mobile_helper{
+	display: none;
+}
+#mobile_helper_screen{
 	display: none;
 }
 
@@ -118,8 +126,9 @@ span.inline > * {
 
 @media (max-width: 499px) {
 	article {
-			max-width: 355px;
-			min-width: unset;
+		max-width: 355px;
+		min-width: unset;
+		overflow-wrap: anywhere;
 	}
 }
 
@@ -149,4 +158,26 @@ span.inline > * {
 		border-radius: 7px;
 		border: 1px solid white;
 	}
+#mobile_helper{
+	opacity: 0;
+	display:block;
+	position:absolute;
+	width: 150px;
+	height: 30px;
+	margin-top: -9px;
+	margin-left: -8px;
+}
+#mobile_helper_screen{
+	display:block;
+	position:absolute;
+	
+	background-color: #666;
+	color: white;
+	padding: 6px;
+	margin-top: 8px;
+	
+	border-radius: 3px;
+	border: 1px solid #444;
+	
+}
 }

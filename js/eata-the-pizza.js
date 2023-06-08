@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	await page.pizzaHeading.hide();
+	//await page.pizzaHeading.hide(); // Testers saying having something at the top helps UI
 	await page.visitPizza.hide();
 
 	await page.scream.show()
@@ -193,34 +193,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 			page.rating.hide();
 			page.songPlayAgain.hide();
 
+		//Need to add a fisher-yates shuffler to this so that their are no repeats of songs.
+
 		const songOptions1 = [
-			"duck_sounds/1/funny-story.mp3",
-			"duck_sounds/1/journey-to-the-sun.mp3",
-			"duck_sounds/1/positive-way.mp3",
-			"duck_sounds/1/spring-upbeat.mp3",
-			"duck_sounds/1/that-good-feeling.mp3",
-			"duck_sounds/1/upbeat-funky-retro.mp3",
-			"duck_sounds/1/upbeat-summer-pop.mp3"
+			"duck_sounds/1/funny-story.webm",
+			"duck_sounds/1/journey-to-the-sun.webm",
+			"duck_sounds/1/positive-way.webm",
+			"duck_sounds/1/spring-upbeat.webm",
+			"duck_sounds/1/that-good-feeling.webm",
+			"duck_sounds/1/upbeat-funky-retro.webm",
+			"duck_sounds/1/upbeat-summer-pop.webm"
 		]
 
 		const songOptions2 = [
-			"duck_sounds/2/beyond.mp3",
-			"duck_sounds/2/electro-jazz.mp3",
-			"duck_sounds/2/flashes.mp3",
-			"duck_sounds/2/future-bass-hot-night.mp3",
-			"duck_sounds/2/space.mp3",
-			"duck_sounds/2/synthwave-80s.mp3",
-			"duck_sounds/2/synthwave-outrun.mp3"
+			"duck_sounds/2/beyond.webm",
+			"duck_sounds/2/electro-jazz.webm",
+			"duck_sounds/2/flashes.webm",
+			"duck_sounds/2/future-bass-hot-night.webm",
+			"duck_sounds/2/space.webm",
+			"duck_sounds/2/synthwave-80s.webm",
+			"duck_sounds/2/synthwave-outrun.webm"
 		]
 
 		const songOptions3 = [
-			"duck_sounds/3/calm-and-light-breakbeat.mp3",
-			"duck_sounds/3/disco-groove.mp3",
-			"duck_sounds/3/first.mp3",
-			"duck_sounds/3/go_guy.mp3",
-			"duck_sounds/3/rock-dedication.mp3",
-			"duck_sounds/3/tango-hip-hop.mp3",
-			"duck_sounds/3/tropical-summer.mp3"
+			"duck_sounds/3/calm-and-light-breakbeat.webm",
+			"duck_sounds/3/disco-groove.webm",
+			"duck_sounds/3/first.webm",
+			"duck_sounds/3/go_guy.webm",
+			"duck_sounds/3/rock-dedication.webm",
+			"duck_sounds/3/tango-hip-hop.webm",
+			"duck_sounds/3/tropical-summer.webm"
 		]
 
 		let songPlayer = async function(songOptions){
@@ -286,25 +288,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 	}
 
 
-	// Event Handlers for the player buttons.
-	page.pauseButton.tag.addEventListener("click", function pauseButtonListener(){
-		song.pause();
-		page.pauseButton.hide({sec: 0});
-		page.playButton.show({sec: 0, disp: "inline"});
-	});
-
-	page.playButton.tag.addEventListener("click", function playButtonListener(){
-		song.play();
-		song.playbackRate = 1;
-		page.playButton.hide({sec: 0});
-		page.pauseButton.show({sec: 0, disp: "inline"});
-	})
-
-	page.ffwdButton.tag.addEventListener("click", function ffwdButtonListener(){
-		song.playbackRate = 4;
-		song.preservePitch = false;
-	})
-
 	let money = 0;
 	// iterate over the song game as long as the duck doesn't have 20 money.
 	do{
@@ -338,11 +321,48 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		let song = await songDebut();
 
+
+		// Event Handlers for the player buttons.
+		const pauseButtonListener = () => {
+			song.pause();
+			page.pauseButton.hide({sec: 0});
+			page.playButton.show({sec: 0, disp: "inline"});
+			}
+		page.pauseButton.tag.addEventListener("click", pauseButtonListener);
+
+
+		const playButtonListener = () => {
+			song.play();
+			song.playbackRate = 1;
+			page.playButton.hide({sec: 0});
+			page.pauseButton.show({sec: 0, disp: "inline"});
+				}
+		page.playButton.tag.addEventListener("click", playButtonListener)
+
+
+		const ffwdButtonListener = () => {
+			if (song.playbackRate === 4){
+				song.playbackRate = 1;
+			}
+			else{
+				song.playbackRate = 4;
+				song.preservePitch = false;
+			}
+		}
+		page.ffwdButton.tag.addEventListener("click", ffwdButtonListener);
+
+
 		await new Promise((resolve) => {
 			song.addEventListener("ended", async () => {
-				console.log("the song is done.");
+
+				//remove button listeners
+				page.pauseButton.tag.removeEventListener("click", pauseButtonListener);
+				page.playButton.tag.removeEventListener("click", playButtonListener);
+				page.ffwdButton.tag.removeEventListener("click", ffwdButtonListener);
+
 				page.songPlaying.hide(); 
 				player_buttons.style.display = "none";
+
 				resolve();
 			}, {once: true});
 		});

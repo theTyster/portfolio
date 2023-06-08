@@ -3,7 +3,7 @@
 //page tags
 const page = {
 	body: document.querySelector("body"),
-	lightGreenBG:  "#B3DCBD",
+	lightGreenBG: "#B3DCBD",
 	container: document.querySelector(".container"),
 	mobileNotice: new displayFunc("header"),
 	oneTime: new displayFunc("#oneTime"),
@@ -47,8 +47,7 @@ const page = {
 		rainReallyBad: new displayFunc("#reallyBad"),
 		rainGetOut: new displayFunc("#rain_getOut"),
 		rainHungry: new displayFunc("#rain_hungry"),
-		eatChoose: new displayFunc("#eat_choose")//,
-		//: new displayFunc("#")
+		eatChoose: new displayFunc("#eat_choose")
 	}
 };
 
@@ -64,7 +63,8 @@ document.addEventListener("DOMContentLoaded", function(){
 async function startButtonListener(){
 	
 
-	page.body.querySelector("h1").style.display = "none";
+	//page.body.querySelector("h1").style.display = "none"; // Testers saying having something at the top helps UI
+	page.body.querySelector("h1").innerText = "The Duck Story";
 	page.mobileNotice.hide();
 	await page.startButton.hide();
 	await page.oneTime.show(1.5);
