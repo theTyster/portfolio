@@ -34,11 +34,12 @@ const page = {
 	playButton: new displayFunc("#play_button"),
 	pauseButton: new displayFunc("#pause_button"),
 	ffwdButton: new displayFunc("#ffwd_button"),
-	playSong: new displayFunc("#play_song"),
+	songPlaying: new displayFunc("#song_playing"),
 	howGood: new displayFunc("#how_good"),
 	songRatingSlide: new displayFunc("#song_rating_slide"),
 	songRatingDisplay: new displayFunc("#song_rating_display"),
-	song_playAgain: new displayFunc("#song_playAgain"),
+	rating: new displayFunc("#rating"),
+	songPlayAgain: new displayFunc("#song_playAgain"),
 	pizzaFinally: new displayFunc("#pizza_finally"),
 	sneakInside: new displayFunc("#sneak_inside"),
 	slipInTheBack: new displayFunc("#slip_in_the_back"),
@@ -91,29 +92,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 		i.style.color = ascii.duck.friend.color;
 	}
 
-	await page.pizzaHeading.show({sec: .5}); //testing only
+	await page.pizzaHeading.show({sec: 5}); //testing only
 	await page.visitPizza.show();
 	page.helper.show();
 	await listen4Enter();
-	page.helper.hide()
+	page.helper.hide();
 	await page.pizzaHeading.hide();
 	await page.visitPizza.hide();
 
 	await page.scream.show()
-	await page.karenWords1.show({sec: .25}); //testing only
+	await page.karenWords1.show({sec: 2.5}); //testing only
 	await page.karenWords2.show({sec: .5}); //actual
 	await page.karenWords3.show({sec: .5}); //actual
 	await page.karenWords4.show();
 	const friendCaps = document.createTextNode(ascii.duck.friend.type.toUpperCase());
-	document.querySelector("#friend_typeCaps").append(friendCaps);
-	await page.karenWords5.show({sec: .2}); //testing only
+	const friendTypeCaps = document.querySelector("#friend_typeCaps");
+	friendTypeCaps.append(friendCaps);
+	friendTypeCaps.style.color = ascii.duck.friend.color;
+
+	await page.karenWords5.show({sec: 2}); //testing only
 	await page.karenWords6.show();
 
 	page.karenWords6.tag.after(helper);
-	page.helper.show()
+	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	await page.scream.hide()
+	await page.scream.hide();
 	await page.karenWords1.hide();
 	await page.karenWords2.hide();
 	await page.karenWords3.hide();
@@ -123,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	await page.mrFantastic.show();
 	await page.sorryGuys.show();
-	await page.leave.show()
+	await page.leave.show();
 	
 	page.leave.tag.after(helper);
 	page.helper.show();
@@ -132,7 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	await page.mrFantastic.hide();
 	await page.sorryGuys.hide();
-	await page.leave.hide()
+	await page.leave.hide();
 	
 	await page.notFantastic.show();
 	await page.duckNod.show();
@@ -176,11 +180,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.songChoose.show();
 	page.songChoose.tag.after(helper);
 
+
 	const songDebut = async () => {
 
-		page.helper.show();
-		await listen4Enter();
-		page.helper.hide();
+			page.songChoose.tag.disabled = false;
+			page.songPlayAgain.tag.after(helper);
+
+			page.helper.show();
+			await listen4Enter();
+			page.helper.hide();
+
+			page.rating.hide();
+			page.songPlayAgain.hide();
 
 		const songOptions1 = [
 			"duck_sounds/1/funny-story.mp3",
@@ -215,12 +226,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 		let songPlayer = async function(songOptions){
 
 			let playSelect = songOptions[ranNumG(6)],
-//			    song = new Audio(playSelect),
-					song = new Audio("duck_sounds/kim_possible.mp3"), //testing file only.
+			    song = new Audio(playSelect),
+					//song = new Audio("duck_sounds/kim_possible.mp3"), //testing file only.
 			    node = document.createElement("p"),
 			    content = document.createTextNode("Loading."),
 			    dot = document.createTextNode("."),
 			    unableToPlay = true;
+
+			page.songChoose.tag.disabled = true;
 
 			node.append(content);
 			page.songChoose.tag.after(node);
@@ -230,11 +243,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 				song.play();
 				unableToPlay = false;
 				node.remove();
-				page.playSong.show();
+				page.songPlaying.show();
 				player_buttons.style.display = "block";
 				page.pauseButton.show({sec: 0, disp: "inline"});
 				page.ffwdButton.show({sec: 0, disp: "inline"});
-				page.playButton.hide({sec: 0})
+				page.playButton.hide({sec: 0});
 			});
 
 			while (unableToPlay){
@@ -261,22 +274,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 		}
 		else{
 			let node = document.createElement("p");
-			let content = document.createTextNode("You have to pick something for them to play first!")
+			let content = document.createTextNode("You have to pick something for them to play first!");
 			node.append(content);
 			node.style.display = "block";
 			page.songChoose.tag.after(node);
 			await sleep(3);
 			node.remove();
-			songDebut()
+			await songDebut();
 
 		}
 	}
 
-	let money = 0;
-	do{
 
-	let song = await songDebut();
-
+	// Event Handlers for the player buttons.
 	page.pauseButton.tag.addEventListener("click", function pauseButtonListener(){
 		song.pause();
 		page.pauseButton.hide({sec: 0});
@@ -294,30 +304,131 @@ document.addEventListener("DOMContentLoaded", async () => {
 		song.playbackRate = 4;
 		song.preservePitch = false;
 	})
-	await new Promise((resolve) => {
-			song.addEventListener("ended", async () => {
-			console.log("the song is done.")
-			await page.playSong.hide();
-			player_buttons.style.display = "none";
-			resolve();
-		});
-	});
-	await page.howGood.show();
-	await page.songRatingSlide.show();
 
-	page.songRatingSlide.tag.after(helper);
+	let money = 0;
+	// iterate over the song game as long as the duck doesn't have 20 money.
+	do{
+		if (money > 0){
+
+			let songRatingDisplay = document.getElementById("song_rating_display"),
+				  songMoneyEarned = document.getElementById("song_moneyEarned"),
+				  songMoneyNeeded = document.getElementById("song_moneyNeeded");
+			if (song_review.value >= 1 & song_review.value < 3){
+				songRatingDisplay.innerText = "bad";
+			}
+			else if (song_review.value >= 3 & song_review.value < 5){
+				songRatingDisplay.innerText = "lame";
+			}
+			else if (song_review.value >= 5 & song_review.value < 7){
+				songRatingDisplay.innerText = "decent";
+			}
+			else if (song_review.value >= 7 & song_review.value < 9){
+				songRatingDisplay.innerText = "great";
+			}
+			else if (song_review.value >9){
+				songRatingDisplay.innerText = "FANTASTIC";
+			}
+
+			songMoneyEarned.innerText = new Intl.NumberFormat(getLanguage(), {style: "currency", currency: "USD"}).format(money);
+			songMoneyNeeded.innerText = new Intl.NumberFormat(getLanguage(), {style: "currency", currency: "USD"}).format(20 - money);
+
+			await page.rating.show({sec: 3});
+			await page.songPlayAgain.show();
+		}
+
+		let song = await songDebut();
+
+		await new Promise((resolve) => {
+			song.addEventListener("ended", async () => {
+				console.log("the song is done.");
+				page.songPlaying.hide(); 
+				player_buttons.style.display = "none";
+				resolve();
+			}, {once: true});
+		});
+		await page.howGood.show();
+		page.songRatingSlide.show();
+
+		page.songRatingSlide.tag.after(helper);
+		page.helper.show();
+		await listen4Enter();
+		page.helper.hide();
+		
+		page.howGood.hide();
+		page.songRatingSlide.hide();
+		page.songRatingSlide.tag.blur();
+
+		money += parseFloat(song_review.value);
+
+		let node = document.createElement("p"),
+			  content = document.createTextNode(`+${song_review.value}`);
+		node.append(content);
+		node.style.display = "block";
+		page.songChoose.tag.after(node);
+		await sleep(3);
+		node.remove();
+
+		// uncheck all of the radios and remove them from focus.
+		song1Select.checked = false;
+		song2Select.checked = false;
+		song3Select.checked = false;
+
+	} while (money < 20);
+
+	let node = document.createElement("p"),
+			content = document.createTextNode(`+${song_review.value}`);
+	node.append(content);
+	node.style.display = "block";
+	page.songChoose.tag.after(node);
+	await sleep(3);
+	node.remove();
+	
+	await page.songChoose.hide();
+	await page.pizzaFinally.show();
+	await page.sneakInside.show();
+
+	page.sneakInside.tag.after(helper);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
-	
-	page.howGood.hide();
-	page.songRatingSlide.hide();
 
-	money += parseFloat(song_review.value);
-	console.log(money);
-	console.log(typeof(money))
-	} while (money < 20);
+	await page.pizzaFinally.hide();
+	await page.sneakInside.hide();
 
+	await page.slipInTheBack.show();
+	await page.outback.show();
+	await page.pizzaWait.show()
+
+	for (let i=0; i<8; i++){
+		let dot = document.createTextNode(`.`);
+		page.pizzaWait.tag.append(dot);
+		await sleep(1);
+	}
+
+	page.ninjaSneak.show();
+
+	page.ninjaSneak.tag.after(helper);
+	page.helper.show();
+	await listen4Enter();
+	page.helper.hide();
+
+	await page.ninjaSneak.hide();
+	await page.slipInTheBack.hide();
+	await page.outback.hide();
+	await page.pizzaWait.hide();
+
+	await page.YAY.show();
+	await page.pizzaDance.show();
+	await page.pizzaEnd.show({sec: 3});
+
+	await page.pizzaEndButtons.show();
 	
+	pizza_playAgain.addEventListener("click", () => {
+		window.open("page1.html", "_self");
+	}, {once: true});
+
+	print_this.addEventListener("click", () => {
+		print();
+	});
 
 });

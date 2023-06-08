@@ -58,6 +58,14 @@ const listen4Enter = function(){
 	})
 }
 
+// guesses the local language from the browser.
+const getLanguage = () => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0];
+  } else {
+    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+  }
+}
 
 const ranNumG = function(max){
 	return Math.floor(Math.random() * max);

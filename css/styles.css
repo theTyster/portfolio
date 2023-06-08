@@ -106,7 +106,7 @@ span.inline > * {
 
 /*MEDIA QUERIES*/
 @media print {
-	.flex-container{
+	main, main > * {
 		display:none;
 	}
 	#print {
