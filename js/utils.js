@@ -106,7 +106,7 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 	let delayedRain = async () => {
 		try {
 			for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
-				await sleep(3.77);
+				await sleep(1.77);
 				let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
 				rainSelector.style.display = "unset";
 				rainSelector.style.opacity = 1;

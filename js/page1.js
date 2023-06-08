@@ -321,7 +321,7 @@ async function storyStartListener(event){
 		ascii.duck.friend.show({rel: false, disp: "inline-block"});
 		ascii.duck.show({rel: false, disp: "inline-block"});
 
-		ascii.duck.friend.tag.style.marginTop = "-60px";
+		ascii.duck.friend.tag.style.marginTop = "-50px";
 		ascii.animalsBlock.tag.style.marginTop = "50px";
 
 		await page.yes.show({sec: 1.5});
