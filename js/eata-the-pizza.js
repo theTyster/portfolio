@@ -58,19 +58,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 	//parse local storage for saved data.
 	const parsedJson = JSON.parse(localStorage.getItem("duck"));
 
-	switch (parsedJson.friend.type){
-		case ("frog"):
-			ascii.duck.friend = ascii.frog;
-			break;
-		case ("dog"):
-			ascii.duck.friend = ascii.dog;
-			break;
-		case ("hog"):
-			ascii.duck.friend = ascii.hog;
-			break;
-		case ("eggnog"):
-			ascii.duck.friend = ascii.eggnog;
-			break;
+	try {
+		switch (parsedJson.friend.type){
+			case ("frog"):
+				ascii.duck.friend = ascii.frog;
+				break;
+			case ("dog"):
+				ascii.duck.friend = ascii.dog;
+				break;
+			case ("hog"):
+				ascii.duck.friend = ascii.hog;
+				break;
+			case ("eggnog"):
+				ascii.duck.friend = ascii.eggnog;
+				break;
+		}
+	}
+	catch (TypeError){
+		document.write("<p>No jumping ahead, cheater! You have to complete the first part of the story FIRST.</p>")
+		document.write("<a href='page1.html'><button>Go to the beginnig.</button></a>")
 	}
 	
 	ascii.duck.color = parsedJson.color;
@@ -181,113 +187,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 	page.songChoose.tag.after(helper);
 
 
-	const songDebut = async () => {
-
-			page.songChoose.tag.disabled = false;
-			page.songPlayAgain.tag.after(helper);
-
-			page.helper.show();
-			await listen4Enter();
-			page.helper.hide();
-
-			page.rating.hide();
-			page.songPlayAgain.hide();
-
-		//Need to add a fisher-yates shuffler to this so that their are no repeats of songs.
-
-		const songOptions1 = [
-			"duck_sounds/1/funny-story.webm",
-			"duck_sounds/1/journey-to-the-sun.webm",
-			"duck_sounds/1/positive-way.webm",
-			"duck_sounds/1/spring-upbeat.webm",
-			"duck_sounds/1/that-good-feeling.webm",
-			"duck_sounds/1/upbeat-funky-retro.webm",
-			"duck_sounds/1/upbeat-summer-pop.webm"
-		]
-
-		const songOptions2 = [
-			"duck_sounds/2/beyond.webm",
-			"duck_sounds/2/electro-jazz.webm",
-			"duck_sounds/2/flashes.webm",
-			"duck_sounds/2/future-bass-hot-night.webm",
-			"duck_sounds/2/space.webm",
-			"duck_sounds/2/synthwave-80s.webm",
-			"duck_sounds/2/synthwave-outrun.webm"
-		]
-
-		const songOptions3 = [
-			"duck_sounds/3/calm-and-light-breakbeat.webm",
-			"duck_sounds/3/disco-groove.webm",
-			"duck_sounds/3/first.webm",
-			"duck_sounds/3/go_guy.webm",
-			"duck_sounds/3/rock-dedication.webm",
-			"duck_sounds/3/tango-hip-hop.webm",
-			"duck_sounds/3/tropical-summer.webm"
-		]
-
-		let songPlayer = async function(songOptions){
-
-			let playSelect = songOptions[ranNumG(6)],
-			    song = new Audio(playSelect),
-					//song = new Audio("duck_sounds/kim_possible.mp3"), //testing file only.
-			    node = document.createElement("p"),
-			    content = document.createTextNode("Loading."),
-			    dot = document.createTextNode("."),
-			    unableToPlay = true;
-
-			page.songChoose.tag.disabled = true;
-
-			node.append(content);
-			page.songChoose.tag.after(node);
-			node.style.display = "block";
-
-			song.addEventListener("canplaythrough", e => {
-				song.play();
-				unableToPlay = false;
-				node.remove();
-				page.songPlaying.show();
-				player_buttons.style.display = "block";
-				page.pauseButton.show({sec: 0, disp: "inline"});
-				page.ffwdButton.show({sec: 0, disp: "inline"});
-				page.playButton.hide({sec: 0});
-			});
-
-			while (unableToPlay){
-				node.append(dot);
-				dot = document.createTextNode(`.`);
-				await sleep(1);
-			}
-
-			return song;
-		}
-
-		
-		if (song1Select.checked){
-			let song = songPlayer(songOptions1);
-			return song;
-		}
-		if (song2Select.checked){
-			let song = songPlayer(songOptions2);
-			return song;
-		}
-		if (song3Select.checked){
-			let song = songPlayer(songOptions3);
-			return song;
-		}
-		else{
-			let node = document.createElement("p");
-			let content = document.createTextNode("You have to pick something for them to play first!");
-			node.append(content);
-			node.style.display = "block";
-			page.songChoose.tag.after(node);
-			await sleep(3);
-			node.remove();
-			await songDebut();
-
-		}
-	}
-
-
 	let money = 0;
 	// iterate over the song game as long as the duck doesn't have 20 money.
 	do{
@@ -319,8 +218,140 @@ document.addEventListener("DOMContentLoaded", async () => {
 			await page.songPlayAgain.show();
 		}
 
-		let song = await songDebut();
+		let songDebut = null; 
+		let song = new Audio();
+		await (songDebut = async () => {
 
+			page.songChoose.tag.disabled = false;
+			page.songPlayAgain.tag.after(helper);
+
+
+		//Need to add a fisher-yates shuffler to this so that their are no repeats of songs.
+
+		const songOptions1 = [
+			"duck_sounds/1/funny-story.mp3",
+			"duck_sounds/1/journey-to-the-sun.mp3",
+			"duck_sounds/1/positive-way.mp3",
+			"duck_sounds/1/spring-upbeat.mp3",
+			"duck_sounds/1/that-good-feeling.mp3",
+			"duck_sounds/1/upbeat-funky-retro.mp3",
+			"duck_sounds/1/upbeat-summer-pop.mp3"
+		]
+
+		const songOptions2 = [
+			"duck_sounds/2/beyond.mp3",
+			"duck_sounds/2/electro-jazz.mp3",
+			"duck_sounds/2/flashes.mp3",
+			"duck_sounds/2/future-bass-hot-night.mp3",
+			"duck_sounds/2/space.mp3",
+			"duck_sounds/2/synthwave-80s.mp3",
+			"duck_sounds/2/synthwave-outrun.mp3"
+		]
+
+		const songOptions3 = [
+			"duck_sounds/3/calm-and-light-breakbeat.mp3",
+			"duck_sounds/3/disco-groove.mp3",
+			"duck_sounds/3/first.mp3",
+			"duck_sounds/3/go_guy.mp3",
+			"duck_sounds/3/rock-dedication.mp3",
+			"duck_sounds/3/tango-hip-hop.mp3",
+			"duck_sounds/3/tropical-summer.mp3"
+		]
+
+		// Takes an input, one of the song arrays, and randomly selects an index to be the src value for the song.
+		let songPlayer = async (songOptions) => {
+
+			let node = document.createElement("p"),
+				content = document.createTextNode("Loading."),
+				dot = document.createTextNode("."),
+				unableToPlay = true,
+				playSelect = songOptions[ranNumG(6)];
+
+			song.src = playSelect;
+
+			// When the play button is clicked, waits till the song is playable then plays it. Until then a loading status is displayed.
+			page.playButton.tag.addEventListener("click", async e => {
+				song.load();
+
+				// removes focus from radios.
+				song1Select.blur();
+				song2Select.blur();
+				song3Select.blur();
+
+			song.addEventListener("canplaythrough", e => {
+				song.play();
+
+				page.songChoose.tag.disabled = true;
+				unableToPlay = false;
+				node.remove();
+
+				page.songPlaying.show();
+
+				page.pauseButton.show({sec: 0, disp: "inline"});
+				page.ffwdButton.show({sec: 0, disp: "inline"});
+				page.playButton.hide({sec: 0});
+
+			}, {once: true});
+
+
+			node.append(content);
+			page.songChoose.tag.after(node);
+			node.style.display = "block";
+
+			while (unableToPlay){
+				node.append(dot);
+				dot = document.createTextNode(`.`);
+				await sleep(1);
+			}
+			}, {once:true});
+
+
+			// Waits for the song to start playing before moving on.
+			await (() => new Promise(resolve => song.addEventListener("playing", () => resolve(), {once: true})))();
+
+
+		}
+
+		// Waits for the play button to be clicked. And then queries the radio buttons to play a song.
+		await (async () => {
+			page.songChoose.tag.addEventListener("change", async () => {
+
+				// Hides the previous iterations results and prompt.
+				page.rating.hide();
+				page.songPlayAgain.hide();
+
+				// Display Play Button.
+				player_buttons.style.display = "block";
+				page.playButton.show({sec: 0});
+				page.ffwdButton.hide({sec: 0});
+				page.pauseButton.hide({sec: 0});
+
+				if (song1Select.checked){
+					songPlayer(songOptions1);
+					return;
+				}
+				else if (song2Select.checked){
+					songPlayer(songOptions2);
+					return;
+				}
+				else if (song3Select.checked){
+					songPlayer(songOptions3);
+					return;
+				}
+				else{ // This will never be used. But is staying here jic. Feel free to delete.
+					let node = document.createElement("p");
+					let content = document.createTextNode("You have to pick something for them to play first!");
+					node.append(content);
+					node.style.display = "block";
+					page.songChoose.tag.after(node);
+					await sleep(3);
+					node.remove();
+					await songDebut();
+				}
+			}, {once: true})
+		})()
+
+	})();
 
 		// Event Handlers for the player buttons.
 		const pauseButtonListener = () => {
@@ -337,7 +368,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 			page.playButton.hide({sec: 0});
 			page.pauseButton.show({sec: 0, disp: "inline"});
 				}
-		page.playButton.tag.addEventListener("click", playButtonListener)
+		page.playButton.tag.addEventListener("click", playButtonListener);
 
 
 		const ffwdButtonListener = () => {
@@ -351,7 +382,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 		}
 		page.ffwdButton.tag.addEventListener("click", ffwdButtonListener);
 
+		// uncheck all of the radios
+		song1Select.checked = false;
+		song2Select.checked = false;
+		song3Select.checked = false;
 
+		// Waits for the song to end before moving on.
 		await new Promise((resolve) => {
 			song.addEventListener("ended", async () => {
 
@@ -378,6 +414,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 		page.songRatingSlide.hide();
 		page.songRatingSlide.tag.blur();
 
+		// reset the slider
+		song_review.value = 0;
+
+		// Sets the money equal to the review
 		money += parseFloat(song_review.value);
 
 		let node = document.createElement("p"),
@@ -385,13 +425,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 		node.append(content);
 		node.style.display = "block";
 		page.songChoose.tag.after(node);
-		await sleep(3);
+		await sleep(1);
 		node.remove();
-
-		// uncheck all of the radios and remove them from focus.
-		song1Select.checked = false;
-		song2Select.checked = false;
-		song3Select.checked = false;
 
 	} while (money < 20);
 
@@ -400,7 +435,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	node.append(content);
 	node.style.display = "block";
 	page.songChoose.tag.after(node);
-	await sleep(3);
+	await sleep(1);
 	node.remove();
 	
 	await page.songChoose.hide();
