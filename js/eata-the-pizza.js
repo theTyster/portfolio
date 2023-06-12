@@ -414,9 +414,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 		page.songRatingSlide.hide();
 		page.songRatingSlide.tag.blur();
 
-		// reset the slider
-		song_review.value = 0;
-
 		// Sets the money equal to the review
 		money += parseFloat(song_review.value);
 
@@ -427,6 +424,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 		page.songChoose.tag.after(node);
 		await sleep(1);
 		node.remove();
+
+		// reset the slider
+		song_review.value = 0;
 
 	} while (money < 20);
 
@@ -487,3 +487,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 	});
 
 });
+
+//  Next on the road map is adding a fisher-yates shuffler to the songs so
+//  that there are no repeats when readers play them.
+//
+//  - Also need to fix pixel width of the input overlay on IOS.
+//  - Double check that the print page doesn't contain a blank page on mobile.
+//  - figure out why flexbox isn't working.
+//  - configure the story so that it doesn't allow clicking the other story branches.
+//  - Release v1.0.0
+//  - branch to testing.
+//  - Add animations and graphics
+//  - Add other story branches.
+//  - Hopefully get hired at some point.
