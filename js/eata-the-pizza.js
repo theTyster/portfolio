@@ -54,6 +54,7 @@ const page = {
 
 document.addEventListener("DOMContentLoaded", async () => {
 	page.body.style.background = page.lightGreenBG;
+	page.container.style.flex = 1;
 
 	//parse local storage for saved data.
 	const parsedJson = JSON.parse(localStorage.getItem("duck"));
@@ -491,9 +492,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 //  Next on the road map is adding a fisher-yates shuffler to the songs so
 //  that there are no repeats when readers play them.
 //
-//  - Also need to fix pixel width of the input overlay on IOS.
-//  - Double check that the print page doesn't contain a blank page on mobile.
-//  - figure out why flexbox isn't working.
 //  - configure the story so that it doesn't allow clicking the other story branches.
 //  - Release v1.0.0
 //  - branch to testing.

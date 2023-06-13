@@ -375,38 +375,49 @@ async function storyStartListener(event){
 		await page.phaseThree.rainHowBad.hide();
 		await page.phaseThree.rainInputNode.hide();
 
+		// DISABLE ALL RADIOS EXCEPT WHAT IS AVAILABLE.
+		// ENABLE OTHER BRANCHES AS THEY BECOME COMPLEET.
+		puddingSelect.disabled = true;
+		grapesSelect.disabled = true;
+
 		await page.phaseThree.rainGetOut.show();
 		await page.phaseThree.rainHungry.show();
 		await page.phaseThree.eatChoose.show();
 
 		page.phaseThree.eatChoose.tag.after(helper);
+
+		// Text to inform of more to come.
+		let node = document.createElement("p");
+		let content = document.createTextNode("Pudding and Grape Stories To come! Check back later!");
+		node.append(content);
+		page.helper.tag.after(node);
+		node.style.display = "block";
+
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
+
 
 		localStorage.setItem("duck", JSON.stringify(ascii.duck));
 		localStorage.setItem("friend", JSON.stringify(ascii.duck.friend));
 		localStorage.setItem("bonus", JSON.stringify(bonusLevel));
 
 		await (async () => {
-			const pizza = document.querySelector("#pizzaSelect"),
-				pudding = document.querySelector("#puddingSelect"),
-				grapes = document.querySelector("#grapesSelect");
 
 			while (true){
-				if (pizza.checked){
+				if (pizzaSelect.checked){
 					window.open("eata-the-pizza.html", "_self");
 					page.helper.show();
 					await listen4Enter();
 					page.helper.hide();
 				}
-				else if (pudding.checked){
+				else if (puddingSelect.checked){
 					window.open("yummy-puhd.html", "_self");
 					page.helper.show();
 					await listen4Enter();
 					page.helper.hide();
 				}
-				else if (grapes.checked){
+				else if (grapesSelect.checked){
 					window.open("got-any-grapes.html", "_self");
 					page.helper.show();
 					await listen4Enter();
