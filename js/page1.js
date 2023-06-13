@@ -23,7 +23,7 @@ const page = {
 		body: new displayFunc("div.phaseTwo"),
 		where: new displayFunc("#where"),
 		letsSee: new displayFunc("#letsSee"),
-		eyes:  new displayFunc("#eyes"),
+		eyes: new displayFunc("#eyes"),
 		ah: new displayFunc("#ah"),
 		thereSheIs: new displayFunc("#thereSheIs"),
 		splashing: new displayFunc("#splashing")
@@ -68,7 +68,7 @@ async function startButtonListener(){
 	page.mobileNotice.hide();
 	await page.startButton.hide();
 	await page.oneTime.show(1.5);
-	page.oneTime.tag.after(helper);
+	page.oneTime.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -90,13 +90,13 @@ async function startButtonListener(){
 
 async function storyStartListener(event){
 	duck_color.blur();
-	yes.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
+	page.yes.tag.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
 
 	await page.phaseOne.duckInlineInput.hide(.5);
 	await page.phaseOne.duckWhatColor.hide(.5);
 
 	await page.yes.show(1.5);
-	yes.after(helper);
+	page.yes.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -104,7 +104,7 @@ async function storyStartListener(event){
 
 	page.phaseTwo.body.show();
 	await page.phaseTwo.where.show(2);
-	where.after(helper);
+	page.phaseTwo.where.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -120,8 +120,8 @@ async function storyStartListener(event){
 
 	//eyes animation
 	await page.phaseTwo.eyes.show(3);
-	eyes.style.transform = "rotate(0.5turn)";
-	eyes.style.textShadow = "-1px -1px 3px black";
+	page.phaseTwo.eyes.tag.style.transform = "rotate(0.5turn)";
+	page.phaseTwo.eyes.tag.style.textShadow = "-1px -1px 3px black";
 	await sleep(3);
 
 	page.phaseTwo.eyes.hide();
@@ -132,7 +132,7 @@ async function storyStartListener(event){
 	await ascii.duck.show();
 	page.helper.show();
 
-	page.phaseTwo.body.tag.after(helper);
+	page.phaseTwo.body.tag.after(page.helper.tag);
 	page.phaseTwo.thereSheIs.tag.after(duck);
 	await listen4Enter();
 
@@ -158,7 +158,7 @@ async function storyStartListener(event){
 	page.phaseThree.body.show({sec: 0});
   page.phaseThree.chooseAFriend.show();
 
-	chooseAFriend.after(helper);
+	page.phaseThree.chooseAFriend.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -218,11 +218,15 @@ async function storyStartListener(event){
 
 
 	await (async () => {
-		let l = true;
-		while (l){
+		let isFriendUndeclared = true;
+		while (isFriendUndeclared){
+
+			// fixes a styling quirk with the easter Egg
+			document.querySelector("p#friend_declare > span.friend_type").className = "friend_type bonus_egg";
+
 			await page.phaseThree.friendDeclare.show();
 			friend_name_input.focus();
-			friend_declare.after(helper);
+			page.phaseThree.friendDeclare.tag.after(page.helper.tag);
 
 			//choose a name for duck's friend.
 			friend_name_input.addEventListener("input", function inputResizeListener(event){
@@ -238,7 +242,7 @@ async function storyStartListener(event){
 			// If the inputed name has a space, is blank, or is a number have them try again.
 			const tryAgain = async (friend_nameError, friend_nameError_content) => {
 				friend_nameError.append(friend_nameError_content);
-				friend_declare.after(friend_nameError);
+				page.phaseThree.friendDeclare.tag.after(friend_nameError);
 				friend_nameError.style.display = "block";
 				await sleep(4);
 				friend_nameError.remove();
@@ -267,7 +271,7 @@ async function storyStartListener(event){
 
 			document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
 			page.phaseThree.friendNameCheck.show();
-			page.phaseThree.friendNameCheck.tag.after(helper);
+			page.phaseThree.friendNameCheck.tag.after(page.helper.tag);
 			page.helper.show();
 			await listen4Enter();
 			page.helper.hide();
@@ -279,7 +283,7 @@ async function storyStartListener(event){
 					i.innerText = ascii.duck.friend.name;
 					i.style.color = ascii.duck.friend.color;
 				}
-				l = false;
+				isFriendUndeclared = false;
 				friend_name_input.blur();
 			}
 
@@ -303,6 +307,13 @@ async function storyStartListener(event){
 	ascii.duck.friend.typeSpans = page.friendType;
 	await checkColorInput(friend_color, ascii.duck.friend, async () => {
 
+		// Sets the Easter Egg after the color has been declared to avoid black on dark text.
+		document.querySelector("p#friend_colorQuestion > span.friend_name").className = "friend_name bonus_egg";
+		document.querySelector("span#friend_colorQuestion_input > span.friend_type").className = "friend_type bonus_egg";
+
+		//Sets the value of the success text so that it can be colored, if necessary by the Easter Egg function.
+		page.yes.tag.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type bonus_egg" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
+
 		// checks to see if easterEgg applies
 		bonusEgg();
 
@@ -313,8 +324,7 @@ async function storyStartListener(event){
 		friend_color.blur();
 		await page.phaseThree.friendColorInput.hide();
 		page.yes.hide();
-		yes.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
-		page.phaseThree.friendColorInput.tag.after(yes);
+		page.phaseThree.friendColorInput.tag.after(page.yes.tag);
 		await page.phaseThree.friendColorQuestion.hide();
 		ascii.animalsBlock.tag.append(ascii.duck.friend.tag);
 
@@ -326,7 +336,7 @@ async function storyStartListener(event){
 
 		await page.yes.show({sec: 1.5});
 
-		yes.after(helper)
+		page.yes.tag.after(page.helper.tag)
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
@@ -337,7 +347,7 @@ async function storyStartListener(event){
 		await page.phaseThree.friendLaugh.show();
 		await page.phaseThree.duckLaugh.show();
 
-		page.phaseThree.duckLaugh.tag.after(helper);
+		page.phaseThree.duckLaugh.tag.after(page.helper.tag);
 		page.helper.show();
 		await listen4Enter();
 		await page.helper.hide();
@@ -350,12 +360,12 @@ async function storyStartListener(event){
 		await page.phaseThree.rainHowBad.show();
 		page.phaseThree.rainInputNode.show();
 
-		page.phaseThree.rainInputNode.tag.after(helper);
+		page.phaseThree.rainInputNode.tag.after(page.helper.tag);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
 
-		makeItRain(rain_range.value);
+		makeItRain(page.phaseThree.rainRangeInput.tag.value);
 
 		// simulate a lightning flash
 		page.body.style.background = `#666`;
@@ -384,7 +394,7 @@ async function storyStartListener(event){
 		await page.phaseThree.rainHungry.show();
 		await page.phaseThree.eatChoose.show();
 
-		page.phaseThree.eatChoose.tag.after(helper);
+		page.phaseThree.eatChoose.tag.after(page.helper.tag);
 
 		// Text to inform of more to come.
 		let node = document.createElement("p");

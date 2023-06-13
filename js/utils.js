@@ -127,10 +127,10 @@ const makeItRain = function(storminess) { // remember that the arg is a range 1-
 
 		//moves helper text to after the input box. If the input box is in an inline class.
 		if (inputSelector.parentNode.classList.toString() === "inline"){
-			inputSelector.parentNode.after(helper);
-			inputSelector.parentNode.after(hm)
-			inputSelector.parentNode.after(no)
-			inputSelector.parentNode.after(yes)
+			inputSelector.parentNode.after(page.helper.tag);
+			inputSelector.parentNode.after(page.hm.tag);
+			inputSelector.parentNode.after(page.no.tag);
+			inputSelector.parentNode.after(page.yes.tag);
 		}
 		else{
 			inputSelector.after(helper);

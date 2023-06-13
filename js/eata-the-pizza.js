@@ -19,7 +19,7 @@ const page = {
 	karenWords5: new displayFunc("#karenWords5"),
 	karenWords6: new displayFunc("#karenWords6"),
 	mrFantastic: new displayFunc("#mrFantastic"),
-	sorryGuys: new displayFunc("#sorryGuys"),
+	sorryGuys: new displayFunc("#sorry_guys"),
 	leave: new displayFunc("#leave"),
 	notFantastic: new displayFunc("#notFantastic"),
 	duckNod: new displayFunc("#duck_nod"),
@@ -37,6 +37,7 @@ const page = {
 	songPlaying: new displayFunc("#song_playing"),
 	howGood: new displayFunc("#how_good"),
 	songRatingSlide: new displayFunc("#song_rating_slide"),
+	songReviewSliderInput: new displayFunc("input#song_review"),
 	songRatingDisplay: new displayFunc("#song_rating_display"),
 	rating: new displayFunc("#rating"),
 	songPlayAgain: new displayFunc("#song_playAgain"),
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.karenWords5.show({sec: 2}); //testing only
 	await page.karenWords6.show();
 
-	page.karenWords6.tag.after(helper);
+	page.karenWords6.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -136,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.sorryGuys.show();
 	await page.leave.show();
 	
-	page.leave.tag.after(helper);
+	page.leave.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -149,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.duckNod.show();
 	await page.sneaky.show();
 
-	page.sneaky.tag.after(helper);
+	page.sneaky.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.startBand.show();
 	await page.soundsAwesome.show();
 
-	page.soundsAwesome.tag.after(helper);
+	page.soundsAwesome.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.finallyReady.show();
 	await page.back4More.show();
 
-	page.back4More.tag.after(helper);
+	page.back4More.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -185,7 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await page.back4More.hide();
 	
 	await page.songChoose.show();
-	page.songChoose.tag.after(helper);
+	page.songChoose.tag.after(page.helper.tag);
 
 
 	let money = 0;
@@ -196,19 +197,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 			let songRatingDisplay = document.getElementById("song_rating_display"),
 				  songMoneyEarned = document.getElementById("song_moneyEarned"),
 				  songMoneyNeeded = document.getElementById("song_moneyNeeded");
-			if (song_review.value >= 1 & song_review.value < 3){
+			if (page.songReviewSliderInput.tag.value >= 1 & page.songReviewSliderInput.tag.value < 3){
 				songRatingDisplay.innerText = "bad";
 			}
-			else if (song_review.value >= 3 & song_review.value < 5){
+			else if (page.songReviewSliderInput.tag.value >= 3 & page.songReviewSliderInput.tag.value < 5){
 				songRatingDisplay.innerText = "lame";
 			}
-			else if (song_review.value >= 5 & song_review.value < 7){
+			else if (page.songReviewSliderInput.tag.value >= 5 & page.songReviewSliderInput.tag.value < 7){
 				songRatingDisplay.innerText = "decent";
 			}
-			else if (song_review.value >= 7 & song_review.value < 9){
+			else if (page.songReviewSliderInput.tag.value >= 7 & page.songReviewSliderInput.tag.value < 9){
 				songRatingDisplay.innerText = "great";
 			}
-			else if (song_review.value >9){
+			else if (page.songReviewSliderInput.tag.value >9){
 				songRatingDisplay.innerText = "FANTASTIC";
 			}
 
@@ -224,7 +225,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 		await (songDebut = async () => {
 
 			page.songChoose.tag.disabled = false;
-			page.songPlayAgain.tag.after(helper);
+			page.songPlayAgain.tag.after(page.helper.tag);
 
 
 		//Need to add a fisher-yates shuffler to this so that their are no repeats of songs.
@@ -406,7 +407,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 		await page.howGood.show();
 		page.songRatingSlide.show();
 
-		page.songRatingSlide.tag.after(helper);
+		page.songRatingSlide.tag.after(page.helper.tag);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
@@ -416,10 +417,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 		page.songRatingSlide.tag.blur();
 
 		// Sets the money equal to the review
-		money += parseFloat(song_review.value);
+		money += parseFloat(page.songReviewSliderInput.tag.value);
 
 		let node = document.createElement("p"),
-			  content = document.createTextNode(`+${song_review.value}`);
+			  content = document.createTextNode(`+${page.songReviewSliderInput.tag.value}`);
 		node.append(content);
 		node.style.display = "block";
 		page.songChoose.tag.after(node);
@@ -427,23 +428,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 		node.remove();
 
 		// reset the slider
-		song_review.value = 0;
+		page.songReviewSliderInput.tag.value = 5;
 
 	} while (money < 20);
 
-	let node = document.createElement("p"),
-			content = document.createTextNode(`+${song_review.value}`);
-	node.append(content);
-	node.style.display = "block";
-	page.songChoose.tag.after(node);
-	await sleep(1);
-	node.remove();
-	
 	await page.songChoose.hide();
 	await page.pizzaFinally.show();
 	await page.sneakInside.show();
 
-	page.sneakInside.tag.after(helper);
+	page.sneakInside.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
@@ -463,7 +456,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	page.ninjaSneak.show();
 
-	page.ninjaSneak.tag.after(helper);
+	page.ninjaSneak.tag.after(page.helper.tag);
 	page.helper.show();
 	await listen4Enter();
 	page.helper.hide();
