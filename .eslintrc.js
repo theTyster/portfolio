@@ -22,5 +22,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'allowIndentationTabs': 0,
+    'no-tabs': 0,
   },
 };
