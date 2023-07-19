@@ -2,16 +2,13 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-/src/css/animate.css
+/public/css/animate.css
 
 # testing
-/coverage
-/READEME.md
+.eslintrc.cjs
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
