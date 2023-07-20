@@ -5,7 +5,7 @@
 /public/css/animate.css
 
 # testing
-.eslintrc.cjs
+.eslintrc*
 
 # production
 /dist

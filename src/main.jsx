@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
+import './nav.css'
 
 // Generates the Header and Footer of each page.
 function Navigation() {
