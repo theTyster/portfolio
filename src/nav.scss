@@ -1,0 +1,87 @@
+/*Color THEME*/
+$darkcitron: #b4a461;
+$citron: #e1ce7a;
+$lightCitron: #e7d794;
+$charcoal: #424b54;
+$darkCharcoal: #2e343a;
+$lightCharcoal: #545d65;
+$desertSand: #ebcfb2;
+$silver: #c5baaf;
+
+@mixin dark-citron-dropshadow() {
+	filter: drop-shadow(3px 3px 10px #b4a461);
+}
+
+@mixin rounded-corners() {
+		border-radius: 7px;
+}
+
+
+body {
+	background: $citron;
+
+	header {
+		.menuHam {
+			margin: 10px;
+			background-color: white;
+			height: 35px;
+			padding: 10px;
+			@include rounded-corners;
+
+			&:hover {
+				background-color: $charcoal;
+				@include dark-citron-dropshadow;
+				svg g {
+					stroke: white;
+				}
+			}
+
+			&:active {
+				background-color: #d2c8a0;
+				filter: none;
+			}
+		}
+
+		nav {
+			transition: visibility .5s;
+			opacity: 1;
+			max-height: 1;
+			display: block;
+			ul {
+				display: flex;
+				flex-direction: column;
+				padding-right: 1em;
+				list-style-type: none;
+				background-color: $citron;
+			}
+
+			li {
+				flex: 1;
+				padding: 10px;
+				padding-right: 1em;
+				margin: 5px;
+				@include dark-citron-dropshadow;
+				text-align: center;
+				transition: filter, background .3s;
+				a {
+					text-decoration: none;
+					color: black;
+				}
+				&:active {
+					filter: none;
+				}
+
+				&:hover {
+					background: $lightCitron;
+				}
+			}
+		}
+	}
+	main {
+		background: white;
+		@include rounded-corners;
+	}
+}
+
+
+
