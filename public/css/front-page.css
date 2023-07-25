@@ -2,7 +2,9 @@
 
 :root {
 /*Color THEME*/
+--darkcitron: #b4a461;
 --citron: #e1ce7a;
+--lightcitron: #e7d794;
 
 --charcoal: #424b54;
 --darkcharcoal: #2e343a;
@@ -12,7 +14,8 @@
 --silver: #c5baaf;
 }
 
-/* ADD FONTS HERE*/
+
+/* TODO: ADD FONTS HERE*/
 
 body{
   background-color: white;
@@ -20,23 +23,25 @@ body{
   flex-direction: column;
 }
 
-header {
-  background-color: var(--citron);
-  padding: .5rem;
+aside {
+  display: flex;
+  flex: 1;
 }
 
 main {
   display: flex;
   flex: 1;
   padding: 1rem;
+  max-width: 800px;
 }
+
 article{
   padding: 1rem;
 }
 
 #duck {
   width: 80px;
-  height: auto;
+  height: 160px;
   padding-top: 50px;
 }
 
@@ -62,4 +67,7 @@ footer {
   padding-right: .5rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  text-align: center;
 }
+
+@media (max-width: 800px)

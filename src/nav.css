@@ -1,7 +1,25 @@
+.menuHam {
+	margin: 10px;
+	background-color: var(--citron);
+	height: 35px;
+	padding: 10px;
+}
+.menuHam:hover {
+	background-color: white;
+	filter: drop-shadow(3px 3px 10px #b4a461)
+}
+
+.menuHam:active {
+	background-color: #d2c8a0;
+	filter: none;
+}
+
 ul {
 	display: flex;
+	flex-direction: column;
 	padding-right: 1em;
 	list-style-type: none;
+	background-color: var(--citron);
 }
 
 li {
@@ -20,7 +38,7 @@ li:active {
 }
 
 li:hover {
-	background: #e7d794;
+	background: var(--lightcitron);
 }
 
 ul>li>a {
