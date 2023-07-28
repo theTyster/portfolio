@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import './nav.scss';
+import './assets/css/nav.scss';
 import Navigation from './nav.jsx';
 import Credit from './credit.jsx';
 

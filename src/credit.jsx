@@ -1,5 +1,5 @@
 import React from 'react';
-import './nav.scss'
+import './assets/css/nav.scss'
 
 function Credit() {
   return (

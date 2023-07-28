@@ -1,5 +1,6 @@
 import React from 'react';
-import './nav.scss'
+import { Transition } from 'react-transition-group';
+import './assets/css/nav.scss'
 import PropTypes from 'prop-types';
 
 // Generates the Header and Footer.
@@ -33,25 +34,52 @@ function Menu({ menuState }) {
   // PROPS VALIDATION
   Menu.propTypes = {
     menuState: PropTypes.bool,
-    onClick: PropTypes.func,
+  }
+
+  const nodeRef = React.useRef(null);
+  const tranDuration = 1000;
+
+  const tranStyle = {
+    entering: {
+      visibility: 'visible',
+      maxHeight: '236px',
+    },
+    entered: {
+      visibility: 'isible',
+      maxHeight: '236px',
+    },
+    exiting: {
+      visibility: 'visible',
+      maxHeight: 0,
+    },
+    exited: {
+      visibility: 'collapse',
+      maxHeight: 0,
+    },
   }
 
   return (
-      <nav style={{ visibility: menuState ? 'visible' : 'collapse' }}>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a rel="noreferrer noopener" target="_blank" href="https://tydavisportfolio.wordpress.com">About The Author</a></li>
-          <li><a rel="noreferrer noopener" target="_blank" href="https://github.com/theTyster/duck_story">The Code</a></li>
-          <li><a href="page1.html">Start The Story</a></li>
-        </ul>
-      </nav>
+    <Transition nodeRef={ nodeRef } in={ menuState } timeout={ tranDuration }>
+      {tranState => (
+        <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
+          <ul>
+            <a href="/"><li>Home</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="https://tydavisportfolio.wordpress.com"><li>About The Author</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="https://github.com/theTyster/duck_story"><li>The Code</li></a>
+            <a href="page1.html"><li>Start The Story</li></a>
+          </ul>
+        </nav>
+      )}
+    </Transition>
   );
+
 }
+
 
 function Navigation() {
 
   const [menuState, menuSet] = React.useState(false);
-  const onClick = () => menuState ? menuSet(false) : menuSet(true);
+  const onClick = () => menuSet(!menuState);
 
 
   return(
