@@ -37,7 +37,7 @@ main {
   /*CENTER*/
   display: block;
   margin: 0 auto;
-  width 70%;
+  width: 70%;
 }
 
 article{
@@ -50,7 +50,7 @@ article{
   /*CENTER*/
   display: block;
   margin: 0 auto;
-  width 70%;
+  width: 70%;
 }
 
 a {
@@ -68,7 +68,7 @@ button {
   /*CENTER*/
   display: block;
   margin: 50px auto;
-  width 70%;
+  width: 70%;
 
 }
 button:hover{
