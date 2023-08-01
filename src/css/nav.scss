@@ -1,15 +1,4 @@
-/*Color THEME*/
-$citron: #e1ce7a;
-$darkCitron: #6b623a;
-$lightCitron: #d7d0b5;
-
-$charcoal: #424b54;
-$darkCharcoal: #2e343a;
-$lightCharcoal: #545d65;
-
-$desertSand: #ebcfb2;
-$silver: #c5baaf;
-
+@use "styles" as theme;
 /*MIXINS*/
 @mixin dark-citron-dropshadow() {
 	filter: drop-shadow(3px 3px 10px #b4a461);
@@ -22,13 +11,13 @@ $silver: #c5baaf;
 @mixin button-click() {
 	&:hover {
 		@include dark-citron-dropshadow;
-		background-color: $lightCitron;
+		background-color: theme.$lightcitron;
 		background: white;
 		svg g {
-			stroke: $charcoal;
+			stroke: theme.$charcoal;
 		}
 		&:active {
-			background-color: $darkCitron;
+			background-color: theme.$darkcitron;
 			filter: none;
 			svg g {
 				stroke: white;
@@ -39,7 +28,7 @@ $silver: #c5baaf;
 
 
 body {
-	background: $citron;
+	background: theme.$citron;
 
 	header {
 		.menuHam {

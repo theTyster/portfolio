@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import './assets/css/duck-svg.scss';
-import { ReactComponent as DuckSVG } from './assets/img/front-page-duck.svg';
-import Text from './text.jsx';
+import './css/front-page.scss';
+import './css/duck-svg.scss';
+import { ReactComponent as DuckSVG } from './front-page/img/duck.svg';
+import Text from './front-page/text.jsx';
 
 const onClick = () => {
 

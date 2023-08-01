@@ -1,6 +1,5 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
-import './assets/css/nav.scss'
 import PropTypes from 'prop-types';
 
 // Generates the Header and Footer.

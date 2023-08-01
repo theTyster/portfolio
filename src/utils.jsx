@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import './assets/css/nav.scss';
-import Navigation from './nav.jsx';
-import Credit from './credit.jsx';
+import './css/nav.scss';
+import './css/styles.scss';
+import Navigation from './utils/nav.jsx';
+import Credit from './utils/credit.jsx';
 
 
 const header = ReactDOM.createRoot(document.querySelector('header'));
