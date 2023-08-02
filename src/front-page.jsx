@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
+import gsap from 'gsap';
 import './css/front-page.scss';
 import './css/duck-svg.scss';
 import { ReactComponent as DuckSVG } from './front-page/img/duck.svg';
@@ -7,16 +8,8 @@ import Text from './front-page/text.jsx';
 
 const onClick = () => {
 
-	const duckHeadKeyframes = {
-		transform: ['rotate(0deg)', 'rotate(30deg)'], //[from, to]
-	}
-	const duckHeadTiming = {
-		duration: 500,
-		fill: 'forwards',
-	}
-
-	const duckHead = document.getElementById('head');
-	duckHead.animate(duckHeadKeyframes, duckHeadTiming);
+	gsap.to("#head", {rotate: 13, transformOrigin: "50% 50%"});
+	gsap.to("#r_wing", {rotate: 130, transformOrigin: "50% 15%"});
 
 }
 

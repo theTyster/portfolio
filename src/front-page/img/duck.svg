@@ -10,11 +10,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="duck"
-   width="115.41mm"
-   height="158.65mm"
+   width="552.84576"
+   height="610.42517"
    version="1.1"
-   viewBox="0 0 115.41 158.65"
-   sodipodi:docname="front-page-duck.svg"
+   viewBox="0 0 146.27375 161.50832"
+   sodipodi:docname="duck.svg"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <metadata
      id="metadata86">
@@ -24,6 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,16 +38,22 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1916"
-     inkscape:window-height="1041"
+     inkscape:window-height="950"
      id="namedview84"
      showgrid="false"
-     inkscape:zoom="1.4189907"
-     inkscape:cx="228.65399"
-     inkscape:cy="189.85736"
+     inkscape:zoom="1.192442"
+     inkscape:cx="193.60201"
+     inkscape:cy="314.04258"
      inkscape:window-x="0"
-     inkscape:window-y="18"
+     inkscape:window-y="109"
      inkscape:window-maximized="0"
-     inkscape:current-layer="g81" />
+     inkscape:current-layer="duck"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px" />
   <defs
      id="defs16">
     <linearGradient
@@ -60,7 +67,7 @@
     </linearGradient>
     <linearGradient
        id="linearGradient883"
-       gradientTransform="matrix(.012761 0 0 .016781 98.475 106.27)"
+       gradientTransform="matrix(0.012761,0,0,0.016781,98.475,106.27)"
        osb:paint="solid">
       <stop
          stop-color="#ffd42a"
@@ -69,7 +76,7 @@
     </linearGradient>
     <linearGradient
        id="linearGradient870"
-       gradientTransform="matrix(-.003896 5.6109e-5 7.8775e-5 .0069164 153.52 100.11)"
+       gradientTransform="matrix(-0.003896,5.6109e-5,7.8775e-5,0.0069164,153.52,100.11)"
        osb:paint="solid">
       <stop
          stop-color="#a40"
@@ -78,7 +85,7 @@
     </linearGradient>
     <linearGradient
        id="linearGradient864"
-       gradientTransform="matrix(2.3311 0 0 2.0098 -89.954 -127.66)"
+       gradientTransform="matrix(2.3311,0,0,2.0098,-89.954,-127.66)"
        osb:paint="solid">
       <stop
          stop-color="#d45500"
@@ -89,31 +96,31 @@
        id="linearGradient860"
        x1="94.444"
        x2="117.5"
-       y1="75.191"
-       y2="75.191"
+       y1="75.191002"
+       y2="75.191002"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient870" />
     <linearGradient
        id="linearGradient1429"
        x1="48.152"
-       x2="90.648"
+       x2="90.648003"
        y1="124.18"
        y2="124.18"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient1391" />
   </defs>
   <g
-     transform="translate(-20.882 -8.1653)"
+     transform="translate(-6.4080827,-5.3057895)"
      id="g81">
     <g
        id="l_leg"
-       transform="translate(-1.5191 2.6128)">
+       transform="translate(-1.5191,2.6128)">
       <path
-         d="m62.589 132.63c-0.69647 4.123-1.3929 8.246-2.0894 12.369 3.7395 4.9669 7.4789 9.9338 11.218 14.901-3.7152-0.65582-8.0143-0.91622-11.079 1.705-1.3641 0.99477-2.311 3.0497-3.6787 0.90332-2.8723-2.3591-6.6623-3.1164-10.295-2.9563-3.0359 0.25639 0.32014-2.2648 0.95028-3.4678 2.9648-3.8483 6.0822-7.6292 8.9516-11.52l2.1616-12.891c1.2868 0.31869 2.5736 0.63737 3.8604 0.95606z"
+         d="m 62.589,132.63 c -0.69647,4.123 -1.3929,8.246 -2.0894,12.369 3.7395,4.9669 7.4789,9.9338 11.218,14.901 -3.7152,-0.65582 -8.0143,-0.91622 -11.079,1.705 -1.3641,0.99477 -2.311,3.0497 -3.6787,0.90332 -2.8723,-2.3591 -6.6623,-3.1164 -10.295,-2.9563 -3.0359,0.25639 0.32014,-2.2648 0.95028,-3.4678 2.9648,-3.8483 6.0822,-7.6292 8.9516,-11.52 l 2.1616,-12.891 c 1.2868,0.31869 2.5736,0.63737 3.8604,0.95606 z"
          fill="url(#linearGradient864)"
          stroke="url(#linearGradient864)"
          stroke-linejoin="round"
-         stroke-width=".38988"
+         stroke-width="0.38988"
          id="path18" />
       <g
          fill="none"
@@ -121,28 +128,28 @@
          stroke-linecap="round"
          id="g26">
         <path
-           d="m50.284 156.84 4.5376-5.6393"
-           stroke-width=".35642"
+           d="m 50.284,156.84 4.5376,-5.6393"
+           stroke-width="0.35642"
            id="path20" />
         <path
-           d="m58.371 159.79-0.41513-8.5119"
-           stroke-width=".4465"
+           d="m 58.371,159.79 -0.41513,-8.5119"
+           stroke-width="0.4465"
            id="path22" />
         <path
-           d="m65.886 157.39-3.5776-6.0102"
-           stroke-width=".32672"
+           d="m 65.886,157.39 -3.5776,-6.0102"
+           stroke-width="0.32672"
            id="path24" />
       </g>
     </g>
     <g
        id="r_leg"
-       transform="matrix(-1 0 0 1 159.94 3.1697)">
+       transform="matrix(-1,0,0,1,159.94,3.1697)">
       <path
-         d="m62.589 132.63c-0.69647 4.123-1.3929 8.246-2.0894 12.369 3.7395 4.9669 7.4789 9.9338 11.218 14.901-3.7152-0.65582-8.0143-0.91622-11.079 1.705-1.3641 0.99477-2.311 3.0497-3.6787 0.90332-2.8723-2.3591-6.6623-3.1164-10.295-2.9563-3.0359 0.25639 0.32014-2.2648 0.95028-3.4678 2.9648-3.8483 6.0822-7.6292 8.9516-11.52l2.1616-12.891c1.2868 0.31869 2.5736 0.63737 3.8604 0.95606z"
+         d="m 62.589,132.63 c -0.69647,4.123 -1.3929,8.246 -2.0894,12.369 3.7395,4.9669 7.4789,9.9338 11.218,14.901 -3.7152,-0.65582 -8.0143,-0.91622 -11.079,1.705 -1.3641,0.99477 -2.311,3.0497 -3.6787,0.90332 -2.8723,-2.3591 -6.6623,-3.1164 -10.295,-2.9563 -3.0359,0.25639 0.32014,-2.2648 0.95028,-3.4678 2.9648,-3.8483 6.0822,-7.6292 8.9516,-11.52 l 2.1616,-12.891 c 1.2868,0.31869 2.5736,0.63737 3.8604,0.95606 z"
          fill="url(#linearGradient864)"
          stroke="url(#linearGradient864)"
          stroke-linejoin="round"
-         stroke-width=".38988"
+         stroke-width="0.38988"
          id="path29" />
       <g
          fill="none"
@@ -150,51 +157,52 @@
          stroke-linecap="round"
          id="g37">
         <path
-           d="m50.284 156.84 4.5376-5.6393"
-           stroke-width=".35642"
+           d="m 50.284,156.84 4.5376,-5.6393"
+           stroke-width="0.35642"
            id="path31" />
         <path
-           d="m58.371 159.79-0.41513-8.5119"
-           stroke-width=".4465"
+           d="m 58.371,159.79 -0.41513,-8.5119"
+           stroke-width="0.4465"
            id="path33" />
         <path
-           d="m65.886 157.39-3.5776-6.0102"
-           stroke-width=".32672"
+           d="m 65.886,157.39 -3.5776,-6.0102"
+           stroke-width="0.32672"
            id="path35" />
       </g>
     </g>
     <ellipse
        id="body"
-       cx="78.568"
-       cy="92.998"
-       rx="54.468"
-       ry="41.457"
+       cx="78.568001"
+       cy="92.998001"
+       rx="54.467999"
+       ry="41.457001"
        fill="url(#linearGradient883)"
        fill-rule="evenodd"
-       stroke-width=".62267" />
+       stroke-width="0.62267" />
     <g
        id="head"
-       transform="translate(-29.361 -32.264)">
+       transform="rotate(-0.04341208,-42716.657,38401.362)">
       <g
          id="skull">
         <ellipse
            transform="rotate(-18)"
            cx="79.055"
            cy="105.96"
-           rx="32.436"
+           rx="32.436001"
            ry="27.955"
            fill="#ffd42a"
            fill-rule="evenodd"
-           stroke-width=".60581"
+           stroke-width="0.60581"
            id="ellipse41" />
         <path
            transform="rotate(-18)"
-           d="m67.237 131.99a32.436 27.955 0 0 1-16.712-12.734"
+           d="M 67.237,131.99 A 32.436,27.955 0 0 1 50.525,119.256"
            fill="none"
            stroke="url(#linearGradient1429)"
            stroke-linecap="round"
            stroke-width="1.5"
-           id="path43" />
+           id="path43"
+           style="stroke:url(#linearGradient1429)" />
       </g>
       <path
          id="hair"
@@ -205,42 +213,43 @@
          stroke-width="1.5" />
       <g
          id="face"
-         transform="translate(5.0722 10.282)">
+         transform="translate(5.0722,10.282)">
         <g
            id="mouth">
           <path
-             d="m103.88 67.636a4.7308 5.9717 72 0 0-4.2923 5.9355 4.1796 13.692 72 0 0-6.2955 6.0197 4.1796 13.692 72 0 0 14.313-0.25593 4.1796 13.692 72 0 0 11.73-8.2061 4.1796 13.692 72 0 0-8.4197-1.2052 4.7308 5.9717 72 0 0-7.005-2.2979 4.7308 5.9717 72 0 0-0.031 0.01006z"
-             fill="#f60"
+             d="m 103.88,67.636 a 4.7308,5.9717 72 0 0 -4.2923,5.9355 4.1796,13.692 72 0 0 -6.2955,6.0197 4.1796,13.692 72 0 0 14.313,-0.25593 4.1796,13.692 72 0 0 11.73,-8.2061 4.1796,13.692 72 0 0 -8.4197,-1.2052 4.7308,5.9717 72 0 0 -7.005,-2.2979 4.7308,5.9717 72 0 0 -0.031,0.01006 z"
+             fill="#ff6600"
              fill-rule="evenodd"
-             stroke-width=".645"
+             stroke-width="0.645"
              id="path46" />
           <path
-             d="m93.294 79.591s8.0731 0.76703 13.983-1.202c5.9102-1.969 12.06-7.2601 12.06-7.2601"
+             d="m 93.294,79.591 c 0,0 8.0731,0.76703 13.983,-1.202 5.9102,-1.969 12.06,-7.2601 12.06,-7.2601"
              fill="none"
-             opacity=".999"
+             opacity="0.999"
              stroke="url(#linearGradient860)"
-             stroke-width=".265"
-             id="path48" />
+             stroke-width="0.265"
+             id="path48"
+             style="stroke:url(#linearGradient860)" />
           <ellipse
              transform="scale(-1,1)"
              cx="-108.46"
-             cy="71.595"
-             rx=".76059"
-             ry=".98642"
+             cy="71.595001"
+             rx="0.76059002"
+             ry="0.98641998"
              fill="url(#linearGradient870)"
              fill-rule="evenodd"
-             opacity=".994"
+             opacity="0.994"
              style="paint-order:normal"
              id="ellipse50" />
           <ellipse
              transform="scale(-1,1)"
              cx="-102.1"
-             cy="73.524"
-             rx=".76059"
-             ry=".98642"
+             cy="73.524002"
+             rx="0.76059002"
+             ry="0.98641998"
              fill="url(#linearGradient870)"
              fill-rule="evenodd"
-             opacity=".994"
+             opacity="0.994"
              style="paint-order:normal"
              id="ellipse52" />
         </g>
@@ -249,20 +258,20 @@
            fill-rule="evenodd">
           <ellipse
              transform="rotate(-18)"
-             cx="60.593"
-             cy="93.913"
-             rx="4.2359"
-             ry="7.144"
+             cx="60.592999"
+             cy="93.913002"
+             rx="4.2358999"
+             ry="7.1440001"
              fill="#2b2200"
-             stroke-width=".645"
+             stroke-width="0.645"
              id="ellipse55" />
           <circle
              id="l_pupil"
-             cx="87.754"
-             cy="69.284"
-             r="2.9227"
+             cx="87.753998"
+             cy="69.283997"
+             r="2.9226999"
              fill="#f2f2f2"
-             opacity=".994"
+             opacity="0.994"
              style="paint-order:normal" />
         </g>
         <g
@@ -270,40 +279,44 @@
            fill-rule="evenodd">
           <ellipse
              transform="rotate(-18)"
-             cx="95.008"
-             cy="94.226"
-             rx="4.2359"
-             ry="7.144"
+             cx="95.008003"
+             cy="94.225998"
+             rx="4.2358999"
+             ry="7.1440001"
              fill="#2b2200"
-             stroke-width=".645"
+             stroke-width="0.645"
              id="ellipse59" />
           <circle
              id="r_pupil"
              cx="120.58"
-             cy="58.946"
-             r="2.9227"
+             cy="58.945999"
+             r="2.9226999"
              fill="#f2f2f2"
-             opacity=".994"
+             opacity="0.994"
              style="paint-order:normal" />
         </g>
       </g>
     </g>
     <g
        id="r_wing"
-       transform="matrix(-1.0339 .34219 .33592 1.0532 67.543 20.872)"
+       transform="matrix(-0.9999539,0.43143412,0.4268787,1.0197289,63.507915,25.290703)"
        fill="url(#linearGradient883)"
-       fill-rule="evenodd">
+       fill-rule="evenodd"
+       inkscape:transform-center-x="-6.4208733"
+       inkscape:transform-center-y="17.586282">
       <ellipse
          cx="-28.041"
-         cy="72.033"
+         cy="72.032997"
          rx="12.867"
          ry="24.055"
-         opacity=".994"
+         opacity="0.994"
          style="paint-order:stroke fill markers"
-         id="ellipse66" />
+         id="ellipse66"
+         inkscape:transform-center-x="-7.2682119"
+         inkscape:transform-center-y="19.267363" />
       <path
-         d="m-25.486 48.458a12.867 24.055 0 0 1 8.971 12.884 12.867 24.055 0 0 1 0.06127 21.149"
-         opacity=".994"
+         d="m -25.486,48.458 a 12.867,24.055 0 0 1 8.971,12.884 12.867,24.055 0 0 1 0.06127,21.149"
+         opacity="0.994"
          stroke="url(#linearGradient1391)"
          stroke-linecap="round"
          stroke-linejoin="round"
@@ -312,21 +325,23 @@
          id="path68" />
     </g>
     <g
-       transform="matrix(1.0339 .34219 -.33592 1.0532 89.635 23.579)"
+       transform="matrix(1.027206,0.36178865,-0.35588678,1.0466217,90.518062,24.488325)"
        fill="url(#linearGradient883)"
        fill-rule="evenodd"
-       id="g75">
+       id="g75"
+       inkscape:transform-center-x="6.1829323"
+       inkscape:transform-center-y="19.267308">
       <ellipse
          cx="-28.041"
-         cy="72.033"
+         cy="72.032997"
          rx="12.867"
          ry="24.055"
-         opacity=".994"
+         opacity="0.994"
          style="paint-order:stroke fill markers"
          id="ellipse71" />
       <path
-         d="m-25.486 48.458a12.867 24.055 0 0 1 8.971 12.884 12.867 24.055 0 0 1 0.06127 21.149"
-         opacity=".994"
+         d="m -25.486,48.458 a 12.867,24.055 0 0 1 8.971,12.884 12.867,24.055 0 0 1 0.06127,21.149"
+         opacity="0.994"
          stroke="url(#linearGradient1391)"
          stroke-linecap="round"
          stroke-linejoin="round"
@@ -335,25 +350,25 @@
          id="path73" />
     </g>
     <ellipse
-       cx="58.753"
+       cx="58.752998"
        cy="124.39"
        rx="11.178"
        ry="12.109"
        fill="url(#linearGradient883)"
        fill-rule="evenodd"
-       opacity=".994"
+       opacity="0.994"
        stroke-linecap="round"
        stroke-linejoin="round"
        stroke-width="1.5"
        id="ellipse77" />
     <ellipse
-       cx="97.677"
+       cx="97.677002"
        cy="124.66"
        rx="11.178"
        ry="12.109"
        fill="url(#linearGradient883)"
        fill-rule="evenodd"
-       opacity=".994"
+       opacity="0.994"
        stroke-linecap="round"
        stroke-linejoin="round"
        stroke-width="1.5"
