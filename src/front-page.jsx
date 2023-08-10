@@ -1,32 +1,29 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import gsap from 'gsap';
 import './css/front-page.scss';
-import './css/duck-svg.scss';
-import { ReactComponent as DuckSVG } from './front-page/img/duck.svg';
+import SvgDuck from "./front-page/duck.jsx";
 import Text from './front-page/text.jsx';
+import StoryPage from './front-page/storyPage.jsx';
 
-const onClick = async () => {
-	const duckTl = gsap.timeline();
-	
 
-	await duckTl
-		.to("#head", {duration: .4, ease:"back", rotate: 13, transformOrigin: "50% 50%"})
-		.to("#lt_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"+=10", x:"+=2.7"},.5)
-		.to("#rt_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"+=10", x:"+=4"},.5)
-		.to("#lb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=5", x:"-=2.5"},.5)
-		.to("#rb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=5", x:"-=2.5"},.5)
-		.to("#r_wing", {duration:.05, yoyo:true, repeat:3, rotate:130, transformOrigin:"50% 15%"},1)
-		.to("#l_wing", {duration:.05, yoyo:true, repeat:3, rotate:50, transformOrigin:"50% 15%"},1);
+const renderStoryPage = () => {
+  document.querySelector("#start-button").disabled = true; // keep double clickers safe.
+  
+  //TODO: need a way to render a duck svg animation when this function runs.
+  const storyPage = ReactDOM.createRoot(document.querySelector("#storyPage"));
+  storyPage.render(<StoryPage />);
 
-	window.open("/page1.html", "_self");
+  setTimeout(() => {
+    window.open("/page1.html", "_self");
+  }, 3000);
+
 
 }
 
 
 const duckSVG = ReactDOM.createRoot(document.querySelector('#duck-svg'));
-duckSVG.render(
-	<DuckSVG />);
+duckSVG.render(<SvgDuck />);
 
 const text = ReactDOM.createRoot(document.querySelector('#text'));
-text.render(<Text onClick={ onClick } />);
+text.render(<Text onClick={ renderStoryPage }/>);
+

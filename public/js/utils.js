@@ -44,7 +44,7 @@ const ascii = {
 
 
 // custom sleep function.
-const sleep = async time => new Promise(resolve => setTimeout(resolve, time * 1000));
+const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
 
 // Listens for Enter to be pressed before continuing.
 const listen4Enter = function(){

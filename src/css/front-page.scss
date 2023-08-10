@@ -1,4 +1,4 @@
-@use "styles" as theme;
+@use "_styles" as theme;
 
 * {margin: 0;} html, body{height: 100%;}
 
@@ -8,41 +8,55 @@
   width: $w;
 }
 
-body{
+$pad: 2rem;
+
+/*ELEMENT STYLING*/
+
+div#storyPageFlex {
   display: flex;
-  flex-direction: column;
-  aside {
-    display: flex;
+  div#flexCenter {
+    flex: .15;
+  }
+  div#content{
     flex: 1;
+    header {
+      max-width: 800px;
+      @include center(800px);
+      padding: $pad;
+      button.menuHam {
+        margin: unset;
+      }
+    }
+    main {
+      max-width: 800px;
+      @include center(800px);
+      flex: 1;
+      article{
+        svg#duck-canvas{
+          @include center(70%);
+        }
+        div#text {
+          padding: $pad; 
+        }
+      }
+    }
+    footer {
+      flex-direction: column;
+      background-color: theme.$citron;
+      padding-left: .5rem;
+      padding-right: .5rem;
+      padding-top: $pad;
+      padding-bottom: $pad;
+      text-align: center;
+    }
   }
-
-  main {
-    display: flex;
-    flex: 1;
-    padding: 1rem;
-    max-width: 800px;
-    @include center(70%);
-  }
-
-  article{
-    padding: 1rem;
-  }
-
-  footer {
-    background-color: theme.$citron;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    text-align: center;
+  div#storyPage {
+    flex: .15;
   }
 }
 
 
-#duck {
-  @include center(70%);
-  height: 320px;
-}
+/*UTILITY STYLES*/
 
 a {
   text-decoration: none;

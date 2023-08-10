@@ -1,4 +1,4 @@
-@use "styles" as theme;
+@use "_styles" as theme;
 /*MIXINS*/
 @mixin dark-citron-dropshadow() {
 	filter: drop-shadow(3px 3px 10px #b4a461);
