@@ -10,4 +10,52 @@ $lightcharcoal: #545d65;
 $desertsand: #ebcfb2;
 $silver: #c5baaf;
 
+
+/*MIXINS*/
+@mixin dark-citron-dropshadow() {
+	filter: drop-shadow(3px 3px 10px #b4a461);
+}
+
+@mixin rounded-corners() {
+		border-radius: 7px;
+}
+
+@mixin button-click() {
+	&:hover {
+		@include dark-citron-dropshadow;
+		background-color: $lightcitron;
+		background: white;
+		svg g {
+			stroke: $charcoal;
+		}
+		&:active {
+			background-color: $darkcitron;
+			filter: none;
+			svg g {
+				stroke: white;
+			}
+		}
+	}
+}
+
+
+
+
 /* TODO: ADD FONTS HERE*/
+
+
+@mixin Theme() {
+
+	* {margin: 0;}
+
+	html, body{
+		height: 100%;
+		body {
+			background: $citron;
+			main {
+				background: white;
+				@include rounded-corners;
+			}
+		}
+	} 
+}

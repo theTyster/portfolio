@@ -1,75 +1,39 @@
 @use "_styles" as theme;
-/*MIXINS*/
-@mixin dark-citron-dropshadow() {
-	filter: drop-shadow(3px 3px 10px #b4a461);
+
+
+.menuHam {
+	@include theme.rounded-corners;
+	@include theme.button-click;
+	margin: 10px;
+	background-color: white;
+	height: 35px;
+	padding: 10px;
 }
 
-@mixin rounded-corners() {
-		border-radius: 7px;
-}
-
-@mixin button-click() {
-	&:hover {
-		@include dark-citron-dropshadow;
-		background-color: theme.$lightcitron;
-		background: white;
-		svg g {
-			stroke: theme.$charcoal;
-		}
-		&:active {
-			background-color: theme.$darkcitron;
-			filter: none;
-			svg g {
-				stroke: white;
-			}
-		}
+nav {
+	visibility: 'collapse';
+	max-height: 0;
+	display: block;
+	transition-property: visibility, max-height;
+	transition-duration: .5s;
+	overflow: hidden;
+	ul {
+		list-style-type: none;
+		padding: 1em 0;
 	}
-}
 
-
-body {
-	background: theme.$citron;
-
-	header {
-		.menuHam {
-			@include rounded-corners;
-			@include button-click;
-			margin: 10px;
-			background-color: white;
-			height: 35px;
-			padding: 10px;
+	a {
+		text-decoration: none;
+		color: black;
+		li {
+			@include theme.rounded-corners;
+			@include theme.dark-citron-dropshadow;
+			@include theme.button-click;
+			padding: 1em;
+			margin: 0 auto;
+			width: 50%;
+			text-align: center;
+			transition: background .2s;
 		}
-
-		nav {
-			visibility: 'collapse';
-			max-height: 0;
-			display: block;
-			transition-property: visibility, max-height;
-			transition-duration: .5s;
-			overflow: hidden;
-			ul {
-				list-style-type: none;
-				padding: 1em 0;
-			}
-
-			a {
-				text-decoration: none;
-				color: black;
-				li {
-					@include rounded-corners;
-					@include dark-citron-dropshadow;
-					@include button-click;
-					padding: 1em;
-					margin: 0 auto;
-					width: 50%;
-					text-align: center;
-					transition: background .2s;
-				}
-			}
-		}
-	}
-	main {
-		background: white;
-		@include rounded-corners;
 	}
 }

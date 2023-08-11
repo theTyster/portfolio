@@ -1,73 +1,6 @@
-import {useRef, useEffect} from "react";
-import gsap from "gsap";
+import React from "react";
 
 const SvgDuck = () => {
-
-  const duckRef = useRef(); // scopes selectors.
-  const blink_tl = useRef(); 
-  const headTurnWingfFlap_tl = useRef();
-
-
-  useEffect(() => { // fires on every render. (No dependencies).
-    const ctx = gsap.context(() => { // allows scoping selectors and animation cleanup. best practice.
-
-
-      //Blink Animation
-      blink_tl.current = gsap.timeline({paused: true});
-      blink_tl.current
-        .to("#lt_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"+=30", x:"+=8.5"},.5)
-        .to("#rt_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"+=30", x:"+=12.7"},.5)
-        .to("#lb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=22", x:"-=10"},.5)
-        .to("#rb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=22", x:"-=12"},.5)
-
-
-      headTurnWingfFlap_tl.current = gsap.timeline({paused:true});
-      headTurnWingfFlap_tl.current
-        .to("#head", {duration:.4, ease:"back", rotate:13, transformOrigin: "50% 50%"})
-        .add(() => {blink_tl.current.isActive() ? null:blink_tl.current.play(0)})
-        .to("#r_wing", {duration:.05, yoyo:true, repeat:31, rotate:-50, transformOrigin:"50% 15%"},1.5)
-        .to("#l_wing", {duration:.05, yoyo:true, repeat:31, rotate:50, transformOrigin:"50% 15%"},1.5)
-        .to("#head", {duration:.4, ease:"ease", rotate:-3, transformOrigin:"50% 50%", delay:1.3})
-        //.to("#storyPage", {delay:1});
-
-    }, duckRef);
-
-
-    const clickHandler = () => {
-      headTurnWingfFlap_tl.current.play(0);
-    }
-    document.querySelector("#duck-svg").addEventListener("click", clickHandler);
-
-    // duck perpetually blinks.
-    (function blinkIntrvl() {            //max     min     min
-      let waitInterval = Math.random() * (15000 - 5000) + 5000;
-    new Promise((r) => 
-      setTimeout(()=>{ 
-        console.log("blink"); //TODO: remove
-        blink_tl.current.play(0);
-        r();
-      }, waitInterval))
-        .then(() => blinkIntrvl())
-    })();
-
-
-    return () => {
-      ctx.revert();
-      document.querySelector("#duck-svg").removeEventListener("click", clickHandler)
-    }
-  }, []);
-
-
-  const duckClickAnimation = async () => {
-    const duckTl = gsap.timeline();
-    const dur = .1;
-    await duckTl
-      .to(duckRefs.body, duckRefs.head, duckRefs.r_wing, duckRefs.l_wing, {duration:dur, yoyo:true, repeat:1, y:"+=5px"})
-      .to(duckRefs.canvas, {duration:dur, y:"-=4px", x:"-=10px"})
-      .to(duckRefs.canvas, {duration:dur, y:"+=4px", x:"-=10px"})
-
-    await duckTl.reverse();
-  }
 
   return (
     <svg
@@ -153,20 +86,23 @@ const SvgDuck = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <g id="duck-svg" ref={duckRef}>
+      <g id="duck-svg">
         <g id="l_leg">
-          <path
-            d="m209.72 496.7c-2.5078 14.846-5.0156 29.691-7.5235 44.537 13.465 17.884 26.93 35.769 40.394 53.654-13.378-2.3614-28.858-3.299-39.893 6.1392-4.9118 3.5819-8.3214 10.981-13.246 3.2526-10.343-8.4944-23.99-11.221-37.07-10.645-10.932 0.92318 1.1528-8.1549 3.4218-12.487 10.676-13.857 21.901-27.47 32.233-41.48l7.7835-46.417c4.6335 1.1475 9.267 2.295 13.901 3.4425z"
-            fill="url(#linearGradient864)"
-            stroke="url(#linearGradient864)"
-            strokeLinejoin="round"
-          />
-          <g fill="none" stroke="url(#Burnt_Orange)" strokeLinecap="round">
-            <path d="m165.41 583.87 16.339-20.305" strokeWidth={1.5} />
-            <path d="m194.53 594.5-1.4948-30.649" strokeWidth={1.5} />
-            <path d="m221.59 585.86-12.882-21.641" strokeWidth={1.5} />
+          <g id="l_flipper">
+            <path
+              d="m209.72 496.7c-2.5078 14.846-5.0156 29.691-7.5235 44.537 13.465 17.884 26.93 35.769 40.394 53.654-13.378-2.3614-28.858-3.299-39.893 6.1392-4.9118 3.5819-8.3214 10.981-13.246 3.2526-10.343-8.4944-23.99-11.221-37.07-10.645-10.932 0.92318 1.1528-8.1549 3.4218-12.487 10.676-13.857 21.901-27.47 32.233-41.48l7.7835-46.417c4.6335 1.1475 9.267 2.295 13.901 3.4425z"
+              fill="url(#linearGradient864)"
+              stroke="url(#linearGradient864)"
+              strokeLinejoin="round"
+            />
+            <g fill="none" stroke="url(#Burnt_Orange)" strokeLinecap="round">
+              <path d="m165.41 583.87 16.339-20.305" strokeWidth={1.5} />
+              <path d="m194.53 594.5-1.4948-30.649" strokeWidth={1.5} />
+              <path d="m221.59 585.86-12.882-21.641" strokeWidth={1.5} />
+            </g>
           </g>
           <ellipse
+            id="l_knee"
             cx={206.33}
             cy={461.23}
             rx={40.25}
@@ -177,18 +113,21 @@ const SvgDuck = () => {
           />
         </g>
         <g id="r_leg">
-          <path
-            d="m340.36 498.71c2.5078 14.846 5.0156 29.691 7.5235 44.537-13.465 17.884-26.93 35.769-40.394 53.654 13.378-2.3614 28.858-3.299 39.893 6.1392 4.9118 3.5819 8.3214 10.981 13.246 3.2526 10.343-8.4944 23.99-11.221 37.07-10.645 10.932 0.92318-1.1528-8.1549-3.4218-12.487-10.676-13.857-21.901-27.47-32.233-41.48l-7.7835-46.417c-4.6335 1.1475-9.267 2.295-13.901 3.4425z"
-            fill="url(#linearGradient864)"
-            stroke="url(#linearGradient864)"
-            strokeLinejoin="round"
-          />
-          <g fill="none" stroke="url(#Burnt_Orange)" strokeLinecap="round">
-            <path d="m384.67 585.88-16.339-20.305" strokeWidth={1.5} />
-            <path d="m355.55 596.5 1.4948-30.649" strokeWidth={1.5} />
-            <path d="m328.49 587.86 12.882-21.641" strokeWidth={1.5} />
+          <g id="r_flipper">
+            <path
+              d="m340.36 498.71c2.5078 14.846 5.0156 29.691 7.5235 44.537-13.465 17.884-26.93 35.769-40.394 53.654 13.378-2.3614 28.858-3.299 39.893 6.1392 4.9118 3.5819 8.3214 10.981 13.246 3.2526 10.343-8.4944 23.99-11.221 37.07-10.645 10.932 0.92318-1.1528-8.1549-3.4218-12.487-10.676-13.857-21.901-27.47-32.233-41.48l-7.7835-46.417c-4.6335 1.1475-9.267 2.295-13.901 3.4425z"
+              fill="url(#linearGradient864)"
+              stroke="url(#linearGradient864)"
+              strokeLinejoin="round"
+            />
+            <g fill="none" stroke="url(#Burnt_Orange)" strokeLinecap="round">
+              <path d="m384.67 585.88-16.339-20.305" strokeWidth={1.5} />
+              <path d="m355.55 596.5 1.4948-30.649" strokeWidth={1.5} />
+              <path d="m328.49 587.86 12.882-21.641" strokeWidth={1.5} />
+            </g>
           </g>
           <ellipse
+            id="r_knee"
             transform="scale(-1,1)"
             cx={-342.66}
             cy={458.99}

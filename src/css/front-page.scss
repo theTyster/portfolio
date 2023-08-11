@@ -1,7 +1,8 @@
 @use "_styles" as theme;
+@use "nav"; // Include all nav styles.
 
-* {margin: 0;} html, body{height: 100%;}
 
+// MIXINS
 @mixin center($w) {
   display: block;
   margin: 0 auto;
@@ -10,7 +11,10 @@
 
 $pad: 2rem;
 
+
 /*ELEMENT STYLING*/
+
+@include theme.Theme;
 
 div#storyPageFlex {
   display: flex;
@@ -32,11 +36,12 @@ div#storyPageFlex {
       @include center(800px);
       flex: 1;
       article{
+        div.text {
+          padding: $pad;
+        }
         svg#duck-canvas{
           @include center(70%);
-        }
-        div#text {
-          padding: $pad; 
+          padding-bottom: $pad;
         }
       }
     }
@@ -54,7 +59,7 @@ div#storyPageFlex {
     flex: .15;
   }
 }
-
+  
 
 /*UTILITY STYLES*/
 
