@@ -18,12 +18,8 @@ const FrontPage = () => {
   //REFS
   const duckRef = useRef();
   const blink_tl = useRef(); 
-  const headTurnWingfFlap_tl = useRef();
-  const headTurnHop_tl = useRef();
-  const preWalk = useRef()
-  const walking = useRef();
-  const walked = useRef();
-  const moveBack = useRef();
+  const flyAway_tl = useRef();
+  const hopNWalk_tl = useRef();
 
 
   // ANIMATIONS 
@@ -39,66 +35,39 @@ const FrontPage = () => {
         .to("#lb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=22", x:"-=10"},.5)
         .to("#rb_eyelid", {duration:.2, ease:"back",  yoyo:true, repeat:1, y:"-=22", x:"-=12"},.5)
 
-      headTurnWingfFlap_tl.current = gsap.timeline({paused:true});
-      headTurnWingfFlap_tl.current
+      flyAway_tl.current = gsap.timeline({paused:true});
+      flyAway_tl.current
         .to("#head", {duration:.4, ease:"back", rotate:13, transformOrigin: "50% 50%"})
         .add(() => {!(blink_tl.current.isActive()) && blink_tl.current.play(0)}) // && Evaluates whatever returns false.
         .to("#r_wing", {duration:.05, yoyo:true, repeat:31, rotate:-50, transformOrigin:"50% 15%"},1.5)
         .to("#l_wing", {duration:.05, yoyo:true, repeat:31, rotate:50, transformOrigin:"50% 15%"},1.5)
-        .to("#head", {duration:.4, ease:"ease", rotate:-3, transformOrigin:"50% 50%", delay:1.3})
         .to("#storyPage", {delay:1});
-
-
 
       const Dur = .1;
 
-      preWalk.current = gsap.timeline({paused: true});
-      preWalk.current
-        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=24", rotate:-10},0)
-        .to("#r_wing", {duration:Dur, scale:.95},0)
-        .to("#l_wing", {duration:Dur, scale:1.05},0)
-        .to("#face", {duration:Dur, x:"+=7"},0)
-        .to("#r_flipper", {duration:Dur, y:"-=30"},0)
-        .to("#r_flipper", {duration:Dur, y:"+=30"})
-        .to("#duck-canvas", {x:"0px", duration:Dur*2},Dur*2)
-        .to("#r_leg", {duration:Dur *2, transformOrigin:"50% 10%", x:"-=24", rotate:0},Dur*2)
-
-      walking.current = gsap.timeline({paused: true});
-      walking.current
-        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=7", rotate:10},0)
-        .to("#l_wing", {duration:Dur, scale:.95},0)
-        .to("#r_wing", {duration:Dur, scale:1.05},0)
-        .to("#face", {duration:Dur, x:"-=14"},0)
-        .to("#l_flipper", {duration:Dur, y:"-=30"},0)
-        .to("#l_flipper", {duration:Dur, y:"+=30"})
-        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=7", rotate:0})
-
-        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=7", rotate:-10},Dur * 3)
-        .to("#r_wing", {duration:Dur, scale:.95},Dur * 3)
-        .to("#l_wing", {duration:Dur, scale:1.05},Dur * 3)
-        .to("#face", {duration:Dur, x:"+=14"},Dur * 3)
-        .to("#r_flipper", {duration:Dur, y:"-=30"},Dur * 3)
-        .to("#r_flipper", {duration:Dur, y:"+=30"})
-        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=7", rotate:0})
-
-      walked.current = gsap.timeline({paused:true});
-      walked.current
-        .to("#face", {duration:Dur, x:"-=7"},0)
-        .to("#r_wing", {duration:Dur, scale:1},0)
-        .to("#l_wing", {duration:Dur, scale:1},0)
-
-      headTurnHop_tl.current = gsap.timeline({paused: true});
-      headTurnHop_tl.current
+      hopNWalk_tl.current = gsap.timeline({paused: true});
+      hopNWalk_tl.current
         .to("#head", {duration:Dur, rotate:13, transformOrigin: "50% 50%"},0)
-        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25px"},0)
-        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5px"},0) //poise for jump
-        .to("#duck-canvas", {duration:Dur, ease:"none", y:"-=40px", x:"-=20px"})
-        .to("#duck-canvas", {duration:Dur / 3, ease:"none", x:"-=10px"})
-        .to("#duck-canvas", {duration:Dur, ease:"none", y:"+=40px", x:"-=20px"}) //jumping
-
-      moveBack.current = gsap.timeline({paused:true});
-      moveBack.current 
-        .to("#duck-canvas", {x:"0px"})
+        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25"},0)
+        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5"},0) //poise for jump
+        .to("#r_wing", {duration:.05, yoyo:true, repeat:5, rotate:-50, transformOrigin:"50% 15%"},">") //wings flapping and jumping
+        .to("#l_wing", {duration:.05, yoyo:true, repeat:5, rotate:50, transformOrigin:"50% 15%"},"<")  
+        .to("#duck-canvas", {duration:Dur, ease:"none", y:"-=40", x:"-=20"},"<")
+        .to("#duck-canvas", {duration:Dur/3, ease:"none", x:"-=10"},">")
+        .to("#duck-canvas", {duration:Dur, ease:"none", y:"+=40", x:"-=20"},"<")
+        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=24", rotate:-10, delay:1},">") // move back first step
+        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=12", rotate:5},"<")
+        .to("#duck-canvas", {duration:Dur, ease:"none", x:"+=20"},"<") 
+        .to("#r_wing", {duration:Dur, scale:.95},"<")
+        .to("#l_wing", {duration:Dur, scale:1.05},"<")
+        .to("#face", {duration:Dur, x:"+=7"},"<")
+        .to("#duck-canvas", {x:"0", duration:Dur},">") // move back second step
+        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=24", rotate:0},"<")
+        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=12", rotate:0},"<")
+        .to("#face", {duration:Dur, x:"-=7"},">") // return to resting position
+        .to("#r_wing", {duration:Dur, scale:1},"<")
+        .to("#l_wing", {duration:Dur, scale:1},"<")
+        .to("#head", {duration:.4, ease:"power3", rotate:-3, transformOrigin:"50% 50%", delay:1.3})
 
     }, duckRef);
 
@@ -115,10 +84,9 @@ const FrontPage = () => {
       })();
 
 
-      const duckClickHandler = async () => {
-        await headTurnHop_tl.current.restart(0);
-        await preWalk.current.restart(0);
-        await walked.current.restart(0);
+      const duckClickHandler = () => {
+        //hopNWalk_tl.current.restart(0);
+        flyAway_tl.current.restart(0); // TESTING
       }
       document.querySelector("#duck-svg").addEventListener("click", duckClickHandler);
 
@@ -136,7 +104,7 @@ const FrontPage = () => {
   const renderStoryPage = () => {
     document.querySelector("#start-button").disabled = true; // keep double-clickers safe.
 
-    headTurnWingfFlap_tl.current.play(0);
+    flyAway_tl.current.play(0);
     const storyPage = ReactDOM.createRoot(document.querySelector("#storyPage")); //Should only be called once.
     storyPage.render(<StoryPage />);
 
