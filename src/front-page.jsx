@@ -20,11 +20,16 @@ const FrontPage = () => {
   const blink_tl = useRef(); 
   const headTurnWingfFlap_tl = useRef();
   const headTurnHop_tl = useRef();
+  const preWalk = useRef()
+  const walking = useRef();
+  const walked = useRef();
+  const moveBack = useRef();
 
 
   // ANIMATIONS 
   useEffect(() =>{ // fires on every render. (No dependencies).
     const ctx = gsap.context(() => { // allows scoping selectors and animation cleanup. best practice.
+
 
       //Blink Animation
       blink_tl.current = gsap.timeline({paused: true});
@@ -44,33 +49,57 @@ const FrontPage = () => {
         .to("#storyPage", {delay:1});
 
 
-      const headTurnHop_dur = 1;
-      const rightLegWalk = gsap.timeline()
-      rightLegWalk
-        .to("#r_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", x:"+=7", rotate:-10},0)//, delay:.7},.4)
-        .to("#r_wing", {duration:headTurnHop_dur, scale:.95},0)
-        .to("#l_wing", {duration:headTurnHop_dur, scale:1.05},0)
-        .to("#face", {duration:headTurnHop_dur, x:"+=7"},0)
-        .to("#r_flipper", {duration:headTurnHop_dur, y:"-=9"},0)
-        .to("#r_flipper", {duration:headTurnHop_dur, y:"+=9"})
+
+      const Dur = .1;
+
+      preWalk.current = gsap.timeline({paused: true});
+      preWalk.current
+        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=24", rotate:-10},0)
+        .to("#r_wing", {duration:Dur, scale:.95},0)
+        .to("#l_wing", {duration:Dur, scale:1.05},0)
+        .to("#face", {duration:Dur, x:"+=7"},0)
+        .to("#r_flipper", {duration:Dur, y:"-=30"},0)
+        .to("#r_flipper", {duration:Dur, y:"+=30"})
+        .to("#duck-canvas", {x:"0px", duration:Dur*2},Dur*2)
+        .to("#r_leg", {duration:Dur *2, transformOrigin:"50% 10%", x:"-=24", rotate:0},Dur*2)
+
+      walking.current = gsap.timeline({paused: true});
+      walking.current
+        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=7", rotate:10},0)
+        .to("#l_wing", {duration:Dur, scale:.95},0)
+        .to("#r_wing", {duration:Dur, scale:1.05},0)
+        .to("#face", {duration:Dur, x:"-=14"},0)
+        .to("#l_flipper", {duration:Dur, y:"-=30"},0)
+        .to("#l_flipper", {duration:Dur, y:"+=30"})
+        .to("#l_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=7", rotate:0})
+
+        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"-=7", rotate:-10},Dur * 3)
+        .to("#r_wing", {duration:Dur, scale:.95},Dur * 3)
+        .to("#l_wing", {duration:Dur, scale:1.05},Dur * 3)
+        .to("#face", {duration:Dur, x:"+=14"},Dur * 3)
+        .to("#r_flipper", {duration:Dur, y:"-=30"},Dur * 3)
+        .to("#r_flipper", {duration:Dur, y:"+=30"})
+        .to("#r_leg", {duration:Dur, transformOrigin:"50% 10%", x:"+=7", rotate:0})
+
+      walked.current = gsap.timeline({paused:true});
+      walked.current
+        .to("#face", {duration:Dur, x:"-=7"},0)
+        .to("#r_wing", {duration:Dur, scale:1},0)
+        .to("#l_wing", {duration:Dur, scale:1},0)
 
       headTurnHop_tl.current = gsap.timeline({paused: true});
       headTurnHop_tl.current
-        .to("#head", {duration:headTurnHop_dur, rotate:13, transformOrigin: "50% 50%"},"<")
-        //.to("#body, #head", {duration:headTurnHop_dur, yoyo:true, repeat:1, y:"+=25px"},0)
-        //.to("#l_knee, #r_knee", {duration:headTurnHop_dur, yoyo:true, repeat:1, y:"-=5px"},0) //poise for jump
-        //.to("#duck-canvas", {duration:headTurnHop_dur, ease:"none", y:"-=40px", x:"-=20px"})
-        //.to("#duck-canvas", {duration:headTurnHop_dur / 3, ease:"none", x:"-=10px"})
-        //.to("#duck-canvas", {duration:headTurnHop_dur, ease:"none", y:"+=40px", x:"-=20px"}) //jumping
-        .add(rightLegWalk)
-        //.to("#l_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", x:"-=7", rotate:10},headTurnHop_dur)//, delay: .7},.4)
-        //.to("#r_wing", {duration:headTurnHop_dur, scale:1.05},headTurnHop_dur)
-        //.to("#l_wing", {duration:headTurnHop_dur, scale:.95},headTurnHop_dur)
-        //.to("#face", {duration:headTurnHop_dur, x:"-=14"},headTurnHop_dur)
-        //.to("#r_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", rotate:10})
-        //.to("#l_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", rotate:-10})
-        //.to("#r_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", rotate:0})
-        //.to("#l_leg", {duration:headTurnHop_dur, transformOrigin:"50% 10%", rotate:0})
+        .to("#head", {duration:Dur, rotate:13, transformOrigin: "50% 50%"},0)
+        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25px"},0)
+        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5px"},0) //poise for jump
+        .to("#duck-canvas", {duration:Dur, ease:"none", y:"-=40px", x:"-=20px"})
+        .to("#duck-canvas", {duration:Dur / 3, ease:"none", x:"-=10px"})
+        .to("#duck-canvas", {duration:Dur, ease:"none", y:"+=40px", x:"-=20px"}) //jumping
+
+      moveBack.current = gsap.timeline({paused:true});
+      moveBack.current 
+        .to("#duck-canvas", {x:"0px"})
+
     }, duckRef);
 
 
@@ -86,14 +115,16 @@ const FrontPage = () => {
       })();
 
 
-      const duckClickHandler = () => {
-        headTurnHop_tl.current.play(0);
+      const duckClickHandler = async () => {
+        await headTurnHop_tl.current.restart(0);
+        await preWalk.current.restart(0);
+        await walked.current.restart(0);
       }
       document.querySelector("#duck-svg").addEventListener("click", duckClickHandler);
 
 
     return () => {
-      const duckCanv = document.querySelector("#duck-canvas");
+      const duckCanv = document.querySelector("#duck-svg");
       ctx.revert();
       duckCanv.removeEventListener("click", duckClickHandler)
       duckCanv.setAttribute("height", "610")
