@@ -16,50 +16,106 @@ $pad: 2rem;
 
 @include theme.Theme;
 
-div#storyPageFlex {
-  display: flex;
-  div#flexCenter {
-    flex: .15;
-  }
-  div#content{
-    flex: 1;
-    header {
-      max-width: 800px;
-      @include center(800px);
-      padding: $pad;
-      button.menuHam {
-        margin: unset;
-      }
+div#front-page{
+  background: theme.$citron;
+  div#storyPageFlex {
+    display: flex;
+    div#flexCenter {
+      flex: .15;
+      overflow: hidden;
     }
-    main {
-      max-width: 800px;
-      @include center(800px);
+    div#content{
       flex: 1;
-      article{
-        div.text {
-          padding: $pad;
+      header {
+        max-width: 800px;
+  
+        @include center(800px);
+        padding: $pad;
+        button.menuHam {
+          margin: unset;
         }
-        svg#duck-canvas{
-          @include center(70%);
-          padding-bottom: $pad;
+      }
+      main {
+        max-width: 800px;
+        @include center(800px);
+        flex: 1;
+        article{
+          div.text {
+            padding: $pad;
+          }
+          svg#duck-canvas{
+            @include center(70%);
+            padding-bottom: $pad;
+          }
+        }
+      }
+      footer {
+        background-color: theme.$citron;
+        max-width: 800px;
+        @include center(800px);
+        padding-top: $pad;
+        padding-bottom: $pad;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+
+      }
+      // MEDIA QUERIES 
+      @media(max-width:900px){
+        header {
+          max-width: 600px;
+          @include center(600px);
+        }
+        main {
+          max-width: 600px;
+          @include center(600px);
+          article{
+            div.text {
+              padding: $pad;
+            }
+            svg#duck-canvas{
+              @include center(100%);
+              padding-bottom: $pad;
+            }
+          }
+        }
+        footer {
+          max-width: 600px;
+          @include center(600px);
+        }
+      }
+      @media(max-width:700px){
+        header {
+          max-width: 300px;
+          @include center(300px);
+        }
+        main {
+          max-width: 300px;
+          @include center(300px);
+          article{
+            div.text {
+              padding: $pad;
+            }
+            svg#duck-canvas{
+              @include center(100%);
+              padding-bottom: $pad;
+              width:300px;
+              height:340px;
+            }
+          }
+        }
+        footer {
+          max-width: 300px;
+          @include center(300px);
         }
       }
     }
-    footer {
-      flex-direction: column;
-      background-color: theme.$citron;
-      padding-left: .5rem;
-      padding-right: .5rem;
-      padding-top: $pad;
-      padding-bottom: $pad;
-      text-align: center;
-    }
-  }
-  div#storyPage {
-    flex: .15;
+      div#storyPage {
+        flex: .15;
+      }
   }
 }
-  
+
 
 /*UTILITY STYLES*/
 

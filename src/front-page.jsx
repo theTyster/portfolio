@@ -16,7 +16,6 @@ import StoryPage from './front-page/storyPage.jsx';
 const FrontPage = () => {
 
   //REFS
-  const duckRef = useRef();
   const blink_tl = useRef(); 
   const flyAway_tl = useRef();
   const hopNWalk_tl = useRef();
@@ -26,6 +25,7 @@ const FrontPage = () => {
   useEffect(() =>{ // fires on every render. (No dependencies).
     const ctx = gsap.context(() => { // allows scoping selectors and animation cleanup. best practice.
 
+      const Dur = .1;
 
       //Blink Animation
       blink_tl.current = gsap.timeline({paused: true});
@@ -39,17 +39,22 @@ const FrontPage = () => {
       flyAway_tl.current
         .to("#head", {duration:.4, ease:"back", rotate:13, transformOrigin: "50% 50%"})
         .add(() => {!(blink_tl.current.isActive()) && blink_tl.current.play(0)}) // && Evaluates whatever returns false.
-        .to("#r_wing", {duration:.05, yoyo:true, repeat:31, rotate:-50, transformOrigin:"50% 15%"},1.5)
-        .to("#l_wing", {duration:.05, yoyo:true, repeat:31, rotate:50, transformOrigin:"50% 15%"},1.5)
-        .to("#storyPage", {delay:1});
-
-      const Dur = .1;
+        .to("#head", {duration:Dur, rotate:13, transformOrigin: "50% 50%"},">")
+        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25"},"<")
+        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5"},"<") //poise for jump
+        .to("#r_wing", {duration:.05, yoyo:true, repeat:31, rotate:-50, transformOrigin:"50% 15%"},">")
+        .to("#l_wing", {duration:.05, yoyo:true, repeat:31, rotate:50, transformOrigin:"50% 15%"},"<")
+        .to("#storyPage", {duration:3, flex:1, backgroundColor:"white"},">")
+        .to("#flexCenter", {duration:3, flex:0},"<")
+        .to("#content", {duration:3, overflow:"hidden", flex:0},"<")
+        .to("#front-page, #storyPage, #storyPageFlex, #content, #duck-container, main, article", {duration:0, height:"100%"},"<")
+        .to("#duck-canvas", {duration:3, position:"absolute", overflow:"unset", top:0,},"<")
 
       hopNWalk_tl.current = gsap.timeline({paused: true});
       hopNWalk_tl.current
-        .to("#head", {duration:Dur, rotate:13, transformOrigin: "50% 50%"},0)
-        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25"},0)
-        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5"},0) //poise for jump
+        .to("#head", {duration:Dur, rotate:13, transformOrigin: "50% 50%"},"<")
+        .to("#body, #head", {duration:Dur, yoyo:true, repeat:1, y:"+=25"},"<")
+        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=5"},"<") //poise for jump
         .to("#r_wing", {duration:.05, yoyo:true, repeat:5, rotate:-50, transformOrigin:"50% 15%"},">") //wings flapping and jumping
         .to("#l_wing", {duration:.05, yoyo:true, repeat:5, rotate:50, transformOrigin:"50% 15%"},"<")  
         .to("#duck-canvas", {duration:Dur, ease:"none", y:"-=40", x:"-=20"},"<")
@@ -69,7 +74,7 @@ const FrontPage = () => {
         .to("#l_wing", {duration:Dur, scale:1},"<")
         .to("#head", {duration:.4, ease:"power3", rotate:-3, transformOrigin:"50% 50%", delay:1.3})
 
-    }, duckRef);
+    } );
 
 
       // DUCK PERPETUALLY BLINKS
@@ -86,6 +91,8 @@ const FrontPage = () => {
 
       const duckClickHandler = () => {
         //hopNWalk_tl.current.restart(0);
+        const storyPage = ReactDOM.createRoot(document.querySelector("#storyPage")); //Should only be called once.
+        storyPage.render(<StoryPage />);
         flyAway_tl.current.restart(0); // TESTING
       }
       document.querySelector("#duck-svg").addEventListener("click", duckClickHandler);
@@ -95,7 +102,6 @@ const FrontPage = () => {
       const duckCanv = document.querySelector("#duck-svg");
       ctx.revert();
       duckCanv.removeEventListener("click", duckClickHandler)
-      duckCanv.setAttribute("height", "610")
     }
   }, [])
 
@@ -147,7 +153,7 @@ const FrontPage = () => {
               <button id="start-button" onClick={ renderStoryPage }>
                 Start the Story!
               </button>
-            <div ref={duckRef} id="duck-container">
+            <div id="duck-container">
               <SvgDuck />
             </div>
 					</article>

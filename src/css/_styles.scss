@@ -45,17 +45,10 @@ $silver: #c5baaf;
 
 
 @mixin Theme() {
-
 	* {margin: 0;}
-
-	html, body{
-		height: 100%;
-		body {
-			background: $citron;
-			main {
-				background: white;
-				@include rounded-corners;
-			}
-		}
-	} 
+	html, body{height: 100%;}
+	main {
+		background: white;
+		@include rounded-corners;
+	}
 }
