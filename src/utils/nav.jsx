@@ -41,11 +41,11 @@ function Menu({ menuState }) {
   const tranStyle = {
     entering: {
       visibility: 'visible',
-      maxHeight: '236px',
+      maxHeight: '260px',
     },
     entered: {
       visibility: 'visible',
-      maxHeight: '236px',
+      maxHeight: '260px',
     },
     exiting: {
       visibility: 'visible',
