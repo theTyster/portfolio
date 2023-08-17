@@ -26,9 +26,8 @@ div#front-page{
       flex-direction: column;
       header {
         @include center(800px);
-        padding: $pad;
         button.menuHam {
-          margin: unset;
+          margin: $pad 0;
         }
       }
       main {

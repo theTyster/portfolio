@@ -40,13 +40,17 @@ const FrontPage = () => {
         .add(() => {!(blink_tl.current.isActive()) && blink_tl.current.play(0)}) // && Evaluates whatever returns false.
         .to("#body", {duration:Dur, yoyo:true, repeat:1, y:"+=35"},"<")
         .to("#head", {duration:Dur, yoyo:true, repeat:1, y:"+=90"},"<")
-        .to("#l_knee, #r_knee", {duration:Dur, yoyo:true, repeat:1, y:"-=10"},"<") //poise for jump
-        .to("#r_wing", {duration:.05, yoyo:true, repeat:47, rotate:-50, transformOrigin:"50% 15%"},">") //flappy
-        .to("#l_wing", {duration:.05, yoyo:true, repeat:47, rotate:50, transformOrigin:"50% 15%"},"<")
-        .to("#duck-canvas", {duration:3, top:"100px"},"<")
+        .to("#l_knee, #r_knee", {duration:Dur, y:"-=10"},"<")
+        .to("#l_leg, #r_leg", {duration:Dur, y:"-=30"},"<") //poise for jump
+        .to("#r_wing", {duration:.05, yoyo:true, repeat:61, rotate:-50, transformOrigin:"50% 15%"},">") //flappy
+        .to("#l_wing", {duration:.05, yoyo:true, repeat:61, rotate:50, transformOrigin:"50% 15%"},"<")
         .to("#storyPage", {duration:3, left:"0"},"<") // slide out
+        .to("#duck-canvas", {duration:2, ease:"power4", top:"70px"},"<")
+        .to("#duck-canvas", {duration:.5, ease:"linear", top:"100px"},"<2")
         .add(() => window.scrollTo({top:0, behavior:"smooth"}),"<")
         .to("#content", {duration:0, overflow:"hidden"},"<")
+        .to("#l_knee, #r_knee", {duration:.5, y:"+=10"},"<")
+        .to("#l_leg, #r_leg", {duration:.5, y:"+=30"},"<") //poise for jump
 
       hopNWalk_tl.current = gsap.timeline({paused: true});
       hopNWalk_tl.current
@@ -107,7 +111,7 @@ const FrontPage = () => {
     flyAway_tl.current.play(0);
 
     setTimeout(() => {
-      window.open("/page1.html", "_self");
+      //window.open("/page1.html", "_self");
     }, flyAway_tl.current.totalDuration() * 1000);
 
     //TODO: remove this.

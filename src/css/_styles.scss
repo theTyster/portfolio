@@ -46,16 +46,17 @@ $silver: #c5baaf;
 		background: white;
 		@include rounded-corners;
 	}
-	p, a{
-		font-family:"Nunito";
-    line-height: 1.3em;
-    font-size: 1.1em;
+	p{
+    font: 1.1em/1.3em "Nunito";
 	}
 	h1{
-		font-family:"Nunito";
+      //      size / line-height
+    font: bold 1.5em/1.35em "Nunito";
     padding: .75em;
-    line-height: 1.35em;
 	}
+  button, li{
+    font: bold 1em/1.3em "Nunito";
+  }
 }
 
 
