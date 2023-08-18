@@ -1,7 +1,8 @@
 //DEV Libraries
 import ReactDOM from 'react-dom/client';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import gsap from "gsap";
+import PropTypes from "prop-types";
 
 //CSS
 import './css/front-page.scss';
@@ -12,7 +13,12 @@ import Credit from "./utils/credit.jsx";
 import SvgDuck from "./front-page/duck.jsx";
 
 
-const FrontPage = () => {
+const FrontPage = ({setStory}) => {
+
+  //Props Validation
+  FrontPage.propTypes = {
+    setStory: PropTypes.func,
+  }
 
   //REFS
   const blink_tl = useRef(); 
@@ -21,7 +27,9 @@ const FrontPage = () => {
 
 
   // ANIMATIONS 
-  useEffect(() =>{ // fires on every render. (No dependencies).
+  useEffect(() =>{ // keeps animations from firing after every render. (No dependancies).
+    //useLayoutEffect is preferred with animations to avoid flickering in .from() type animations that run before the dom paints.
+    //useEffect was chosen in this case because none of the animations are set to fire until well after the dom is painted.
     const ctx = gsap.context(() => { // allows scoping selectors and animation cleanup. best practice.
 
       const Dur = .1;
@@ -38,19 +46,19 @@ const FrontPage = () => {
       flyAway_tl.current
         .to("#head", {duration:.5, ease:"back", rotate:13, transformOrigin: "50% 50%"})
         .add(() => {!(blink_tl.current.isActive()) && blink_tl.current.play(0)}) // && Evaluates whatever returns false.
-        .to("#body", {duration:Dur, yoyo:true, repeat:1, y:"+=35"},"<")
-        .to("#head", {duration:Dur, yoyo:true, repeat:1, y:"+=90"},"<")
         .to("#l_knee, #r_knee", {duration:Dur, y:"-=10"},"<")
         .to("#l_leg, #r_leg", {duration:Dur, y:"-=30"},"<") //poise for jump
+        .to("#body", {duration:Dur, yoyo:true, repeat:1, y:"+=35"},"<")
+        .to("#head", {duration:Dur, yoyo:true, repeat:1, y:"+=90"},"<")
         .to("#r_wing", {duration:.05, yoyo:true, repeat:61, rotate:-50, transformOrigin:"50% 15%"},">") //flappy
         .to("#l_wing", {duration:.05, yoyo:true, repeat:61, rotate:50, transformOrigin:"50% 15%"},"<")
         .to("#storyPage", {duration:3, left:"0"},"<") // slide out
-        .to("#duck-canvas", {duration:2, ease:"power4", top:"70px"},"<")
-        .to("#duck-canvas", {duration:.5, ease:"linear", top:"100px"},"<2")
-        .add(() => window.scrollTo({top:0, behavior:"smooth"}),"<")
         .to("#content", {duration:0, overflow:"hidden"},"<")
+        .to("#duck-canvas", {duration:2, ease:"power4", top:"70px"},"<")
+        .add(() => window.scrollTo({top:0, behavior:"smooth"}),"<")
+        .to("#duck-canvas", {duration:.5, ease:"linear", top:"100px"},"<+2")
         .to("#l_knee, #r_knee", {duration:.5, y:"+=10"},"<")
-        .to("#l_leg, #r_leg", {duration:.5, y:"+=30"},"<") //poise for jump
+        .to("#l_leg, #r_leg", {duration:.5, y:"+=30"},"<") 
 
       hopNWalk_tl.current = gsap.timeline({paused: true});
       hopNWalk_tl.current
@@ -91,32 +99,74 @@ const FrontPage = () => {
       })();
 
 
-      const duckClickHandler = () => {
-        hopNWalk_tl.current.restart(0);
-      }
-      document.querySelector("#duck-svg").addEventListener("click", duckClickHandler);
+    // DUCK CLICK HANDLER
+    const duckClickHandler = () => {
+      hopNWalk_tl.current.restart(0);
+    }
+    document.querySelector("#duck-svg").addEventListener("click", duckClickHandler); 
+    // this event listener is removed when the svg is unmounted and re-rendered without it during state change.
 
 
     return () => {
-      const duckCanv = document.querySelector("#duck-svg");
       ctx.revert();
-      duckCanv.removeEventListener("click", duckClickHandler)
     }
   }, [])
 
 
   //START BUTTON HANDLER
   const turnStoryPage = () => {
-    document.querySelector("#start-button").disabled = true; // keep double-clickers safe.
+    document.querySelector("#start-button").removeEventListener("click", turnStoryPage)
     flyAway_tl.current.play(0);
-
     setTimeout(() => {
-      //window.open("/page1.html", "_self");
-    }, flyAway_tl.current.totalDuration() * 1000);
-
-    //TODO: remove this.
-    document.querySelector("#start-button").disabled = false;
+      setStory("beginning")
+    }, flyAway_tl.current.totalDuration() * 1000 + 1000);
   }
+
+
+  return(
+    <>
+      <div className="text">
+        <h1>An Interactive Computer Story for Children</h1>
+        <p>
+          The duck story is a fun interactive story meant to help young 
+          children learn how to operate a mouse and keyboard.
+        </p>
+        <p>
+        Many of todays kids grow up being proficient with mobile devices,
+        but might feel a bit lost on a desktop computer. This fun, short,
+        interactive story allows your child to take their first steps in 
+        learning how to use a desktop computer.
+        </p>
+        <p>
+        A skill that will build a foundation for the rest of their life.
+        </p>
+      </div>
+      <div id="storyPage"></div>
+      <div id="duck-container">
+        <SvgDuck />
+      </div>
+        <button id="start-button" onClick={ turnStoryPage }>
+          Start the Story!
+        </button>
+    </>
+  );
+}
+
+
+const Beginning = () => {
+
+  return(
+    <>
+      <p>Hi</p>
+      <SvgDuck />
+    </>
+  )
+}
+
+
+const App = () => {
+
+  const [storyState, setStory] = useState("firstPaint");
 
 
   return(
@@ -129,29 +179,16 @@ const FrontPage = () => {
 				</header>
 				<main>
 					<article>
-            <div className="text">
-              <h1>An Interactive Computer Story for Children</h1>
-              <p>
-                The duck story is a fun interactive story meant to help young 
-                children learn how to operate a mouse and keyboard.
-              </p>
-              <p>
-              Many of todays kids grow up being proficient with mobile devices,
-              but might feel a bit lost on a desktop computer. This fun, short,
-              interactive story allows your child to take their first steps in 
-              learning how to use a desktop computer.
-              </p>
-              <p>
-              A skill that will build a foundation for the rest of their life.
-              </p>
-            </div>
-              <button id="start-button" onClick={ turnStoryPage }>
-                Start the Story!
-              </button>
-            <div id="storyPage"></div>
-            <div id="duck-container">
-              <SvgDuck />
-            </div>
+            {
+              (()=>{
+                switch(storyState){
+                  case("firstPaint"):
+                    return(<FrontPage setStory={setStory}/>)
+                  case("beginning"):
+                    return(<Beginning />)
+                }
+              })()
+            }
 					</article>
 				</main>
 				<footer>
@@ -164,6 +201,7 @@ const FrontPage = () => {
   )
 }
 
+
 // RENDERS
-const frontPage = ReactDOM.createRoot(document.getElementById("front-page"));
-frontPage.render(<FrontPage />)
+const app = ReactDOM.createRoot(document.getElementById("app"));
+app.render(<App />);

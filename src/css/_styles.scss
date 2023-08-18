@@ -41,7 +41,10 @@ $silver: #c5baaf;
 @mixin Theme() {
 	* {margin: 0;}
 	html{height:100%;}
-	body{min-height:100%;position:relative;} // pos:relative is necessary if ANYTHING is to be positioned absolute.
+	body{
+      min-height:100%;
+      position:relative; // pos:relative is necessary if ANYTHING is to be positioned absolute.
+  } 
 	main {
 		background: white;
 		@include rounded-corners;

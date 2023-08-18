@@ -16,7 +16,7 @@ $pad: 2rem;
 
 @include theme.Theme;
 
-div#front-page{
+div#app{
   background-color: theme.$citron;
   div#storyPageFlex {
     display: flex;
