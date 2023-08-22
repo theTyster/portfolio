@@ -18,93 +18,75 @@ $pad: 2rem;
 
 div#app{
   background-color: theme.$citron;
-  div#storyPageFlex {
+  div#content{
+    min-height: 100vh;
     display: flex;
-    div#content{
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+    flex-direction: column;
+    align-items: stretch;
+    header {
+      flex-shrink:0;
+      @include center(800px);
+      padding: 2rem 0;
+      button.menuHam{
+        margin: unset;
+      }
+    }
+    main {
+      flex-grow:1;
+      @include center(800px);
+      article{
+        padding: $pad;
+        position: relative;
+      }
+    }
+    footer {
+      flex-shrink: 0;
+      position: relative;
+      bottom: 0;
+      background-color: theme.$citron;
+      @include center(100%);
+      padding-top: $pad;
+      padding-bottom: $pad;
+      text-align: center;
+      white-space: nowrap;
+    
+    }
+    // MEDIA QUERIES 
+    @media(max-width:900px){
       header {
-        @include center(800px);
-        button.menuHam {
-          margin: $pad 0;
-        }
+        @include center(600px);
       }
       main {
-        flex:1;
-        @include center(800px);
+        @include center(600px);
         article{
-          div.text {
-            padding: $pad;
+          svg#duck-canvas{
+            @include center(100%);
           }
-          div#storyPage{
-            width:100%;
-            height:100%;
-            position:absolute;
-            top:0;
-            left:100%;
-            background-color: #fff;
-          }
-          div#duck-container{
-            height: 610px;
-            padding: $pad;
-            svg#duck-canvas{
-              @include center(100%);
-              padding-bottom: $pad;
-              position:absolute;
-              left: 0;
-              top: auto;
-              bottom: auto;
-              right: auto;
-            }
-          } 
         }
       }
       footer {
-        background-color: theme.$citron;
-        @include center(800px);
-        padding-top: $pad;
-        padding-bottom: $pad;
-        text-align: center;
-        white-space: nowrap;
-
+        @include center(600px);
       }
-      // MEDIA QUERIES 
-      @media(max-width:900px){
-        header {
-          @include center(600px);
-        }
-        main {
-          @include center(600px);
-          article{
+    }
+    @media(max-width:700px){
+      header {
+        @include center(300px);
+      }
+      main {
+        @include center(300px);
+        article{
+          padding: 1rem;
+          div#duck-container{
+            height: 340px;
             svg#duck-canvas{
               @include center(100%);
+              height:340px;
             }
           }
-        }
-        footer {
-          @include center(600px);
         }
       }
-      @media(max-width:700px){
-        header {
-          @include center(300px);
-        }
-        main {
-          @include center(300px);
-          article{
-            div#duck-container{
-              height: 340px;
-              svg#duck-canvas{
-                @include center(100%);
-                height:340px;
-              }
-            }
-          }
-        }
-        footer {
-          @include center(300px);
-        }
+      footer {
+        @include center(300px);
       }
     }
   }
@@ -113,13 +95,32 @@ div#app{
 
 /*UTILITY STYLES*/
 
+div#storyPage{
+  width:0;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:100%;
+  background-color: #fff;
+  @include theme.rounded-corners;
+}
+div#duck-container{
+  height: 610px;
+  padding: $pad;
+} 
+
+svg#duck-canvas{
+  @include center(100%);
+  position:absolute;
+  opacity:1;
+}
+
 a {
   text-decoration: none;
 }
 
 button {
   @include center(unset);
-  margin: 50px auto;
   padding: 1rem;
   border: none;
   border-radius: 7px;

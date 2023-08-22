@@ -1,6 +1,5 @@
 //DEV Libraries
-import ReactDOM from 'react-dom/client';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import gsap from "gsap";
 import PropTypes from "prop-types";
 
@@ -8,9 +7,7 @@ import PropTypes from "prop-types";
 import './css/front-page.scss';
 
 //COMPONENTS
-import Nav from "./utils/nav.jsx";
-import Credit from "./utils/credit.jsx";
-import SvgDuck from "./front-page/duck.jsx";
+import SvgDuck from "./assets/duck.jsx";
 
 
 const FrontPage = ({setStory}) => {
@@ -52,13 +49,14 @@ const FrontPage = ({setStory}) => {
         .to("#head", {duration:Dur, yoyo:true, repeat:1, y:"+=90"},"<")
         .to("#r_wing", {duration:.05, yoyo:true, repeat:61, rotate:-50, transformOrigin:"50% 15%"},">") //flappy
         .to("#l_wing", {duration:.05, yoyo:true, repeat:61, rotate:50, transformOrigin:"50% 15%"},"<")
-        .to("#storyPage", {duration:3, left:"0"},"<") // slide out
+        .to("#storyPage", {duration:3, left:"0", width:"100%"},"<") // slide out
         .to("#content", {duration:0, overflow:"hidden"},"<")
-        .to("#duck-canvas", {duration:2, ease:"power4", top:"70px"},"<")
+        .to("#duck-canvas", {duration:2, ease:"power4", top:"7vh"},"<")
         .add(() => window.scrollTo({top:0, behavior:"smooth"}),"<")
-        .to("#duck-canvas", {duration:.5, ease:"linear", top:"100px"},"<+2")
+        .to("#duck-canvas", {duration:.5, ease:"linear", top:"10vh"},"<+2")
         .to("#l_knee, #r_knee", {duration:.5, y:"+=10"},"<")
         .to("#l_leg, #r_leg", {duration:.5, y:"+=30"},"<") 
+        .to("#head", {duration:.4, ease:"power3", rotate:0, transformOrigin:"50% 50%", delay:.5})
 
       hopNWalk_tl.current = gsap.timeline({paused: true});
       hopNWalk_tl.current
@@ -82,7 +80,7 @@ const FrontPage = ({setStory}) => {
         .to("#face", {duration:Dur, x:"-=7"},">") // return to resting position
         .to("#r_wing", {duration:Dur, scale:1},"<")
         .to("#l_wing", {duration:Dur, scale:1},"<")
-        .to("#head", {duration:.4, ease:"power3", rotate:-3, transformOrigin:"50% 50%", delay:1.3})
+        .to("#head", {duration:.4, ease:"power3", rotate:0, transformOrigin:"50% 50%", delay:1.3})
 
     });
 
@@ -143,7 +141,12 @@ const FrontPage = ({setStory}) => {
       </div>
       <div id="storyPage"></div>
       <div id="duck-container">
-        <SvgDuck />
+        <SvgDuck props={{
+          top:"auto",
+          bottom:"auto",
+          left:"0",
+          right:"auto"
+        }}/>
       </div>
         <button id="start-button" onClick={ turnStoryPage }>
           Start the Story!
@@ -152,56 +155,4 @@ const FrontPage = ({setStory}) => {
   );
 }
 
-
-const Beginning = () => {
-
-  return(
-    <>
-      <p>Hi</p>
-      <SvgDuck />
-    </>
-  )
-}
-
-
-const App = () => {
-
-  const [storyState, setStory] = useState("firstPaint");
-
-
-  return(
-    <>
-		<div id="storyPageFlex">
-			<div id="flexCenter"></div>
-			<div id="content">
-				<header>
-          <Nav />
-				</header>
-				<main>
-					<article>
-            {
-              (()=>{
-                switch(storyState){
-                  case("firstPaint"):
-                    return(<FrontPage setStory={setStory}/>)
-                  case("beginning"):
-                    return(<Beginning />)
-                }
-              })()
-            }
-					</article>
-				</main>
-				<footer>
-          <Credit />
-				</footer>
-			</div>
-			<div id="flexCenter"></div>
-		</div>
-    </>
-  )
-}
-
-
-// RENDERS
-const app = ReactDOM.createRoot(document.getElementById("app"));
-app.render(<App />);
+export default FrontPage;

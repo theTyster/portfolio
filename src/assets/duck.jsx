@@ -1,6 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const SvgDuck = () => {
+const SvgDuck = ({props}) => {
+
+  //Props Validation
+  SvgDuck.propTypes = {
+    props:PropTypes.object.isRequired,
+    top: PropTypes.string,
+    bottom: PropTypes.string,
+    left: PropTypes.string,
+    right: PropTypes.string,
+  }
 
   return (
     <svg
@@ -10,6 +20,12 @@ const SvgDuck = () => {
       viewBox="0 0 553 610"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      style={{
+        top:props.top, 
+        bottom:props.bottom, 
+        left:props.left,
+        right:props.right
+      }}
     >
       <defs>
         <linearGradient
