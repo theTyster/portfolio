@@ -52,12 +52,12 @@ const page = {
 };
 
 //waits for content to load and then adds a listener to the start button.
-document.addEventListener("DOMContentLoaded", function(){
-	//closes the mobile notice once the "x" button is clicked.
-	document.querySelector("#notice > button").addEventListener("click", () => page.mobileNotice.hide(), {once:true})
-	//listener for button that starts off the story.
-	return startButton.addEventListener("click", startButtonListener);
-}, {once: true});
+//document.addEventListener("DOMContentLoaded", function(){
+//	//closes the mobile notice once the "x" button is clicked.
+//	document.querySelector("#notice > button").addEventListener("click", () => page.mobileNotice.hide(), {once:true})
+//	//listener for button that starts off the story.
+//	return startButton.addEventListener("click", startButtonListener);
+//}, {once: true});
 
 
 async function startButtonListener(){
