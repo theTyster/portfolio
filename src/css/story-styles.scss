@@ -94,7 +94,7 @@ span.inline > * {
 		display: none;
 	}
 	#print_div{
-		display:block;
+		display:block !important;
 		font-size:19pt;
 		position:absolute;
 		font-family: Courier;
