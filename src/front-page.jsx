@@ -114,10 +114,12 @@ const FrontPage = ({setStory}) => {
   //START BUTTON HANDLER
   const turnStoryPage = () => {
     document.querySelector("#start-button").removeEventListener("click", turnStoryPage)
-    flyAway_tl.current.play(0);
-    setTimeout(() => {
-      setStory("beginning")
-    }, flyAway_tl.current.totalDuration() * 1000 + 1000);
+    //TESTING SETTINGS
+    flyAway_tl.current.play(">");//0);
+    setStory("beginning");
+    //setTimeout(() => {
+    //  setStory("beginning")
+    //}, flyAway_tl.current.totalDuration() * 1000 + 1000);
   }
 
 

@@ -2,28 +2,27 @@
 
 <img src="https://raw.githubusercontent.com/theTyster/duck_story/ad74905527f2926d903bea79bb5d895e3a489d4c/src/assets/img/duck.svg" alt="The Duck">
 
-**An interactive story written for web.**
+An interactive story written for web.
 
 As I began my journey into web development, this project became a place where I could practice using Javascript to manipulate elements on a webpage.
-
-<a href="https://github.com/theTyster/duck_story/releases/tag/1.0.0">Version 1</a> of the story was about 1000 lines of static JavaScript. Characters were made with ascii art in \<pre\> tags.
+<a href="https://github.com/theTyster/duck_story/releases/tag/1.0.0">Version 1</a> of the story was about 600 lines of static JavaScript. Characters were made with ascii art in \<pre\> tags.
 It walked the user through one branch of the story and had almost no animations and very little illustrations.
 It really was just about learning the code.
 
 Now, it is transforming into a full-blown react app. Complete with full-color character's and animations using the <a href="https://greensock.com">GreenSock Animation Program</a>.
 
-&nbsp;
+<hr>
 
-# Goals for the Duck:
-I still intend to use this project primarily as a way to learn more about programming. 
+# Goals for the Duck.
+I still intend to use this project primarily as a way for me to learn more about programming. 
 But alongside that I also want it to:
 
-1. Provide young children with a gentle environment where they can learn how to use a mouse and keyboard in a fun and entertaining place on the web.
-	- Create beautiful animations with GSAP.
-	- Use the React API and App design. 
-	- Integrate 3rd party tools to allow safe and fun plugins that can interact with the story.
+	1. Provide young children with a gentle environment where they can learn how to use a mouse and keyboard in a fun and entertaining place on the web.
+		- Create beautiful animations with GSAP.
+		- Use the React API and App design. 
+		- Integrate 3rd party tools to allow safe and fun plugins that can interact with the story.
 
-&nbsp;
+<hr>
 
 # Read The Story!
 Visit <a href="https://theDuckSays.click">theDuckSays.click</a> to view the current version of the story. 
@@ -36,9 +35,8 @@ The releases are not complete versions of the story. But, serve more as mile-mar
 
 If you just want to know how the story ends you can read the original "manuscript" for this project in <a href="https://github.com/theTyster/duck_story/blob/main/docs/story.md">the docs directory</a>.
 
-&nbsp;
 
 # Viewing Older Versions
-With every commit in this repo, I learn more. I tag commits which contain complete functionality of the story (on some level) as a <a href="https://github.com/theTyster/duck_story/releases">release</a>.
+With every commit in this repo, I learn more. I tag commits which contain complete functionality of the story (on some level) as a <a href="https://github.com/theTyster/duck_story/blob/main/docs/story.md">release</a>.
 
 To view these versions, you will need to download the release, unzip it, and then open the file called `index.html` or `page1.html` if you are viewing <a href="https://github.com/theTyster/duck_story/releases/tag/1.0.0">Version 1</a>.

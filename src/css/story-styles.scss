@@ -16,7 +16,7 @@ input {
 	background-color: white;
 	transition: background-color 3s;
 	font-family: monospace;
-
+	margin: 0 5px;
 }
 
 
@@ -51,11 +51,40 @@ span.inline > * {
 	text-shadow: 1px 1px 3px black;
 }
 
+#waterBody{
+	background-color: darkblue;
+	border-radius: 100%;
+	max-width: 300px;
+	box-shadow: darkblue 0 0 50px;
+	margin: 20px;
+	padding: 23px 0;
+	#water1, #water2{
+		scale:1;
+		padding-left:30px;
+	}
+}
+
+.sky {
+        height: 0;
+}
+
+@media (max-width: 499px){
+	#waterBody{
+		max-width: 300px;
+		margin: 20px 0;
+		padding: 13px 0;
+		#water1, #water2{
+			scale:.65;
+		}
+	}
+}
+
 #duck {
 	position: relative;
-	margin-left: 20px;
+	/* margin-left: 20px; */
 	transition-property: margin;
 	transition-duration: 1s;
+	overflow: hidden;
 }
 
 #frog {
@@ -76,7 +105,7 @@ span.inline > * {
 
 .ascii_animals_block {
 	display: flex;
-	margin: 20px;
+	margin: 40px auto;
 }
 
 .ascii_animal {
@@ -90,7 +119,7 @@ span.inline > * {
 
 /*MEDIA QUERIES*/
 @media print {
-	:not(:is(pre)){
+	.flex-container *, #duck-canvas *, header *{
 		display: none;
 	}
 	#print_div{
@@ -98,5 +127,30 @@ span.inline > * {
 		font-size:19pt;
 		position:absolute;
 		font-family: Courier;
+	}
+}
+
+@media screen and (max-width:900px){
+	#mobile_helper_input{
+		opacity: 0;
+		display:block;
+		position:absolute;
+		width: 10.5em;
+		height: 2em;
+		margin-top: -.60em;
+		margin-left: -.8em;
+	}
+	#mobile_helper_screen{
+		display:block;
+		position:absolute;
+
+		background-color: #424b54;
+		color: white;
+		padding: 6px;
+		margin-top: 8px;
+
+		border-radius: 3px;
+		border: 1px solid #444;
+
 	}
 }

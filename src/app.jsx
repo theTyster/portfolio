@@ -1,9 +1,9 @@
 //DEV Libraries
-import ReactDOM from 'react-dom/client';
-import {useState} from 'react';
+import ReactDOM from "react-dom/client";
+import {useState} from "react";
 
 //CSS
-import './css/front-page.scss';
+import "./css/front-page.scss";
 
 //COMPONENTS
 import Nav from "./assets/nav.jsx";

@@ -6,7 +6,9 @@ import gsap from "gsap";
 import SvgDuck from "./assets/duck.jsx";
 
 //CSS
-import "./css/story-styles.scss"
+import "./css/story-styles.scss";
+import "./css/animate_water_flow.scss";
+import "./css/animate_rain.scss";
 
 
 const Beginning = ()=>{
@@ -15,13 +17,36 @@ const Beginning = ()=>{
   //ANIMATIONS
   useLayoutEffect(()=>{
     const ctx = gsap.context(()=>{
+			let placement = {}
+			if(window.screen.width < 700){
+				placement = {
+					scale:.25,
+					y:-400,
+					x:""
+				}
+			}
+			else if(window.screen.width < 900){
+				placement = {
+					scale:.6,
+					y:-280,
+					x:280
+				}
+			}
+			else{
+				placement = {
+					scale:.6,
+					y:-300,
+					x:430
+				}
+			}
+			console.log(placement)
       const dur = 1;
       placement_tl.current = gsap.timeline();
       placement_tl.current
         .from("p", {duration:dur, opacity:0, y:"+=10"})
         .from("footer", {duration:dur, y:"+=200px"},"<")
         .from("main", {duration:dur, height:"100vh"},"<")
-        .to("#duck-canvas", {duration:dur, scale:.6, top:"-190", left:"300"},"<")
+				.to("#duck-canvas", {duration:dur, width:"auto", ...placement})
       
     })
 
@@ -362,8 +387,9 @@ const Beginning = ()=>{
 
 			ascii.water.tag.style.flex = 1;
 			ascii.animalsBlock.tag.style.Top = "55px";
-			duck.style.marginLeft = "50%";
-			duck.style.marginTop = "-40px";
+			//duck.style.left = "50%";
+			duck.style.top = "-60px";
+
 
 			page.phaseThree.body.show({sec: 0});
 			page.phaseThree.chooseAFriend.show();
@@ -541,7 +567,30 @@ const Beginning = ()=>{
 				ascii.duck.friend.show({rel: false, disp: "inline-block"});
 				ascii.duck.show({rel: false, disp: "inline-block"});
 
-				ascii.duck.friend.tag.style.marginTop = "-50px";
+				let placementFriend = {};
+				let placementDuck = {};
+				if(window.screen.width < 700){
+					placementFriend = {
+						scale:.80,
+						left:-60,
+					}
+					placementDuck = {
+						scale:.80,
+						top:10,
+					}
+				}
+				else {
+					placementDuck = {
+						top:-50,
+						left:80,
+					};
+				}
+
+				gsap.timeline()
+					.to("#frog, #dog, #hog, #eggnog", {duration:.5, ...placementFriend})
+					.to("#duck", {duration:.5, ...placementDuck},"<");
+
+				ascii.duck.friend.tag.style.top = "-50px";
 				ascii.animalsBlock.tag.style.marginTop = "50px";
 
 				await page.yes.show({sec: 1.5});
@@ -601,6 +650,14 @@ const Beginning = ()=>{
 				grapesSelect.disabled = true;
 
 				await page.phaseThree.rainGetOut.show();
+
+				page.phaseThree.rainGetOut.tag.after(page.helper.tag);
+				page.helper.show();
+				await listen4Enter();
+				page.helper.hide();
+
+				await page.phaseThree.rainGetOut.hide();
+
 				await page.phaseThree.rainHungry.show();
 				await page.phaseThree.eatChoose.show();
 
@@ -612,12 +669,15 @@ const Beginning = ()=>{
 				node.append(content);
 				page.helper.tag.after(node);
 				node.style.display = "block";
+				node.style.scale = ".5";
+				node.style.textAlign = "center";
+				node.style.marginTop = "50px";
 
 				page.helper.show();
 				await listen4Enter();
 				page.helper.hide();
 
-
+				// NOT WORKING WITH REACT.
 				//localStorage.setItem("duck", JSON.stringify(ascii.duck));
 				//localStorage.setItem("friend", JSON.stringify(ascii.duck.friend));
 				//localStorage.setItem("bonus", JSON.stringify(bonusLevel));
@@ -728,15 +788,13 @@ const Beginning = ()=>{
 				         <div className="phaseTwo">
 				           <p id="where">Now, where is that <span className="duck_type bonus_egg">duck</span>? She was just around here somewhere. </p>
 				           <p id="letsSee">Let&apos;s see.......</p>
-				           <pre id="eyes" className="bonus_egg">
-				Ÿ‘€
-				     </pre>
+									 <span role="img" aria-label="eyes" id="eyes" className="bonus_egg">ðŸ‘€</span>
 				           <h2 id="ah">ah! </h2>
 				             <p id="thereSheIs">there she is.</p>
 				               <pre className="ascii_animal bonus_egg" id="duck">{`
-				 __
-				(â€¢ )___
-				(  _> /  
+         __
+       =(â€¢ )___
+        (  _> /  
 				                 `}
 				               </pre>
 				             <p id="splashing">One day <span className="duck_type bonus_egg">duck</span> was splashing in the pond with her best friend.</p>
@@ -778,7 +836,7 @@ const Beginning = ()=>{
 				               <span id="friend_colorQuestion_input" className="inline" >
 				                 <p>Maybe they were a </p>
 				                 <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxLength="24" size="12" />
-				                 <span className="friend_type"></span>.
+				                <span className="friend_type"></span>.
 				               </span>
 				               <p id="friend_goofy">&quot;You sure are one goofy <span className="friend_type bonus_egg"></span>, <span className="friend_name bonus_egg"></span>.&quot; <span className="duck_type bonus_egg">duck</span> said as they splashed together.</p>
 				               <p id="friend_laugh"><span className="friend_name bonus_egg"></span> laughed.</p>
@@ -804,11 +862,10 @@ const Beginning = ()=>{
 				               <h1 className="grapes_story">The grape story (for brave souls)</h1>
 				                     <div id="waterBody">
 				                       <pre className="water_flow" id="water1">
-				         ----^--^------^--^--^--^------^--^
-				
+																 {`-^------^--^--^--^------^--^`}
 				                 </pre>
 				                       <pre className="water_flow" id="water2">
-				            --^----^--        --^----^--
+																 {`    ^----^--        ^---^--`}
 				                 </pre>
 				                     </div>
 							</div>
