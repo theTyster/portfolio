@@ -10,6 +10,7 @@ import Nav from "./assets/nav.jsx";
 import Credit from "./assets/credit.jsx";
 import FrontPage from "./front-page.jsx";
 import Beginning from "./beginning.jsx";
+import Pizza from "./pizza.jsx";
 const App = () => {
 
   const [storyState, setStory] = useState("firstPaint");
@@ -19,6 +20,7 @@ const App = () => {
     <div id="content">
       <header>
         <Nav />
+        <h1 className="pageTitle">The Duck Story</h1>
       </header>
       <main>
         <article>
@@ -26,9 +28,17 @@ const App = () => {
             (()=>{
               switch(storyState){
                 case("firstPaint"):
-                  return(<FrontPage setStory={setStory}/>)
+                  return(<FrontPage 
+                  setStory={setStory}
+                    />)
                 case("beginning"):
-                  return(<Beginning />)
+                  return(<Beginning
+                    setStory={setStory}
+                    />)
+                case("pizza"):
+                  return(<Pizza
+                    setStory={setStory}
+                  />)
               }
             })()
           }
