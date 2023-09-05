@@ -22,6 +22,7 @@ function NavButton({ onClick, menuState }) {
             </g>
           </svg>
       </button>
+      <h1 className="pageTitle">The Duck Story</h1>
       <Menu menuState={ menuState } onClick={ onClick }/>
     </>
   );

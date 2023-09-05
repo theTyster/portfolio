@@ -1,144 +1,144 @@
 import {useLayoutEffect} from "react";
 
-const Utils = () => {
+export const Utils = () => {
 
-  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
-  const displayFunc = function(tag) {
-    this.tag = document.querySelector(tag),
-      this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
-        this.tag.style.display = disp;
-      if (rel)
-        this.tag.style.position = "relative";
-      if (!rel)
-        this.tag.style.position = "absolute";
-      await sleep(sec * 1);
-      },
-    this.hide = async function(sec = .5){
-      this.tag.style.display = "none";
-      await sleep(sec * 1);
-    }
-  };
-
-
-  // custom sleep function.
-  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
-
-
-  //PAGE TAGS
-  const page = {
-    //Unilateral Tags
-    border: document.querySelector("#app"),
-    lightGreenBG: "#B3DCBD",
-    container: document.querySelector(".container"),
-    duckType: document.querySelectorAll(".duck_type"),
-    friendType: document.querySelectorAll(".friend_type"),
-    friendName: document.querySelectorAll(".friend_name"),
-    helper: new displayFunc("#helper"),
-    // Beginning Tags
-  }
-
-  const beginningPage = {
-    oneTime: new displayFunc("#oneTime"),
-    startButton: new displayFunc("button#startButton"),
-    hm:  new displayFunc("#hm"),
-    no: new displayFunc("#no"),
-    yes: new displayFunc("#yes"),
-    phaseOne:{
-      duckInlineInput: new displayFunc("span.inline"),
-      duckWhatColor: new displayFunc("#whatColor"),
-    },
-    phaseTwo:{
-      body: new displayFunc("div.phaseTwo"),
-      where: new displayFunc("#where"),
-      letsSee: new displayFunc("#letsSee"),
-      eyes: new displayFunc("#eyes"),
-      ah: new displayFunc("#ah"),
-      thereSheIs: new displayFunc("#thereSheIs"),
-      splashing: new displayFunc("#splashing"),
-    },
-    phaseThree:{
-      body: new displayFunc("div.phaseThree"),
-      chooseAFriend: new displayFunc("#chooseAFriend"),
-      tryAgain: new displayFunc("#tryAgain"),
-      friendDeclare: new displayFunc("#friend_declare"),
-      friendNameCheck: new displayFunc(".input_name_check"),
-      friendColorQuestion: new displayFunc("#friend_colorQuestion"),
-      friendColorInput: new displayFunc("#friend_colorQuestion_input"),
-      friendGoofy: new displayFunc("#friend_goofy"),
-      friendLaugh: new displayFunc("#friend_laugh"),
-      duckLaugh: new displayFunc("#duck_laugh"),
-      rainStart: new displayFunc("#rain_start"),
-      rainHowBad: new displayFunc("#rain_howBad"),
-      rainInputNode: new displayFunc("#rain_input_node"),
-      rainNotBad: new displayFunc("#notBad"),
-      rainRangeInput: new displayFunc("input#rain_range"),
-      rainReallyBad: new displayFunc("#reallyBad"),
-      rainGetOut: new displayFunc("#rain_getOut"),
-      rainHungry: new displayFunc("#rain_hungry"),
-      eatChoose: new displayFunc("#eat_choose"),
-    },
-  }
-
-  const pizzaPage = {
-    // Pizza Tags
-    pizzaHeading: new displayFunc("#pizza_story"),
-    visitPizza: new displayFunc("#visit_pizza"),
-    pizzaFantastic: new displayFunc("#pizza_fantastic"),
-    scream: new displayFunc("#scream"),
-    karenWords1: new displayFunc("#karenWords1"),
-    karenWords2: new displayFunc("#karenWords2"),
-    karenWords3: new displayFunc("#karenWords3"),
-    karenWords4: new displayFunc("#karenWords4"),
-    karenWords5: new displayFunc("#karenWords5"),
-    karenWords6: new displayFunc("#karenWords6"),
-    mrFantastic: new displayFunc("#mrFantastic"),
-    sorryGuys: new displayFunc("#sorry_guys"),
-    leave: new displayFunc("#leave"),
-    notFantastic: new displayFunc("#notFantastic"),
-    duckNod: new displayFunc("#duck_nod"),
-    sneaky: new displayFunc("#sneaky"),
-    sneakyHow: new displayFunc("#sneaky_how"),
-    startBand: new displayFunc("#start_band"),
-    soundsAwesome: new displayFunc("#sounds_awesome"),
-    musicPractice: new displayFunc("#music_practice"),
-    finallyReady: new displayFunc("#finally_ready"),
-    back4More: new displayFunc("#back_4_more"),
-    songChoose: new displayFunc("#song_choose"),
-    playButton: new displayFunc("#play_button"),
-    pauseButton: new displayFunc("#pause_button"),
-    ffwdButton: new displayFunc("#ffwd_button"),
-    songPlaying: new displayFunc("#song_playing"),
-    howGood: new displayFunc("#how_good"),
-    songRatingSlide: new displayFunc("#song_rating_slide"),
-    songReviewSliderInput: new displayFunc("input#song_review"),
-    songRatingDisplay: new displayFunc("#song_rating_display"),
-    rating: new displayFunc("#rating"),
-    songPlayAgain: new displayFunc("#song_playAgain"),
-    pizzaFinally: new displayFunc("#pizza_finally"),
-    sneakInside: new displayFunc("#sneak_inside"),
-    slipInTheBack: new displayFunc("#slip_in_the_back"),
-    outback: new displayFunc("#outback"),
-    pizzaWait: new displayFunc("#pizza_wait"),
-    ninjaSneak: new displayFunc("#ninja_sneak"),
-    YAY: new displayFunc("#YAY"),
-    pizzaDance: new displayFunc("#pizza_dance"),
-    pizzaEnd: new displayFunc("#pizza_end"),
-    pizzaEndButtons: new displayFunc("#pizza_end_buttons"),
-  }
-
-  //tags to ascii graphics
-  const ascii = {
-    water: new displayFunc("#waterBody"),
-    duck: new displayFunc("#duck"),
-    frog: new displayFunc("#frog"),
-    dog: new displayFunc("#dog"),
-    hog: new displayFunc("#hog"),
-    eggnog: new displayFunc("#eggnog"),
-    animalsBlock: new displayFunc(".ascii_animals_block")
-  };
+//  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
+//  const displayFunc = function(tag) {
+//    this.tag = document.querySelector(tag),
+//      this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
+//        this.tag.style.display = disp;
+//      if (rel)
+//        this.tag.style.position = "relative";
+//      if (!rel)
+//        this.tag.style.position = "absolute";
+//      await sleep(sec * 1);
+//      },
+//    this.hide = async function(sec = .5){
+//      this.tag.style.display = "none";
+//      await sleep(sec * 1);
+//    }
+//  };
+//
+//
+//  // custom sleep function.
+//  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
+//
+//
+//  //PAGE TAGS
+//  const page = {
+//    //Unilateral Tags
+//    border: document.querySelector("#app"),
+//    lightGreenBG: "#B3DCBD",
+//    container: document.querySelector(".container"),
+//    duckType: document.querySelectorAll(".duck_type"),
+//    friendType: document.querySelectorAll(".friend_type"),
+//    friendName: document.querySelectorAll(".friend_name"),
+//    helper: new displayFunc("#helper"),
+//    // Beginning Tags
+//  }
+//
+//export  const beginningPage = {
+//    oneTime: new displayFunc("#oneTime"),
+//    startButton: new displayFunc("button#startButton"),
+//    hm:  new displayFunc("#hm"),
+//    no: new displayFunc("#no"),
+//    yes: new displayFunc("#yes"),
+//    phaseOne:{
+//      duckInlineInput: new displayFunc("span.inline"),
+//      duckWhatColor: new displayFunc("#whatColor"),
+//    },
+//    phaseTwo:{
+//      body: new displayFunc("div.phaseTwo"),
+//      where: new displayFunc("#where"),
+//      letsSee: new displayFunc("#letsSee"),
+//      eyes: new displayFunc("#eyes"),
+//      ah: new displayFunc("#ah"),
+//      thereSheIs: new displayFunc("#thereSheIs"),
+//      splashing: new displayFunc("#splashing"),
+//    },
+//    phaseThree:{
+//      body: new displayFunc("div.phaseThree"),
+//      chooseAFriend: new displayFunc("#chooseAFriend"),
+//      tryAgain: new displayFunc("#tryAgain"),
+//      friendDeclare: new displayFunc("#friend_declare"),
+//      friendNameCheck: new displayFunc(".input_name_check"),
+//      friendColorQuestion: new displayFunc("#friend_colorQuestion"),
+//      friendColorInput: new displayFunc("#friend_colorQuestion_input"),
+//      friendGoofy: new displayFunc("#friend_goofy"),
+//      friendLaugh: new displayFunc("#friend_laugh"),
+//      duckLaugh: new displayFunc("#duck_laugh"),
+//      rainStart: new displayFunc("#rain_start"),
+//      rainHowBad: new displayFunc("#rain_howBad"),
+//      rainInputNode: new displayFunc("#rain_input_node"),
+//      rainNotBad: new displayFunc("#notBad"),
+//      rainRangeInput: new displayFunc("input#rain_range"),
+//      rainReallyBad: new displayFunc("#reallyBad"),
+//      rainGetOut: new displayFunc("#rain_getOut"),
+//      rainHungry: new displayFunc("#rain_hungry"),
+//      eatChoose: new displayFunc("#eat_choose"),
+//    },
+//  }
+//
+//export  const pizzaPage = {
+//    // Pizza Tags
+//    pizzaHeading: new displayFunc("#pizza_story"),
+//    visitPizza: new displayFunc("#visit_pizza"),
+//    pizzaFantastic: new displayFunc("#pizza_fantastic"),
+//    scream: new displayFunc("#scream"),
+//    karenWords1: new displayFunc("#karenWords1"),
+//    karenWords2: new displayFunc("#karenWords2"),
+//    karenWords3: new displayFunc("#karenWords3"),
+//    karenWords4: new displayFunc("#karenWords4"),
+//    karenWords5: new displayFunc("#karenWords5"),
+//    karenWords6: new displayFunc("#karenWords6"),
+//    mrFantastic: new displayFunc("#mrFantastic"),
+//    sorryGuys: new displayFunc("#sorry_guys"),
+//    leave: new displayFunc("#leave"),
+//    notFantastic: new displayFunc("#notFantastic"),
+//    duckNod: new displayFunc("#duck_nod"),
+//    sneaky: new displayFunc("#sneaky"),
+//    sneakyHow: new displayFunc("#sneaky_how"),
+//    startBand: new displayFunc("#start_band"),
+//    soundsAwesome: new displayFunc("#sounds_awesome"),
+//    musicPractice: new displayFunc("#music_practice"),
+//    finallyReady: new displayFunc("#finally_ready"),
+//    back4More: new displayFunc("#back_4_more"),
+//    songChoose: new displayFunc("#song_choose"),
+//    playButton: new displayFunc("#play_button"),
+//    pauseButton: new displayFunc("#pause_button"),
+//    ffwdButton: new displayFunc("#ffwd_button"),
+//    songPlaying: new displayFunc("#song_playing"),
+//    howGood: new displayFunc("#how_good"),
+//    songRatingSlide: new displayFunc("#song_rating_slide"),
+//    songReviewSliderInput: new displayFunc("input#song_review"),
+//    songRatingDisplay: new displayFunc("#song_rating_display"),
+//    rating: new displayFunc("#rating"),
+//    songPlayAgain: new displayFunc("#song_playAgain"),
+//    pizzaFinally: new displayFunc("#pizza_finally"),
+//    sneakInside: new displayFunc("#sneak_inside"),
+//    slipInTheBack: new displayFunc("#slip_in_the_back"),
+//    outback: new displayFunc("#outback"),
+//    pizzaWait: new displayFunc("#pizza_wait"),
+//    ninjaSneak: new displayFunc("#ninja_sneak"),
+//    YAY: new displayFunc("#YAY"),
+//    pizzaDance: new displayFunc("#pizza_dance"),
+//    pizzaEnd: new displayFunc("#pizza_end"),
+//    pizzaEndButtons: new displayFunc("#pizza_end_buttons"),
+//  }
+//
+//  //tags to ascii graphics
+//export const ascii = {
+//    water: new displayFunc("#waterBody"),
+//    duck: new displayFunc("#duck"),
+//    frog: new displayFunc("#frog"),
+//    dog: new displayFunc("#dog"),
+//    hog: new displayFunc("#hog"),
+//    eggnog: new displayFunc("#eggnog"),
+//    animalsBlock: new displayFunc(".ascii_animals_block")
+//  };
 
   //declares the object for easter egg features.
-  const bonusLevel = {}
+export const bonusLevel = {}
 
   //function to invert styles if easter egg is activated.
   const bonusEgg = function(){
@@ -152,7 +152,7 @@ const Utils = () => {
   }
 
   // Listens for Enter to be pressed before continuing.
-  const listen4Enter = function(){
+export const listen4Enter = function(){
     return new Promise(resolve => {
       document.addEventListener("keyup", function enterInputListener(event){
         if (event.key === "Enter"){
@@ -164,7 +164,7 @@ const Utils = () => {
   }
 
   // guesses the local language from the browser.
-  const getLanguage = () => {
+export const getLanguage = () => {
     if (navigator.languages && navigator.languages.length) {
       return navigator.languages[0];
     } else {
@@ -172,12 +172,12 @@ const Utils = () => {
     }
   }
 
-  const ranNumG = function(max){
+export const ranNumG = function(max){
     return Math.floor(Math.random() * max);
   }
 
 
-  const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
+export const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
     if (useKeysBool){
       return [...Array(maxIndex).keys()].map(x => ++x);
     }
@@ -187,7 +187,7 @@ const Utils = () => {
   }
 
 
-  const shuffle = function fisherYatesArrayShuffler(inputArr){
+export const shuffle = function fisherYatesArrayShuffler(inputArr){
     let applyShuffler = () => {
       let len = inputArr.length;
       while (len){
@@ -201,7 +201,7 @@ const Utils = () => {
 
 
 
-  const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
+export const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
     const hiddenRaindrops = 20;
     storminess = Math.floor(hiddenRaindrops*(storminess/100));
     const rainArray = shuffle(makeArray(storminess));
@@ -224,7 +224,7 @@ const Utils = () => {
   }
 
 
-  const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
+export const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
     //inputSelector = The selector ID for the text input box being used to choose a color.
     //asciiObj = the ascii picture that the color is going to be applied to.
     //transFunc = the function which fires after the check is complete.
@@ -287,5 +287,3 @@ const Utils = () => {
 
   return(<></>)
 }
-
-export default Utils;

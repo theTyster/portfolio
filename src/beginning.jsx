@@ -1,20 +1,24 @@
 //DEV Libraries
-import {useLayoutEffect, useEffect, useRef} from "react";
+import {useLayoutEffect} from "react";
 import gsap from "gsap";
 import PropTypes from "prop-types";
-
 import {
 	sleep,
-	bonusLevel,
+//	bonusLevel,
 	bonusEgg,
 	listen4Enter,
-	getLanguage,
-	ranNumG,
-	makeArray,
-	shuffle,
+//	getLanguage,
+//	ranNumG,
+//	makeArray,
+//	shuffle,
 	makeItRain,
 	checkColorInput,
-} from "./assets/utils.js";
+} from "./utils.jsx";
+
+//TODO
+// COMBINE ALL PAGES OF THE STORY INTO ONE COMPONENT. 
+// MAKE SMALLER COMPONENTS WITH PARTS OF THE STORY THAT CAN BE REUSED.
+// USE UTILS.JS TO CONTROL THE STORY.
 
 //Components
 import SvgDuck from "./assets/duck.jsx";
@@ -32,10 +36,11 @@ const Beginning = ({setStory})=>{
     setStory: PropTypes.func,
   }
 
-  const placement_tl = useRef();
+	let placement_tl;
 
   //ANIMATIONS
   useLayoutEffect(()=>{
+
 
     const ctx = gsap.context(()=>{
 			let placement = {}
@@ -61,8 +66,8 @@ const Beginning = ({setStory})=>{
 				}
 			}
       const dur = 1;
-      placement_tl.current = gsap.timeline();
-      placement_tl.current
+      placement_tl = gsap.timeline();
+      placement_tl
         .from("p", {duration:dur, opacity:0, y:"+=10"})
         .from("footer", {duration:dur, y:"+=200px"},"<")
         .from("main", {duration:dur, height:"100vh"},"<")
@@ -76,191 +81,6 @@ const Beginning = ({setStory})=>{
     }
   }, [])
 
-	let page,
-		ascii,
-		bonusEgg,
-		makeItRain,
-		checkColorInput;
-
-	useEffect(()=>{
-
-  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
-  const displayFunc = function(tag) {
-    this.tag = document.querySelector(tag),
-      this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
-        this.tag.style.display = disp;
-      if (rel)
-        this.tag.style.position = "relative";
-      if (!rel)
-        this.tag.style.position = "absolute";
-      await sleep(sec * 1);
-      },
-    this.hide = async function(sec = .5){
-      this.tag.style.display = "none";
-      await sleep(sec * 1);
-    }
-  }
-
-
-		//PAGE TAGS
-		page = {
-			border: document.querySelector("#app"),
-			lightGreenBG: "#B3DCBD",
-			container: document.querySelector(".container"),
-			oneTime: new displayFunc("#oneTime"),
-			startButton: new displayFunc("button#startButton"),
-			helper: new displayFunc("#helper"),
-			hm:  new displayFunc("#hm"),
-			no: new displayFunc("#no"),
-			yes: new displayFunc("#yes"),
-			duckType: document.querySelectorAll(".duck_type"),
-			friendType: document.querySelectorAll(".friend_type"),
-			friendName: document.querySelectorAll(".friend_name"),
-			phaseOne:{
-				duckInlineInput: new displayFunc("span.inline"),
-				duckWhatColor: new displayFunc("#whatColor")
-			},
-			phaseTwo:{
-				body: new displayFunc("div.phaseTwo"),
-				where: new displayFunc("#where"),
-				letsSee: new displayFunc("#letsSee"),
-				eyes: new displayFunc("#eyes"),
-				ah: new displayFunc("#ah"),
-				thereSheIs: new displayFunc("#thereSheIs"),
-				splashing: new displayFunc("#splashing")
-			},
-			phaseThree:{
-				body: new displayFunc("div.phaseThree"),
-				chooseAFriend: new displayFunc("#chooseAFriend"),
-				tryAgain: new displayFunc("#tryAgain"),
-				friendDeclare: new displayFunc("#friend_declare"),
-				friendNameCheck: new displayFunc(".input_name_check"),
-				friendColorQuestion: new displayFunc("#friend_colorQuestion"),
-				friendColorInput: new displayFunc("#friend_colorQuestion_input"),
-				friendGoofy: new displayFunc("#friend_goofy"),
-				friendLaugh: new displayFunc("#friend_laugh"),
-				duckLaugh: new displayFunc("#duck_laugh"),
-				rainStart: new displayFunc("#rain_start"),
-				rainHowBad: new displayFunc("#rain_howBad"),
-				rainInputNode: new displayFunc("#rain_input_node"),
-				rainNotBad: new displayFunc("#notBad"),
-				rainRangeInput: new displayFunc("input#rain_range"),
-				rainReallyBad: new displayFunc("#reallyBad"),
-				rainGetOut: new displayFunc("#rain_getOut"),
-				rainHungry: new displayFunc("#rain_hungry"),
-				eatChoose: new displayFunc("#eat_choose")
-			}
-		};
-
-		//tags to ascii graphics
-		ascii = {
-			water: new displayFunc("#waterBody"),
-			duck: new displayFunc("#duck"),
-			frog: new displayFunc("#frog"),
-			dog: new displayFunc("#dog"),
-			hog: new displayFunc("#hog"),
-			eggnog: new displayFunc("#eggnog"),
-			animalsBlock: new displayFunc(".ascii_animals_block")
-		};
-
-
-		makeItRain = function(storminess) { // remember that the arg is a range 1-100.
-			const hiddenRaindrops = 20;
-			storminess = Math.floor(hiddenRaindrops*(storminess/100));
-			const rainArray = shuffle(makeArray(storminess));
-			const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
-
-			let delayedRain = async () => {
-				try {
-					for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
-						await sleep(1.77);
-						let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
-						rainSelector.style.display = "unset";
-						rainSelector.style.opacity = 1;
-					}
-				}
-				catch (e){
-					console.log(e);
-				}
-			}
-			delayedRain();
-		}
-
-		//function to invert styles if easter egg is activated.
-		bonusEgg = function(){
-			if (bonusLevel.enabled){
-				const invert = "invert(100%)";
-				page.border.style.background = "MidnightBlue";
-				const selectorTexts = document.querySelectorAll(".bonus_egg");
-				for (let i of selectorTexts)
-					i.style.filter = invert;
-			}
-		}
-
-		checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
-			//inputSelector = The selector ID for the text input box being used to choose a color.
-			//asciiObj = the ascii picture that the color is going to be applied to.
-			//transFunc = the function which fires after the check is complete.
-
-			//moves helper text to after the input box. If the input box is in an inline class.
-			if (inputSelector.parentNode.classList.toString() === "inline"){
-				inputSelector.parentNode.after(page.helper.tag);
-				inputSelector.parentNode.after(page.hm.tag);
-				inputSelector.parentNode.after(page.no.tag);
-				inputSelector.parentNode.after(page.yes.tag);
-			}
-			else{
-				inputSelector.after(document.querySelector("#helper"));
-			}
-			await listen4Enter(); // wait for enter to be hit after inputing the color
-			page.helper.hide();
-
-			//blocks the input while it is being checked.
-			inputSelector.disabled = true;
-			await page.hm.show(); 
-			await page.hm.hide();
-
-			// event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
-			inputSelector.addEventListener("transitionend", transFunc, {once: true});
-
-			//Colors the Duck based on the input.
-			//saves details to object and local storage.
-			(async () => {
-				inputSelector.style.backgroundColor = inputSelector.value;
-				asciiObj.color = inputSelector.value;
-				asciiObj.tag.style.color = asciiObj.color;
-				for (let i of asciiObj.typeSpans)
-					i.style.color = asciiObj.color;
-
-				//a little easter egg in case anyone puts in the same color that is used for the background later on.
-				if (inputSelector.value === "MidnightBlue")
-					bonusLevel.enabled = true;
-			})();
-
-			const inputRegex = /#/gu;
-			// checks if the background color has a value.
-			if (!inputSelector.style.backgroundColor){
-				await page.no.show();
-				await page.no.hide();
-				inputSelector.disabled = false;
-				checkColorInput(inputSelector, asciiObj);
-			}
-			//checks to ensure that no hex colors were used and that the duck is not colored white.
-			switch(true){
-				case inputSelector.style.backgroundColor === "white":
-				case Boolean(inputSelector.value.match(inputRegex)):{
-					await page.no.show();
-					await page.no.hide();
-					inputSelector.disabled = false;
-					checkColorInput(inputSelector, asciiObj);
-					break;
-				}
-			}
-		}
-
-
-
-	},[]);
 
 		//FUNCTIONS
 	async function startButtonListener(){
@@ -834,68 +654,6 @@ const Beginning = ({setStory})=>{
 				</div>
 				<div className="container"></div>
 			</div>
-      <div className="hidden_ascii">
-       <pre className="ascii_animal bonus_egg" id="frog">{`
-         _   _
-        (•)_(•)
-     _ (   _   ) _
-    / \\/'-----'\\/ \\
-  __\\ ( (     ) ) /__
-  )   /\\ \\___/ /\\   (
-   )_/ /|\\   /|\\ \\_(
-         `}
-
-      </pre>
-            <pre className="ascii_animal bonus_egg" id="dog">{`
-       __
-  (___()•\`;
-  /,    /\`
-  \\\\\`--\\\\
-              `}
-      </pre>
-            <pre className="ascii_animal bonus_egg" id="hog">{`
-  ^..^_____  
-  (00)     \\9
-    \\______/ 
-     WW  WW
-              `}
-      </pre>
-      <pre className="ascii_animal bonus_egg" id="eggnog">{`
-   ____
-  |____|      
-  /___/_\\      
-  |   | |      
-  |nog| |      
-  |   | |      
-  |___|_|      
-        `}
-      </pre>
-      </div>
-        <pre id="print_div">{`
-                                  ___
-                              ,-""   \`.
-                            ,'  _   • )\`-._
-                           /  ,' \`-._:.===-'
-                          /  /
-                         /  ;
-             _.--.__    /   ;
-(\`._    _.-""       "--'    |
-(_  \`-""                     \\
- (\`-                          :
-  (__   (__.                  ;
-    \`-.   '-.__.      _.'    /
-       \\      \`-.__,-'    _,'
-        \`._    ,    /__,-'
-           ""._\\__,'| |____
-                | |  \`----.\`.
-                | |        \\ \`.
-                ; |___      \\-\`\`
-                \\   --)
-                 \`.\`.)
-
-           Goose. (not a duck.)
-          `}
-        </pre>
       <SvgDuck props={{
         top:"10vh",
         bottom:"auto",
