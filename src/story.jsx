@@ -5,17 +5,6 @@
 import {useLayoutEffect, useRef} from "react";
 import gsap from "gsap";
 import PropTypes from "prop-types";
-import {
-//	bonusLevel,
-	bonusEgg,
-	listen4Enter,
-	getLanguage,
-	ranNumG,
-//	makeArray,
-//	shuffle,
-	makeItRain,
-	checkColorInput,
-} from "./assets/utils.js";
 
 //COMPONENTS
 import SvgDuck from "./assets/duck.jsx";
@@ -82,17 +71,17 @@ const Story = ({setStory})=>{
 //UTILITIES
   //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
   const displayFunc = function() {
-    this.tag = useRef(null),
+    this.tag = useRef(),
       this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
-        this.tag.style.display = disp;
+        this.tag.current.style.display = disp;
       if (rel)
-        this.tag.style.position = "relative";
+        this.tag.current.style.position = "relative";
       if (!rel)
-        this.tag.style.position = "absolute";
+        this.tag.current.style.position = "absolute";
       await sleep(sec * 1);
       },
     this.hide = async function(sec = .5){
-      this.tag.style.display = "none";
+      this.tag.current.style.display = "none";
       await sleep(sec * 1);
     }
   };
@@ -105,53 +94,62 @@ const Story = ({setStory})=>{
     //Unilateral Tags
     border: document.querySelector("#app"),
     lightGreenBG: "#B3DCBD",
-    container: document.querySelector(".container"),
-    duckType: document.querySelectorAll(".duck_type"),
+    container: useRef(),
+    duckType: [],
     friendType: document.querySelectorAll(".friend_type"),
     friendName: document.querySelectorAll(".friend_name"),
-    helper: new displayFunc("#helper"),
+    helper: new displayFunc(),
   }
 
   // Beginning Tags
 	const beginningPage = {
-    oneTime: new displayFunc("#oneTime"),
+    oneTime: new displayFunc(),
     startButton: new displayFunc(),
-    hm:  new displayFunc("#hm"),
-    no: new displayFunc("#no"),
-    yes: new displayFunc("#yes"),
+    hm: new displayFunc(),
+    no: new displayFunc(),
+    yes: new displayFunc(),
     phaseOne:{
-      duckInlineInput: new displayFunc("span.inline"),
-      duckWhatColor: new displayFunc("#whatColor"),
+      duckInline: new displayFunc(),
+      duckInlineInput: new displayFunc(),
+      duckWhatColor: new displayFunc(),
     },
     phaseTwo:{
-      body: new displayFunc("div.phaseTwo"),
-      where: new displayFunc("#where"),
-      letsSee: new displayFunc("#letsSee"),
-      eyes: new displayFunc("#eyes"),
-      ah: new displayFunc("#ah"),
-      thereSheIs: new displayFunc("#thereSheIs"),
-      splashing: new displayFunc("#splashing"),
+      body: new displayFunc(),
+      where: new displayFunc(),
+      letsSee: new displayFunc(),
+      eyes: new displayFunc(),
+      ah: new displayFunc(),
+      thereSheIs: new displayFunc(),
+      splashing: new displayFunc(),
     },
     phaseThree:{
-      body: new displayFunc("div.phaseThree"),
-      chooseAFriend: new displayFunc("#chooseAFriend"),
-      tryAgain: new displayFunc("#tryAgain"),
-      friendDeclare: new displayFunc("#friend_declare"),
-      friendNameCheck: new displayFunc(".input_name_check"),
-      friendColorQuestion: new displayFunc("#friend_colorQuestion"),
-      friendColorInput: new displayFunc("#friend_colorQuestion_input"),
-      friendGoofy: new displayFunc("#friend_goofy"),
-      friendLaugh: new displayFunc("#friend_laugh"),
-      duckLaugh: new displayFunc("#duck_laugh"),
-      rainStart: new displayFunc("#rain_start"),
-      rainHowBad: new displayFunc("#rain_howBad"),
-      rainInputNode: new displayFunc("#rain_input_node"),
-      rainNotBad: new displayFunc("#notBad"),
-      rainRangeInput: new displayFunc("input#rain_range"),
-      rainReallyBad: new displayFunc("#reallyBad"),
-      rainGetOut: new displayFunc("#rain_getOut"),
-      rainHungry: new displayFunc("#rain_hungry"),
-      eatChoose: new displayFunc("#eat_choose"),
+      body: new displayFunc(),
+      chooseAFriend: new displayFunc(),
+			frogSelect:new displayFunc(),
+			dogSelect:new displayFunc(),
+			hogSelect:new displayFunc(),
+			eggnogSelect:new displayFunc(),
+      tryAgain: new displayFunc(),
+      friendDeclare: new displayFunc(),
+      friendNameInput: new displayFunc(),
+      friendNameCheck: new displayFunc(),
+      friendNameCheckYes: new displayFunc(),
+      friendNameCheckNo: new displayFunc(),
+      friendColorQuestion: new displayFunc(),
+      friendColorInput: new displayFunc(),
+      friendColor: new displayFunc(),
+      friendGoofy: new displayFunc(),
+      friendLaugh: new displayFunc(),
+      duckLaugh: new displayFunc(),
+      rainStart: new displayFunc(),
+      rainHowBad: new displayFunc(),
+      rainInputNode: new displayFunc(),
+      rainNotBad: new displayFunc(),
+      rainRangeInput: new displayFunc(),
+      rainReallyBad: new displayFunc(),
+      rainGetOut: new displayFunc(),
+      rainHungry: new displayFunc(),
+      eatChoose: new displayFunc(),
     },
   }
 
@@ -213,6 +211,149 @@ const Story = ({setStory})=>{
     animalsBlock: new displayFunc(".ascii_animals_block")
   };
 
+  //declares the object for easter egg features.
+  const bonusLevel = {}
+
+  //function to invert styles if easter egg is activated.
+  const bonusEgg = function(){
+    if (bonusLevel.enabled){
+      const invert = "invert(100%)";
+      page.border.style.background = "MidnightBlue";
+      const selectorTexts = document.querySelectorAll(".bonus_egg");
+      for (let i of selectorTexts)
+        i.style.filter = invert;
+    }
+  }
+
+  // Listens for Enter to be pressed before continuing.
+  const listen4Enter = function(){
+    return new Promise(resolve => {
+      document.addEventListener("keyup", function enterInputListener(event){
+        if (event.key === "Enter"){
+          document.removeEventListener("keyup", enterInputListener);
+          resolve();
+        }
+      });
+    })
+  }
+
+  // guesses the local language from the browser.
+  const getLanguage = () => {
+    if (navigator.languages && navigator.languages.length) {
+      return navigator.languages[0];
+    } else {
+      return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+    }
+  }
+
+  const ranNumG = function(max){
+    return Math.floor(Math.random() * max);
+  }
+
+  const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
+    if (useKeysBool){
+      return [...Array(maxIndex).keys()].map(x => ++x);
+    }
+    else {
+      return [...Array(maxIndex).keys()];
+    }
+  }
+
+  const shuffle = function fisherYatesArrayShuffler(inputArr){
+    let applyShuffler = () => {
+      let len = inputArr.length;
+      while (len){
+        let ran = ranNumG(len--);
+        [inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
+      }
+      return inputArr;
+    }
+    return applyShuffler(...inputArr);
+  }
+
+  const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
+    const hiddenRaindrops = 20;
+    storminess = Math.floor(hiddenRaindrops*(storminess/100));
+    const rainArray = shuffle(makeArray(storminess));
+    const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
+
+    let delayedRain = async () => {
+      try {
+        for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
+          await sleep(1.77);
+          let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
+          rainSelector.style.display = "unset";
+          rainSelector.style.opacity = 1;
+        }
+      }
+      catch (e){
+        console.log(e);
+      }
+    }
+    delayedRain();
+  }
+
+  //color input sanitizer
+  const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
+    //inputSelector = The selector ID for the text input box being used to choose a color.
+    //asciiObj = the ascii picture that the color is going to be applied to.
+    //transFunc = the function which fires after the check is complete.
+
+    //moves helper text to after the input box. If the input box is in an inline class.
+    if (inputSelector.parentNode.classList.toString() === "inline"){
+      inputSelector.parentNode.after(page.helper.tag.current);
+      inputSelector.parentNode.after(beginningPage.hm.tag.current);
+      inputSelector.parentNode.after(beginningPage.no.tag.current);
+      inputSelector.parentNode.after(beginningPage.yes.tag.current);
+    }
+    else{
+      inputSelector.after(page.helper.tag.current);
+    }
+    await listen4Enter(); // wait for enter to be hit after inputing the color
+    page.helper.hide();
+
+    //blocks the input while it is being checked.
+    inputSelector.disabled = true;
+    await beginningPage.hm.show(); 
+    await beginningPage.hm.hide();
+
+    // event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
+    inputSelector.addEventListener("transitionend", transFunc, {once: true});
+
+    //Colors the Duck based on the input.
+    //saves details to object and local storage.
+    const colorizeAscii = (async () => {
+      inputSelector.style.backgroundColor = inputSelector.value;
+      asciiObj.color = inputSelector.value;
+      asciiObj.tag.current.style.color = asciiObj.color;
+      for (let i of asciiObj.typeSpans)
+        i.current.style.color = asciiObj.color;
+
+      //a little easter egg in case anyone puts in the same color that is used for the background later on.
+      if (inputSelector.value === "paleTurquoise")
+        bonusLevel.enabled = true;
+    })();
+
+    const inputRegex = /#/gu;
+    // checks if the background color has a value.
+    if (!inputSelector.style.backgroundColor){
+      await page.no.show();
+      await page.no.hide();
+      inputSelector.disabled = false;
+      checkColorInput(inputSelector, asciiObj);
+    }
+    //checks to ensure that no hex colors were used and that the duck is not colored white.
+    switch(true){
+      case inputSelector.style.backgroundColor === "white":
+      case Boolean(inputSelector.value.match(inputRegex)):{
+        await page.no.show();
+        await page.no.hide();
+        inputSelector.disabled = false;
+        checkColorInput(inputSelector, asciiObj);
+        break;
+      }
+    }
+  }
 
   //STORY FUNCTIONS
   //BEGINNING 
@@ -220,36 +361,36 @@ const Story = ({setStory})=>{
 
 		beginningPage.startButton.hide();
 		await beginningPage.oneTime.show(1.5);
-		beginningPage.oneTime.tag.after(page.helper.tag);
+		beginningPage.oneTime.tag.current.after(page.helper.tag.current);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
 		await beginningPage.oneTime.hide();
 		await beginningPage.phaseOne.duckWhatColor.show();
-		beginningPage.phaseOne.duckInlineInput.show();
-		duck_color.focus();
+		beginningPage.phaseOne.duckInline.show();
+		beginningPage.phaseOne.duckInlineInput.tag.current.focus();
 
 		//actively resizes the box based on how many characters are in it.
 		//css declares monospace font so no sizing issues.
-		duck_color.addEventListener("input", function inputResizeListener(event){
-			duck_color.style.width = duck_color.value.length + "ch";
+		beginningPage.phaseOne.duckInlineInput.tag.current.addEventListener("input", function inputResizeListener(){
+			beginningPage.phaseOne.duckInlineInput.tag.current.style.width = beginningPage.phaseOne.duckInlineInput.tag.current.value.length + "ch";
 			page.helper.show();
 		});
 
 		ascii.duck.typeSpans = page.duckType;
-		await checkColorInput(duck_color, ascii.duck, storyStartListener);
-	};
+		await checkColorInput(beginningPage.phaseOne.duckInlineInput.tag.current, ascii.duck, storyStartListener);
+	}
 
 		
-	async function storyStartListener(event){
-		duck_color.blur();
-		beginningPage.yes.tag.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
+	async function storyStartListener(){
+		beginningPage.phaseOne.duckWhatColor.tag.current.blur();
+		beginningPage.yes.tag.current.innerHTML = `<p>Ah, yes! That's it. She was a very normal looking ${ascii.duck.color} <span class="inline" style="color: ${ascii.duck.color};">duck.</span></p>`;
 
-		await beginningPage.phaseOne.duckInlineInput.hide(.5);
+		await beginningPage.phaseOne.duckInline.hide(.5);
 		await beginningPage.phaseOne.duckWhatColor.hide(.5);
 
 		await beginningPage.yes.show(1.5);
-		beginningPage.yes.tag.after(page.helper.tag);
+		beginningPage.yes.tag.current.after(page.helper.tag.current);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
@@ -257,7 +398,7 @@ const Story = ({setStory})=>{
 
 		beginningPage.phaseTwo.body.show();
 		await beginningPage.phaseTwo.where.show(2);
-		beginningPage.phaseTwo.where.tag.after(page.helper.tag);
+		beginningPage.phaseTwo.where.tag.current.after(page.helper.tag.current);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
@@ -273,8 +414,8 @@ const Story = ({setStory})=>{
 
 		//eyes animation
 		await beginningPage.phaseTwo.eyes.show(3);
-		beginningPage.phaseTwo.eyes.tag.style.transform = "rotate(0.5turn)";
-		beginningPage.phaseTwo.eyes.tag.style.textShadow = "-1px -1px 3px black";
+		beginningPage.phaseTwo.eyes.tag.current.style.transform = "rotate(0.5turn)";
+		beginningPage.phaseTwo.eyes.tag.current.style.textShadow = "-1px -1px 3px black";
 		await sleep(3);
 
 		beginningPage.phaseTwo.eyes.hide();
@@ -285,8 +426,8 @@ const Story = ({setStory})=>{
 		await ascii.duck.show();
 		page.helper.show();
 
-		beginningPage.phaseTwo.body.tag.after(page.helper.tag);
-		beginningPage.phaseTwo.thereSheIs.tag.after(duck);
+		beginningPage.phaseTwo.body.tag.current.after(page.helper.tag.current);
+		beginningPage.phaseTwo.thereSheIs.tag.current.after(duck);
 		await listen4Enter();
 
 		page.helper.hide();
@@ -295,16 +436,16 @@ const Story = ({setStory})=>{
 		await ascii.duck.hide();
 		ascii.water.hide();
 
-		beginningPage.phaseTwo.splashing.tag.after(ascii.animalsBlock.tag);
-		ascii.animalsBlock.tag.append(ascii.water.tag, duck);
+		beginningPage.phaseTwo.splashing.tag.current.after(ascii.animalsBlock.tag.current);
+		ascii.animalsBlock.tag.current.append(ascii.water.tag.current, duck);
 
 		beginningPage.phaseTwo.splashing.show();
 		await ascii.animalsBlock.show({sec: 2, disp: "flex"});
 		ascii.water.show({sec: 0});
 		ascii.duck.show({sec:0, rel: false});
 
-		ascii.water.tag.style.flex = 1;
-		ascii.animalsBlock.tag.style.Top = "55px";
+		ascii.water.tag.current.style.flex = 1;
+		ascii.animalsBlock.tag.current.style.Top = "55px";
 		//duck.style.left = "50%";
 		duck.style.top = "-60px";
 
@@ -312,16 +453,12 @@ const Story = ({setStory})=>{
 		beginningPage.phaseThree.body.show({sec: 0});
 		beginningPage.phaseThree.chooseAFriend.show();
 
-		beginningPage.phaseThree.chooseAFriend.tag.after(page.helper.tag);
+		beginningPage.phaseThree.chooseAFriend.tag.current.after(page.helper.tag.current);
 		page.helper.show();
 		await listen4Enter();
 		page.helper.hide();
 		// Checks to ensure a friend was selected and assigns the value to the duck object.
 		await (async function obtainAFriend(){
-			const frog = document.querySelector("#frogSelect"),
-				dog = document.querySelector("#dogSelect"),
-				hog = document.querySelector("#hogSelect"),
-				eggnog = document.querySelector("#eggnogSelect");
 			let friendObtained = false;
 
 			while (!friendObtained === true){
@@ -379,43 +516,43 @@ const Story = ({setStory})=>{
 				document.querySelector("p#friend_declare > span.friend_type").className = "friend_type bonus_egg";
 
 				await beginningPage.phaseThree.friendDeclare.show();
-				friend_name_input.focus();
-				beginningPage.phaseThree.friendDeclare.tag.after(page.helper.tag);
+				beginningPage.phaseThree.friendNameInput.tag.current.focus();
+				beginningPage.phaseThree.friendDeclare.tag.current.after(page.helper.tag.current);
 
 				//choose a name for duck's friend.
-				friend_name_input.addEventListener("input", function inputResizeListener(event){
-					friend_name_input.style.width = friend_name_input.value.length + "ch";
+				beginningPage.phaseThree.friendNameInput.tag.current.addEventListener("input", function inputResizeListener(event){
+					beginningPage.phaseThree.friendNameInput.tag.current.style.width = beginningPage.phaseThree.friendNameInput.tag.current.value.length + "ch";
 					page.helper.show();
 				});
 
 				await listen4Enter();
 				page.helper.hide();
 				await beginningPage.phaseThree.friendDeclare.hide();
-				friend_name_input.disabled = true;
+				beginningPage.phaseThree.friendNameInput.tag.current.disabled = true;
 
 				// If the inputed name has a space, is blank, or is a number have them try again.
 				const tryAgain = async (friend_nameError, friend_nameError_content) => {
 					friend_nameError.append(friend_nameError_content);
-					beginningPage.phaseThree.friendDeclare.tag.after(friend_nameError);
+					beginningPage.phaseThree.friendDeclare.tag.current.after(friend_nameError);
 					friend_nameError.style.display = "block";
 					await sleep(4);
 					friend_nameError.remove();
-					friend_name_input.disabled = false;
+					beginningPage.phaseThree.friendNameInput.tag.current.disabled = false;
 				}
 
-				if (friend_name_input.value.indexOf(" ") > -1){
+				if (beginningPage.phaseThree.friendNameInput.tag.current.value.indexOf(" ") > -1){
 					const friend_nameError = document.createElement("p");
 					const friend_nameError_content = document.createTextNode("Sorry, names can't contain spaces. Try again.");
 					tryAgain(friend_nameError, friend_nameError_content);
 					continue;
 				}
-				else if (!(friend_name_input.value) || friend_name_input.value.match(/[0-9]/)){
+				else if (!(beginningPage.phaseThree.friendNameInput.tag.current.value) || beginningPage.phaseThree.friendNameInput.tag.current.value.match(/[0-9]/)){
 					const friend_nameError = document.createElement("p");
 					const friend_nameError_content = document.createTextNode("That name won't work! Try again.");
 					tryAgain(friend_nameError, friend_nameError_content);
 					continue;
 				}
-				else if (!friend_name_input.value.match(/^[A-Z]/m)){
+				else if (!beginningPage.phaseThree.friendNameInput.tag.current.value.match(/^[A-Z]/m)){
 					const friend_nameError = document.createElement("p");
 					const friend_nameError_content = document.createTextNode("Don't forget to capitalize names!")
 					tryAgain(friend_nameError, friend_nameError_content);
@@ -423,29 +560,29 @@ const Story = ({setStory})=>{
 				}
 
 
-				document.querySelector("legend>span.friend_name").innerText = friend_name_input.value;
+				document.querySelector("legend>span.friend_name").innerText = beginningPage.phaseThree.friendNameInput.tag.current.value;
 				beginningPage.phaseThree.friendNameCheck.show();
-				beginningPage.phaseThree.friendNameCheck.tag.after(page.helper.tag);
+				beginningPage.phaseThree.friendNameCheck.tag.current.after(page.helper.tag.current);
 				page.helper.show();
 				await listen4Enter();
 				page.helper.hide();
 
-				if (name_check_yes.checked){
-					ascii.duck.friend.name = friend_name_input.value;
+				if (beginningPage.phaseThree.friendNameCheckYes.tag.current.checked){
+					ascii.duck.friend.name = beginningPage.phaseThree.friendNameInput.tag.current.value;
 					await beginningPage.phaseThree.friendNameCheck.hide();
 					for(let i of page.friendName){
 						i.innerText = ascii.duck.friend.name;
 						i.style.color = ascii.duck.friend.color;
 					}
 					isFriendUndeclared = false;
-					friend_name_input.blur();
+					beginningPage.phaseThree.friendNameInput.tag.current.blur();
 				}
 
-				else if(name_check_no.checked){
+				else if(beginningPage.phaseThree.friendNameCheckNo.tag.current.checked){
 					await beginningPage.phaseThree.friendNameCheck.hide();
-					friend_name_input.style.width = "11ch";
-					friend_name_input.value = "";
-					friend_name_input.disabled = false;
+					beginningPage.phaseThree.friendNameInput.tag.current.style.width = "11ch";
+					beginningPage.phaseThree.friendNameInput.tag.current.value = "";
+					beginningPage.phaseThree.friendNameInput.tag.current.disabled = false;
 				}
 			}
 		})();
@@ -453,20 +590,20 @@ const Story = ({setStory})=>{
 
 		await beginningPage.phaseThree.friendColorQuestion.show();
 		beginningPage.phaseThree.friendColorInput.show();
-		friend_color.focus();
-		friend_color.addEventListener("input", function inputResizeListener(event){
-			friend_color.style.width = friend_color.value.length + "ch";
+		beginningPage.phaseThree.friendColor.tag.current.focus();
+		beginningPage.phaseThree.friendColor.tag.current.addEventListener("input", function inputResizeListener(event){
+			beginningPage.phaseThree.friendColor.tag.current.style.width = beginningPage.phaseThree.friendColor.tag.current.value.length + "ch";
 			page.helper.show();
 		});
 		ascii.duck.friend.typeSpans = page.friendType;
-		await checkColorInput(friend_color, ascii.duck.friend, async () => {
+		await checkColorInput(beginningPage.phaseThree.friendColor.tag.current, ascii.duck.friend, async () => {
 
 			// Sets the Easter Egg after the color has been declared to avoid black on dark text.
 			document.querySelector("p#friend_colorQuestion > span.friend_name").className = "friend_name bonus_egg";
 			document.querySelector("span#friend_colorQuestion_input > span.friend_type").className = "friend_type bonus_egg";
 
 			//Sets the value of the success text so that it can be colored, if necessary by the Easter Egg function.
-			beginningPage.yes.tag.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type bonus_egg" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
+			beginningPage.yes.tag.current.innerHTML = `<p>Oh, duh! How could I forget! They were definitely a ${ascii.duck.friend.color} <span class="inline friend_type bonus_egg" style="color: ${ascii.duck.friend.color};">${ascii.duck.friend.type}.</span></p>`;
 
 			// checks to see if easterEgg applies
 			bonusEgg();
@@ -475,12 +612,12 @@ const Story = ({setStory})=>{
 			for (let i of page.friendName)
 				i.style.color = ascii.duck.friend.color;
 
-			friend_color.blur();
+			beginningPage.phaseThree.friendColor.tag.current.blur();
 			await beginningPage.phaseThree.friendColorInput.hide();
 			beginningPage.yes.hide();
-			beginningPage.phaseThree.friendColorInput.tag.after(beginningPage.yes.tag);
+			beginningPage.phaseThree.friendColorInput.tag.current.after(beginningPage.yes.tag.current);
 			await beginningPage.phaseThree.friendColorQuestion.hide();
-			ascii.animalsBlock.tag.append(ascii.duck.friend.tag);
+			ascii.animalsBlock.tag.current.append(ascii.duck.friend.tag.current);
 
 			ascii.duck.friend.show({rel: false, disp: "inline-block"});
 			ascii.duck.show({rel: false, disp: "inline-block"});
@@ -514,12 +651,12 @@ const Story = ({setStory})=>{
 				.to("#frog, #dog, #hog, #eggnog", {duration:.5, ...placementFriend})
 				.to("#duck", {duration:.5, ...placementDuck},"<");
 
-			ascii.duck.friend.tag.style.top = "-50px";
-			ascii.animalsBlock.tag.style.marginTop = "50px";
+			ascii.duck.friend.tag.current.style.top = "-50px";
+			ascii.animalsBlock.tag.current.style.marginTop = "50px";
 
 			await beginningPage.yes.show({sec: 1.5});
 
-			beginningPage.yes.tag.after(page.helper.tag)
+			beginningPage.yes.tag.current.after(page.helper.tag.current)
 			page.helper.show();
 			await listen4Enter();
 			page.helper.hide();
@@ -530,7 +667,7 @@ const Story = ({setStory})=>{
 			await beginningPage.phaseThree.friendLaugh.show();
 			await beginningPage.phaseThree.duckLaugh.show();
 
-			beginningPage.phaseThree.duckLaugh.tag.after(page.helper.tag);
+			beginningPage.phaseThree.duckLaugh.tag.current.after(page.helper.tag.current);
 			page.helper.show();
 			await listen4Enter();
 			await page.helper.hide();
@@ -543,12 +680,12 @@ const Story = ({setStory})=>{
 			await beginningPage.phaseThree.rainHowBad.show();
 			beginningPage.phaseThree.rainInputNode.show();
 
-			beginningPage.phaseThree.rainInputNode.tag.after(page.helper.tag);
+			beginningPage.phaseThree.rainInputNode.tag.current.after(page.helper.tag.current);
 			page.helper.show();
 			await listen4Enter();
 			page.helper.hide();
 
-			makeItRain(beginningPage.phaseThree.rainRangeInput.tag.value);
+			makeItRain(beginningPage.phaseThree.rainRangeInput.tag.current.value);
 
 			// simulate a lightning flash
 			page.border.style.background = `#666`;
@@ -575,7 +712,7 @@ const Story = ({setStory})=>{
 
 			await beginningPage.phaseThree.rainGetOut.show();
 
-			beginningPage.phaseThree.rainGetOut.tag.after(page.helper.tag);
+			beginningPage.phaseThree.rainGetOut.tag.current.after(page.helper.tag.current);
 			page.helper.show();
 			await listen4Enter();
 			page.helper.hide();
@@ -585,13 +722,13 @@ const Story = ({setStory})=>{
 			await beginningPage.phaseThree.rainHungry.show();
 			await beginningPage.phaseThree.eatChoose.show();
 
-			beginningPage.phaseThree.eatChoose.tag.after(page.helper.tag);
+			beginningPage.phaseThree.eatChoose.tag.current.after(page.helper.tag.current);
 
 			// Text to inform of more to come.
 			let node = document.createElement("p");
 			let content = document.createTextNode("Pudding and Grape Stories To come! Check back later!");
 			node.append(content);
-			page.helper.tag.after(node);
+			page.helper.tag.current.after(node);
 			node.style.display = "block";
 			node.style.scale = ".5";
 			node.style.textAlign = "center";
@@ -626,7 +763,7 @@ const Story = ({setStory})=>{
 					else{
 						const p = document.createElement("p");
 						p.append(document.createTextNode("You must make a selection to continue."));
-						beginningPage.phaseThree.eatChoose.tag.after(p);
+						beginningPage.phaseThree.eatChoose.tag.current.after(p);
 						p.style.display = "block";
 						page.helper.show();
 						await listen4Enter();
@@ -680,7 +817,7 @@ const Story = ({setStory})=>{
       await pizza.karenWords5.show({sec: 2}); //testing only
       await pizza.karenWords6.show();
 
-      pizza.karenWords6.tag.after(page.helper.tag);
+      pizza.karenWords6.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -696,7 +833,7 @@ const Story = ({setStory})=>{
       await pizza.sorryGuys.show();
       await pizza.leave.show();
 
-      pizza.leave.tag.after(page.helper.tag);
+      pizza.leave.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -709,7 +846,7 @@ const Story = ({setStory})=>{
       await pizza.duckNod.show();
       await pizza.sneaky.show();
 
-      pizza.sneaky.tag.after(page.helper.tag);
+      pizza.sneaky.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -722,7 +859,7 @@ const Story = ({setStory})=>{
       await pizza.startBand.show();
       await pizza.soundsAwesome.show();
 
-      pizza.soundsAwesome.tag.after(page.helper.tag);
+      pizza.soundsAwesome.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -735,7 +872,7 @@ const Story = ({setStory})=>{
       await pizza.finallyReady.show();
       await pizza.back4More.show();
 
-      pizza.back4More.tag.after(page.helper.tag);
+      pizza.back4More.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -745,7 +882,7 @@ const Story = ({setStory})=>{
       await pizza.back4More.hide();
 
       await pizza.songChoose.show();
-      pizza.songChoose.tag.after(page.helper.tag);
+      pizza.songChoose.tag.current.after(page.helper.tag.current);
 
 
       let money = 0;
@@ -756,19 +893,19 @@ const Story = ({setStory})=>{
           let songRatingDisplay = document.getElementById("song_rating_display"),
               songMoneyEarned = document.getElementById("song_moneyEarned"),
               songMoneyNeeded = document.getElementById("song_moneyNeeded");
-          if (pizza.songReviewSliderInput.tag.value >= 1 & pizza.songReviewSliderInput.tag.value < 3){
+          if (pizza.songReviewSliderInput.tag.current.value >= 1 & pizza.songReviewSliderInput.tag.current.value < 3){
             songRatingDisplay.innerText = "bad";
           }
-          else if (pizza.songReviewSliderInput.tag.value >= 3 & pizza.songReviewSliderInput.tag.value < 5){
+          else if (pizza.songReviewSliderInput.tag.current.value >= 3 & pizza.songReviewSliderInput.tag.current.value < 5){
             songRatingDisplay.innerText = "lame";
           }
-          else if (pizza.songReviewSliderInput.tag.value >= 5 & pizza.songReviewSliderInput.tag.value < 7){
+          else if (pizza.songReviewSliderInput.tag.current.value >= 5 & pizza.songReviewSliderInput.tag.current.value < 7){
             songRatingDisplay.innerText = "decent";
           }
-          else if (pizza.songReviewSliderInput.tag.value >= 7 & pizza.songReviewSliderInput.tag.value < 9){
+          else if (pizza.songReviewSliderInput.tag.current.value >= 7 & pizza.songReviewSliderInput.tag.current.value < 9){
             songRatingDisplay.innerText = "great";
           }
-          else if (pizza.songReviewSliderInput.tag.value >9){
+          else if (pizza.songReviewSliderInput.tag.current.value >9){
             songRatingDisplay.innerText = "FANTASTIC";
           }
 
@@ -783,8 +920,8 @@ const Story = ({setStory})=>{
         let song = new Audio();
         await (songDebut = async () => {
 
-          pizza.songChoose.tag.disabled = false;
-          pizza.songPlayAgain.tag.after(page.helper.tag);
+          pizza.songChoose.tag.current.disabled = false;
+          pizza.songPlayAgain.tag.current.after(page.helper.tag.current);
 
 
         //TODO
@@ -832,7 +969,7 @@ const Story = ({setStory})=>{
           song.src = playSelect;
 
           // When the play button is clicked, waits till the song is playable then plays it. Until then a loading status is displayed.
-          pizza.playButton.tag.addEventListener("click", async e => {
+          pizza.playButton.tag.current.addEventListener("click", async e => {
             song.load();
 
             // removes focus from radios.
@@ -843,7 +980,7 @@ const Story = ({setStory})=>{
           song.addEventListener("canplaythrough", e => {
             song.play();
 
-            pizza.songChoose.tag.disabled = true;
+            pizza.songChoose.tag.current.disabled = true;
             unableToPlay = false;
             node.remove();
 
@@ -857,7 +994,7 @@ const Story = ({setStory})=>{
 
 
           node.append(content);
-          pizza.songChoose.tag.after(node);
+          pizza.songChoose.tag.current.after(node);
           node.style.display = "block";
 
           while (unableToPlay){
@@ -876,7 +1013,7 @@ const Story = ({setStory})=>{
 
         // Waits for the play button to be clicked. And then queries the radio buttons to play a song.
         await (async () => {
-          pizza.songChoose.tag.addEventListener("change", async () => {
+          pizza.songChoose.tag.current.addEventListener("change", async () => {
 
             // Hides the previous iterations results and prompt.
             pizza.rating.hide();
@@ -905,7 +1042,7 @@ const Story = ({setStory})=>{
               let content = document.createTextNode("You have to pick something for them to play first!");
               node.append(content);
               node.style.display = "block";
-              pizza.songChoose.tag.after(node);
+              pizza.songChoose.tag.current.after(node);
               await sleep(3);
               node.remove();
               await songDebut();
@@ -921,7 +1058,7 @@ const Story = ({setStory})=>{
           pizza.pauseButton.hide({sec: 0});
           pizza.playButton.show({sec: 0, disp: "inline"});
           }
-        pizza.pauseButton.tag.addEventListener("click", pauseButtonListener);
+        pizza.pauseButton.tag.current.addEventListener("click", pauseButtonListener);
 
 
         const playButtonListener = () => {
@@ -930,7 +1067,7 @@ const Story = ({setStory})=>{
           pizza.playButton.hide({sec: 0});
           pizza.pauseButton.show({sec: 0, disp: "inline"});
             }
-        pizza.playButton.tag.addEventListener("click", playButtonListener);
+        pizza.playButton.tag.current.addEventListener("click", playButtonListener);
 
 
         const ffwdButtonListener = () => {
@@ -942,7 +1079,7 @@ const Story = ({setStory})=>{
             song.preservePitch = false;
           }
         }
-        pizza.ffwdButton.tag.addEventListener("click", ffwdButtonListener);
+        pizza.ffwdButton.tag.current.addEventListener("click", ffwdButtonListener);
 
         // uncheck all of the radios
         song1Select.checked = false;
@@ -954,9 +1091,9 @@ const Story = ({setStory})=>{
           song.addEventListener("ended", async () => {
 
             //remove button listeners
-            pizza.pauseButton.tag.removeEventListener("click", pauseButtonListener);
-            pizza.playButton.tag.removeEventListener("click", playButtonListener);
-            pizza.ffwdButton.tag.removeEventListener("click", ffwdButtonListener);
+            pizza.pauseButton.tag.current.removeEventListener("click", pauseButtonListener);
+            pizza.playButton.tag.current.removeEventListener("click", playButtonListener);
+            pizza.ffwdButton.tag.current.removeEventListener("click", ffwdButtonListener);
 
             pizza.songPlaying.hide(); 
             player_buttons.style.display = "none";
@@ -967,28 +1104,28 @@ const Story = ({setStory})=>{
         await pizza.howGood.show();
         pizza.songRatingSlide.show();
 
-        pizza.songRatingSlide.tag.after(page.helper.tag);
+        pizza.songRatingSlide.tag.current.after(page.helper.tag.current);
         page.helper.show();
         await listen4Enter();
         page.helper.hide();
         
         pizza.howGood.hide();
         pizza.songRatingSlide.hide();
-        pizza.songRatingSlide.tag.blur();
+        pizza.songRatingSlide.tag.current.blur();
 
         // Sets the money equal to the review
-        money += parseFloat(pizza.songReviewSliderInput.tag.value);
+        money += parseFloat(pizza.songReviewSliderInput.tag.current.value);
 
         let node = document.createElement("p"),
-            content = document.createTextNode(`+${pizza.songReviewSliderInput.tag.value}`);
+            content = document.createTextNode(`+${pizza.songReviewSliderInput.tag.current.value}`);
         node.append(content);
         node.style.display = "block";
-        pizza.songChoose.tag.after(node);
+        pizza.songChoose.tag.current.after(node);
         await sleep(1);
         node.remove();
 
         // reset the slider
-        pizza.songReviewSliderInput.tag.value = 5;
+        pizza.songReviewSliderInput.tag.current.value = 5;
 
       } while (money < 20);
 
@@ -996,7 +1133,7 @@ const Story = ({setStory})=>{
       await pizza.pizzaFinally.show();
       await pizza.sneakInside.show();
 
-      pizza.sneakInside.tag.after(page.helper.tag);
+      pizza.sneakInside.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -1010,13 +1147,13 @@ const Story = ({setStory})=>{
 
       for (let i=0; i<8; i++){
         let dot = document.createTextNode(`.`);
-        pizza.pizzaWait.tag.append(dot);
+        pizza.pizzaWait.tag.current.append(dot);
         await sleep(1);
       }
 
       pizza.ninjaSneak.show();
 
-      pizza.ninjaSneak.tag.after(page.helper.tag);
+      pizza.ninjaSneak.tag.current.after(page.helper.tag.current);
       page.helper.show();
       await listen4Enter();
       page.helper.hide();
@@ -1091,86 +1228,86 @@ const Story = ({setStory})=>{
         <div className="air"></div>
       </div>
 			<div className="flex-container">
-				<div className="container"></div>
+				<div ref={page.container} className="container"></div>
 				       <button ref={beginningPage.startButton.tag} onClick={startButtonListener}>click to start</button>
 				       <div className="phasedDisplay flex-container">
-				         <p id="oneTime">Once upon a time there was a <span className="duck_type bonus_egg">duck</span>.</p>
-				         <p id="whatColor">Now, what was the color of that <span className="duck_type bonus_egg">duck</span> again?</p>
-				         <span className="inline">
+                 <p id="oneTime" ref={beginningPage.oneTime.tag}>Once upon a time there was a <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span>.</p>
+                 <p ref={beginningPage.phaseOne.duckWhatColor.tag} id="whatColor">Now, what was the color of that <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span> again?</p>
+				         <span ref={beginningPage.phaseOne.duckInline.tag} className="inline">
 				           <p>I think she was a </p>
-				           <input id="duck_color" type="text" name="duck_color" placeholder="Type a color" maxLength="24" size="12" />
-				           <p> <span className="duck_type bonus_egg">duck</span>.</p>
+				           <input ref={beginningPage.phaseOne.duckInlineInput.tag} id="duck_color" type="text" name="duck_color" placeholder="Type a color" maxLength="24" size="12" />
+				           <p> <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]}  className="duck_type bonus_egg">duck</span>.</p>
 				         </span>
-				         <p id="helper">Hit &quot;Enter&quot; on your keyboard. 
+				         <p ref={page.helper.tag} id="helper">Hit &quot;Enter&quot; on your keyboard. 
 				           <span id="mobile_helper_screen"><input id="mobile_helper_input" type="text" name="mobile_helper" />Tap here to show keyboard</span>
 				         </p>
-				         <p id="hm">Hmmmmmm.....</p>
-				         <p id="no">No, that wasn&apos;t it.</p>
-				         <p id="yes"></p>
-				         <div className="phaseTwo">
-				           <p id="where">Now, where is that <span className="duck_type bonus_egg">duck</span>? She was just around here somewhere. </p>
-				           <p id="letsSee">Let&apos;s see.......</p>
-									 <span role="img" aria-label="eyes" id="eyes" className="bonus_egg">👀</span>
-				           <h2 id="ah">ah! </h2>
-				             <p id="thereSheIs">there she is.</p>
-				               <pre className="ascii_animal bonus_egg" id="duck">{`
+				         <p ref={beginningPage.hm.tag} id="hm">Hmmmmmm.....</p>
+				         <p ref={beginningPage.no.tag} id="no">No, that wasn&apos;t it.</p>
+				         <p ref={beginningPage.yes.tag} id="yes"></p>
+				         <div ref={beginningPage.phaseTwo.body.tag}className="phaseTwo">
+				           <p ref={beginningPage.phaseTwo.where.tag} id="where">Now, where is that <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span>? She was just around here somewhere. </p>
+				           <p ref={beginningPage.phaseTwo.letsSee.tag} id="letsSee">Let&apos;s see.......</p>
+									 <span role="img" aria-label="eyes" ref={beginningPage.phaseTwo.eyes.tag} id="eyes" className="bonus_egg">👀</span>
+				           <h2 ref={beginningPage.phaseTwo.ah.tag} id="ah">ah! </h2>
+				             <p ref={beginningPage.phaseTwo.thereSheIs.tag} id="thereSheIs">there she is.</p>
+				               <pre className="ascii_animal bonus_egg" ref={ascii.duck.tag} id="duck">{`
          __
        =(• )___
         (  _> /  
 				                 `}
 				               </pre>
-				             <p id="splashing">One day <span className="duck_type bonus_egg">duck</span> was splashing in the pond with her best friend.</p>
+				             <p ref={beginningPage.phaseTwo.splashing.tag} id="splashing">One day <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span> was splashing in the pond with her best friend.</p>
 				         </div>
 				         <div className="ascii_animals_block">
 				         </div>
-				         <div className="phaseThree">
-				             <fieldset id="chooseAFriend">
-				               <legend>Please Choose one friend for <span className="duck_type bonus_egg">duck</span>.</legend>
-				               <input id="frogSelect" type="radio" name="friend" defaultValue="frog" />
+				         <div ref={beginningPage.phaseThree.body.tag} className="phaseThree">
+				             <fieldset ref={beginningPage.phaseThree.chooseAFriend.tag} id="chooseAFriend">
+				               <legend>Please Choose one friend for <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span>.</legend>
+				               <input ref={beginningPage.phaseThree.frogSelect.tag} id="frogSelect" type="radio" name="friend" defaultValue="frog" />
 				               <label htmlFor="frogSelect">Frog</label>
 				               <br />
-				               <input id="dogSelect" type="radio" name="friend" defaultValue="dog" />
+				               <input ref={beginningPage.phaseThree.dogSelect.tag} id="dogSelect" type="radio" name="friend" defaultValue="dog" />
 				               <label htmlFor="dogSelect">Dog</label>
 				               <br />
-				               <input id="hogSelect" type="radio" name="friend" defaultValue="hog" />
+				               <input ref={beginningPage.phaseThree.hogSelect.tag} id="hogSelect" type="radio" name="friend" defaultValue="hog" />
 				               <label htmlFor="hogSelect">Hog</label>
 				               <br />
-				               <input id="eggnogSelect" type="radio" name="friend" defaultValue="eggnog" />
+				               <input ref={beginningPage.phaseThree.eggnogSelect.tag} id="eggnogSelect" type="radio" name="friend" defaultValue="eggnog" />
 				               <label htmlFor="eggnogSelect">Eggnog</label>
 				               <br />
 				             </fieldset>
-				             <p id="tryAgain">You have to pick a friend for <span className="duck_type bonus_egg">duck</span> first!</p>
-				             <p id="friend_declare"><span className="duck_type bonus_egg">duck</span>&apos;s best friend was a <span className="friend_type"></span> named
+				             <p ref={beginningPage.phaseThree.tryAgain.tag} id="tryAgain">You have to pick a friend for <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span> first!</p>
+				             <p ref={beginningPage.phaseThree.friendDeclare.tag} id="friend_declare"><span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span>&apos;s best friend was a <span className="friend_type"></span> named
 				                <span className="inline">
-				               <input id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxLength="23" size="11" />.
+				               <input ref={beginningPage.phaseThree.friendNameInput.tag} id="friend_name_input" type="text" name="friend_name" placeholder="Type a name" maxLength="23" size="11" />.
 				                </span>
 				             </p>
-				             <fieldset className="input_name_check">
+				             <fieldset ref={beginningPage.phaseThree.friendNameCheck.tag} className="input_name_check">
 				               <legend>Does <span className="friend_name"></span> sound right?</legend>
-				               <input id="name_check_yes" type="radio" name="name_check" defaultValue="yes" />
+				               <input ref={beginningPage.phaseThree.friendNameCheckYes.tag} id="name_check_yes" type="radio" name="name_check" defaultValue="yes" />
 				               <label htmlFor="name_check">Yes</label>
 				               <br />
-				               <input id="name_check_no" type="radio" name="name_check" defaultValue="no" defaultChecked />
+				               <input ref={beginningPage.phaseThree.friendNameCheckNo.tag} id="name_check_no" type="radio" name="name_check" defaultValue="no" defaultChecked />
 				               <label htmlFor="name_check">No</label>
 				               <br />
 				             </fieldset>
-				               <p id="friend_colorQuestion">I always forget what color <span className="friend_name"></span> is. Do you remember?</p>
-				               <span id="friend_colorQuestion_input" className="inline" >
+				               <p ref={beginningPage.phaseThree.friendColorQuestion.tag} id="friend_colorQuestion">I always forget what color <span className="friend_name"></span> is. Do you remember?</p>
+				               <span ref={beginningPage.phaseThree.friendColorInput.tag} id="friend_colorQuestion_input" className="inline" >
 				                 <p>Maybe they were a </p>
-				                 <input id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxLength="24" size="12" />
+				                 <input ref={beginningPage.phaseThree.friendColor.tag} id="friend_color" type="text" name="friend_color" placeholder="Type a color" maxLength="24" size="12" />
 				                <span className="friend_type"></span>.
 				               </span>
-				               <p id="friend_goofy">&quot;You sure are one goofy <span className="friend_type bonus_egg"></span>, <span className="friend_name bonus_egg"></span>.&quot; <span className="duck_type bonus_egg">duck</span> said as they splashed together.</p>
-				               <p id="friend_laugh"><span className="friend_name bonus_egg"></span> laughed.</p>
-				               <p id="duck_laugh"><span className="duck_type bonus_egg">Duck</span> laughed.</p>
-				               <p id="rain_start">After a little while it started to <span style={{color:"blue"}}>rain</span>.</p>
-				               <p id="rain_howBad">How bad was the storm?</p>
-				               <div id="rain_input_node">
-				                 <span id="notBad">Not too bad. </span><input id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" defaultValue="25" /><span id="reallyBad" > Really Bad.</span>
+				               <p ref={beginningPage.phaseThree.friendGoofy.tag} id="friend_goofy">&quot;You sure are one goofy <span className="friend_type bonus_egg"></span>, <span className="friend_name bonus_egg"></span>.&quot; <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span> said as they splashed together.</p>
+				               <p ref={beginningPage.phaseThree.friendLaugh.tag} id="friend_laugh"><span className="friend_name bonus_egg"></span> laughed.</p>
+				               <p ref={beginningPage.phaseThree.duckLaugh.tag} id="duck_laugh"><span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">Duck</span> laughed.</p>
+				               <p ref={beginningPage.phaseThree.rainStart.tag} id="rain_start">After a little while it started to <span style={{color:"blue"}}>rain</span>.</p>
+				               <p ref={beginningPage.phaseThree.rainHowBad.tag} id="rain_howBad">How bad was the storm?</p>
+				               <div ref={beginningPage.phaseThree.rainInputNode.tag} id="rain_input_node">
+				                 <span ref={beginningPage.phaseThree.rainNotBad.tag} id="notBad">Not too bad. </span><input ref={beginningPage.phaseThree.rainRangeInput.tag} id="rain_range" type="range" name="rain_range" min="0" max="100" step="5" defaultValue="25" /><span ref={beginningPage.phaseThree.rainReallyBad.tag} id="reallyBad" > Really Bad.</span>
 				               </div>
-				               <p id="rain_getOut">&quot;We should get out of the water during a rainstorm.&quot; said <span className="friend_name bonus_egg"></span></p>
-				               <p id="rain_hungry">&quot;Yeah. I&apos;m hungry anyways. What should we eat today?&quot; said <span className="duck_type bonus_egg">duck</span>.</p>
-				               <fieldset id="eat_choose">
+				               <p ref={beginningPage.phaseThree.rainGetOut.tag} id="rain_getOut">&quot;We should get out of the water during a rainstorm.&quot; said <span className="friend_name bonus_egg"></span></p>
+				               <p ref={beginningPage.phaseThree.rainHungry.tag} id="rain_hungry">&quot;Yeah. I&apos;m hungry anyways. What should we eat today?&quot; said <span ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} className="duck_type bonus_egg">duck</span>.</p>
+				               <fieldset ref={beginningPage.phaseThree.eatChoose.tag} id="eat_choose">
 				               <legend id="eat_what">What should they eat?</legend>  
 				                 <input id="pizzaSelect" type="radio" name="food" defaultValue="pizza" />
 				                 <label htmlFor="pizzaSelect">Pizza</label><br />
