@@ -9,6 +9,9 @@
  .flex-container > aside { transition: flex, linear, 7s; }
  .flex-container > aside:nth-of-type(2) { flex: 1; }
  
+div#app {
+	transition: background-color 3s;
+}
  
 input {
 	border:none;

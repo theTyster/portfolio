@@ -43,7 +43,6 @@ div#app{
       flex-shrink: 0;
       //position: relative;
       bottom: 0;
-      background-color: theme.$citron;
       @include center(100%);
       padding-top: $pad;
       padding-bottom: $pad;

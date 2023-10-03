@@ -1,6 +1,7 @@
 //DEV Libraries
 import {useLayoutEffect, useEffect, useRef} from "react";
 import gsap from "gsap";
+import PropTypes from "prop-types";
 
 //Components
 import SvgDuck from "./assets/duck.jsx";
@@ -11,7 +12,14 @@ import "./css/animate_water_flow.scss";
 import "./css/animate_rain.scss";
 
 
-const Beginning = ()=>{
+const Beginning = ({setStory}) => {
+
+  //Props Validation
+  Beginning.propTypes = {
+    setStory: PropTypes.func,
+  }
+
+	//REFS
   const placement_tl = useRef();
 
   //ANIMATIONS
@@ -39,7 +47,6 @@ const Beginning = ()=>{
 					x:430
 				}
 			}
-			console.log(placement)
       const dur = 1;
       placement_tl.current = gsap.timeline();
       placement_tl.current
@@ -243,7 +250,7 @@ const Beginning = ()=>{
 
 		//page tags
 		const page = {
-			body: document.querySelector("body"),
+			body: document.querySelector("div#app"),
 			lightGreenBG: "#B3DCBD",
 			container: document.querySelector(".container"),
 			mobileNotice: new displayFunc("#notice"),
@@ -354,10 +361,8 @@ const Beginning = ()=>{
 			bonusEgg();
 
 			//eyes animation
-			await page.phaseTwo.eyes.show(3);
-			page.phaseTwo.eyes.tag.style.transform = "rotate(0.5turn)";
-			page.phaseTwo.eyes.tag.style.textShadow = "-1px -1px 3px black";
-			await sleep(3);
+			await page.phaseTwo.eyes.show(2);
+			await sleep(2);
 
 			page.phaseTwo.eyes.hide();
 			await page.phaseTwo.letsSee.hide();
@@ -686,7 +691,7 @@ const Beginning = ()=>{
 
 					while (true){
 						if (pizzaSelect.checked){
-							window.open("eata-the-pizza.html", "_self");
+							setStory("more to come")
 							page.helper.show();
 							await listen4Enter();
 							page.helper.hide();

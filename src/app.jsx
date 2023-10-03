@@ -28,7 +28,11 @@ const App = () => {
                 case("firstPaint"):
                   return(<FrontPage setStory={setStory}/>)
                 case("beginning"):
-                  return(<Beginning />)
+                  return(<Beginning setStory={setStory}/>)
+                case("more to come"):
+                  return(
+                    <h1>Thats all for now, folks. Check back later.</h1>
+                  )
               }
             })()
           }
