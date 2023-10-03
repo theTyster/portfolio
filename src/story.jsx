@@ -1,5 +1,9 @@
 //TODO
 //Combine all tags as refs that can be used to manipulate the DOM.
+//
+//Currently you need to add the function below to the page object tags for friendType and friendName.
+//
+// ref={page.duckType[(()=>{page.duckType.push(useRef()); return (page.duckType.length - 1)})()]} 
 
 //DEV Libraries
 import {useLayoutEffect, useRef} from "react";
