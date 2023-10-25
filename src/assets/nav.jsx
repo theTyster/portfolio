@@ -22,6 +22,7 @@ function NavButton({ onClick, menuState }) {
             </g>
           </svg>
       </button>
+      <h1 className="pageTitle">The Duck Story</h1>
       <Menu menuState={ menuState } onClick={ onClick }/>
     </>
   );
@@ -41,11 +42,11 @@ function Menu({ menuState }) {
   const tranStyle = {
     entering: {
       visibility: 'visible',
-      maxHeight: '260px',
+      maxHeight: '560px',
     },
     entered: {
       visibility: 'visible',
-      maxHeight: '260px',
+      maxHeight: '560px',
     },
     exiting: {
       visibility: 'visible',
@@ -65,7 +66,12 @@ function Menu({ menuState }) {
             <a href="/"><li>Home</li></a>
             <a rel="noreferrer noopener" target="_blank" href="https://tydavisportfolio.wordpress.com"><li>About The Author</li></a>
             <a rel="noreferrer noopener" target="_blank" href="https://github.com/theTyster/duck_story"><li>The Code</li></a>
-            <a href="page1.html"><li>Start The Story</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Fruit Search Autocomplete/index.html"><li>Fruit Search</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Giphy Search/index.html"><li>Giphy Search</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Memory Game/index.html"><li>Memory Game</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Jeopardy/index.html"><li>Jeopardy</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Meme Generator/index.html"><li>Meme Generator</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="ToDo App/index.html"><li>ToDo App</li></a>
           </ul>
         </nav>
       )}
