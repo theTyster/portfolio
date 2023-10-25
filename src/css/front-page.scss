@@ -18,15 +18,25 @@ $pad: 2rem;
 
 div#app{
   background-color: theme.$citron;
+  transition: background-color 2s;
   div#content{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     header {
-      flex-shrink:0;
       @include center(800px);
+      display:flex;
+      flex-wrap:wrap;
       padding: 2rem 0;
+      .pageTitle{
+        text-align:center;
+        margin:0;
+        flex:1;
+      }
+      nav{
+        flex-basis:100%;
+      }
       button.menuHam{
         margin: unset;
       }
@@ -41,7 +51,6 @@ div#app{
     }
     footer {
       flex-shrink: 0;
-      //position: relative;
       bottom: 0;
       @include center(100%);
       padding-top: $pad;
@@ -54,6 +63,7 @@ div#app{
     @media(max-width:900px){
       header {
         @include center(600px);
+        display:flex;
       }
       main {
         @include center(600px);
@@ -65,6 +75,7 @@ div#app{
     @media(max-width:700px){
       header {
         @include center(300px);
+        display:flex;
       }
       main {
         @include center(300px);
