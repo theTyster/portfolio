@@ -4,7 +4,7 @@ $("form").on("submit", async function (e) {
   const query = $("input").val();
   let request = await axios
     .get(
-      `http://api.giphy.com/v1/gifs/search?q=${query}&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym`,
+      `https://api.giphy.com/v1/gifs/search?api_key=bRjODJuPyvav8xTfZFu5TVc0XHznI9qY&q=${query}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`,
     )
     .catch(async (e) => {
       $(
