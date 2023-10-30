@@ -66,6 +66,7 @@ function Menu({ menuState }) {
             <a href="/"><li>Home</li></a>
             <a rel="noreferrer noopener" target="_blank" href="https://tydavisportfolio.wordpress.com"><li>About The Author</li></a>
             <a rel="noreferrer noopener" target="_blank" href="https://github.com/theTyster/duck_story"><li>The Code</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="Hacker News Clone/index.html"><li>Hacker News Clone</li></a>
             <a rel="noreferrer noopener" target="_blank" href="Fruit Search Autocomplete/index.html"><li>Fruit Search</li></a>
             <a rel="noreferrer noopener" target="_blank" href="Giphy Search/index.html"><li>Giphy Search</li></a>
             <a rel="noreferrer noopener" target="_blank" href="Memory Game/index.html"><li>Memory Game</li></a>
