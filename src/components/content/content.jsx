@@ -2,23 +2,15 @@
 import ReactDOM from "react-dom/client";
 import {useState} from "react";
 
-//CSS
-import "./css/front-page.scss";
-
 //COMPONENTS
-import Nav from "./assets/nav.jsx";
-import Credit from "./assets/credit.jsx";
-import FrontPage from "./front-page.jsx";
-import Beginning from "./beginning.jsx";
-const App = () => {
+import FrontPage from "./landing-page/landing-page.jsx";
+import Beginning from "./duck-story/beginning.jsx";
+const Content = () => {
 
   const [storyState, setStory] = useState("firstPaint");
 
   return(
     <div id="content">
-      <header>
-        <Nav />
-      </header>
       <main>
         <article>
           {
@@ -37,14 +29,11 @@ const App = () => {
           }
         </article>
       </main>
-      <footer>
-        <Credit />
-      </footer>
     </div>
   )
 }
 
 
 // RENDERS
-const app = ReactDOM.createRoot(document.getElementById("app"));
-app.render(<App />);
+const component = ReactDOM.createRoot(document.getElementById("content"));
+component.render(<Content />);

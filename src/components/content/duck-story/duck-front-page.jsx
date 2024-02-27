@@ -10,10 +10,10 @@ import './css/front-page.scss';
 import SvgDuck from "./assets/duck.jsx";
 
 
-const FrontPage = ({setStory}) => {
+const DuckStoryFrontPage = ({setStory}) => {
 
   //Props Validation
-  FrontPage.propTypes = {
+  DuckStoryFrontPage.propTypes = {
     setStory: PropTypes.func,
   }
 
@@ -155,4 +155,4 @@ const FrontPage = ({setStory}) => {
   );
 }
 
-export default FrontPage;
+export default DuckStoryFrontPage;

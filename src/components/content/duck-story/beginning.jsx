@@ -4,12 +4,12 @@ import gsap from "gsap";
 import PropTypes from "prop-types";
 
 //Components
-import SvgDuck from "./assets/duck.jsx";
+import SvgDuck from "../../../assets/img/duck.jsx";
 
 //CSS
-import "./css/story-styles.scss";
-import "./css/animate_water_flow.scss";
-import "./css/animate_rain.scss";
+import "../../../assets/css/story-styles.scss";
+import "../../../assets/css/animate_water_flow.scss";
+import "../../../assets/css/animate_rain.scss";
 
 
 const Beginning = ({setStory}) => {
