@@ -14,7 +14,6 @@ const App = () => {
 
   const [storyState, setStory] = useState("firstPaint");
 
-
   return(
     <div id="content">
       <header>
