@@ -5,6 +5,9 @@ import gsap from 'gsap';
 //Components
 import NavButton from "./nav-button.jsx"
 
+//CSS
+import "../../assets/css/nav.scss";
+
 function Navigation() {
 
   const [menuState, menuSet] = React.useState(false);

@@ -28,7 +28,7 @@ span.inline > * {
 	display: inline;
 }
 
-#print_div, header, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > *, div.hidden_ascii {
+#print_div, .phasedDisplay > *, .phaseTwo > *, .phaseTwo, .phaseThree > *, div.hidden_ascii {
 	display: none;
 }
 

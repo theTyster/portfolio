@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 import SvgDuck from "../../../assets/img/duck.jsx";
 
 //CSS
-import "../../../assets/css/story-styles.scss";
-import "../../../assets/css/animate_water_flow.scss";
-import "../../../assets/css/animate_rain.scss";
+import "../../../assets/css/duck-story-styles.scss";
+import "../../../assets/css/duck-animate_water_flow.scss";
+import "../../../assets/css/duck-animate_rain.scss";
 
 
 const Beginning = ({setStory}) => {
