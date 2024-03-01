@@ -1,4 +1,4 @@
-@use "_styles" as theme;
+@use "utils/_mixins" as theme;
 
 
 .menuHam {
@@ -7,14 +7,20 @@
 	background-color: white;
 	height: 35px;
 	padding: 10px;
+	margin-bottom: 1rem;
+	border:none;
 }
 
-nav {
-	visibility: 'collapse';
-	display: block;
-	transition-property: visibility, max-height;
-	transition-duration: .5s;
-	overflow: hidden;
+#nav{
+	display:block;
+	margin: 1rem auto 0 auto; 
+	width: 800px;
+	nav{
+		overflow: hidden;
+		visibility: 'collapse';
+		transition-property: visibility, max-height;
+		transition-duration: .5s;
+	}
 	ul {
 		list-style-type: none;
 		padding: 1em 0;
@@ -35,3 +41,4 @@ nav {
 		}
 	}
 }
+
