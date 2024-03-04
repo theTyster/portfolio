@@ -4,6 +4,7 @@ import {useRef, useState} from "react";
 import JobHistory from "./job-history.jsx";
 import Hobbies from "./hobbies.jsx";
 import Contributions from "./contributions.jsx";
+import MyWork from "./my-work.jsx";
 
 function Showcase(){
   //REFS
@@ -37,7 +38,7 @@ function Showcase(){
       <div>{(()=>{
         switch(portfolioState){
           case("my-work"): return (
-            <h2>My Work</h2>
+            <MyWork />
         );
           case("job-history"): return (
             <JobHistory />
