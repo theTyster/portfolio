@@ -1,0 +1,137 @@
+@use "_variables" as variables;
+
+@mixin foundation() {
+	* {margin: 0;}
+	html{height:100%;}
+	body{
+      min-height:100%;
+      background-color: variables.$citron;
+      transition: background-color 2s;
+      div#content{
+        //min-height: 100vh; Making scrollbars on short pages
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+    }
+  } 
+  .pageTitle{
+    text-align:center;
+    margin:0;
+    flex:1;
+  }
+  header {
+	display: block;
+  }
+	main {
+		background: white;
+    @include rounded-corners;
+    flex-grow:1;
+    @include center-by-margin(800px);
+	}
+  article{
+    padding: variables.$pad;
+    position: relative;
+  }
+	p{
+    font: 1.1em/1.3em "Nunito";
+	}
+	h1{
+    //         size / line-height
+    font: bold 1.5em/1.35em "Nunito";
+    margin: .75em;
+	}
+  h2{
+    font: bold 1.4em/1.28em "Nunito";
+    margin: .75em;
+  }
+  h3{
+    font: bold 1.3em/1.21em "Nunito";
+    margin: .75em;
+  }
+  h4{
+    font: bold 1.2em/1.14em "Nunito";
+    margin: .75em;
+  }
+  h5{
+    font: bold 1.1em/1.07em "Nunito";
+    margin: .75em;
+  }
+  button, li, ul{
+    font: bold 1em/1.3em "Nunito";
+  }
+  footer {
+    flex-shrink: 0;
+    bottom: 0;
+    @include center-by-margin(100%);
+    padding-top: variables.$pad;
+    padding-bottom: variables.$pad;
+    text-align: center;
+    white-space: nowrap;
+  
+  }
+  // MEDIA QUERIES 
+  @media(max-width:900px){
+    header {
+      @include center-by-margin(600px);
+      display:flex;
+    }
+    main {
+      @include center-by-margin(600px);
+    }
+    footer {
+      @include center-by-margin(600px);
+    }
+  }
+  @media(max-width:700px){
+    header {
+      @include center-by-margin(300px);
+      display:flex;
+    }
+    main {
+      @include center-by-margin(300px);
+      article{
+        padding: 1rem;
+      }
+    }
+    footer {
+      @include center-by-margin(300px);
+    }
+  }
+}
+
+
+@mixin dark-citron-dropshadow() {
+	filter: drop-shadow(3px 3px 10px #b4a461);
+}
+
+
+@mixin rounded-corners() {
+		border-radius: 7px;
+}
+
+
+@mixin button-click() {
+	&:hover {
+		@include dark-citron-dropshadow;
+		background-color: variables.$lightcitron;
+		background: white;
+		svg g {
+			stroke: variables.$charcoal;
+		}
+		&:active {
+			background-color: variables.$darkcitron;
+			filter: none;
+			svg g {
+				stroke: white;
+			}
+		}
+	}
+}
+
+
+@mixin center-by-margin($w) {
+  display: block;
+  margin: 0 auto;
+  width: $w;
+}
