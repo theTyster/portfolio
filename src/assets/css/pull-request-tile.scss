@@ -1,0 +1,23 @@
+@use "utils/_mixins" as theme;
+@use "utils/_animators" as animate;
+
+//Animations
+@include animate.rotate();
+
+.loading{
+  animation: 3s linear infinite rotate;
+}
+
+
+.pr-icon-merged, .pr-icon-open{
+	fill: white;
+}
+
+.pr-icon-merged{
+	//purple
+	background-color: #8957e5;
+}
+.pr-icon-open{
+	//green
+	background-color: #238636;
+}
