@@ -37,16 +37,14 @@ function Menu({ menuState }) {
       {tranState => (
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
           <ul>
-            <a href="/"><li>Home</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="https://tydavisportfolio.wordpress.com"><li>About The Author</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="https://github.com/theTyster/duck_story"><li>The Code</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Hacker News Clone/index.html"><li>Hacker News Clone</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Fruit Search Autocomplete/index.html"><li>Fruit Search</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Giphy Search/index.html"><li>Giphy Search</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Memory Game/index.html"><li>Memory Game</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Jeopardy/index.html"><li>Jeopardy</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="Meme Generator/index.html"><li>Meme Generator</li></a>
-            <a rel="noreferrer noopener" target="_blank" href="ToDo App/index.html"><li>ToDo App</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="fruit-search/index.html"><li>Fruit Search</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="giphy-search/index.html"><li>Giphy Search</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="hacker-news-clone/index.html"><li>Hacker News Clone</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="jeopardy/index.html"><li>Jeopardy</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="meme-generator/index.html"><li>Meme Generator</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="memory-game/index.html"><li>Memory Game</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="duck-story/index.html"><li>Duck Story</li></a>
+            <a rel="noreferrer noopener" target="_blank" href="todo-app/index.html"><li>ToDo App</li></a>         
           </ul>
         </nav>
       )}
