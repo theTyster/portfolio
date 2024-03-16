@@ -8,7 +8,26 @@ $darkcharcoal: #2e343a;
 $lightcharcoal: #545d65;
 
 $desertsand: #ebcfb2;
-$silver: #c5baaf;
+$burntsilver: #655649;
 
 
+// SPACING
 $pad: 2rem;
+$h1-margin: .75rem;
+
+
+// FONT SIZING
+
+//headers
+$h1-font-size: 60px;
+$h1-line-height: calc($h1-font-size*1.4);
+$h1-font: bold #{$h1-font-size*1.0}/#{$h1-line-height*1.0} "Nunito";
+$h2-font: bold #{$h1-font-size*.60}/#{$h1-line-height*.60} "Nunito";
+$h3-font: bold #{$h1-font-size*.50}/#{$h1-line-height*.50} "Nunito";
+$h4-font: bold #{$h1-font-size*.40}/#{$h1-line-height*.40} "Nunito";
+$h5-font: bold #{$h1-font-size*.30}/#{$h1-line-height*.30} "Nunito";
+
+//p
+$p-font-size: 16px;
+$p-line-height: $p-font-size*1.3;
+$p-font: #{$p-font-size}/#{$p-line-height} "Nunito";

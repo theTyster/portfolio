@@ -1,0 +1,27 @@
+@use "utils/_mixins" as theme;
+@use "utils/_variables" as v;
+
+div.attention-getter {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	@include theme.medium-media-query(){display: block}
+	img {
+		@include theme.medium-media-query(){
+			@include theme.center-by-margin($w:100%);
+			height: auto;
+		}
+		flex: 0 1 auto;
+		/* overflow: hidden; */
+		border-radius: 100%;
+	}
+	div.sideText-container{
+		display: flex;
+		flex: 1 1 0%;
+		div:nth-child(3){
+			@include theme.medium-media-query(){max-width:100%}
+			color: v.$charcoal;
+		}
+	}
+}
+

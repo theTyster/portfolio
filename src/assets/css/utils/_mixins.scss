@@ -1,28 +1,46 @@
-@use "_variables" as variables;
+@use "_variables" as v;
 
+// Data communicates information. 
+// Art communicates Emotion.
+
+//TODO make the theme of colors changeable.
+//Idea:
+// use `&--themename` to set color themes in scss
+// change the theme color variables to be something like:
+// -$primary
+// -$secondary
+// -$accent
+//
+// The end result should be the ability to toggle the theme by changing all
+// tags with a class like `.theme--themename` to a different theme.
+
+// MAIN THEME
 @mixin foundation() {
-	* {margin: 0;}
-	html{height:100%;}
+	/* * {margin: 0;} */
+  html{
+    max-height:100%vh;
+    max-width: 100%vw;
+    overflow-x: hidden;
+  }
 	body{
-      min-height:100%;
-      background-color: variables.$citron;
+      /* min-height:100%; */
+      background-color: v.$citron;
+      background-image: url('img/splat-dark.svg');
+      background-attachment: fixed;
       transition: background-color 2s;
       div#content{
-        //min-height: 100vh; Making scrollbars on short pages
+        /* min-height: 100vh; //Making scrollbars on short pages */
         display: flex;
         flex-direction: column;
         align-items: stretch;
 
     }
   } 
-  .pageTitle{
-    text-align:center;
-    margin:0;
-    flex:1;
+  .page-title{
+    text-align: center;
+    padding: v.$pad;
   }
-  header {
-	display: block;
-  }
+  header {display: block;}
 	main {
 		background: white;
     @include rounded-corners;
@@ -30,108 +48,127 @@
     @include center-by-margin(800px);
 	}
   article{
-    padding: variables.$pad;
+    padding: v.$pad;
     position: relative;
   }
-	p{
-    font: 1.1em/1.3em "Nunito";
-	}
-	h1{
-    //         size / line-height
-    font: bold 1.5em/1.35em "Nunito";
-    margin: .75em;
-	}
-  h2{
-    font: bold 1.4em/1.28em "Nunito";
-    margin: .75em;
+	p{font: v.$p-font}
+  h1{
+    font: v.$h1-font;
+    margin: v.$h1-margin;
   }
-  h3{
-    font: bold 1.3em/1.21em "Nunito";
-    margin: .75em;
+  h2{                                                            
+    font: v.$h2-font;
+    margin: calc(v.$h1-margin*.8);
+  }                                                              
+  h3{                                                            
+    font: v.$h3-font;
+    margin: calc(v.$h1-margin*.6);
+  }                                                              
+  h4{                                                            
+    font: v.$h4-font;
+    margin: calc(v.$h1-margin*.4);
+  }                                                              
+  h5{                                                            
+    font: v.$h5-font;
+    margin: calc(v.$h1-margin*.2);
   }
-  h4{
-    font: bold 1.2em/1.14em "Nunito";
-    margin: .75em;
-  }
-  h5{
-    font: bold 1.1em/1.07em "Nunito";
-    margin: .75em;
-  }
-  button, li, ul{
-    font: bold 1em/1.3em "Nunito";
+  button, li, ul, a{font: bold v.$p-font}
+  hr {
+    @include center-by-margin($topbottom:4em);
+    margin: 4em auto;
+    background-image: url("/src/assets/img/curlywave.svg");
+    background-size: contain;
+    border: none;
+    height: 52px;
+    background-repeat: no-repeat;
+    background-position-x: center;
   }
   footer {
-    flex-shrink: 0;
-    bottom: 0;
-    @include center-by-margin(100%);
-    padding-top: variables.$pad;
-    padding-bottom: variables.$pad;
+    padding-top: v.$pad;
+    padding-bottom: v.$pad;
     text-align: center;
-    white-space: nowrap;
+    /* white-space: nowrap; */
   
   }
+
   // MEDIA QUERIES 
-  @media(max-width:900px){
+  @include medium-media-query(){
     header {
       @include center-by-margin(600px);
       display:flex;
     }
-    main {
-      @include center-by-margin(600px);
-    }
-    footer {
-      @include center-by-margin(600px);
-    }
+    main {@include center-by-margin(600px);}
+    footer {@include center-by-margin(600px);}
   }
-  @media(max-width:700px){
+  @include small-media-query(){
     header {
       @include center-by-margin(300px);
       display:flex;
     }
     main {
       @include center-by-margin(300px);
-      article{
-        padding: 1rem;
-      }
+      article{padding: 1rem;}
     }
-    footer {
-      @include center-by-margin(300px);
-    }
+    footer {@include center-by-margin(300px);}
   }
 }
 
 
-@mixin dark-citron-dropshadow() {
-	filter: drop-shadow(3px 3px 10px #b4a461);
-}
+// MIXINS
+
+@mixin medium-media-query(){@media(max-width:900px){@content}}
+@mixin small-media-query(){@media(max-width:700px){@content}}
+
+@mixin rounded-corners() {border-radius: 7px;}
 
 
-@mixin rounded-corners() {
-		border-radius: 7px;
-}
-
-
-@mixin button-click() {
+@mixin button-click($shadow: 3px 3px 10px) {
 	&:hover {
-		@include dark-citron-dropshadow;
-		background-color: variables.$lightcitron;
+    filter: drop-shadow($shadow #b4a461);
+		background-color: v.$lightcitron;
 		background: white;
-		svg g {
-			stroke: variables.$charcoal;
-		}
 		&:active {
-			background-color: variables.$darkcitron;
+			background-color: v.$darkcitron;
 			filter: none;
-			svg g {
-				stroke: white;
-			}
+      color: white;
 		}
 	}
 }
 
+@mixin tab-click($width: 7px, $background: white) {
+  border: $width solid $background;
+  border-bottom: $width solid $background;
+	&:hover {
+    border: $width solid $background;
+		border-bottom: $width solid v.$lightcitron;
+		background: $background;
+		&:active {
+      border: $width solid v.$darkcitron;
+			background-color: v.$darkcitron;
+      color: white;
+		}
+	}
+}
 
-@mixin center-by-margin($w) {
+@mixin center-by-margin($w:auto, $top:0, $bottom:0, $topbottom:null) {
+  @if not $topbottom{
+    margin-top: $top;
+    margin-bottom: $bottom;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @else {margin: $topbottom auto;}
+  max-width: $w;
   display: block;
-  margin: 0 auto;
-  width: $w;
+}
+
+@mixin center-children-by-flex($childTag:#{div}, $childClassPrefix: flex, $itemWidth: auto){
+  display: flex;
+  #{$childTag}.#{$childClassPrefix}-item{
+    flex: 1 0 $itemWidth; 
+    max-width: 700px;
+    @include medium-media-query(){max-width: 500px}
+    @include small-media-query(){max-width: 250px}
+  }
+  #{$childTag}.#{$childClassPrefix}-centering-box{flex: 1}
 }
