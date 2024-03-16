@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useState, useEffect} from "react";
 
 //COMPONENTS
 import JobHistory from "./job-history.jsx";
@@ -6,51 +6,60 @@ import Hobbies from "./hobbies.jsx";
 import Contributions from "./contributions.jsx";
 import MyWork from "./my-work.jsx";
 
+//CSS
+import "../../../assets/css/showcase.scss";
+
 function Showcase(){
-  //REFS
-  const showcaseRef = useRef();
 
   let [portfolioState, setPortfolioState] = useState("my-work");
 
-  const handleClick = event =>{
-    if(event.target.classList.contains("job-history"))setPortfolioState("job-history");
-    if(event.target.classList.contains("my-work"))setPortfolioState("my-work");
-    if(event.target.classList.contains("contributions"))setPortfolioState("contributions");
-    if(event.target.classList.contains("hobbies"))setPortfolioState("hobbies");
+  const showcasing = {
+    ["job-history"]: <JobHistory />,
+    ["my-work"]: <MyWork />,
+    ["contributions"]: <Contributions />,
+    ["hobbies"]: <Hobbies />,
   }
 
+  const handleClick = event => {
+    // If the target has an id, return that, otherwise return the parents id.
+    // if neither have an id, then return undefined.
+    if(!(event.target.id ? 
+        setPortfolioState(event.target.id):
+        setPortfolioState(event.target.parentNode.id))
+    )
+          return undefined;
+  }
+  
+  useEffect(()=>{
+    const currentSelected = document.getElementById(portfolioState);
+    const previousSelected = document.querySelector(".selected");
+
+    if(previousSelected) previousSelected.classList.remove("selected");
+
+    currentSelected.classList.add("selected");
+
+  }, [portfolioState])
+
+  // Note: Click handler depends on only buttons having id's.
   return(
     <>
-      <ul className="showcase" ref={showcaseRef}>
-        <li>
-          <h2 className="showcase-click job-history" onClick={handleClick}>Job History</h2>
-        </li>
-        <li>
-          <h2 className="showcase-click my-work" onClick={handleClick}>My Work</h2>
-        </li>
-        <li>
-          <h2 className="showcase-click contributions" onClick={handleClick}>Contributions</h2>
-        </li>
-        <li>
-          <h2 className="showcase-click hobbies" onClick={handleClick}>Hobbies</h2>
-        </li>
-      </ul>
-      <div>{(()=>{
-        switch(portfolioState){
-          case("my-work"): return (
-            <MyWork />
-        );
-          case("job-history"): return (
-            <JobHistory />
-        );
-          case("contributions"): return (
-            <Contributions />
-        );
-          case("hobbies"): return (
-            <Hobbies />
-        );
-        }
-      })()}</div>
+      <menu onClick={handleClick}>
+        <button id="job-history">
+          <h2>Job History</h2>
+        </button>
+        <button id="my-work">
+          <h2>My Work</h2>
+        </button>
+        <button id="contributions">
+          <h2>Contributions</h2>
+        </button>
+        <button id="hobbies">
+          <h2>Hobbies</h2>
+        </button>
+      </menu>
+      <div className="showcase">
+        {showcasing[portfolioState]}
+      </div>
     </>
   )
 }

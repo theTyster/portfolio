@@ -36,7 +36,7 @@ function Menu({ menuState }) {
     <Transition nodeRef={ nodeRef } in={ menuState } timeout={ tranDuration }>
       {tranState => (
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
-          <ul>
+          <menu>
             <a rel="noreferrer noopener" target="_blank" href="fruit-search/index.html"><li>Fruit Search</li></a>
             <a rel="noreferrer noopener" target="_blank" href="giphy-search/index.html"><li>Giphy Search</li></a>
             <a rel="noreferrer noopener" target="_blank" href="hacker-news-clone/index.html"><li>Hacker News Clone</li></a>
@@ -45,7 +45,7 @@ function Menu({ menuState }) {
             <a rel="noreferrer noopener" target="_blank" href="memory-game/index.html"><li>Memory Game</li></a>
             <a rel="noreferrer noopener" target="_blank" href="duck-story/index.html"><li>Duck Story</li></a>
             <a rel="noreferrer noopener" target="_blank" href="todo-app/index.html"><li>ToDo App</li></a>         
-          </ul>
+          </menu>
         </nav>
       )}
     </Transition>
