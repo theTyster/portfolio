@@ -18,8 +18,6 @@
 //  }
 //
 //
-//  // custom sleep function.
-export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
 //
 //
 //  //PAGE TAGS
@@ -135,149 +133,166 @@ export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 
 //    animalsBlock: new displayFunc(".ascii_animals_block")
 //  };
 
-  //declares the object for easter egg features.
-  export const bonusLevel = {}
+// generates a random number based on max number inputted.
+export const ranNumG = max => Math.floor(Math.random() * max);
 
-  //function to invert styles if easter egg is activated.
-  export const bonusEgg = function(){
-    if (bonusLevel.enabled){
-      const invert = "invert(100%)";
-      page.current.border.style.background = "MidnightBlue";
-      const selectorTexts = document.querySelectorAll(".bonus_egg");
-      for (let i of selectorTexts)
-        i.style.filter = invert;
-    }
+
+// makes an array based on maxIndex inputted.
+export const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
+  if (useKeysBool){
+    return [...Array(maxIndex).keys()].map(x => ++x);
   }
-
-  // Listens for Enter to be pressed before continuing.
-  export const listen4Enter = function(){
-    return new Promise(resolve => {
-      document.addEventListener("keyup", function enterInputListener(event){
-        if (event.key === "Enter"){
-          document.removeEventListener("keyup", enterInputListener);
-          resolve();
-        }
-      });
-    })
+  else {
+    return [...Array(maxIndex).keys()];
   }
+}
 
-  // guesses the local language from the browser.
-  export const getLanguage = () => {
-    if (navigator.languages && navigator.languages.length) {
-      return navigator.languages[0];
-    } else {
-      return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+
+// shuffles an array efficiently.
+export const shuffle = function fisherYatesArrayShuffler(inputArr){
+  let applyShuffler = () => {
+    let len = inputArr.length;
+    while (len){
+      let ran = ranNumG(len--);
+      [inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
     }
+    return inputArr;
   }
+  return applyShuffler(...inputArr);
+}
 
 
-  export const ranNumG = max => Math.floor(Math.random() * max);
-
-
-  export const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
-    if (useKeysBool){
-      return [...Array(maxIndex).keys()].map(x => ++x);
-    }
-    else {
-      return [...Array(maxIndex).keys()];
-    }
+// guesses the local language from the browser.
+export const getLanguage = () => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0];
+  } else {
+    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
   }
+}
 
 
-  export const shuffle = function fisherYatesArrayShuffler(inputArr){
-    let applyShuffler = () => {
-      let len = inputArr.length;
-      while (len){
-        let ran = ranNumG(len--);
-        [inputArr[ran], inputArr[len]] = [inputArr[len], inputArr[ran]];
+// custom sleep function.
+export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
+
+
+// Sets the page Title based on String inputted.
+export const setTitle = title => {
+  const titleTags = document.querySelectorAll(".page-title");
+  for (let tag of titleTags){
+    tag.innerText = title;
+  }
+}
+
+
+// DUCK STORY UTILITIES
+//declares the object for easter egg features.
+export const bonusLevel = {}
+
+//function to invert styles if easter egg is activated.
+export const bonusEgg = function(){
+  if (bonusLevel.enabled){
+    const invert = "invert(100%)";
+    page.current.border.style.background = "MidnightBlue";
+    const selectorTexts = document.querySelectorAll(".bonus_egg");
+    for (let i of selectorTexts)
+      i.style.filter = invert;
+  }
+}
+
+// Listens for Enter to be pressed before continuing.
+export const listen4Enter = function(){
+  return new Promise(resolve => {
+    document.addEventListener("keyup", function enterInputListener(event){
+      if (event.key === "Enter"){
+        document.removeEventListener("keyup", enterInputListener);
+        resolve();
       }
-      return inputArr;
-    }
-    return applyShuffler(...inputArr);
-  }
+    });
+  })
+}
 
 
+export const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
+  const hiddenRaindrops = 20;
+  storminess = Math.floor(hiddenRaindrops*(storminess/100));
+  const rainArray = shuffle(makeArray(storminess));
+  const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
 
-  export const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
-    const hiddenRaindrops = 20;
-    storminess = Math.floor(hiddenRaindrops*(storminess/100));
-    const rainArray = shuffle(makeArray(storminess));
-    const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
-
-    let delayedRain = async () => {
-      try {
-        for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
-          await sleep(1.77);
-          let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
-          rainSelector.style.display = "unset";
-          rainSelector.style.opacity = 1;
-        }
-      }
-      catch (e){
-        console.log(e);
+  let delayedRain = async () => {
+    try {
+      for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
+        await sleep(1.77);
+        let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
+        rainSelector.style.display = "unset";
+        rainSelector.style.opacity = 1;
       }
     }
-    delayedRain();
+    catch (e){
+      console.log(e);
+    }
   }
+  delayedRain();
+}
 
 
-  export const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
-    //inputSelector = The selector ID for the text input box being used to choose a color.
-    //asciiObj = the ascii picture that the color is going to be applied to.
-    //transFunc = the function which fires after the check is complete.
+export const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
+  //inputSelector = The selector ID for the text input box being used to choose a color.
+  //asciiObj = the ascii picture that the color is going to be applied to.
+  //transFunc = the function which fires after the check is complete.
 
-    //moves helper text to after the input box. If the input box is in an inline class.
-    if (inputSelector.parentNode.classList.toString() === "inline"){
-      inputSelector.parentNode.after(page.current.helper.tag);
-      inputSelector.parentNode.after(page.current.hm.tag);
-      inputSelector.parentNode.after(page.current.no.tag);
-      inputSelector.parentNode.after(page.current.yes.tag);
-    }
-    else{
-      inputSelector.after(document.querySelector("#helper"));
-    }
-    await listen4Enter(); // wait for enter to be hit after inputing the color
-    page.current.helper.hide();
+  //moves helper text to after the input box. If the input box is in an inline class.
+  if (inputSelector.parentNode.classList.toString() === "inline"){
+    inputSelector.parentNode.after(page.current.helper.tag);
+    inputSelector.parentNode.after(page.current.hm.tag);
+    inputSelector.parentNode.after(page.current.no.tag);
+    inputSelector.parentNode.after(page.current.yes.tag);
+  }
+  else{
+    inputSelector.after(document.querySelector("#helper"));
+  }
+  await listen4Enter(); // wait for enter to be hit after inputing the color
+  page.current.helper.hide();
 
-    //blocks the input while it is being checked.
-    inputSelector.disabled = true;
-    await page.current.hm.show(); 
-    await page.current.hm.hide();
+  //blocks the input while it is being checked.
+  inputSelector.disabled = true;
+  await page.current.hm.show(); 
+  await page.current.hm.hide();
 
-    // event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
-    inputSelector.addEventListener("transitionend", transFunc, {once: true});
+  // event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
+  inputSelector.addEventListener("transitionend", transFunc, {once: true});
 
-    //Colors the Duck based on the input.
-    //saves details to object and local storage.
-    const colorizeAscii = (async () => {
-      inputSelector.style.backgroundColor = inputSelector.value;
-      asciiObj.color = inputSelector.value;
-      asciiObj.tag.style.color = asciiObj.color;
-      for (let i of asciiObj.typeSpans)
-        i.style.color = asciiObj.color;
+  //Colors the Duck based on the input.
+  //saves details to object and local storage.
+  const colorizeAscii = (async () => {
+    inputSelector.style.backgroundColor = inputSelector.value;
+    asciiObj.color = inputSelector.value;
+    asciiObj.tag.style.color = asciiObj.color;
+    for (let i of asciiObj.typeSpans)
+      i.style.color = asciiObj.color;
 
-      //a little easter egg in case anyone puts in the same color that is used for the background later on.
-      if (inputSelector.value === "MidnightBlue")
-        bonusLevel.enabled = true;
-    })();
+    //a little easter egg in case anyone puts in the same color that is used for the background later on.
+    if (inputSelector.value === "MidnightBlue")
+      bonusLevel.enabled = true;
+  })();
 
-    const inputRegex = /#/gu;
-    // checks if the background color has a value.
-    if (!inputSelector.style.backgroundColor){
+  const inputRegex = /#/gu;
+  // checks if the background color has a value.
+  if (!inputSelector.style.backgroundColor){
+    await page.current.no.show();
+    await page.current.no.hide();
+    inputSelector.disabled = false;
+    checkColorInput(inputSelector, asciiObj);
+  }
+  //checks to ensure that no hex colors were used and that the duck is not colored white.
+  switch(true){
+    case inputSelector.style.backgroundColor === "white":
+    case Boolean(inputSelector.value.match(inputRegex)):{
       await page.current.no.show();
       await page.current.no.hide();
       inputSelector.disabled = false;
       checkColorInput(inputSelector, asciiObj);
-    }
-    //checks to ensure that no hex colors were used and that the duck is not colored white.
-    switch(true){
-      case inputSelector.style.backgroundColor === "white":
-      case Boolean(inputSelector.value.match(inputRegex)):{
-        await page.current.no.show();
-        await page.current.no.hide();
-        inputSelector.disabled = false;
-        checkColorInput(inputSelector, asciiObj);
-        break;
-      }
+      break;
     }
   }
+}
