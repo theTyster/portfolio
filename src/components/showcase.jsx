@@ -7,7 +7,7 @@ import "../assets/css/showcase.scss";
 const Showcase = ({db}) =>{
 
   //PROPS
-  Showcase.proptypes = {
+  Showcase.propTypes = {
     db: PropTypes.object.isRequired,
   }
 
