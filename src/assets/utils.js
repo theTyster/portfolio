@@ -177,12 +177,7 @@ export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 
 
 
 // Sets the page Title based on String inputted.
-export const setTitle = title => {
-  const titleTags = document.querySelectorAll(".page-title");
-  for (let tag of titleTags){
-    tag.innerText = title;
-  }
-}
+export const setTitle = title => Array.from(document.querySelectorAll(".page-title")).forEach(e => e.innerText = title);
 
 
 // DUCK STORY UTILITIES
