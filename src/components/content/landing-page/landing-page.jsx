@@ -5,8 +5,8 @@ import react from "react";
 import "../../../assets/css/landing-page.scss";
 
 //COMPONENTS
-import Showcase from "./showcase.jsx";
-import AttetionGetterImage from "../attention-getter-image.jsx";
+import TabMenu from "./tab-menu.jsx";
+import AttetionGetterImage from "../../attention-getter-image.jsx";
 
 //SVG
 import SvgCurlywave from "../../../assets/img/curlywave.jsx";
@@ -47,7 +47,7 @@ function LandingPage(){
 
       <hr />
 
-      <Showcase />
+      <TabMenu />
     </>
   )
 }

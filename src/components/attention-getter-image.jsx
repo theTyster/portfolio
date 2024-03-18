@@ -2,7 +2,7 @@ import react from "react";
 import PropTypes from "prop-types";
 
 //CSS
-import "../../assets/css/attention-getter-image.scss";
+import "../assets/css/attention-getter-image.scss";
 
 // NOTE: Using this component encourages the use of the center-children-by-flex
 // mixin in order to style the sideText containers to a desirable width of the

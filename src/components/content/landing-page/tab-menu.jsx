@@ -7,13 +7,13 @@ import Contributions from "./contributions.jsx";
 import MyWork from "./my-work.jsx";
 
 //CSS
-import "../../../assets/css/showcase.scss";
+import "../../../assets/css/tab-menu.scss";
 
-function Showcase(){
+function TabMenu(){
 
   let [portfolioState, setPortfolioState] = useState("my-work");
 
-  const showcasing = {
+  const menu = {
     ["job-history"]: <JobHistory />,
     ["my-work"]: <MyWork />,
     ["contributions"]: <Contributions />,
@@ -57,11 +57,11 @@ function Showcase(){
           <h2>Hobbies</h2>
         </button>
       </menu>
-      <div className="showcase">
-        {showcasing[portfolioState]}
+      <div className="tab-menu">
+        {menu[portfolioState]}
       </div>
     </>
   )
 }
 
-export default Showcase;
+export default TabMenu;

@@ -1,0 +1,22 @@
+@use "utils/_mixins" as theme;
+@use "utils/_variables" as v;
+
+article > menu, menu *{padding: 0}
+article{
+	>menu{
+		display: flex;
+		@include theme.medium-media-query(){flex-direction: column}
+		button{
+			flex: auto;
+			background-color: white;
+			@include theme.tab-click;
+			cursor: pointer;
+			h2{font: v.$h3-font}
+		}
+		button.selected{
+			background-color: v.$lightcharcoal;
+			border: 7px solid v.$lightcharcoal;
+			color: white;
+		}
+	}
+}

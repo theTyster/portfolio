@@ -4,7 +4,7 @@ import react from "react";
 import "../../../assets/css/job-history.scss";
 
 //Components
-import AttentionGetterImage from "../attention-getter-image.jsx";
+import AttentionGetterImage from "../../attention-getter-image.jsx";
 
 const Springboard = ()=>(
   <>
