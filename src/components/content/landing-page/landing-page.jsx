@@ -8,6 +8,10 @@ import "../../../assets/css/landing-page.scss";
 //COMPONENTS
 import TabMenu from "./tab-menu.jsx";
 import AttetionGetterImage from "../../attention-getter-image.jsx";
+import JobHistory from "./job-history.jsx";
+import Hobbies from "./hobbies.jsx";
+import Contributions from "./contributions.jsx";
+import MyWork from "./my-work.jsx";
 
 //SVG
 import SvgCurlywave from "../../../assets/img/curlywave.jsx";
@@ -28,6 +32,43 @@ function LandingPage(){
 
   setTitle("Ty Davis")
 
+  const menuItems = new Map([
+    [
+      {
+        "job-history": 0,
+        "my-work": 1,
+        "contributions": 2,
+        "hobbies": 3,
+      },
+      [
+        {
+    //0
+        component: <JobHistory />,
+        title: "Job History",
+        id:"job-history"
+        },
+        {
+    //1
+        component: <MyWork />,
+        title: "My Work",
+        id:"my-work"
+        },
+        {
+    //2
+        component: <Contributions />,
+        title: "Contributions",
+        id:"contributions"
+        },
+        {
+    //3
+        component: <Hobbies />,
+        title: "Hobbies",
+        id:"hobbies"
+        }
+      ]
+    ]
+  ])
+
   return(
     <>
       <AttetionGetterImage 
@@ -40,7 +81,8 @@ function LandingPage(){
 
       <hr />
 
-      <TabMenu />
+    <TabMenu menuItems={menuItems} />
+
     </>
   )
 }
