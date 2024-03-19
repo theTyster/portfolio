@@ -17,25 +17,25 @@ const SvgLoadingCircle = (props) => {
     {...props}
   >
     <defs>
-      <linearGradient
-        id="loading-circle_svg__a"
-        x1={368.98}
-        x2={449.66}
-        y1={457.98}
-        y2={513.11}
-        gradientTransform="matrix(.0559 0 0 .05787 75.152 99.253)"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset={0} />
-        <stop offset={1} stopOpacity={0} />
+      <linearGradient 
+        id="a"
+        x1={96.978} 
+        x2={101.12} 
+        y1={125.04} 
+        y2={129.18} 
+        gradientUnits="userSpaceOnUse">
+      <stop offset={0}/>
+      <stop stop-opacity={0} offset={1}/>
       </linearGradient>
     </defs>
-    <path
-      fill="url(#loading-circle_svg__a)"
-      d="M94.574 122.57a6.615 6.849 0 0 0-4.008 8.062 6.615 6.849 0 0 0 7.23 5.115 6.615 6.849 0 0 0 5.797-6.797h-3.307a3.307 3.424 0 0 1-3.025 3.412 3.307 3.424 0 0 1-3.542-2.829 3.307 3.424 0 0 1 2.057-3.773z"
-      opacity={0.998}
-      transform="translate(-90.364 -122.57)"
-    />
+
+    <g transform="translate(-90.364 -122.57)">
+      <path 
+        d="m96.978 122.57a6.6145 6.6145 0 0 0-6.6145 6.6145 6.6145 6.6145 0 0 0 6.6145 6.6145 6.6145 6.6145 0 0 0 6.6145-6.6145h-2.4727a4.1419 4.1419 0 0 1-4.1418 4.1418 4.1419 4.1419 0 0 1-4.1418-4.1418 4.1419 4.1419 0 0 1 4.1418-4.1418v-2.4727z" 
+        opacity={.998}
+        fill="url(#a)"
+      />
+    </g>
   </svg>
   )
 };
