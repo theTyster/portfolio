@@ -175,6 +175,18 @@ export const getLanguage = () => {
 // custom sleep function.
 export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
 
+// change epoch date to: `MMMMM, DD YYYY hh:mm AMPM`
+export const normalizeEpochDate = dateString=>{
+  let date = new Date(dateString);
+  let format = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  return `${date.toLocaleTimeString("en-US", format)}`;
+}
 
 // Sets the page Title based on String inputted.
 export const setTitle = title => Array.from(document.querySelectorAll(".page-title")).forEach(e => e.innerText = title);

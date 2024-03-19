@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 
 //CSS
-import "../../../assets/css/tab-menu.scss";
+import "../assets/css/tab-menu.scss";
 
 function TabMenu({menuItems}){
 

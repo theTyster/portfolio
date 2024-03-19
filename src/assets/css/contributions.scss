@@ -1,0 +1,14 @@
+@use "utils/_mixins" as theme;
+@use "utils/_animators" as animate;
+
+//Animations
+@include animate.rotate();
+
+
+ul{
+  padding: 0;
+  .loading{
+    animation: 3s linear infinite rotate;
+    @include theme.center-by-margin(50px);
+  }
+}

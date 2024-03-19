@@ -1,19 +1,19 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import react from "react";
 import PropTypes from "prop-types";
+import {normalizeEpochDate} from "../../../assets/utils.js"
 
 //COMPONENTS
 import SvgPullRequest from "../../../assets/img/pull-request-svg.jsx";
-import SvgLoadingCircle from "../../../assets/img/loading-circle-svg.jsx";
 
 //CSS
 import "../../../assets/css/pull-request-tile.scss";
 
-function PullRequestTile({pr}){
+function PullRequestTile({pr, org}){
 
   //Props Validation
   PullRequestTile.propTypes = {
     pr: PropTypes.object.isRequired,
+    org: PropTypes.object.isRequired,
   }
 
   //VARIABLES
@@ -23,52 +23,22 @@ function PullRequestTile({pr}){
   //CLICK HANDLERS
   const visitPullRequest = ()=> window.open(pr.html_url+"/files"); 
 
-  //TODO move utility function to separate file.
-  const normalizeEpochDate = dateString=>{
-    let date = new Date(dateString);
-    let format = {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    return `${date.toLocaleTimeString("en-US", format)}`;
-  }
-
-  let [orgData, setOrgData] = useState();
-
-  useEffect(()=>{(async ()=>{
-    const resp = await axios(pr.repository_url);
-    const org = resp.data;
-    setOrgData([org.html_url, org.owner.avatar_url, org.login, org.description]);
-  })()},[])
-
   return (
     <div onClick={visitPullRequest} className="pull-request-tile">
       <h4><SvgPullRequest  className={pullRequest.merged_at?"pr-icon-merged":"pr-icon-open"}/> {pr.title}</h4>
       <p>{normalizeEpochDate(pr.created_at)}</p>
-      {(()=>{
-      return orgData?
-        <p>{orgData[3]}</p>
-        :
-        <p>Loading...</p>
-      })()}
+      <p>{org.description}</p>
       <a href={thetyster.html_url}>
         <img src={thetyster.avatar_url} alt="My Github user profile picture" />
       </a>
-      {(()=>{
-        return orgData? (
-          <a href={orgData[0]}>
-            <img src={orgData[1]} alt={`${orgData[2]}'s profile picture`} />
-          </a>
-        ):
-          <SvgLoadingCircle className="loading" />
-      })()}
+      <a href={org.html_url}>
+        <img src={org.owner.avatar_url} alt={`${org.login}'s profile picture`} />
+      </a>
 
       {pr.labels.map(label=><span key={label.id} style={{backgroundColor: `#${label.color}`}}>{label.name}</span>)}
 
       {(()=>{
+        // Display reactions if they exist.
         if(pr.reactions["+1"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["+1"] > 2) pr.reactions["+1"]})()}👍</p>
         if(pr.reactions["-1"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["-1"] > 2) pr.reactions["-1"]})()}👎</p>
         if(pr.reactions["confused"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["confused"] > 2) pr.reactions["confused"]})()}😕</p>
