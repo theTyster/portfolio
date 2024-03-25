@@ -15,7 +15,7 @@ function Navigation() {
   const ham = {};
 
   React.useEffect(() => {
-    hamTl // Every time the state is changed useEffect re-renders a new timeline and plays this.
+    hamTl 
       .to("#ham-top", {duration: 0.4, y: 4})
       .to("#ham-bottom", {duration: 0.4, y: -4},"<")
       .reverse();
