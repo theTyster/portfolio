@@ -8,49 +8,45 @@ function TabMenu({menuItems}){
 
   //PROPS
   TabMenu.propTypes = {
-    // Remember the Object keys will become the new ID's for each object.
     menuItems: PropTypes.object.isRequired,
+    handleTabMenuClick: PropTypes.func,
   }
 
   const menuNamesObj = menuItems.keys().next().value;
   const menuDataArr = menuItems.values().next().value;
 
-  let [portfolioState, setPortfolioState] = useState("my-work");
+  const [menuState, setMenuState] = useState("initial");
+  const currentSelected = menuDataArr[menuNamesObj[menuState]];
 
-  const handleClick = event => {
-    // If the target has an id, return that, otherwise return the parents id.
-    // if neither have an id, then return undefined.
-    if(!(event.target.id ? 
-        setPortfolioState(event.target.id):
-        setPortfolioState(event.target.parentNode.id))
-    )
-          return undefined;
-  }
-  
-  useEffect(()=>{
-    const currentSelected = document.getElementById(portfolioState);
-    const previousSelected = document.querySelector(".selected");
+  const handleTabMenuClick = event =>
+    setMenuState(
+      menuDataArr[+(
+        event.target.dataset.tabmenuItemId? 
+        event.target.dataset.tabmenuItemId
+        :
+        event.target.parentNode.dataset.tabmenuItemId
+      )].id);
 
-    if(previousSelected) previousSelected.classList.remove("selected");
-
-    currentSelected.classList.add("selected");
-
-  }, [portfolioState])
-
-  // Note: Click handler depends on only buttons having id's.
   return(
-    <>
-      <menu onClick={handleClick}>
+    <div className="tabmenu">
+      <menu onClick={handleTabMenuClick}> 
         {menuDataArr.map(item =>(
-          <button key={item.id} id={item.id}>
-            <h2>{item.title}</h2>
+          <button 
+            key={menuNamesObj[item.id]}
+            data-tabmenu-item-id={menuNamesObj[item.id]}
+            className={item === currentSelected? "selected":""}
+            onClick={item.buttonClick?item.buttonClick:undefined}
+          >
+            <h2 className={`tabmenu-item-title${item.titleClass?`-${item.titleClass}`:""}`}>
+              {item.title}
+            </h2>
           </button>
         ))}
       </menu>
-      <div className="tab-menu">
-        {menuDataArr[menuNamesObj[portfolioState]].component}
+      <div className="menu-content">
+        {currentSelected.component}
       </div>
-    </>
+    </div>
   )
 }
 
