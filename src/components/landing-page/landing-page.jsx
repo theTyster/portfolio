@@ -1,21 +1,21 @@
 //DEV LIBRARIES
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {setTitle, sleep} from "../../../assets/utils.js";
+import {setTitle, sleep} from "../../assets/utils.js";
 
 //CSS
-import "../../../assets/css/landing-page.scss";
+import "../../assets/css/landing-page.scss";
 
 //COMPONENTS
-import TabMenu from "../../tab-menu.jsx";
-import AttetionGetterImage from "../../attention-getter-image.jsx";
+import TabMenu from "../tab-menu.jsx";
+import AttetionGetterImage from "../attention-getter-image.jsx";
 import JobHistory from "./job-history.jsx";
 import Hobbies from "./hobbies.jsx";
 import Contributions from "./contributions.jsx";
 import MyWork from "./my-work.jsx";
 
 //SVG
-import SvgCurlywave from "../../../assets/img/curlywave.jsx";
+import SvgCurlywave from "../../assets/img/curlywave.jsx";
 
 const AttentionGetterContent = () =>(
     <>

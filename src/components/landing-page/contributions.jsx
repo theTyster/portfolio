@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 //Components
 import PullRequestTile from "./pull-request-tile.jsx";
-import SvgLoadingCircle from "../../../assets/img/loading-circle-svg.jsx";
-import ErrorMessageModal from "../../error-msg-modal.jsx";
+import SvgLoadingCircle from "../../assets/img/loading-circle-svg.jsx";
+import ErrorMessageModal from "../error-msg-modal.jsx";
 
 //CSS
-import "../../../assets/css/contributions.scss";
+import "../../assets/css/contributions.scss";
 
 function Contributions({orgs, pullRequests}){
   //PROPS

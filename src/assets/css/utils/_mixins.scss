@@ -42,15 +42,13 @@
   }
   header {display: block;}
 	main {
-		background: white;
-    @include rounded-corners;
+    position: relative;
     flex-grow:1;
     @include center-by-margin(800px);
-	}
-  article{
     padding: v.$pad;
-    position: relative;
-  }
+		background: white;
+    @include rounded-corners;
+	}
 	p{font: v.$p-font}
   h1{
     font: v.$h1-font;

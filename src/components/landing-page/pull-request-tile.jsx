@@ -1,12 +1,12 @@
 import react from "react";
 import PropTypes from "prop-types";
-import {normalizeEpochDate} from "../../../assets/utils.js"
+import {normalizeEpochDate} from "../../assets/utils.js"
 
 //COMPONENTS
-import SvgPullRequest from "../../../assets/img/pull-request-svg.jsx";
+import SvgPullRequest from "../../assets/img/pull-request-svg.jsx";
 
 //CSS
-import "../../../assets/css/pull-request-tile.scss";
+import "../../assets/css/pull-request-tile.scss";
 
 function PullRequestTile({pr, org}){
 

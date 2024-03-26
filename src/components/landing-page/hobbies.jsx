@@ -1,7 +1,7 @@
 import react from "react";
 
 //css
-import "../../../assets/css/hobbies.scss";
+import "../../assets/css/hobbies.scss";
 
 function Hobbies(){
   const calcAge = birthDate => Math.round(Math.abs((new Date(birthDate)-(new Date())))/8.64e7/365);

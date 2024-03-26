@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom/client";
 import React from 'react';
 import gsap from 'gsap';
 
@@ -32,6 +31,4 @@ function Navigation() {
   );
 }
 
-
-const app = ReactDOM.createRoot(document.getElementById("nav"));
-app.render(<Navigation />)
+export default Navigation;

@@ -1,7 +1,7 @@
 import react from "react";
 
 //COMPONENTS
-import Showcase from "../../showcase.jsx";
+import Showcase from "../showcase.jsx";
 
 //COMPONENTS TODO:
 //import DuckStory       from "../duck-story/duck-story.jsx";
