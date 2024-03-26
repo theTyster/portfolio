@@ -1,9 +1,12 @@
 import react from "react";
 
+//css
+import "../../../assets/css/hobbies.scss";
+
 function Hobbies(){
   const calcAge = birthDate => Math.round(Math.abs((new Date(birthDate)-(new Date())))/8.64e7/365);
   return(
-    <>
+    <div className="hobbies">
       <h3>Self-hosting</h3>
         <p>
           My data is very important to me. To keep control of what goes out onto the internet I try to self-host as much of my own data as I can. I'm currently running servers hosting:
@@ -97,7 +100,7 @@ function Hobbies(){
         <li>Homemade ginger ale</li>
         <li>Smoked jerky</li>
       </ul>
-    </>
+    </div>
   );
 }
 
