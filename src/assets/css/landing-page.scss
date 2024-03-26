@@ -4,9 +4,11 @@
 
 @include theme.foundation;
 
-div.attention-getter {
-	@include theme.center-children-by-flex(
-		$childClassPrefix: "headshot-text", 
-		$itemWidth: 20em
-	);
+div.landing-page{
+	div.attention-getter {
+		@include theme.center-children-by-flex(
+			$childClassPrefix: "headshot-text",
+			$itemWidth: 20em
+		);
+	}
 }

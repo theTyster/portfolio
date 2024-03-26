@@ -1,31 +1,33 @@
 @use "utils/_mixins" as theme;
 @use "utils/_variables" as v;
 
-.jobHistory-header{
-	/* display: flex; */
-}
+div.job-history{
+  .jobHistory-header{
+    /* display: flex; */
+  }
 
-.jobHistory-logo{
-	width: 200px;
-	/* border-radius: 25%; */
-}
+  .jobHistory-logo{
+    width: 200px;
+    /* border-radius: 25%; */
+  }
 
-.jobHistory-title{
-	/* width: 50%; */
-}
+  .jobHistory-title{
+    /* width: 50%; */
+  }
 
-.jobHistory-org{
-	/* display: block; */
+  .jobHistory-org{
+    /* display: block; */
 
-}
+  }
 
-.jobHistory-summary{
-	@include theme.center-by-margin($w: 25rem);
-}
+  .jobHistory-summary{
+    @include theme.center-by-margin($w: 25rem);
+  }
 
-div.attention-getter {
-  @include theme.center-children-by-flex(
-    $childClassPrefix: "jobHistory",
-    $itemWidth: 25em
-  );
+  div.attention-getter {
+    @include theme.center-children-by-flex(
+      $childClassPrefix: "jobHistory",
+      $itemWidth: 25em
+    );
+  }
 }

@@ -21,7 +21,7 @@ const DirectorsChoice = ()=>(
 )
 
 const JobHistory = () => (
-  <>
+  <div className="job-history">
     <div className="springboard">
       <AttentionGetterImage 
         imgClass="jobHistory-logo" 
@@ -75,7 +75,7 @@ const JobHistory = () => (
         </ul>
       </div>
     </div>
-  </>
+  </div>
 );
 
 export default JobHistory;
