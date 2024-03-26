@@ -25,7 +25,7 @@ const SvgLoadingCircle = (props) => {
         y2={129.18} 
         gradientUnits="userSpaceOnUse">
       <stop offset={0}/>
-      <stop stop-opacity={0} offset={1}/>
+      <stop stopOpacity={0} offset={1}/>
       </linearGradient>
     </defs>
 
