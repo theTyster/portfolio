@@ -3,20 +3,20 @@
 
 $button-margin: 10px;
 
-menu.showcase {
+div.showcase {
 	display:flex;
 	flex-wrap: wrap;
 	padding: 0;
-	button{
+	button, a{
 		position:relative !important;
-		width: calc(33.33% - $button-margin * 2);
+		flex: 1 0 calc(33.33% - $button-margin * 2);
 		@include theme.medium-media-query(){width: calc(50% - $button-margin * 2)}
 		@include theme.small-media-query(){width: calc(100% - $button-margin * 2)}
 		line-height:0;
 		padding: 0;
 		margin: $button-margin;
 		border: 0;
-		background-color: rgba(0,0,0,0);
+		background-color: inherit;
 		h3{
 			@include theme.medium-media-query(){
 				position: static;
@@ -25,7 +25,6 @@ menu.showcase {
 				height: auto;
 				margin-bottom: calc($button-margin/2);
 				background-color: v.$darkcharcoal;
-
 			}
 			font: v.$h5-font;
 			display: flex;
@@ -40,8 +39,9 @@ menu.showcase {
 			color: white;
 			@include theme.rounded-corners;
 		}
-		&:hover{
+		&:hover, &:active, &:focus-visible {
 			h3{opacity:1}
+			background-color: inherit;
 		}
 		img{
 			box-sizing: border-box; // sets how the total width and height is calculated. In this case it's calculated by the border box instead of the content box.

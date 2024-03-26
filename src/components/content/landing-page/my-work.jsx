@@ -3,15 +3,15 @@ import react from "react";
 //COMPONENTS
 import Showcase from "../../showcase.jsx";
 
-//COMPONENTS
-//import DuckStory       from "../../../components/content/duck-story/duck-story.jsx";
-//import FruitSearch     from "../../../components/content/fruit-search/fruit-search.jsx";
-//import GiphySearch     from "../../../components/content/giphy-search/giphy-search.jsx";
-//import HackerNewsClone from "../../../components/content/hacker-news-clone/hacker-news-clone.jsx";
-//import Jeopardy        from "../../../components/content/jeopardy/jeopardy.jsx";
-//import MemeGenerator   from "../../../components/content/meme-generator/meme-generator.jsx";
-//import MemoryGame      from "../../../components/content/memory-game/memory-game.jsx";
-//import TodoApp         from "../../../components/content/todo-app/todo-app.jsx";
+//COMPONENTS TODO:
+//import DuckStory       from "../duck-story/duck-story.jsx";
+//import FruitSearch     from "../fruit-search/fruit-search.jsx";
+//import GiphySearch     from "../giphy-search/giphy-search.jsx";
+//import HackerNewsClone from "../hacker-news-clone/hacker-news-clone.jsx";
+//import Jeopardy        from "../jeopardy/jeopardy.jsx";
+//import MemeGenerator   from "../meme-generator/meme-generator.jsx";
+//import MemoryGame      from "../memory-game/memory-game.jsx";
+//import TodoApp         from "../todo-app/todo-app.jsx";
 
 const MyWork = () => {
 
@@ -30,56 +30,78 @@ const MyWork = () => {
       [
         {
           //0
-          name: "Fruit Search",
-          onClick: ()=> window.open("fruit-search/index.html"),
+          id: "Fruit Search",
+          title: "Fruit Search",
+          onClick: undefined,
+          link: ["fruit-search/index.html", "_blank"],
           img: ["./img/fruit-search-ss.png", "Fruit Search App Screenshot"],
         },
         {
           //1
-          name: "Giphy Search",
-          onClick: ()=> window.open("giphy-search/index.html"),
+          id: "Giphy Search",
+          title: "Giphy Search",
+          onClick: undefined,
+          link: ["giphy-search/index.html", "_blank"],
           img: ["./img/giphy-search-ss.png", "Giphy Search App Screenshot"],
         },
         {
           //2
-          name: "Hacker News Clone",
-          onClick: ()=> window.open("hacker-news-clone/index.html"),
+          id: "Hacker News Clone",
+          title: "Hacker News Clone",
+          onClick: undefined,
+          link: ["hacker-news-clone/index.html", "_blank"],
           img: ["./img/hacker-news-clone-ss.png", "Hacker News Clone App Screenshot"],
         },
         {
           //3
-          name: "Jeopardy",
-          onClick: ()=> window.open("jeopardy/index.html"),
+          id: "Jeopardy",
+          title: "Jeopardy",
+          onClick: undefined,
+          link: ["jeopardy/index.html", "_blank"],
           img: ["./img/jeopardy-ss.png", "Jeopardy App Screenshot"],
         },
         {
           //4
-          name: "Meme Generator",
-          onClick: ()=> window.open("meme-generator/index.html"),
+          id: "Meme Generator",
+          title: "Meme Generator",
+          onClick: undefined,
+          link: ["meme-generator/index.html", "_blank"],
           img: ["./img/meme-generator-ss.png", "Meme Generator App Screenshot"],
         },
         {
           //5
-          name: "Memory Game",
-          onClick: ()=> window.open("memory-game/index.html"),
+          id: "Memory Game",
+          title: "Memory Game",
+          onClick: undefined,
+          link: ["memory-game/index.html", "_blank"],
           img: ["./img/memory-game-ss.png", "Memory Game App Screenshot"],
         },
         {
           //6
-          name: "Duck Story",
-          onClick: ()=> window.open("duck-story/index.html"),
+          id: "Duck Story",
+          title: "Duck Story",
+          onClick: undefined,
+          link: ["duck-story/index.html", "_blank"],
           img: ["./img/duck-story-ss.png", "Duck Story App Screenshot"],
         },
         {
           //7
-          name: "ToDo App",
-          onClick: ()=> window.open("todo-app/index.html"),
+          id: "ToDo App",
+          title: "ToDo App",
+          onClick: undefined,
+          link: ["todo-app/index.html", "_blank"],
           img: ["./img/todo-app-ss.png", "ToDo App Screenshot"],
         },
       ]
     ]])
 
-  return <Showcase db={portfolioDB}/>
+  return(
+    <nav>
+      <menu className="my-work">
+        <Showcase db={portfolioDB}/>
+      </menu>
+    </nav>
+  );
 }
 
 export default MyWork;
