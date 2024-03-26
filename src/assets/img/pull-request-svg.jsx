@@ -11,7 +11,7 @@ const SvgPullRequest = (props) => {
   return (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="-100 -100 712 712"
     width="1em"
     height="1em"
     {...props}
