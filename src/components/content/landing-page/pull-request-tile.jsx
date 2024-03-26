@@ -19,35 +19,111 @@ function PullRequestTile({pr, org}){
   //VARIABLES
   const thetyster = pr.user;
   const pullRequest = pr.pull_request;
+  const mergedClass = pullRequest.merged_at?"prt-merged":"prt-open";
+  const reactionEmoji = {
+    "-1":"👎",
+    "+1":"👍",
+    "confused":"😕",
+    "eyes":"👀",
+    "heart":"❤",
+    "hooray":"🎉",
+    "laugh":"😆",
+    "rocket":"🚀",
+  }
 
-  //CLICK HANDLERS
-  const visitPullRequest = ()=> window.open(pr.html_url+"/files"); 
+
 
   return (
-    <div onClick={visitPullRequest} className="pull-request-tile">
-      <h4><SvgPullRequest  className={pullRequest.merged_at?"pr-icon-merged":"pr-icon-open"}/> {pr.title}</h4>
-      <p>{normalizeEpochDate(pr.created_at)}</p>
-      <p>{org.description}</p>
-      <a href={thetyster.html_url}>
-        <img src={thetyster.avatar_url} alt="My Github user profile picture" />
+    <div className={`pull-request-tile ${mergedClass}`}>
+      <a
+        href={pr.html_url+"/files"}
+        target="_blank"
+      >
+        <h4 className={mergedClass}>
+          #{pr.url.split("/").slice(-1)[0]} - {pullRequest.merged_at?"Merged":"Open"}
+        </h4>
       </a>
-      <a href={org.html_url}>
-        <img src={org.owner.avatar_url} alt={`${org.login}'s profile picture`} />
-      </a>
+      <h5>{pr.title}</h5>
 
-      {pr.labels.map(label=><span key={label.id} style={{backgroundColor: `#${label.color}`}}>{label.name}</span>)}
+      <div className="prt-visual-aid">
+        <a
+          href={org.html_url}
+          target="_blank"
+          className="prt-org-link"
+        >
+          <img
+            className="prt-org-avatar"
+            src={org.owner.avatar_url}
+            alt={`${org.login}'s profile picture`}
+          />
+        </a>
 
-      {(()=>{
-        // Display reactions if they exist.
-        if(pr.reactions["+1"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["+1"] > 2) pr.reactions["+1"]})()}👍</p>
-        if(pr.reactions["-1"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["-1"] > 2) pr.reactions["-1"]})()}👎</p>
-        if(pr.reactions["confused"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["confused"] > 2) pr.reactions["confused"]})()}😕</p>
-        if(pr.reactions["eyes"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["eyes"] > 2) pr.reactions["eyes"]})()}👀</p>
-        if(pr.reactions["heart"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["heart"] > 2) pr.reactions["heart"]})()}❤</p>
-        if(pr.reactions["hooray"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["hooray"] > 2) pr.reactions["hooray"]})()}🎉</p>
-        if(pr.reactions["laugh"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["laugh"] > 2) pr.reactions["laugh"]})()}😆</p>
-        if(pr.reactions["rocket"]) return <p className="pr-reaction">{(()=>{if(pr.reactions["rocket"] > 2)pr.reactions["rocket"]})()}🚀</p>
-      })()}
+        <SvgPullRequest  className={mergedClass}/>
+
+        <a
+          href={thetyster.html_url}
+          target="_blank"
+          className="prt-thetyster-link"
+        >
+          <img
+            className="prt-thetyster-avatar"
+            src={thetyster.avatar_url}
+            alt="My Github user profile picture"
+          />
+        </a>
+      </div>
+
+      <p className="prt-org-description">{org.description}</p>
+
+      <div className="prt-labels">
+      {
+        //pr.labels.map(label=>
+        //<span
+        //  key={label.id.toString()+pr.id.toString()}
+        //  className="prt-labels"
+        //  style={{
+        //    backgroundColor: `#${lightenHexColor(label.color, 1)}`,
+        //    color: `#${darkenHexColor(label.color, .1)}`,
+        //    border: `5px solid #${darkenHexColor(label.color, .7)}`
+        //  }}
+        //>
+        //  {label.name + " "}
+        //</span>
+        //)
+      }
+      </div>
+
+      <div className="prt-reactions">
+        {(()=>{
+          let reactions = [];
+          // Display reactions if they exist.
+          for (let emoji in pr.reactions){
+
+            if(emoji === "total_count" || emoji === "url") continue;
+
+            if(pr.reactions[emoji])
+              reactions.push(
+                <span
+                  key={`prt-reaction: ${emoji}`}
+                  className="prt-reaction"
+                >
+                  {(pr.reactions[emoji] > 1)?
+                        <span
+                          key={`prt-reaction: ${emoji}-count`}
+                          className="prt-reaction-count"
+                        >
+                          {`+${pr.reactions[emoji]}`}
+                        </span>
+                      : undefined}
+                  {reactionEmoji[emoji]}
+                </span>
+              );
+          }
+          return reactions;
+        })()}
+      </div>
+
+      <p className="prt-create-date">Created {normalizeEpochDate(pr.created_at)}.</p>
     </div>
   )
 }
