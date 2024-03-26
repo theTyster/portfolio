@@ -133,6 +133,38 @@
 //    animalsBlock: new displayFunc(".ascii_animals_block")
 //  };
 
+//COLORS
+export const themeColors = {
+  // Primary
+  darkcitron: "#b4a461",
+  citron: "#e1ce7a",
+  lightcitron: "#e7d794",
+
+  //Secondary
+  darkcharcoal: "#2e343a",
+  charcoal: "#424b54",
+  lightcharcoal: "#545d65",
+  ultralightcharcoal: "#878D93",
+
+  darkdesertsand: "#e0b68a",
+  desertsand: "#ebcfb2",
+  lightdesertsand: "#f0dcc6",
+  ultralightdesertsand: "#fbf5ee",
+
+  darkburntsilver: "#56493e",
+  burntsilver: "#655649",
+  lightburntsilver: "#836f5e",
+  ultralightburntsilver: "#A39080",
+
+  //SHADES OF gray
+  bw3to1: "#949494",
+
+
+  errormessage: "#9f0000",
+  errorbackground: "#ffeeee",
+}
+
+
 // generates a random number based on max number inputted.
 export const ranNumG = max => Math.floor(Math.random() * max);
 
@@ -263,7 +295,7 @@ export const checkColorInput = async function checkInputForColor(inputSelector, 
 
   //blocks the input while it is being checked.
   inputSelector.disabled = true;
-  await page.current.hm.show(); 
+  await page.current.hm.show();
   await page.current.hm.hide();
 
   // event listener verifies the input. If the transition on the input box occurred after colorizeAscii ran, then transitionend will detect it.
