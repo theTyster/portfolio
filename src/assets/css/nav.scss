@@ -31,6 +31,8 @@
 		transition-duration: .5s;
 	}
 	menu {
+		display: flex;
+		flex-wrap: wrap;
 		list-style-type: none;
 		padding: 1em 0;
 	}
@@ -38,16 +40,14 @@
 	a {
 		text-decoration: none;
 		color: black;
-		li {
-			@include theme.rounded-corners;
-			@include theme.button-click;
-			padding: 15px;
-			margin: .2rem auto;
-			width: 50%;
-			text-align: center;
-			background-color: rgba(256, 256, 256, .3);
-			transition: background .2s;
-		}
+		@include theme.rounded-corners;
+		@include theme.button-click;
+		padding: 15px;
+		margin: .2rem auto;
+		width: 50%;
+		text-align: center;
+		background-color: rgba(256, 256, 256, .3);
+		transition: background .2s;
 	}
 }
 
