@@ -1,4 +1,5 @@
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 //SVG
 import SvgExitButton from "../assets/img/exit-button-svg.jsx";
@@ -7,7 +8,22 @@ import SvgExitButton from "../assets/img/exit-button-svg.jsx";
 import "../assets/css/error-msg-modal.scss";
 
 
-const ErrorMessageModal = ({msg, imgSrc, imgAlt, buttonLink, buttonText})=>{
+const ErrorMessageModal = ({
+  msg,
+  imgSrc,
+  imgAlt,
+  buttonLink,
+  buttonText,
+})=>{
+
+  //Props
+  ErrorMessageModal.propTypes= {
+    msg: PropTypes.string.isRequired,
+    imgSrc: PropTypes.string,
+    imgAlt: PropTypes.string,
+    buttonLink: PropTypes.string,
+    buttonText: PropTypes.string,
+  }
 
   const [isClosed, setClosed] = useState(false);
   const handleClick = () => setClosed(true);
