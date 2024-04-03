@@ -92,7 +92,8 @@
   }
   hr {
     @include center-by-margin($w:unset, $topbottom:4em);
-    margin: 4em auto;
+    margin-top: 4em;
+    margin-bottom: 2em;
     background-image: url("/src/assets/img/curlywave.svg");
     background-size: contain;
     border: none;
@@ -132,8 +133,8 @@
 
 // MIXINS
 
-@mixin medium-media-query(){@media(max-width:900px){@content}}
-@mixin small-media-query(){@media(max-width:700px){@content}}
+@mixin medium-media-query(){@media(max-width:v.$md-max-width){@content}}
+@mixin small-media-query(){@media(max-width:v.$sm-max-width){@content}}
 
 @mixin rounded-corners(){border-radius: 7px}
 
@@ -164,11 +165,11 @@
 
 @mixin center-children-by-flex($childTag:#{div}, $childClassPrefix: flex, $itemWidth: auto){
   display: flex;
-  #{$childTag}.#{$childClassPrefix}-item{
+  #{$childTag}[class^="#{$childClassPrefix}"][class$=item]{
     flex: 1 0 $itemWidth;
-    max-width: 700px;
+    max-width: v.$sm-max-width;
     @include medium-media-query(){max-width: 500px}
     @include small-media-query(){max-width: 250px}
   }
-  #{$childTag}.#{$childClassPrefix}-centering-box{flex: 1}
+  #{$childTag}[class^="#{$childClassPrefix}"][class$=centering-box]{flex: 1}
 }
