@@ -13,22 +13,37 @@ import "../assets/css/attention-getter-image.scss";
 // div.attention-getter {
 //   @include center-children-by-flex(
 //     $childClassPrefix: <SET THIS>
+//		 $itemWidth: <SET THIS>
 //   ) 
 // }
 
-//Props
-AttentionGetterImage.proptypes = {
-  imgClass: PropTypes.string,
-  imgSrc: PropTypes.string.isRequired,
-  imgAlt: PropTypes.string.isRequired,
-  sideText: PropTypes.element.isRequired,
-  sideText_ClassPrefix: PropTypes.string.isRequired,
-}
+function AttentionGetterImage({
+  imgClass,
+  imgSrc,
+  imgAlt,
+  imgLink,
+  sideText_classPrefix,
+  sideText,
+}){
 
-function AttentionGetterImage({imgClass, imgSrc, imgAlt, sideText, sideText_classPrefix}){
+  //Props
+  AttentionGetterImage.propTypes = {
+    imgClass: PropTypes.string,
+    imgSrc: PropTypes.string.isRequired,
+    imgAlt: PropTypes.string.isRequired,
+    imgLink: PropTypes.string,
+    sideText_classPrefix: PropTypes.string.isRequired,
+    sideText: PropTypes.element.isRequired,
+  }
+
   return (
-    <div className="attention-getter">
-      <img className={imgClass} src={imgSrc} alt={imgAlt} />
+    <div 
+      className="attention-getter"
+    >
+      {imgLink?
+        <a href={imgLink} target="_blank"><img className={imgClass} src={imgSrc} alt={imgAlt} /></a>
+        :
+        <img className={imgClass} src={imgSrc} alt={imgAlt} />}
       <div className="sideText-container">
         <div className={`${sideText_classPrefix}-centering-box`}></div>
         <div className={`${sideText_classPrefix}-item`}>
