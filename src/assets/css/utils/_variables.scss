@@ -1,10 +1,11 @@
-// COLORS
-// Primary
+// vim:foldmethod=marker
+// COLORS {{{
+// Primary {{{
 $darkcitron: #b4a461;
 $citron: #e1ce7a;
-$lightcitron: #e7d794;
+$lightcitron: #e7d794;// }}}
 
-//Secondary
+//Secondary {{{
 $darkcharcoal: #2e343a;
 $charcoal: #424b54;
 $lightcharcoal: #545d65;
@@ -18,35 +19,57 @@ $ultralightdesertsand: #fbf5ee;
 $darkburntsilver: #56493e;
 $burntsilver: #655649;
 $lightburntsilver: #836f5e;
-$ultralightburntsilver: #A39080;
+$ultralightburntsilver: #A39080;// }}}
 
-//SHADES OF gray
-$bw3to1: #949494;
+//SHADES OF gray {{{
+$bw3to1: #949494;// }}}
 
-
+// Error {{{
 $errormessage: #9f0000;
-$errorbackground: #ffeeee;
+$errorbackground: #ffeeee;// }}}
+// }}}
 
-
-// SPACING
+// SPACING {{{
 $pad: 2rem;
 $h1-margin: .75rem;
 $sm-max-width: 700px;
-$md-max-width: 900px;
+$md-max-width: 900px;// }}}
 
+// FONT SIZING{{{
+$font-family: "Nunito";
+$font-weight-xbold: 900;
+$font-weight-medium: 500;
+$font-weight-light: 300;
+$font-weight-xlight: 200;
 
-// FONT SIZING
-
-//headers
+// HEADERS {{{
 $h1-font-size: 60px;
 $h1-line-height: calc($h1-font-size*1.4);
-$h1-font: bold #{$h1-font-size*1.0}/#{$h1-line-height*1.0} "Nunito";
-$h2-font: bold #{$h1-font-size*.60}/#{$h1-line-height*.60} "Nunito";
-$h3-font: bold #{$h1-font-size*.50}/#{$h1-line-height*.50} "Nunito";
-$h4-font: bold #{$h1-font-size*.40}/#{$h1-line-height*.40} "Nunito";
-$h5-font: bold #{$h1-font-size*.30}/#{$h1-line-height*.30} "Nunito";
+$h1-font-weight: $font-weight-xbold;
+$h1-font: $h1-font-weight #{$h1-font-size}/#{$h1-line-height} $font-family;
 
-//p
+$h2-font-size: calc($h1-font-size*.60);
+$h2-line-height: calc($h1-line-height*.60);
+$h2-font-weight: bold;
+$h2-font: $h2-font-weight #{$h2-font-size}/#{$h2-line-height} $font-family;
+
+$h3-font-size: calc($h1-font-size*.50);
+$h3-line-height: calc($h1-line-height*.50);
+$h3-font-weight: bold;
+$h3-font: $h3-font-weight #{$h3-font-size}/#{$h3-line-height} $font-family;
+
+$h4-font-size: calc($h1-font-size*.40);
+$h4-line-height: calc($h1-line-height*.40);
+$h4-font-weight: $font-weight-medium;
+$h4-font: $h4-font-weight #{$h4-font-size}/#{$h4-line-height} $font-family;
+
+$h5-font-size: calc($h1-font-size*.30);
+$h5-line-height: calc($h1-line-height*.30);
+$h5-font-weight: $font-weight-medium;
+$h5-font: $h5-font-weight #{$h5-font-size}/#{$h5-line-height} $font-family;// }}}
+
+// PARAGRAPHS {{{
 $p-font-size: 16px;
-$p-line-height: $p-font-size*1.3;
-$p-font: #{$p-font-size}/#{$p-line-height} "Nunito";
+$p-line-height: calc($p-font-size*1.3);
+$p-font: #{$p-font-size}/#{$p-line-height} $font-family;// }}}
+// }}}
