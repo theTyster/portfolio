@@ -6,6 +6,17 @@ div.attention-getter {
 	align-items: center;
 	flex-wrap: wrap;
 	@include theme.medium-media-query(){display: block}
+	a:has(img){
+		@include theme.medium-media-query(){
+			@include theme.center-by-margin($w:100%);
+			height: auto;
+		}
+	}
+	a>img{
+		&:hover{box-shadow: 3px 3px 10px black}
+		&:active{box-shadow:unset}
+		transition: box-shadow .1s;
+	}
 	img {
 		@include theme.medium-media-query(){
 			@include theme.center-by-margin($w:100%);
