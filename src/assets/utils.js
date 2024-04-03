@@ -133,6 +133,7 @@
 //    animalsBlock: new displayFunc(".ascii_animals_block")
 //  };
 
+
 //COLORS
 export const themeColors = {
   // Primary
@@ -163,6 +164,12 @@ export const themeColors = {
   errormessage: "#9f0000",
   errorbackground: "#ffeeee",
 }
+
+
+
+// Calculates age  in years from an anniversary date.
+export const calcAge = anniversary => 
+  Math.round(Math.abs((new Date(anniversary)-(new Date())))/8.64e7/365);
 
 
 // generates a random number based on max number inputted.
