@@ -1,33 +1,48 @@
 @use "utils/_mixins" as theme;
 @use "utils/_variables" as v;
 
-div.job-history{
-  .jobHistory-header{
-    /* display: flex; */
+//Default Styles
+div.jobHistory{
+  article{
+    [class^=jobHistory]{
+      img[class$=logo]{
+        width: 100%;
+      }
+      a:has([class$=logo]){
+        width: 200px;
+      }
+      &[class$=details]{}
+      &[class$=summary]{
+        p{text-indent:calc(v.$p-font-size*1.5)}
+      }
+      &[class$=title]{
+        line-height: v.$h5-line-height;
+        padding:.3em;
+      }
+      &[class$=org]{
+        line-height: v.$h5-line-height;
+        padding:.3em;
+      }
+      &[class$=timeframe]{
+        font-weight: v.$font-weight-light;
+        font-size: v.$p-font-size;
+        line-height: v.$p-line-height;
+        margin:0;
+      }
+      &[class$=elapsed-time]{
+        font-weight: v.$font-weight-light;
+        font-size: calc(v.$p-font-size*.7);
+        line-height: calc(v.$p-line-height*.7);
+        margin:0;
+      }
+      div.attention-getter {
+        @include theme.center-children-by-flex(
+          $childClassPrefix: "jobHistory",
+          $itemWidth: 25em
+        );
+      }
+      div.sideText-container * {text-align: center;}
+    }
   }
-
-  .jobHistory-logo{
-    width: 200px;
-    /* border-radius: 25%; */
-  }
-
-  .jobHistory-title{
-    /* width: 50%; */
-  }
-
-  .jobHistory-org{
-    /* display: block; */
-
-  }
-
-  .jobHistory-summary{
-    @include theme.center-by-margin($w: 25rem);
-  }
-
-  div.attention-getter {
-    @include theme.center-children-by-flex(
-      $childClassPrefix: "jobHistory",
-      $itemWidth: 25em
-    );
-  }
+  @include theme.medium-media-query(){}
 }
