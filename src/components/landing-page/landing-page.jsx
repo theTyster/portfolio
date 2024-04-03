@@ -17,7 +17,7 @@ import MyWork from "./my-work.jsx";
 //SVG
 import SvgCurlywave from "../../assets/img/curlywave.jsx";
 
-const AttentionGetterContent = () =>(
+const AttentionGetterSideText = () =>(
     <>
       <p><i>I like to keep things, lean, fast, simple and usable. The web was meant to make information accessible to anyone.</i></p>
       <blockquote>
@@ -137,7 +137,8 @@ function LandingPage(){
         sideText_classPrefix="headshot-text"
         imgSrc="img/me.jpg"
         imgAlt="My Face."
-        sideText={<AttentionGetterContent />}
+        imgLink="https://www.linkedin.com/in/tyler-d-webdev/"
+        sideText={<AttentionGetterSideText />}
       />
 
       <hr />
