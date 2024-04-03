@@ -1,6 +1,6 @@
 //DEV Libraries
 import ReactDOM from "react-dom/client";
-import react from "react";
+import {StrictMode} from "react";
 //import {useState} from "react";
 
 //COMPONENTS
@@ -23,10 +23,22 @@ const Content = () => {
 
 // RENDERS
 const nav = ReactDOM.createRoot(document.getElementById("nav"));
-nav.render(<Navigation />)
+nav.render(
+  <StrictMode>
+  <Navigation />
+  </StrictMode>
+)
 
 const content = ReactDOM.createRoot(document.getElementById("content"));
-content.render(<Content />);
+content.render(
+  <StrictMode>
+  <Content />
+  </StrictMode>
+);
 
 const credit = ReactDOM.createRoot(document.getElementById("credit"));
-credit.render(<Credit />);
+credit.render(
+  <StrictMode>
+  <Credit />
+  </StrictMode>
+);
