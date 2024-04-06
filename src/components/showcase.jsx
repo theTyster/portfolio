@@ -33,25 +33,26 @@ const Showcase = ({db}) =>{
 
   return (
     <div className="showcase">
-      {showcaseDataArr.map(p =>
-          p.link?(
+      {showcaseDataArr.map(s =>
+          s.link?(
             <a
-              key={p.id}
-              data-showcase-item-id={p.id}
-              href={p.link[0]}
-              target={p.link[1]}
+              key={s.id}
+              data-showcase-item-id={s.id}
+              href={s.link[0]}
+              target={s.link[1]?s.link[1]:undefined}
+              rel={s.link[1] === "_blank"?"noreferrer noopener":undefined}
             >
-              <h3>{p.title}</h3>
-              <img src={p.img[0]} alt={p.img[1]} />
+              <h3>{s.title}</h3>
+              <img src={s.img[0]} alt={s.img[1]} />
             </a>
           ):(
             <button
-              key={p.id}
-              data-showcase-item-id={p.id}
-              onClick={p.onClick}
+              key={s.id}
+              data-showcase-item-id={s.id}
+              onClick={s.onClick}
             >
-              <h3>{p.title}</h3>
-              <img src={p.img[0]} alt={p.img[1]} />
+              <h3>{s.title}</h3>
+              <img src={s.img[0]} alt={s.img[1]} />
             </button>
           )
       )}

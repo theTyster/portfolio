@@ -41,7 +41,7 @@ function AttentionGetterImage({
       className="attention-getter"
     >
       {imgLink?
-        <a href={imgLink} target="_blank"><img className={imgClass} src={imgSrc} alt={imgAlt} /></a>
+        <a href={imgLink} target="_blank" rel="noreferrer noopener" ><img className={imgClass} src={imgSrc} alt={imgAlt} /></a>
         :
         <img className={imgClass} src={imgSrc} alt={imgAlt} />}
       <div className="sideText-container">

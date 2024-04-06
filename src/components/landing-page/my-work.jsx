@@ -33,7 +33,7 @@ const MyWork = () => {
           id: "Fruit Search",
           title: "Fruit Search",
           onClick: undefined,
-          link: ["fruit-search/index.html", "_blank"],
+          link: ["fruit-search/", "_blank"],
           img: ["./img/fruit-search-ss.png", "Fruit Search App Screenshot"],
         },
         {
@@ -41,7 +41,7 @@ const MyWork = () => {
           id: "Giphy Search",
           title: "Giphy Search",
           onClick: undefined,
-          link: ["giphy-search/index.html", "_blank"],
+          link: ["giphy-search/", "_blank"],
           img: ["./img/giphy-search-ss.png", "Giphy Search App Screenshot"],
         },
         {
@@ -49,7 +49,7 @@ const MyWork = () => {
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           onClick: undefined,
-          link: ["hacker-news-clone/index.html", "_blank"],
+          link: ["hacker-news-clone/", "_blank"],
           img: ["./img/hacker-news-clone-ss.png", "Hacker News Clone App Screenshot"],
         },
         {
@@ -57,7 +57,7 @@ const MyWork = () => {
           id: "Jeopardy",
           title: "Jeopardy",
           onClick: undefined,
-          link: ["jeopardy/index.html", "_blank"],
+          link: ["jeopardy/", "_blank"],
           img: ["./img/jeopardy-ss.png", "Jeopardy App Screenshot"],
         },
         {
@@ -65,7 +65,7 @@ const MyWork = () => {
           id: "Meme Generator",
           title: "Meme Generator",
           onClick: undefined,
-          link: ["meme-generator/index.html", "_blank"],
+          link: ["meme-generator/", "_blank"],
           img: ["./img/meme-generator-ss.png", "Meme Generator App Screenshot"],
         },
         {
@@ -73,7 +73,7 @@ const MyWork = () => {
           id: "Memory Game",
           title: "Memory Game",
           onClick: undefined,
-          link: ["memory-game/index.html", "_blank"],
+          link: ["memory-game/", "_blank"],
           img: ["./img/memory-game-ss.png", "Memory Game App Screenshot"],
         },
         {
@@ -81,7 +81,7 @@ const MyWork = () => {
           id: "Duck Story",
           title: "Duck Story",
           onClick: undefined,
-          link: ["duck-story/index.html", "_blank"],
+          link: ["duck-story/", "_blank"],
           img: ["./img/duck-story-ss.png", "Duck Story App Screenshot"],
         },
         {
@@ -89,7 +89,7 @@ const MyWork = () => {
           id: "ToDo App",
           title: "ToDo App",
           onClick: undefined,
-          link: ["todo-app/index.html", "_blank"],
+          link: ["todo-app/", "_blank"],
           img: ["./img/todo-app-ss.png", "ToDo App Screenshot"],
         },
       ]

@@ -17,7 +17,7 @@ function PullRequestTile({pr, org}){
   }
 
   //VARIABLES
-  const thetyster = pr.user;
+  const user = pr.user;
   const pullRequest = pr.pull_request;
   const mergedClass = pullRequest.merged_at?"prt-merged":"prt-open";
   const reactionEmoji = {
@@ -38,6 +38,7 @@ function PullRequestTile({pr, org}){
       <a
         href={pr.html_url+"/files"}
         target="_blank"
+        rel="noreferrer noopener"
       >
         <h4 className={mergedClass}>
           #{pr.url.split("/").slice(-1)[0]} - {pullRequest.merged_at?"Merged":"Open"}
@@ -49,6 +50,7 @@ function PullRequestTile({pr, org}){
         <a
           href={org.html_url}
           target="_blank"
+          rel="noreferrer noopener"
           className="prt-org-link"
         >
           <img
@@ -61,13 +63,14 @@ function PullRequestTile({pr, org}){
         <SvgPullRequest  className={mergedClass}/>
 
         <a
-          href={thetyster.html_url}
+          href={user.html_url}
           target="_blank"
-          className="prt-thetyster-link"
+          rel="noreferrer noopener"
+          className="prt-user-link"
         >
           <img
-            className="prt-thetyster-avatar"
-            src={thetyster.avatar_url}
+            className="prt-user-avatar"
+            src={user.avatar_url}
             alt="My Github user profile picture"
           />
         </a>

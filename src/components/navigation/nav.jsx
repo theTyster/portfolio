@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import gsap from 'gsap';
 
 //Components
@@ -9,11 +9,10 @@ import "../../assets/css/nav.scss";
 
 function Navigation() {
 
-  const [menuState, menuSet] = React.useState(false);
-  const [hamTl] = React.useState(gsap.timeline()); // used to trigger the render.
-  const ham = {};
+  const [menuState, menuSet] = useState(false);
+  const [hamTl] = useState(gsap.timeline()); // used to trigger the render.
 
-  React.useEffect(() => {
+  useEffect(() => {
     hamTl 
       .to("#ham-top", {duration: 0.4, y: 4})
       .to("#ham-bottom", {duration: 0.4, y: -4},"<")
@@ -27,7 +26,7 @@ function Navigation() {
 
 
   return(
-    <NavButton ham={ ham } menuState={ menuState } onClick={ onClick } />
+    <NavButton menuState={menuState} onClick={onClick} />
   );
 }
 
