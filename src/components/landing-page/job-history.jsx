@@ -28,12 +28,12 @@ const JobHistory = () => {
       <>
         <p>PR and the web go hand-in-hand these days.</p>
         <p>
-      I've found that my background in public relations helps tremendously
-      as I help organizations build one of the most publicly facing forms of
-      owned content a business usually has, their website. I have had the
-      privelege to be a part of many new businesses first steps into the
-      internet, and continue to support several of them as they grows. These
-      experiences have taught me so much. Here's a few to start:
+          I've found that my background in public relations helps tremendously
+          as I help organizations build one of the most publicly facing forms of
+          owned content a business usually has, their website. I have had the
+          privelege to be a part of many new businesses first steps into the
+          internet, and continue to support several of them as they grows. These
+          experiences have taught me so much. Here's a few to start:
         </p>
       </>,
       [
@@ -127,7 +127,7 @@ const JobHistory = () => {
         <p>
           I also helped rebuild a website which provided resources to parents of
           kids struggling with <a href="https://en.wikipedia.org/wiki/Anoxia"
-          target="_blank">Anoxia</a>. We were able to prioritize this
+          rel="noreferrer noopener" target="_blank">Anoxia</a>. We were able to prioritize this
           organizations search engine results page rank with search engine
           optimized content. My time at RaiderComm set the foundation for how I
           build content for websites today. Here's a few more things I learned
