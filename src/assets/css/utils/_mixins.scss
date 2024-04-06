@@ -1,0 +1,175 @@
+@use "_variables" as v;
+
+// Data communicates information.
+// Art communicates Emotion.
+
+//TODO make the theme of colors changeable.
+//Idea:
+// use `&--themename` to set color themes in scss
+// change the theme color variables to be something like:
+// -$primary
+// -$secondary
+// -$accent
+//
+// The end result should be the ability to toggle the theme by changing all
+// tags with a class like `.theme--themename` to a different theme.
+
+// MAIN THEME
+@mixin foundation() {
+	/* * {margin: 0;} */
+  html{
+    max-height:100%vh;
+    max-width: 100%vw;
+    overflow-x: hidden;
+  }
+	body{
+      /* min-height:100%; */
+      background-color: v.$citron;
+      background-image: url('img/splat-dark.svg');
+      background-attachment: fixed;
+      transition: background-color 2s;
+      div#content{
+        /* min-height: 100vh; //Making scrollbars on short pages */
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+    }
+  }
+  .page-title{
+    text-align: center;
+    padding: v.$pad;
+  }
+  header {display: block;}
+	main {
+    position: relative;
+    flex-grow:1;
+    @include center-by-margin(800px);
+    padding: v.$pad;
+		background: white;
+    @include rounded-corners;
+	}
+	p{font: v.$p-font}
+  h1{
+    font: v.$h1-font;
+    margin: v.$h1-margin;
+  }
+  h2{
+    font: v.$h2-font;
+    margin: calc(v.$h1-margin*.8);
+  }
+  h3{
+    font: v.$h3-font;
+    margin: calc(v.$h1-margin*.6);
+  }
+  h4{
+    font: v.$h4-font;
+    margin: calc(v.$h1-margin*.4);
+  }
+  h5{
+    font: v.$h5-font;
+    margin: calc(v.$h1-margin*.2);
+  }
+  button, li, ul, a{font: bold v.$p-font}
+  a button{text-decoration: none}
+  a {color: v.$lightburntsilver}
+  button{
+    padding: .7em;
+    @include rounded-corners;
+    /* border: none; */
+    color: white;
+    background-color: v.$charcoal;
+    &:hover{
+      background-color: v.$lightcharcoal;
+      &:active{
+        background-color: v.$darkcharcoal;
+      }
+    }
+  }
+  :focus-visible {
+  outline: 9px double black;
+  box-shadow: 0 0 0 6px white;
+  }
+  hr {
+    @include center-by-margin($w:unset, $topbottom:4em);
+    margin-top: 4em;
+    margin-bottom: 2em;
+    background-image: url("/src/assets/img/curlywave.svg");
+    background-size: contain;
+    border: none;
+    height: 52px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+  }
+  footer {
+    padding-top: v.$pad;
+    padding-bottom: v.$pad;
+    text-align: center;
+    /* white-space: nowrap; */
+  }
+
+  // MEDIA QUERIES
+  @include medium-media-query(){
+    header {
+      @include center-by-margin(600px);
+      display:flex;
+    }
+    main {@include center-by-margin(600px);}
+    footer {@include center-by-margin(600px);}
+  }
+  @include small-media-query(){
+    header {
+      @include center-by-margin(300px);
+      display:flex;
+    }
+    main {
+      @include center-by-margin(300px);
+      article{padding: 1rem;}
+    }
+    footer {@include center-by-margin(300px);}
+  }
+}
+
+
+// MIXINS
+
+@mixin medium-media-query(){@media(max-width:v.$md-max-width){@content}}
+@mixin small-media-query(){@media(max-width:v.$sm-max-width){@content}}
+
+@mixin rounded-corners(){border-radius: 7px}
+
+@mixin button-click($shadow: 3px 3px 10px) {
+	&:hover {
+    filter: drop-shadow($shadow #b4a461);
+		background-color: v.$lightcitron;
+		background: white;
+		&:active {
+			background-color: v.$darkcitron;
+			filter: none;
+      color: white;
+		}
+	}
+}
+
+@mixin center-by-margin($w:fit-content, $top:0, $bottom:0, $topbottom:null) {
+  @if not $topbottom{
+    margin-top: $top;
+    margin-bottom: $bottom;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @else {margin: $topbottom auto;}
+  display: block;
+  max-width: $w;
+}
+
+@mixin center-children-by-flex($childTag:#{div}, $childClassPrefix: flex, $itemWidth: auto){
+  display: flex;
+  #{$childTag}[class^="#{$childClassPrefix}"][class$=item]{
+    flex: 1 0 $itemWidth;
+    max-width: v.$sm-max-width;
+    @include medium-media-query(){max-width: 500px}
+    @include small-media-query(){max-width: 250px}
+  }
+  #{$childTag}[class^="#{$childClassPrefix}"][class$=centering-box]{flex: 1}
+}
