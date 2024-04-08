@@ -31,7 +31,7 @@ function Hobbies(){
             </p>
           }
         />
-        <utils.DetailsTag 
+        <utils.DetailsTag
           summary={<a href="https://pleroma.social">Pleroma</a>}
           details={
             <p>
@@ -40,11 +40,11 @@ function Hobbies(){
               heard of. Mastodon and Pleroma are programs used to connect to
               the federated socialsphere called "The Fediverse". Pleroma is a
               lighter, faster project but interoperates with all of the
-              platforms on the fediverse. Including Mastodon. 
+              platforms on the fediverse. Including Mastodon.
             </p>
           }
         />
-         <utils.DetailsTag 
+         <utils.DetailsTag
           summary={<a href="https://github.com/searxng/searxng">SearXNG</a>}
           details={
             <p>
@@ -54,7 +54,7 @@ function Hobbies(){
             </p>
           }
         />
-         <utils.DetailsTag 
+         <utils.DetailsTag
            summary={<a href="https://standardnotes.com">Standard Notes</a>}
            details={
              <p>
@@ -63,7 +63,7 @@ function Hobbies(){
              </p>
            }
          />
-         <utils.DetailsTag 
+         <utils.DetailsTag
           summary={<a href="https://gitea.com">Gitea</a>}
           details={
             <p>
@@ -72,7 +72,7 @@ function Hobbies(){
             </p>
            }
         />
-        <utils.DetailsTag 
+        <utils.DetailsTag
           summary={<a href="https://conduit.rs">Conduit</a>}
           details={<p>Conduit is a lightweight Matrix Chat server.</p>}
         />
@@ -83,8 +83,8 @@ function Hobbies(){
       1,
       "Family Time",
       <p>
-        My family is so much fun. I love spending time with my wife and
-        {calcAge("2022")}-year-old daughter. When we are all together some of
+        My family is so much fun. I love spending time with my wife
+        and {calcAge("2022")}-year-old daughter. When we are all together some of
         the things we enjoy doing are:
       </p>,
       <ul>
@@ -114,7 +114,7 @@ function Hobbies(){
       </ul>,
     ),//}}}
     // A Good Story{{{
-    new utils.hobby( 
+    new utils.hobby(
       3,
       "A Good Story",
       <p>
