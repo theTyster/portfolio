@@ -76,7 +76,9 @@
   button{
     padding: .7em;
     @include rounded-corners;
-    /* border: none; */
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     color: white;
     background-color: v.$charcoal;
     &:hover{
