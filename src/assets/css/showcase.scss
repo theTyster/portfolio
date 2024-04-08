@@ -12,6 +12,7 @@ div.showcase {
 		flex: 1 0 calc(33.33% - $button-margin * 2);
 		@include theme.medium-media-query(){flex: 1 0 calc(50% - $button-margin * 2)}
 		@include theme.small-media-query(){flex: 1 0 calc(100% - $button-margin * 2)}
+		text-decoration: none;
 		line-height:0;
 		padding: 0;
 		margin: $button-margin;
