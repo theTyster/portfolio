@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/public/css/animate.css
 
 # testing
 .eslintrc*
