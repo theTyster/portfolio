@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState, useEffect} from 'react';
 import gsap from 'gsap';
 
@@ -5,7 +6,7 @@ import gsap from 'gsap';
 import NavButton from "./nav-button.jsx"
 
 //CSS
-import "../../assets/css/nav.scss";
+import "./nav.scss";
 
 function Navigation() {
 

@@ -1,12 +1,12 @@
-//vim:foldmethod=marker
+// vim:foldmethod=marker
 import {Fragment} from "react";
-import utils from "./utils/job-history.jsx";
+import utils from "./job-history.utils.jsx";
 
 //CSS
-import "../../assets/css/job-history.scss";
+import "./job-history.scss";
 
 //Components
-import JobAttentionGetter from "../attention-getter-image.jsx";
+import JobAttentionGetter from "../../../components/attention-getter-image/attention-getter-image.jsx";
 
 const JobHistory = () => {
 
@@ -21,7 +21,7 @@ const JobHistory = () => {
           to: new Date(),
       },
       [
-        "img/freelance-webdev.jpg",
+        "/static/img/freelance-webdev.jpg",
         "HTML code on a screen",
         "https://www.linkedin.com/in/tyler-d-webdev/"
       ],
@@ -57,7 +57,7 @@ const JobHistory = () => {
           to: new Date(2024, 2)
       },
       [
-        "img/springboard-logo.svg",
+        "/static/img/springboard-logo.svg",
         "Springboard's Logo",
         "https://springboard.com"
       ],
@@ -83,7 +83,7 @@ const JobHistory = () => {
           to: new Date(2023, 0)
       },
       [
-        "img/directorschoice-logo.png",
+        "/static/img/directorschoice-logo.png",
         "Director's Choice Logo",
         "https://directorschoice.com"
       ],
@@ -113,7 +113,7 @@ const JobHistory = () => {
           to: new Date(2021, 4)
       },
       [
-        "img/raidercomm-logo.jpeg",
+        "/static/img/raidercomm-logo.jpeg",
         "RaiderComm Public Relations Logo",
         "https://raidercommpr.wixsite.com/rcpr"
       ],

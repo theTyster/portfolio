@@ -1,7 +1,7 @@
-import react from "react";
+import React from "react";
 
 //COMPONENTS
-import Showcase from "../showcase.jsx";
+import Showcase from "../../../components/showcase/showcase.jsx";
 
 //COMPONENTS TODO:
 //import DuckStory       from "../duck-story/duck-story.jsx";
@@ -34,7 +34,7 @@ const MyWork = () => {
           title: "Fruit Search",
           onClick: undefined,
           link: ["fruit-search/", "_blank"],
-          img: ["./img/fruit-search-ss.png", "Fruit Search App Screenshot"],
+          img: ["./static/img/fruit-search-ss.png", "Fruit Search App Screenshot"],
         },
         {
           //1
@@ -42,7 +42,7 @@ const MyWork = () => {
           title: "Giphy Search",
           onClick: undefined,
           link: ["giphy-search/", "_blank"],
-          img: ["./img/giphy-search-ss.png", "Giphy Search App Screenshot"],
+          img: ["./static/img/giphy-search-ss.png", "Giphy Search App Screenshot"],
         },
         {
           //2
@@ -50,7 +50,7 @@ const MyWork = () => {
           title: "Hacker News Clone",
           onClick: undefined,
           link: ["hacker-news-clone/", "_blank"],
-          img: ["./img/hacker-news-clone-ss.png", "Hacker News Clone App Screenshot"],
+          img: ["./static/img/hacker-news-clone-ss.png", "Hacker News Clone App Screenshot"],
         },
         {
           //3
@@ -58,7 +58,7 @@ const MyWork = () => {
           title: "Jeopardy",
           onClick: undefined,
           link: ["jeopardy/", "_blank"],
-          img: ["./img/jeopardy-ss.png", "Jeopardy App Screenshot"],
+          img: ["./static/img/jeopardy-ss.png", "Jeopardy App Screenshot"],
         },
         {
           //4
@@ -66,7 +66,7 @@ const MyWork = () => {
           title: "Meme Generator",
           onClick: undefined,
           link: ["meme-generator/", "_blank"],
-          img: ["./img/meme-generator-ss.png", "Meme Generator App Screenshot"],
+          img: ["./static/img/meme-generator-ss.png", "Meme Generator App Screenshot"],
         },
         {
           //5
@@ -74,7 +74,7 @@ const MyWork = () => {
           title: "Memory Game",
           onClick: undefined,
           link: ["memory-game/", "_blank"],
-          img: ["./img/memory-game-ss.png", "Memory Game App Screenshot"],
+          img: ["./static/img/memory-game-ss.png", "Memory Game App Screenshot"],
         },
         {
           //6
@@ -82,7 +82,7 @@ const MyWork = () => {
           title: "Duck Story",
           onClick: undefined,
           link: ["duck-story/", "_blank"],
-          img: ["./img/duck-story-ss.png", "Duck Story App Screenshot"],
+          img: ["./static/img/duck-story-ss.png", "Duck Story App Screenshot"],
         },
         {
           //7
@@ -90,7 +90,7 @@ const MyWork = () => {
           title: "ToDo App",
           onClick: undefined,
           link: ["todo-app/", "_blank"],
-          img: ["./img/todo-app-ss.png", "ToDo App Screenshot"],
+          img: ["./static/img/todo-app-ss.png", "ToDo App Screenshot"],
         },
       ]
     ]])

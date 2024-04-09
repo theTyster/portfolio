@@ -1,6 +1,6 @@
-@use "utils/_mixins" as theme;
-@use "utils/_animators" as animate;
-@use "utils/_variables" as v;
+@use "../../../assets/css/_mixins" as theme;
+@use "../../../assets/css/_animators" as animate;
+@use "../../../assets/css/_variables" as v;
 
 //Animations
 @include animate.rotate;

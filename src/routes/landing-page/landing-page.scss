@@ -1,6 +1,6 @@
-@use "utils/_fonts";
-@use "utils/_mixins" as theme;
-@use "utils/_variables" as v;
+@use "../../assets/css/_fonts";
+@use "../../assets/css/_mixins" as theme;
+@use "../../assets/css/_variables" as v;
 
 @include theme.foundation;
 

@@ -1,8 +1,8 @@
-import react from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 //CSS
-import "../assets/css/showcase.scss";
+import "./showcase.scss";
 
 // This component requires a pseudo SQL database shaped Map that has the following constraints:
 // I. An Object which contains Id's pointing to indexes. {["id"]: 0}

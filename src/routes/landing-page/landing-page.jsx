@@ -1,18 +1,19 @@
 //DEV LIBRARIES
+import React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {setTitle, sleep} from "../../assets/utils.js";
+import {setTitle, sleep} from "../../assets/utils/utils.js";
 
 //CSS
-import "../../assets/css/landing-page.scss";
+import "./landing-page.scss";
 
 //COMPONENTS
-import TabMenu from "../tab-menu.jsx";
-import AttetionGetterImage from "../attention-getter-image.jsx";
-import JobHistory from "./job-history.jsx";
-import Hobbies from "./hobbies.jsx";
-import Contributions from "./contributions.jsx";
-import MyWork from "./my-work.jsx";
+import TabMenu from "../../components/tab-menu/tab-menu.jsx";
+import AttetionGetterImage from "../../components/attention-getter-image/attention-getter-image.jsx";
+import JobHistory from "./job-history/job-history.jsx";
+import Hobbies from "./hobbies/hobbies.jsx";
+import Contributions from "./contributions/contributions.jsx";
+import MyWork from "./my-work/my-work.jsx";
 
 //SVG
 import SvgCurlywave from "../../assets/img/curlywave.jsx";
@@ -135,7 +136,7 @@ function LandingPage(){
       <AttetionGetterImage
         imgClass="my-headshot"
         sideText_classPrefix="headshot-text"
-        imgSrc="img/me.jpg"
+        imgSrc="static/img/me.jpg"
         imgAlt="My Face."
         imgLink="https://www.linkedin.com/in/tyler-d-webdev/"
         sideText={<AttentionGetterSideText />}

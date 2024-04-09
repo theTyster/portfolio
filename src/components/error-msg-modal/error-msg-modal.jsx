@@ -2,10 +2,10 @@ import {useState} from "react";
 import PropTypes from "prop-types";
 
 //SVG
-import SvgExitButton from "../assets/img/exit-button-svg.jsx";
+import SvgExitButton from "../../assets/img/exit-button-svg.jsx";
 
 //CSS
-import "../assets/css/error-msg-modal.scss";
+import "./error-msg-modal.scss";
 
 
 const ErrorMessageModal = ({
