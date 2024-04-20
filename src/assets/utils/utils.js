@@ -1,6 +1,6 @@
 "use strict";
 
-//  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
+//  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.{{{
 //  const displayFunc = function(tag) {
 //    this.tag = document.querySelector(tag),
 //      this.show = async function({sec = 1, rel = true, disp = "block"} = {}){
@@ -131,10 +131,10 @@
 //    hog: new displayFunc("#hog"),
 //    eggnog: new displayFunc("#eggnog"),
 //    animalsBlock: new displayFunc(".ascii_animals_block")
-//  };
+//  };}}}
 
 
-//COLORS
+//COLORS{{{
 export const themeColors = {
   // Primary
   darkcitron: "#b4a461",
@@ -163,20 +163,31 @@ export const themeColors = {
 
   errormessage: "#9f0000",
   errorbackground: "#ffeeee",
-}
+}//}}}
 
 
+// Find fastest working API.{{{
+export async function raceAPIs(apis) {
+    try {
+        const requests = apis.map(api => axios.get(`${api}/category?id=3`));
+        const winner = await Promise.race(requests);
+      return winner;
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}//}}}
 
-// Calculates age  in years from an anniversary date.
-export const calcAge = anniversary => 
-  Math.round(Math.abs((new Date(anniversary)-(new Date())))/8.64e7/365);
+
+// Calculates age  in years from an anniversary date.{{{
+export const calcAge = anniversary =>
+  Math.round(Math.abs((new Date(anniversary)-(new Date())))/8.64e7/365);//}}}
 
 
-// generates a random number based on max number inputted.
-export const ranNumG = max => Math.floor(Math.random() * max);
+// generates a random number based on max number inputted.{{{
+export const ranNumG = max => Math.floor(Math.random() * max);//}}}
 
 
-// makes an array based on maxIndex inputted.
+// makes an array based on maxIndex inputted.{{{
 export const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
   if (useKeysBool){
     return [...Array(maxIndex).keys()].map(x => ++x);
@@ -184,10 +195,10 @@ export const makeArray = function arrayFromMaxIndex(maxIndex, useKeysBool){
   else {
     return [...Array(maxIndex).keys()];
   }
-}
+}//}}}
 
 
-// shuffles an array efficiently.
+// shuffles an array efficiently.{{{
 export const shuffle = function fisherYatesArrayShuffler(inputArr){
   let applyShuffler = () => {
     let len = inputArr.length;
@@ -198,23 +209,24 @@ export const shuffle = function fisherYatesArrayShuffler(inputArr){
     return inputArr;
   }
   return applyShuffler(...inputArr);
-}
+}//}}}
 
 
-// guesses the local language from the browser.
+// guesses the local language from the browser.{{{
 export const getLanguage = () => {
   if (navigator.languages && navigator.languages.length) {
     return navigator.languages[0];
   } else {
     return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
   }
-}
+}//}}}
 
 
-// custom sleep function.
-export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));
+// custom sleep function.{{{
+export  const sleep = time => new Promise(resolve => setTimeout(resolve, time * 1000));//}}}
 
-// change epoch date to: `MMMMM, DD YYYY hh:mm AMPM`
+
+// change epoch date to: `MMMMM, DD YYYY hh:mm AMPM`{{{
 export const normalizeEpochDate = dateString=>{
   let date = new Date(dateString);
   let format = {
@@ -225,17 +237,19 @@ export const normalizeEpochDate = dateString=>{
     minute: "2-digit",
   };
   return `${date.toLocaleTimeString("en-US", format)}`;
-}
-
-// Sets the page Title based on String inputted.
-export const setTitle = title => Array.from(document.querySelectorAll(".page-title")).forEach(e => e.innerText = title);
+}//}}}
 
 
-// DUCK STORY UTILITIES
-//declares the object for easter egg features.
-export const bonusLevel = {}
+// Sets the page Title based on String inputted.{{{
+export const setTitle = title => Array.from(document.querySelectorAll(".page-title")).forEach(e => e.innerText = title);//}}}
 
-//function to invert styles if easter egg is activated.
+
+// DUCK STORY UTILITIES{{{
+//declares the object for easter egg features.{{{
+export const bonusLevel = {}//}}}
+
+
+//function to invert styles if easter egg is activated.{{{
 export const bonusEgg = function(){
   if (bonusLevel.enabled){
     const invert = "invert(100%)";
@@ -244,9 +258,10 @@ export const bonusEgg = function(){
     for (let i of selectorTexts)
       i.style.filter = invert;
   }
-}
+}//}}}
 
-// Listens for Enter to be pressed before continuing.
+
+// Listens for Enter to be pressed before continuing.{{{
 export const listen4Enter = function(){
   return new Promise(resolve => {
     document.addEventListener("keyup", function enterInputListener(event){
@@ -256,10 +271,10 @@ export const listen4Enter = function(){
       }
     });
   })
-}
+}//}}}
 
 
-export const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
+export const makeItRain = function(storminess) { // remember that the arg is a range 1-100.{{{
   const hiddenRaindrops = 20;
   storminess = Math.floor(hiddenRaindrops*(storminess/100));
   const rainArray = shuffle(makeArray(storminess));
@@ -279,10 +294,10 @@ export const makeItRain = function(storminess) { // remember that the arg is a r
     }
   }
   delayedRain();
-}
+}//}}}
 
 
-export const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){
+export const checkColorInput = async function checkInputForColor(inputSelector, asciiObj, transFunc){//{{{
   //inputSelector = The selector ID for the text input box being used to choose a color.
   //asciiObj = the ascii picture that the color is going to be applied to.
   //transFunc = the function which fires after the check is complete.
@@ -341,4 +356,7 @@ export const checkColorInput = async function checkInputForColor(inputSelector, 
       break;
     }
   }
-}
+}//}}}
+//}}}
+
+// vim:foldmethod=marker
