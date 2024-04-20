@@ -1,3 +1,7 @@
+import {shuffle, raceAPIs} from "../../assets/utils/utils.js";
+import $ from "jquery";
+import axios from "axios";
+
 const loadGame = async () => {
   //RESET THE BOARD.
   $("table").off();
