@@ -3,8 +3,9 @@
 # dependencies
 /node_modules
 
-# testing
+# Linting
 .eslintrc*
+eslint.config*
 
 # production
 /dist
