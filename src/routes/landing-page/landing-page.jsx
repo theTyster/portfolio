@@ -1,6 +1,5 @@
 //DEV LIBRARIES
-import React from 'react';
-import {useEffect, useState} from "react";
+import {React, useEffect, useState} from "react";
 import axios from "axios";
 import {setTitle, sleep} from "../../assets/utils/utils.js";
 
@@ -14,9 +13,6 @@ import JobHistory from "./job-history/job-history.jsx";
 import Hobbies from "./hobbies/hobbies.jsx";
 import Contributions from "./contributions/contributions.jsx";
 import MyWork from "./my-work/my-work.jsx";
-
-//SVG
-import SvgCurlywave from "../../assets/img/curlywave.jsx";
 
 const AttentionGetterSideText = () =>(
     <>
