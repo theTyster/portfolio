@@ -166,18 +166,6 @@ export const themeColors = {
 }//}}}
 
 
-// Find fastest working API.{{{
-export async function fastestResponse(endpoints) {
-    try {
-        const requests = endpoints.map(endpoint => axios.get(endpoint));
-        const winner = await Promise.race(requests);
-      return winner;
-    } catch (error) {
-        console.error('Error:', error.message);
-    }
-}//}}}
-
-
 // Calculates age  in years from an anniversary date.{{{
 export const calcAge = anniversary =>
   Math.round(Math.abs((new Date(anniversary)-(new Date())))/8.64e7/365);//}}}
