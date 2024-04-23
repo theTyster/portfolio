@@ -167,9 +167,9 @@ export const themeColors = {
 
 
 // Find fastest working API.{{{
-export async function raceAPIs(apis) {
+export async function fastestResponse(endpoints) {
     try {
-        const requests = apis.map(api => axios.get(`${api}/category?id=3`));
+        const requests = endpoints.map(endpoint => axios.get(endpoint));
         const winner = await Promise.race(requests);
       return winner;
     } catch (error) {
