@@ -60,8 +60,7 @@ button:active {
   display: none;
 }
 
-table,
-.loading {
+table{
   display: none;
 }
 
@@ -91,6 +90,7 @@ th {
   text-transform: capitalize;
   background-color: var(--dark-blue);
   border: 5px solid white;
+	box-sizing: border-box;
 }
 
 td {
@@ -98,13 +98,15 @@ td {
   font-size: 10pt;
   background-color: var(--dark-blue);
   border: 1px solid white;
-  min-width: 120px;
+  min-width: 100px;
+	box-sizing: border-box;
 }
 
 @media screen and (max-width: 400px) {
   img:not(.loading) {
     width: 100vw;
   }
+	table
 }
 
 @keyframes rotate {

@@ -23,8 +23,11 @@
           src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Jeopardy_Germany_2016_logo.jpg"
           alt="Jeopardy! Logo Courtesy of Wikimedia Commons"
         />
-        <button id="start-button">Start Game</button>
-        <img class="loading" src="loading-circle.svg" alt="loading..." />
+        <div class="buttons">
+        	<button id="start-button">Start Game</button>
+        	<button id="newGame-button">New Game</button>
+        </div>
+        <img class="loading" src="/src/assets/img/loading-circle.svg" alt="loading..." />
         <noscript>
           <p class="noscript">This page requires Javascript to work!</p>
         </noscript>
@@ -86,6 +89,6 @@
       <div class="flex-items"></div>
     </div>
 
-    <script type="module" src="/src/routes/jeopardy/index.js"></script>
+    <script type="module" src="/src/jeopardy/index.js"></script>
   </body>
 </html>
