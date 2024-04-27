@@ -63,7 +63,7 @@ const apis = [
 		}
 	}),
 	new JeopardyAPI( "https://jservice.io", "/api/category?id=", data =>
-		({ 
+		({
 			title: data.category.title,
 			clues: data.category.clues.map(clue => [clue.question, clue.answer])
 		}))
@@ -72,33 +72,35 @@ const apis = [
 
 const newGame = () => { window.location.reload() }
 
+
 // First Paint.
 $("div.buttons").css("display", "none");
 const $loadingMsg = $("<p>Building the game, please wait...</p>").css("text-align", "center");
 $("div.buttons").before($loadingMsg);
 $("img.loading").css("display", "block");
 
-// Get a Working API
-let api = await JeopardyAPI.findFastestAPI(apis);
-api.getGameData();
+// Get a Working API and prime the game.
+new Promise(res => res(JeopardyAPI.findFastestAPI(apis)))
+	.then(api => {
 
-$loadingMsg.detach();
-$("div.buttons").css("display", "flex");
-$("img.loading").css("display", "none");
+		api.getGameData();
+
+		$loadingMsg.detach();
+		$("div.buttons").css("display", "flex");
+		$("img.loading").css("display", "none");
 
 
-const loadGame = async () => {
-  //RESET THE BOARD.
-  $("table").off();
-	$("table").css("display", "block")
-  $("th").html("");
-  $("td").off();
-  $("td").css("background", "var(--dark-blue)");
-  $("td").html("<strong>?</strong>");
-  $("strong").css("display", "block");
-  $("button#start-button").replaceWith("<button id='start-button'>Restart Game</button>");
+	const loadGame = async () => {
+		//RESET THE BOARD.
+		$("table").off();
+		$("table").css("display", "block")
+		$("th").html("");
+		$("td").off();
+		$("td").css("background", "var(--dark-blue)");
+		$("td").html("<strong>?</strong>");
+		$("strong").css("display", "block");
+		$("button#start-button").replaceWith("<button id='start-button'>Restart Game</button>");
 
-	try {
 		for (let i = 0; i < viewportWidth; i++) {
 			$(`th.j-category${i}`).append(api.categories[i]);
 			for (let ii = 0; ii < 5; ii++) {
@@ -114,65 +116,55 @@ const loadGame = async () => {
 			$(`td[id^='j-${i}']`).remove();
 			$(`th[class^='j-category${i}']`).remove();
 		}
-	} catch ({ name, message }) {
-		//IF BOARD IS INCOMPLETE, REBUILD IT
-		if (
-			name === "TypeError" &&
-			(message === "api.board[api.categories[i]][ii] is undefined" ||
-				message === "api.board[api.categories[i]] is undefined")
-		)
 
-			api = await JeopardyAPI.findFastestAPI(apis);
-			api.getGameData();
-			loadGame();
-	}
-	//HANDLERS FOR THE GAME
-	//IF A BOX IS CLICKED ON, SHOW THE NEXT VALUE IN THE BOX AND CHANGE THE BACKGROUND.
-	//IF A CLUE IS ON THE BOARD DON'T ALLOW OTHER BOXES TO BE CLICKED.
-	const gameClickHandler = function (event) {
-		function showAnswer(event) {
-			if (
-				event.target.className === "question" &&
-				event.target.style.display === "block"
-			) {
-				event.target.style.display = "none";
-				event.target.nextSibling.style.display = "block";
-				event.target.parentElement.style.background = "var(--green)";
-			} else if (
-				event.target.tagName === "TD" &&
-				event.target.children[0].style.display === "block"
-			) {
-				event.target.children[0].style.display = "none";
-				event.target.children[0].nextSibling.style.display = "block";
-				event.target.children[0].parentElement.style.background =
-					"var(--green)";
+		//HANDLERS FOR THE GAME
+		//IF A BOX IS CLICKED ON, SHOW THE NEXT VALUE IN THE BOX AND CHANGE THE BACKGROUND.
+		//IF A CLUE IS ON THE BOARD DON'T ALLOW OTHER BOXES TO BE CLICKED.
+		const gameClickHandler = function (event) {
+			function showAnswer(event) {
+				if (
+					event.target.className === "question" &&
+					event.target.style.display === "block"
+				) {
+					event.target.style.display = "none";
+					event.target.nextSibling.style.display = "block";
+					event.target.parentElement.style.background = "var(--green)";
+				} else if (
+					event.target.tagName === "TD" &&
+					event.target.children[0].style.display === "block"
+				) {
+					event.target.children[0].style.display = "none";
+					event.target.children[0].nextSibling.style.display = "block";
+					event.target.children[0].parentElement.style.background =
+						"var(--green)";
+				}
+
+				$("td").off();
+				$("table").off().on("click", gameClickHandler);
 			}
 
-			$("td").off();
-			$("table").off().on("click", gameClickHandler);
-		}
+			if (event.target.tagName === "STRONG") {
+				event.target.style.display = "none";
+				event.target.nextSibling.style.display = "block";
+				event.target.parentElement.style.background = "var(--light-blue)";
+				$("table").off();
+				$(event.target).parent().on("click", showAnswer);
+			} else if (
+				event.target.tagName === "TD" &&
+				event.target.children[0].style.display === "block" &&
+				event.target.innerText === "?"
+			) {
+				event.target.children[1].style.display = "block";
+				event.target.children[0].remove();
+				event.target.style.background = "var(--light-blue)";
+				$("table").off();
+				$(event.target).on("click", showAnswer);
+			}
+		};
 
-		if (event.target.tagName === "STRONG") {
-			event.target.style.display = "none";
-			event.target.nextSibling.style.display = "block";
-			event.target.parentElement.style.background = "var(--light-blue)";
-			$("table").off();
-			$(event.target).parent().on("click", showAnswer);
-		} else if (
-			event.target.tagName === "TD" &&
-			event.target.children[0].style.display === "block" &&
-			event.target.innerText === "?"
-		) {
-			event.target.children[1].style.display = "block";
-			event.target.children[0].remove();
-			event.target.style.background = "var(--light-blue)";
-			$("table").off();
-			$(event.target).on("click", showAnswer);
-		}
+		$("table").on("click", gameClickHandler);
 	};
 
-	$("table").on("click", gameClickHandler);
-};
-
-$("div.game").on("click", "#start-button", loadGame);
-$("div.game").on("click", "#newGame-button", newGame);
+	$("div.game").on("click", "#start-button", loadGame);
+	$("div.game").on("click", "#newGame-button", newGame);
+})
