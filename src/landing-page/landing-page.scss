@@ -1,0 +1,14 @@
+@use "@css/_fonts";
+@use "@css/_mixins" as theme;
+@use "@css/_variables" as v;
+
+@include theme.foundation;
+
+div.landing-page{
+	div.attention-getter {
+		@include theme.center-children-by-flex(
+			$childClassPrefix: "headshot-text",
+			$itemWidth: 20em
+		);
+	}
+}

@@ -1,13 +1,12 @@
 //DEV Libraries
-import React from "react";
 import ReactDOM from "react-dom/client";
-import {StrictMode} from "react";
+import {React, StrictMode} from "react";
 //import {useState} from "react";
 
 //COMPONENTS
-import LandingPage from "./routes/landing-page/landing-page.jsx";
-import Navigation from "./components/navigation/nav.jsx";
-import Credit from "./components/credit/credit.jsx";
+import LandingPage from "./landing-page/landing-page.jsx";
+import Navigation from "@components/navigation/nav.jsx";
+import Credit from "@components/credit/credit.jsx";
 //import Beginning from "./duck-story/beginning.jsx";
 
 const Content = () => {

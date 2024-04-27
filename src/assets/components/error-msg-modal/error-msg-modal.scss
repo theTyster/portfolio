@@ -1,0 +1,42 @@
+@use "@css/_variables" as v;
+@use "@css/_mixins" as theme;
+
+div.error-msg{
+  position: absolute;
+  background: v.$errorbackground;
+  @include theme.rounded-corners;
+  padding: v.$pad;
+  @include theme.medium-media-query(){padding: calc(v.$pad/2)}
+  div{
+    display: flex;
+    svg.error-message-exit{
+      margin-left: auto;
+      &:hover{
+        #exit-button-svg-circle{fill: v.$lightcharcoal}
+        #exit-button-svg-x{stroke: white}
+        &:active{
+          #exit-button-svg-circle{
+            fill: v.$darkcharcoal;
+            stroke: v.$darkcharcoal;
+          }
+        }
+      }
+    }
+  }
+  h3{
+    text-align: center;
+    color: v.$errormessage;
+  }
+  img{
+    @include theme.center-by-margin($w:98px, $topbottom: v.$pad);
+    border-radius: 100%;
+  }
+  p{
+    text-align: center;
+  }
+  a, button{
+    @include theme.center-by-margin;
+    text-decoration: none;
+  }
+  border: 1px solid red;
+}

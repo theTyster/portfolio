@@ -1,0 +1,25 @@
+@use "@css/_mixins" as theme;
+@use "@css/_animators" as animate;
+@use "@css/_variables" as v;
+
+//Animations
+@include animate.rotate;
+
+div.contributions{
+  ul{
+    position: relative;
+    padding: 0;
+    .loading{
+      animation: 3s linear infinite rotate;
+      @include theme.center-by-margin(50px);
+    }
+    p.loading-msg{
+      text-align: center;
+      position: relative;
+      top: -400px;
+    }
+  }
+  div.error-msg{
+    top: 10%;
+  }
+}
