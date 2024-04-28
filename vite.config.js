@@ -9,8 +9,8 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				app: fileURLToPath(new URL('index.html', import.meta.url)),
-				jeopardy: fileURLToPath(new URL('public/jeopardy/index.html', import.meta.url)),
-			}
+				jeopardy: fileURLToPath(new URL('jeopardy/index.html', import.meta.url)),
+			},
 		}
 	},
 	resolve: {
