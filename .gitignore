@@ -3,10 +3,6 @@
 # dependencies
 /node_modules
 
-# Linting
-.eslintrc*
-eslint.config*
-
 # production
 /dist
 
