@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --config site/vite.config.js",
+    "build": "vite build --config site/vite.config.js",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "preview": "vite preview --config site/vite.config.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -f -d dist"
+    "deploy": "gh-pages -f -d site/dist"
   },
   "dependencies": {
     "axios": "^1.6.7",
