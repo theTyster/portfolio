@@ -1,8 +1,9 @@
-import {shuffle} from "../assets/utils/utils.js";
+import {shuffle} from "@utils/utils.js";
 import $ from "jquery";
 import axios from "axios";
 
-const viewportWidth = Math.floor((window.innerWidth + 20)/100)
+const calcViewportWidth = Math.floor((window.innerWidth + 20)/100);
+const viewportWidth = calcViewportWidth > 6? 6 : calcViewportWidth;
 
 class JeopardyAPI {
 
