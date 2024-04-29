@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import {themeColors} from "../utils/utils.js"
 
 const SvgExitButton = (props) => (
@@ -9,7 +9,8 @@ const SvgExitButton = (props) => (
     viewBox="0 0 26.458 26.458"
     {...props}
   >
-    <g 
+		<title>Exit Button</title>
+    <g
       strokeLinecap="round"
     >
       <circle
@@ -24,7 +25,7 @@ const SvgExitButton = (props) => (
       />
       <path
         id="exit-button-svg-x"
-        fill="none" 
+        fill="none"
         stroke={themeColors.lightcharcoal}
         strokeWidth={1.5}
         d="m6.952 6.952 12.555 12.555M19.507 6.952 6.952 19.507"
