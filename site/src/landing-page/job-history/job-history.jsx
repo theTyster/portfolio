@@ -87,7 +87,7 @@ const JobHistory = () => {
         "Director's Choice Logo",
         "https://directorschoice.com"
       ],
-      <p>Working at Director's Choice changed me. I realized at Director's choice
+      <p>Working at Director&apos;s Choice changed me. I realized at Director&apos;s choice
       that I wanted to focus my career more on web development. While working
       there some of my responsibilities included:</p>,
       [
