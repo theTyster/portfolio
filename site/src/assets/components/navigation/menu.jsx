@@ -37,6 +37,7 @@ function Menu({menuState}) {
       {tranState => (
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
           <menu>
+            <a href="/">Home</a>
             <a rel="noreferrer noopener" target="_blank" href="my-work/fruit-search/">Fruit Search</a>
             <a rel="noreferrer noopener" target="_blank" href="my-work/giphy-search/">Giphy Search</a>
             <a rel="noreferrer noopener" target="_blank" href="my-work/hacker-news-clone/">Hacker News Clone</a>
