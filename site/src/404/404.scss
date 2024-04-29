@@ -1,0 +1,17 @@
+@use "@css/_fonts";
+@use "@css/_mixins" as theme;
+@use "@css/_variables" as v;
+
+@include theme.foundation;
+
+main {
+	a.button {
+		border:none;
+		@include theme.center-by-margin();
+		/* @include theme.button-click(); */
+	}
+	svg {
+		@include theme.center-by-margin();
+		width: 300px;
+	}
+}
