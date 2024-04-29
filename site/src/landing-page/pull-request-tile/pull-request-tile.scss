@@ -35,14 +35,21 @@ div.pull-request-tile{
 			border-radius: 100%;
 			width: 100%;
 		}
+		a:has(svg) {
+			flex: 1 0 auto;
+			width: 15%;
+			height: 15%;
+			margin: 0 8px;
+		}
+		svg, img[class$=-avatar] {
+			&:hover{box-shadow: 3px 3px 10px black}
+			&:active{box-shadow:unset}
+		}
 		svg.prt{
 			&-merged, &-open{
 				fill: white;
-				flex: 1 0 auto;
-				width: 15%;
-				height: 15%;
-				/* min-height: 100px; */
-				margin: 0 8px;
+				width: 100%;
+				height: 100%;
 				border-radius: 25%;
 			}
 			&-merged{
@@ -76,16 +83,20 @@ div.pull-request-tile{
 		$HxW: 40px;
 		$r-margin: 1em;
 		span.prt-reaction{
+			position:relative; // Necessary? Need more emojis to test.
+			display:flex;
+			margin-bottom: 1em;
+			margin-right: $r-margin;
+			border-radius: 100%;
+			background-color: v.$ultralightcharcoal;
+			a{
 			position:relative;
 			display:flex;
 			align-items: center;
 			justify-content: center;
 			width: $HxW;
 			height: $HxW;
-			margin-bottom: 1em;
-			margin-right: $r-margin;
-			border-radius: 100%;
-			background-color: v.$ultralightcharcoal;
+			}
 		}
 		span.prt-reaction-count{
 			display: flex;

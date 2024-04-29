@@ -16,6 +16,8 @@ function PullRequestTile({pr, org}){
     org: PropTypes.object.isRequired,
   }
 
+	console.log(pr);
+
   //VARIABLES
   const user = pr.user;
   const pullRequest = pr.pull_request;
@@ -56,11 +58,19 @@ function PullRequestTile({pr, org}){
           <img
             className="prt-org-avatar"
             src={org.owner.avatar_url}
-            alt={`${org.login}'s profile picture`}
+            alt={`${org.login}'s profile.`}
           />
         </a>
 
-        <SvgPullRequest  className={mergedClass}/>
+				<a 
+					href={pr.html_url+"/files"}
+					target="_blank"
+					rel="noreferrer noopenner"
+				>
+					<SvgPullRequest  
+						className={mergedClass}
+					/>
+				</a>
 
         <a
           href={user.html_url}
@@ -71,7 +81,7 @@ function PullRequestTile({pr, org}){
           <img
             className="prt-user-avatar"
             src={user.avatar_url}
-            alt="My Github user profile picture"
+            alt="My Github user profile."
           />
         </a>
       </div>
@@ -110,15 +120,21 @@ function PullRequestTile({pr, org}){
                   key={`prt-reaction: ${emoji}`}
                   className="prt-reaction"
                 >
-                  {(pr.reactions[emoji] > 1)?
-                        <span
-                          key={`prt-reaction: ${emoji}-count`}
-                          className="prt-reaction-count"
-                        >
-                          {`+${pr.reactions[emoji]}`}
-                        </span>
-                      : undefined}
-                  {reactionEmoji[emoji]}
+                  <a 
+                    href={pr.html_url}
+                    rel="noreferrer noopenner"
+                    target="_blank"
+                  >
+                    {(pr.reactions[emoji] > 1)?
+                          <span
+                            key={`prt-reaction: ${emoji}-count`}
+                            className="prt-reaction-count"
+                          >
+                            {`+${pr.reactions[emoji]}`}
+                          </span>
+                        : undefined}
+                    {reactionEmoji[emoji]}
+                  </a>
                 </span>
               );
           }
