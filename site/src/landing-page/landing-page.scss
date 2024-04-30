@@ -1,6 +1,6 @@
-@use "@css/_fonts";
-@use "@css/_mixins" as theme;
-@use "@css/_variables" as v;
+@use "@css/fonts";
+@use "@css/mixins" as theme;
+@use "@css/variables" as v;
 
 @include theme.foundation;
 
