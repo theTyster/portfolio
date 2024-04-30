@@ -38,14 +38,14 @@ function Menu({menuState}) {
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
           <menu>
             <a href="/">Home</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/fruit-search/">Fruit Search</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/giphy-search/">Giphy Search</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/hacker-news-clone/">Hacker News Clone</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/jeopardy/">Jeopardy</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/meme-generator/">Meme Generator</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/memory-game/">Memory Game</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/duck-story/">Duck Story</a>
-            <a rel="noreferrer noopener" target="_blank" href="my-work/todo-app/">ToDo App</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/fruit-search/">Fruit Search</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/giphy-search/">Giphy Search</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/hacker-news-clone/">Hacker News Clone</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/jeopardy/">Jeopardy</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/meme-generator/">Meme Generator</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/memory-game/">Memory Game</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/duck-story/">Duck Story</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/todo-app/">ToDo App</a>
           </menu>
         </nav>
       )}
