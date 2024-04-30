@@ -81,8 +81,8 @@ const MyWork = () => {
           id: "Duck Story",
           title: "Duck Story",
           onClick: undefined,
-          link: ["my-work/duck-story/", "_blank"],
-          img: ["./static/img/duck-story-ss.png", "Duck Story App Screenshot"],
+          link: ["my-work/duck-story-v1/", "_blank"],
+          img: ["./static/img/duck-story-v1-ss.png", "Duck Story App Screenshot"],
         },
         {
           //7

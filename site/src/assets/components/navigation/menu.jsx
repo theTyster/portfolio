@@ -44,7 +44,7 @@ function Menu({menuState}) {
             <a rel="noreferrer noopener" target="_blank" href="/my-work/jeopardy/">Jeopardy</a>
             <a rel="noreferrer noopener" target="_blank" href="/my-work/meme-generator/">Meme Generator</a>
             <a rel="noreferrer noopener" target="_blank" href="/my-work/memory-game/">Memory Game</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/duck-story/">Duck Story</a>
+            <a rel="noreferrer noopener" target="_blank" href="/my-work/duck-story-v1/">Duck Story</a>
             <a rel="noreferrer noopener" target="_blank" href="/my-work/todo-app/">ToDo App</a>
           </menu>
         </nav>
