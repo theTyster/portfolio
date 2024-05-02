@@ -5,7 +5,6 @@ import {setTitle} from "@utils/utils.js";
 
 //COMPONENTS
 import Navigation from "@components/navigation/nav.jsx";
-import Credit from "@components/credit/credit.jsx";
 import SvgLost from "@img/lost-svg.jsx";
 
 //CSS
@@ -38,12 +37,5 @@ const content = ReactDOM.createRoot(document.getElementById("content"));
 content.render(
   <StrictMode>
   <Content />
-  </StrictMode>
-);
-
-const credit = ReactDOM.createRoot(document.getElementById("credit"));
-credit.render(
-  <StrictMode>
-  <Credit />
   </StrictMode>
 );

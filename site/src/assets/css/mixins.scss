@@ -113,22 +113,20 @@
   // MEDIA QUERIES
   @include medium-media-query(){
     header {
-      @include center-by-margin(600px);
-      display:flex;
+      @include center-by-margin(v.$md-content-width);
     }
-    main {@include center-by-margin(600px);}
-    footer {@include center-by-margin(600px);}
+    main {@include center-by-margin(v.$md-content-width);}
+    footer {@include center-by-margin(v.$md-content-width);}
   }
   @include small-media-query(){
     header {
-      @include center-by-margin(300px);
-      display:flex;
+      @include center-by-margin(v.$sm-content-width);
     }
     main {
-      @include center-by-margin(300px);
+      @include center-by-margin(v.$sm-content-width);
       article{padding: 1rem;}
     }
-    footer {@include center-by-margin(300px);}
+    footer {@include center-by-margin(v.$sm-content-width);}
   }
 }
 

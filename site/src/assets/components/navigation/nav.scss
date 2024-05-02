@@ -20,13 +20,16 @@
 }
 
 #nav{
-	/* display:block; */
-	/* position:relative; */
 	margin: 1rem auto 0 auto;
 	width: 800px;
+  @include theme.medium-media-query(){
+    width: v.$md-content-width;
+  }
+  @include theme.small-media-query(){
+    width: v.$sm-content-width;
+  }
 	nav{
 		overflow: hidden;
-		/* visibility: collapse; */
 		transition-property: visibility, max-height;
 		transition-duration: .5s;
 	}

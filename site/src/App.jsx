@@ -6,7 +6,6 @@ import {React, StrictMode} from "react";
 //COMPONENTS
 import LandingPage from "./landing-page/landing-page.jsx";
 import Navigation from "@components/navigation/nav.jsx";
-import Credit from "@components/credit/credit.jsx";
 //import Beginning from "./duck-story/beginning.jsx";
 
 const Content = () => {
@@ -33,12 +32,5 @@ const content = ReactDOM.createRoot(document.getElementById("content"));
 content.render(
   <StrictMode>
   <Content />
-  </StrictMode>
-);
-
-const credit = ReactDOM.createRoot(document.getElementById("credit"));
-credit.render(
-  <StrictMode>
-  <Credit />
   </StrictMode>
 );

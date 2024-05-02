@@ -33,6 +33,7 @@ function TabMenu({menuItems}){
         {menuDataArr.map(item =>(
           <button 
             key={menuNamesObj[item.id]}
+            aria-label={item.title}
             data-tabmenu-item-id={menuNamesObj[item.id]}
             className={item === currentSelected? "selected":""}
             onClick={item.buttonClick?item.buttonClick:undefined}

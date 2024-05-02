@@ -14,7 +14,7 @@ function NavButton({onClick, menuState}) {
 
   return (
     <>
-      <button type="button" className='menuHam' onClick={onClick}> 
+      <button type="button" aria-label="Hamburger Menu" className='menuHam' onClick={onClick}> 
           <svg width="16px" height="16px" role="img" version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <title id="hamburger_menu">Hamburger Menu</title>
             <g id="ham" fill="none" stroke="#6c623a" strokeLinecap="round" strokeWidth="2">
