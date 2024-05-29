@@ -7,6 +7,7 @@ import "./job-history.scss";
 
 //Components
 import JobAttentionGetter from "@components/attention-getter-image/attention-getter-image.jsx";
+import NewTabLink from "@components/safe-link/new-tab-link.jsx";
 
 const JobHistory = () => {
 
@@ -28,23 +29,23 @@ const JobHistory = () => {
       <>
         <p>PR and the web go hand-in-hand these days.</p>
         <p>
-          I've found that my background in public relations helps tremendously
+          I&apos;ve found that my background in public relations helps tremendously
           as I help organizations build one of the most publicly facing forms of
           owned content a business usually has, their website. I have had the
           privelege to be a part of many new businesses first steps into the
-          internet, and continue to support several of them as they grows. These
-          experiences have taught me so much. Here's a few to start:
+          internet, and continue to support several of them as they grow. These
+          experiences have taught me so much. Here&apos;s a few to start:
         </p>
       </>,
       [
         "How to build an online brand from the ground up.",
         <>How to do it on a <i>tight</i> budget.</>,
         "What companies want from a website.",
-        "How to communicate with clients so that I can help them get the site that they want.",
+        "How to communicate with clients so they can get the site they want in the timeframe they want it.",
         "How to teach people the basics of maintaining a website.",
         "How to make websites that are easy to maintain.",
         "Lots of graphic design.",
-        "How to abandon my own design preferences for what a client wants.",
+        "How to abandon my own design preferences for what a client wants without sacrificing accessibility.",
       ]
     ),//}}}
     // Springboard{{{
@@ -61,9 +62,12 @@ const JobHistory = () => {
         "Springboard's Logo",
         "https://springboard.com"
       ],
-      <p>After a year of self-teaching I decided to team up with
-      Springboard to further my expertise in front end web development. At
-      Springboard I learned:</p>,
+      <p>
+        Springboard is a bootcamp I decided to team up to further my expertise
+        in front end web development. My track focused on JavaScript, Python,
+        and SQL. I started with Springboard after self-teaching for about a year.
+        At Springboard I learned:
+      </p>,
       [
         "Advanced front end development.",
         "Advanced JavaScript.",
@@ -92,13 +96,17 @@ const JobHistory = () => {
       there some of my responsibilities included:</p>,
       [
         "Maintaining the front-end of the company website.",
-        "Ground-up development and maintenance of a sales funnel automation application. (Python)",
-        "Updating and maintain the WordPress instance and site theme for the company website.",
-        "Developing interactive product pages and update information.",
+        <>
+          Ground-up development and maintenance of a <NewTabLink
+          link="https://github.com/theTyster/DC-marketing-funneltron">sales
+          funnel automation back end</NewTabLink>. (Python)
+        </>,
+        "Updating and maintaining the WordPress instance and site theme for the company website.",
+        "Developing and maintaining interactive product pages.",
         "Writing HTML and CSS for marketing emails.",
         "Optimizing all digital media for Search Engine crawlers. (SEO)",
         "Integrating data in Google sheets and HubSpot with various applications. (Python)",
-        "Designing and gather visual media for marketing and public-facing events. (Adobe)",
+        "Designing and gathering visual media for marketing and public-facing events. (Adobe)",
         "Crisis prevention and management.",
         "Brand Management.",
       ],
@@ -125,13 +133,12 @@ const JobHistory = () => {
           provided jobs for neuro-atypical kids.
         </p>
         <p>
-          I also helped rebuild a website which provided resources to parents of
-          kids struggling with <a href="https://en.wikipedia.org/wiki/Anoxia"
-          rel="noreferrer noopener" target="_blank">Anoxia</a>. We were able to prioritize this
-          organizations search engine results page rank with search engine
-          optimized content. My time at RaiderComm set the foundation for how I
-          build content for websites today. Here's a few more things I learned
-          from my time there:
+          I also worked with an organization supporting parents of children with <NewTabLink
+          link="https://en.wikipedia.org/wiki/Anoxia">Anoxia</NewTabLink>. We
+          were able to prioritize this organizations search engine results page
+          rank with search engine optimized content. My time at RaiderComm set the
+          foundation for how I build content for websites today. Here&apos;s a
+          few more things I learned from my time there:
         </p>
       </>,
       [

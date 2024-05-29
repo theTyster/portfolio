@@ -1,6 +1,8 @@
-import {React, useRef} from "react";
-import {Transition} from 'react-transition-group';
+import { React, useRef } from "react";
+import { Transition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+
+import NewTabLink from "@components/safe-link/new-tab-link.jsx"
 
 
 function Menu({menuState}) {
@@ -38,14 +40,14 @@ function Menu({menuState}) {
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
           <menu>
             <a href="/">Home</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/fruit-search/">Fruit Search</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/giphy-search/">Giphy Search</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/hacker-news-clone/">Hacker News Clone</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/jeopardy/">Jeopardy</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/meme-generator/">Meme Generator</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/memory-game/">Memory Game</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/duck-story-v1/">Duck Story</a>
-            <a rel="noreferrer noopener" target="_blank" href="/my-work/todo-app/">ToDo App</a>
+            <NewTabLink link="/my-work/fruit-search/">Fruit Search</NewTabLink>
+            <NewTabLink link="/my-work/giphy-search/">Giphy Search</NewTabLink>
+            <NewTabLink link="/my-work/hacker-news-clone/">Hacker News Clone</NewTabLink>
+            <NewTabLink link="/my-work/jeopardy/">Jeopardy</NewTabLink>
+            <NewTabLink link="/my-work/meme-generator/">Meme Generator</NewTabLink>
+            <NewTabLink link="/my-work/memory-game/">Memory Game</NewTabLink>
+            <NewTabLink link="/my-work/duck-story-v1/">Duck Story</NewTabLink>
+            <NewTabLink link="/my-work/todo-app/">ToDo App</NewTabLink>
           </menu>
         </nav>
       )}
