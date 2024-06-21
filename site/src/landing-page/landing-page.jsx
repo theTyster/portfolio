@@ -45,7 +45,7 @@ function LandingPage(){
         search = resp.data.items
       }
       catch (error){
-        console.log("API Error. Trying Again. ", error);
+        console.warn("API Error. Trying Again. ", error);
         await sleep(120);
       }
     }
@@ -75,7 +75,7 @@ function LandingPage(){
           )
       }
       catch (error){
-        console.log("API Error. Trying Again. ", error);
+        console.warn("API Error. Trying Again. ", error);
         await sleep(120);
       }
     }
