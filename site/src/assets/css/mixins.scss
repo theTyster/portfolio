@@ -16,84 +16,97 @@
 
 // MAIN THEME
 @mixin foundation() {
-	/* * {margin: 0;} */
-  html{
-    max-height:100%vh;
+  /* {margin: 0;} */
+  html {
+    max-height: 100%vh;
     max-width: 100%vw;
     overflow-x: hidden;
   }
-	body{
-      /* min-height:100%; */
-      background-color: v.$citron;
-      background-image: url('/static/img/splat-dark.svg');
-      background-attachment: fixed;
-      transition: background-color 2s;
-      div#content{
-        /* min-height: 100vh; //Making scrollbars on short pages */
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-
+  body {
+    background-color: v.$citron;
+    background-image: url("/static/img/splat-dark.svg");
+    background-attachment: fixed;
+    transition: background-color 2s;
+    div#content {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
   }
-  .page-title{
+  .page-title {
     text-align: center;
     padding: v.$pad;
   }
-  header {display: block;}
-	main {
+  header {
+    display: block;
+  }
+  main {
     position: relative;
-    flex-grow:1;
+    flex-grow: 1;
     @include center-by-margin(800px);
     padding: v.$pad;
-		background: white;
+    background: white;
     @include rounded-corners;
-	}
-	p{font: v.$p-font}
-  h1{
+  }
+  p {
+    font: v.$p-font;
+  }
+  h1 {
     font: v.$h1-font;
     margin: v.$h1-margin;
   }
-  h2{
+  h2 {
     font: v.$h2-font;
-    margin: calc(v.$h1-margin*.8);
+    margin: calc(v.$h1-margin * 0.8);
   }
-  h3{
+  h3 {
     font: v.$h3-font;
-    margin: calc(v.$h1-margin*.6);
+    margin: calc(v.$h1-margin * 0.6);
   }
-  h4{
+  h4 {
     font: v.$h4-font;
-    margin: calc(v.$h1-margin*.4);
+    margin: calc(v.$h1-margin * 0.4);
   }
-  h5{
+  h5 {
     font: v.$h5-font;
-    margin: calc(v.$h1-margin*.2);
+    margin: calc(v.$h1-margin * 0.2);
   }
-  button, .button, li, ul, a{font: bold v.$p-font}
-  a button, .button{text-decoration: none}
-  a {color: v.$lightburntsilver}
-  button, .button{
-    padding: .7em;
+  button,
+  .button,
+  li,
+  ul,
+  a {
+    font: bold v.$p-font;
+  }
+  a button,
+  .button {
+    text-decoration: none;
+  }
+  a {
+    color: v.$lightburntsilver;
+  }
+  button,
+  .button {
+    padding: 0.7em;
     @include rounded-corners;
     user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     color: white;
     background-color: v.$charcoal;
-    &:hover{
+    &:hover {
       background-color: v.$lightcharcoal;
-      &:active{
+      &:active {
         background-color: v.$darkcharcoal;
       }
     }
   }
   :focus-visible {
-  outline: 9px double black;
-  box-shadow: 0 0 0 6px white;
+    outline: 9px double black;
+    box-shadow: 0 0 0 6px white;
   }
   hr {
-    @include center-by-margin($w:unset, $topbottom:4em);
+    @include center-by-margin($w: unset, $topbottom: 4em);
     margin-top: 4em;
     margin-bottom: 2em;
     background-image: url("/static/img/curlywave.svg");
@@ -111,65 +124,104 @@
   }
 
   // MEDIA QUERIES
-  @include medium-media-query(){
+  @include medium-media-query() {
     header {
+      box-sizing: border-box;
       @include center-by-margin(v.$md-content-width);
     }
-    main {@include center-by-margin(v.$md-content-width);}
-    footer {@include center-by-margin(v.$md-content-width);}
+    main {
+      box-sizing: border-box;
+      @include center-by-margin(v.$md-content-width);
+    }
+    footer {
+      box-sizing: border-box;
+      @include center-by-margin(v.$md-content-width);
+    }
   }
-  @include small-media-query(){
+  @include small-media-query() {
     header {
+      box-sizing: border-box;
       @include center-by-margin(v.$sm-content-width);
     }
     main {
       @include center-by-margin(v.$sm-content-width);
-      article{padding: 1rem;}
+      box-sizing: border-box;
+      article {
+        padding: 1rem;
+      }
     }
-    footer {@include center-by-margin(v.$sm-content-width);}
+    footer {
+      box-sizing: border-box;
+      @include center-by-margin(v.$sm-content-width);
+    }
   }
 }
 
-
 // MIXINS
 
-@mixin medium-media-query(){@media(max-width:v.$md-max-width){@content}}
-@mixin small-media-query(){@media(max-width:v.$sm-max-width){@content}}
-
-@mixin rounded-corners(){border-radius: 7px}
-
-@mixin button-click($shadow: 3px 3px 10px) {
-	&:hover {
-    filter: drop-shadow($shadow #b4a461);
-		background-color: v.$lightcitron;
-		background: white;
-		&:active {
-			background-color: v.$darkcitron;
-			filter: none;
-      color: white;
-		}
-	}
+@mixin medium-media-query() {
+  @media (max-width: v.$md-max-width) {
+    @content;
+  }
+}
+@mixin small-media-query() {
+  @media (max-width: v.$sm-max-width) {
+    @content;
+  }
 }
 
-@mixin center-by-margin($w:fit-content, $top:0, $bottom:0, $topbottom:null) {
-  @if not $topbottom{
+@mixin rounded-corners() {
+  border-radius: 7px;
+}
+
+@mixin button-click($shadow: 3px 3px 10px) {
+  &:hover {
+    filter: drop-shadow($shadow #b4a461);
+    background-color: v.$lightcitron;
+    background: white;
+    &:active {
+      background-color: v.$darkcitron;
+      filter: none;
+      color: white;
+    }
+  }
+}
+
+@mixin center-by-margin(
+  $w: fit-content,
+  $top: 0,
+  $bottom: 0,
+  $topbottom: null
+) {
+  @if not $topbottom {
     margin-top: $top;
     margin-bottom: $bottom;
     margin-right: auto;
     margin-left: auto;
+  } @else {
+    margin: $topbottom auto;
   }
-  @else {margin: $topbottom auto;}
   display: block;
   max-width: $w;
 }
 
-@mixin center-children-by-flex($childTag:#{div}, $childClassPrefix: flex, $itemWidth: auto){
+@mixin center-children-by-flex(
+  $childTag: #{div},
+  $childClassPrefix: flex,
+  $itemWidth: auto
+) {
   display: flex;
-  #{$childTag}[class^="#{$childClassPrefix}"][class$=item]{
+  #{$childTag}[class^="#{$childClassPrefix}"][class$="item"] {
     flex: 1 0 $itemWidth;
     max-width: v.$sm-max-width;
-    @include medium-media-query(){max-width: 500px}
-    @include small-media-query(){max-width: 250px}
+    @include medium-media-query() {
+      max-width: 500px;
+    }
+    @include small-media-query() {
+      max-width: 250px;
+    }
   }
-  #{$childTag}[class^="#{$childClassPrefix}"][class$=centering-box]{flex: 1}
+  #{$childTag}[class^="#{$childClassPrefix}"][class$="centering-box"] {
+    flex: 1;
+  }
 }
