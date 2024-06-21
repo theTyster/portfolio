@@ -1,5 +1,6 @@
 import {React, useState} from "react";
 import PropTypes from "prop-types";
+import NewTabLink from "@components/safe-link/new-tab-link";
 
 //SVG
 import SvgExitButton from "@img/exit-button-svg.jsx";
@@ -43,7 +44,7 @@ const ErrorMessageModal = ({
       })()}
       <p>{msg}</p>
       {(()=>{
-        if(buttonLink) return <a href={buttonLink} target="_blank" ><button>{buttonText}</button></a>
+        if(buttonLink) return <NewTabLink><button>{buttonText}</button></NewTabLink>
       })()}
     </div>
   )
