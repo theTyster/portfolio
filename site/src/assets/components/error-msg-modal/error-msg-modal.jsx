@@ -7,7 +7,6 @@ import SvgExitButton from "@img/exit-button-svg.jsx";
 //CSS
 import "./error-msg-modal.scss";
 
-
 const ErrorMessageModal = ({
   msg,
   imgSrc,
@@ -30,12 +29,14 @@ const ErrorMessageModal = ({
 
   return !isClosed? (
     <div className="error-msg">
-      <div>
+      <button 
+        className="error-message-exit"
+        onClick={handleClick}
+      >
         <SvgExitButton 
-          onClick={handleClick}
           className="error-message-exit"
         />
-      </div>
+      </button>
       <h3>Whoops!</h3>
       {(()=>{
         if(imgSrc) return <img src={imgSrc} alt={imgAlt} />

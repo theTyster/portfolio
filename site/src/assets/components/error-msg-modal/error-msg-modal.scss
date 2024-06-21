@@ -7,8 +7,11 @@ div.error-msg{
   @include theme.rounded-corners;
   padding: v.$pad;
   @include theme.medium-media-query(){padding: calc(v.$pad/2)}
-  div{
+  button.error-message-exit{
     display: flex;
+    border: none;
+    background: none;
+    margin-right: 0;
     svg.error-message-exit{
       margin-left: auto;
       &:hover{
