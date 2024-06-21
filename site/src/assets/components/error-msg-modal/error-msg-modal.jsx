@@ -30,11 +30,11 @@ const ErrorMessageModal = ({
 
   return !isClosed? (
     <div className="error-msg">
-      <button 
+      <button
         className="error-message-exit"
         onClick={handleClick}
       >
-        <SvgExitButton 
+        <SvgExitButton
           className="error-message-exit"
         />
       </button>
@@ -44,7 +44,7 @@ const ErrorMessageModal = ({
       })()}
       <p>{msg}</p>
       {(()=>{
-        if(buttonLink) return <NewTabLink><button>{buttonText}</button></NewTabLink>
+        if(buttonLink) return <NewTabLink link={buttonLink}><button>{buttonText}</button></NewTabLink>
       })()}
     </div>
   )
