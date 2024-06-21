@@ -16,8 +16,6 @@ function PullRequestTile({pr, org}){
     org: PropTypes.object.isRequired,
   }
 
-	console.log(pr);
-
   //VARIABLES
   const user = pr.user;
   const pullRequest = pr.pull_request;
@@ -62,15 +60,15 @@ function PullRequestTile({pr, org}){
           />
         </a>
 
-				<a 
-					href={pr.html_url+"/files"}
-					target="_blank"
-					rel="noreferrer noopenner"
-				>
-					<SvgPullRequest  
-						className={mergedClass}
-					/>
-				</a>
+        <a
+          href={pr.html_url+"/files"}
+          target="_blank"
+          rel="noreferrer noopenner"
+        >
+          <SvgPullRequest
+            className={mergedClass}
+          />
+        </a>
 
         <a
           href={user.html_url}
@@ -120,7 +118,7 @@ function PullRequestTile({pr, org}){
                   key={`prt-reaction: ${emoji}`}
                   className="prt-reaction"
                 >
-                  <a 
+                  <a
                     href={pr.html_url}
                     rel="noreferrer noopenner"
                     target="_blank"
