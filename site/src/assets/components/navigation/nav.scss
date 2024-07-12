@@ -1,56 +1,64 @@
 @use "@css/mixins" as theme;
 @use "@css/variables" as v;
 
-
 .menuHam {
-	@include theme.rounded-corners;
-	@include theme.button-click;
-	&:hover{
-		svg g {stroke: v.$charcoal}
-	}
-	&:active{
-		svg g {stroke: white;}
-	}
-	background-color: white;
-	height: 35px;
-	padding: 10px;
-	margin-bottom: 1rem;
-	border:none;
-	font-size: 0;
+  @include theme.rounded-corners;
+  @include theme.button-click;
+  &:hover {
+    svg g {
+      stroke: v.$charcoal;
+    }
+  }
+  &:active {
+    svg g {
+      stroke: white;
+    }
+  }
+  background-color: white;
+  height: 35px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: none;
+  font-size: 0;
 }
 
-#nav{
-	margin: 1rem auto 0 auto;
-	width: 800px;
-  @include theme.medium-media-query(){
+#nav {
+  margin: 1rem auto 0 auto;
+  width: 800px;
+  @include theme.medium-media-query() {
     width: v.$md-content-width;
   }
-  @include theme.small-media-query(){
-    width: v.$sm-content-width;
+  @include theme.small-media-query() {
+    width: 100%;
+    white-space: nowrap;
+    min-width: v.$content-min-width;
+    box-sizing: border-box;
+    a {
+      width: 100%;
+    }
   }
-	nav{
-		overflow: hidden;
-		transition-property: visibility, max-height;
-		transition-duration: .5s;
-	}
-	menu {
-		display: flex;
-		flex-wrap: wrap;
-		list-style-type: none;
-		padding: 1em 0;
-	}
+  nav {
+    overflow: hidden;
+    transition-property: visibility, max-height;
+    transition-duration: 0.5s;
+  }
+  menu {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 1em 0;
+  }
 
-	a {
-		text-decoration: none;
-		color: black;
-		@include theme.rounded-corners;
-		@include theme.button-click;
-		padding: 15px;
-		margin: .2rem auto;
-		width: 50%;
-		text-align: center;
-		background-color: rgba(256, 256, 256, .3);
-		transition: background .2s;
-	}
+  a {
+    text-decoration: none;
+    color: black;
+    @include theme.rounded-corners;
+    @include theme.button-click;
+    padding: 15px;
+    margin: 0.2rem auto;
+    width: 50%;
+    text-align: center;
+    background-color: rgba(256, 256, 256, 0.3);
+    transition: background 0.2s;
+  }
 }
-
