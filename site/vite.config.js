@@ -12,6 +12,7 @@ export default defineConfig({
         app: fileURLToPath(new URL('index.html', import.meta.url)),
         jeopardy: fileURLToPath(new URL('my-work/jeopardy/index.html', import.meta.url)),
         404: fileURLToPath(new URL('404.html', import.meta.url)),
+        fonts: fileURLToPath(new URL('src/assets/css/fonts.scss', import.meta.url)),
       },
     }
   },
