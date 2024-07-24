@@ -38,7 +38,7 @@
     }
   }
   nav {
-    overflow: hidden;
+    overflow: scroll;
     transition-property: visibility, max-height;
     transition-duration: 0.5s;
   }

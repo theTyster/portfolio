@@ -18,11 +18,11 @@ function Menu({menuState}) {
   const tranStyle = {
     entering: {
       visibility: 'visible',
-      maxHeight: '560px',
+      maxHeight: '345px',
     },
     entered: {
       visibility: 'visible',
-      maxHeight: '560px',
+      maxHeight: '345px',
     },
     exiting: {
       visibility: 'visible',
@@ -40,6 +40,8 @@ function Menu({menuState}) {
         <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
           <menu>
             <a href="/">Home</a>
+            <NewTabLink link="https://www.linkedin.com/in/tyler-d-webdev/">My LinkedIn</NewTabLink>
+            <NewTabLink link="https://github.com/thetyster">My Github</NewTabLink>
             <NewTabLink link="/my-work/fruit-search/">Fruit Search</NewTabLink>
             <NewTabLink link="/my-work/giphy-search/">Giphy Search</NewTabLink>
             <NewTabLink link="/my-work/hacker-news-clone/">Hacker News Clone</NewTabLink>
