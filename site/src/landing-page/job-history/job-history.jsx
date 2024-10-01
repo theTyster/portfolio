@@ -64,7 +64,7 @@ const JobHistory = () => {
       ],
       <p>
         Springboard is a bootcamp I decided to team up to further my expertise
-        in front end web development. My track focused on JavaScript, Python,
+        in software development. My track focused on JavaScript, Python,
         and SQL. I started with Springboard after self-teaching for about a year.
         At Springboard I learned:
       </p>,
@@ -92,7 +92,7 @@ const JobHistory = () => {
         "https://directorschoice.com"
       ],
       <p>Working at Director&apos;s Choice changed me. I realized at Director&apos;s choice
-      that I wanted to focus my career more on web development. While working
+      that I wanted to focus my career more on software development. While working
       there some of my responsibilities included:</p>,
       [
         "Maintaining the front-end of the company website.",

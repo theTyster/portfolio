@@ -16,7 +16,7 @@ import MyWork from "./my-work/my-work.jsx";
 
 const AttentionGetterSideText = () =>(
     <>
-      <p><i>I like to keep things, lean, fast, simple and usable. The web was meant to make information accessible to anyone.</i></p>
+      <p><i>I like to keep things lean, fast, simple and usable. The web was meant to make information accessible to anyone.</i></p>
       <blockquote>
       <p>
         <i>&quot;Web pages are designed for people.&quot;</i>
