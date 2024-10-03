@@ -1,5 +1,5 @@
 // vim:foldmethod=marker
-import {React, Fragment} from "react";
+import {Fragment} from "react";
 import utils from "./job-history.utils";
 
 //CSS

@@ -1,6 +1,6 @@
 //DEV Libraries
 import ReactDOM from "react-dom/client";
-import {React, StrictMode} from "react";
+import {StrictMode} from "react";
 import {setTitle} from "@utils/utils.js";
 
 //COMPONENTS

@@ -1,4 +1,3 @@
-import * as React from "react";
 function SvgCurlywave(props) {
   return (
     <svg

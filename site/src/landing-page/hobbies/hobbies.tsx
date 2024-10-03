@@ -1,5 +1,4 @@
 // vim:foldmethod=marker
-import { React } from "react";
 import {calcAge} from "@utils/utils.js";
 import utils from "./hobbies.utils";
 

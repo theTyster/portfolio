@@ -1,4 +1,4 @@
-import { React, useRef } from "react";
+import { useRef } from "react";
 import { Transition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 

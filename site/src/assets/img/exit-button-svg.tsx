@@ -1,4 +1,3 @@
-import React from "react";
 import {themeColors} from "../utils/utils.js"
 
 const SvgExitButton = (props) => (
