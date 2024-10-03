@@ -11,7 +11,7 @@ import gsap from "gsap";
 import PropTypes from "prop-types";
 
 //COMPONENTS
-import SvgDuck from "./assets/duck.jsx";
+import SvgDuck from "./assets/duck";
 
 //CSS
 import "./css/story-styles.scss";

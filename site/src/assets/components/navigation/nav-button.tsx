@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 //Components
-import Menu from "./menu.jsx";
+import Menu from "./menu";
 
 function NavButton({onClick, menuState}) {
 

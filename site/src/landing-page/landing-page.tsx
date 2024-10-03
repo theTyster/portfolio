@@ -7,12 +7,12 @@ import {setTitle, sleep} from "@utils/utils.js";
 import "./landing-page.scss";
 
 //COMPONENTS
-import TabMenu from "@components/tab-menu/tab-menu.jsx";
-import AttetionGetterImage from "@components/attention-getter-image/attention-getter-image.jsx";
-import JobHistory from "./job-history/job-history.jsx";
-import Hobbies from "./hobbies/hobbies.jsx";
-import Contributions from "./contributions/contributions.jsx";
-import MyWork from "./my-work/my-work.jsx";
+import TabMenu from "@components/tab-menu/tab-menu";
+import AttetionGetterImage from "@components/attention-getter-image/attention-getter-image";
+import JobHistory from "./job-history/job-history";
+import Hobbies from "./hobbies/hobbies";
+import Contributions from "./contributions/contributions";
+import MyWork from "./my-work/my-work";
 
 const AttentionGetterSideText = () =>(
     <>

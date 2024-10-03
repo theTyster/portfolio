@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import GitHubCalendar from "react-github-calendar";
 
 //Components
-import PullRequestTile from "../pull-request-tile/pull-request-tile.jsx";
-import SvgLoadingCircle from "@img/loading-circle-svg.jsx";
-import ErrorMessageModal from "@components/error-msg-modal/error-msg-modal.jsx";
+import PullRequestTile from "../pull-request-tile/pull-request-tile";
+import SvgLoadingCircle from "@img/loading-circle-svg";
+import ErrorMessageModal from "@components/error-msg-modal/error-msg-modal";
 
 //CSS
 import "./contributions.scss";

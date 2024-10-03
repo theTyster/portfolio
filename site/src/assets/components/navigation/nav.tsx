@@ -2,7 +2,7 @@ import {React, useState, useEffect} from 'react';
 import Gsap from 'gsap';
 
 //Components
-import NavButton from "./nav-button.jsx"
+import NavButton from "./nav-button"
 
 //CSS
 import "./nav.scss";

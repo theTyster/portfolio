@@ -4,9 +4,9 @@ import {React, StrictMode} from "react";
 //import {useState} from "react";
 
 //COMPONENTS
-import LandingPage from "./landing-page/landing-page.jsx";
-import Navigation from "@components/navigation/nav.jsx";
-//import Beginning from "./duck-story/beginning.jsx";
+import LandingPage from "./landing-page/landing-page";
+import Navigation from "@components/navigation/nav";
+//import Beginning from "./duck-story/beginning";
 
 const Content = () => {
 

@@ -1,13 +1,13 @@
 // vim:foldmethod=marker
 import {React, Fragment} from "react";
-import utils from "./job-history.utils.jsx";
+import utils from "./job-history.utils";
 
 //CSS
 import "./job-history.scss";
 
 //Components
-import JobAttentionGetter from "@components/attention-getter-image/attention-getter-image.jsx";
-import NewTabLink from "@components/safe-link/new-tab-link.jsx";
+import JobAttentionGetter from "@components/attention-getter-image/attention-getter-image";
+import NewTabLink from "@components/safe-link/new-tab-link";
 
 const JobHistory = () => {
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import NewTabLink from "@components/safe-link/new-tab-link";
 
 //SVG
-import SvgExitButton from "@img/exit-button-svg.jsx";
+import SvgExitButton from "@img/exit-button-svg";
 
 //CSS
 import "./error-msg-modal.scss";

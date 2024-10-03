@@ -4,7 +4,7 @@ import gsap from "gsap";
 import PropTypes from "prop-types";
 
 //Components
-import SvgDuck from "../../../assets/img/duck.jsx";
+import SvgDuck from "../../../assets/img/duck";
 
 //CSS
 import "../../../assets/css/duck-story-styles.scss";

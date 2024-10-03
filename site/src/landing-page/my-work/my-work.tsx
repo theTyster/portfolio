@@ -1,17 +1,17 @@
 import React from "react";
 
 //COMPONENTS
-import Showcase from "@components/showcase/showcase.jsx";
+import Showcase from "@components/showcase/showcase";
 
 //COMPONENTS TODO:
-//import DuckStory       from "../duck-story/duck-story.jsx";
-//import FruitSearch     from "../fruit-search/fruit-search.jsx";
-//import GiphySearch     from "../giphy-search/giphy-search.jsx";
-//import HackerNewsClone from "../hacker-news-clone/hacker-news-clone.jsx";
-//import Jeopardy        from "../jeopardy/jeopardy.jsx";
-//import MemeGenerator   from "../meme-generator/meme-generator.jsx";
-//import MemoryGame      from "../memory-game/memory-game.jsx";
-//import TodoApp         from "../todo-app/todo-app.jsx";
+//import DuckStory       from "../duck-story/duck-story";
+//import FruitSearch     from "../fruit-search/fruit-search";
+//import GiphySearch     from "../giphy-search/giphy-search";
+//import HackerNewsClone from "../hacker-news-clone/hacker-news-clone";
+//import Jeopardy        from "../jeopardy/jeopardy";
+//import MemeGenerator   from "../meme-generator/meme-generator";
+//import MemoryGame      from "../memory-game/memory-game";
+//import TodoApp         from "../todo-app/todo-app";
 
 const MyWork = () => {
 

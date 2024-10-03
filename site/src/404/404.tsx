@@ -4,8 +4,8 @@ import {React, StrictMode} from "react";
 import {setTitle} from "@utils/utils.js";
 
 //COMPONENTS
-import Navigation from "@components/navigation/nav.jsx";
-import SvgLost from "@img/lost-svg.jsx";
+import Navigation from "@components/navigation/nav";
+import SvgLost from "@img/lost-svg";
 
 //CSS
 import "./404.scss";

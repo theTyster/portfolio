@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {normalizeEpochDate} from "@utils/utils.js"
 
 //COMPONENTS
-import SvgPullRequest from "@img/pull-request-svg.jsx";
+import SvgPullRequest from "@img/pull-request-svg";
 
 //CSS
 import "./pull-request-tile.scss";

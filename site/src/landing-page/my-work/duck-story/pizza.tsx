@@ -2,7 +2,7 @@
 import {useEffect, useRef} from "react";
 //import gsap from "gsap";
 import PropTypes from "prop-types";
-import SvgDuck from "./assets/duck.jsx";
+import SvgDuck from "./assets/duck";
 import {
 	sleep,
 //	bonusLevel,
@@ -14,7 +14,7 @@ import {
 //	shuffle,
 //	makeItRain,
 //	checkColorInput,
-} from "./utils.jsx";
+} from "./utils";
 
 //CSS
 import "./css/story-styles.scss";

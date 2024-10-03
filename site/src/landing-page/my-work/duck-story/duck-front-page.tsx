@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import './css/front-page.scss';
 
 //COMPONENTS
-import SvgDuck from "./assets/duck.jsx";
+import SvgDuck from "./assets/duck";
 
 
 const DuckStoryFrontPage = ({setStory}) => {
