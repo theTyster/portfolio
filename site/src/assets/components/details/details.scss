@@ -1,0 +1,14 @@
+@use "@css/mixins" as theme;
+@use "@css/variables" as v;
+
+div.details {
+  background-color: v.$lightdesertsand;
+  padding: v.$pad;
+  margin: v.$pad;
+  @include theme.rounded-corners;
+  color: v.$darkburntsilver;
+  text-align: left;
+  a {
+    color: v.$lightburntsilver;
+  }
+}
