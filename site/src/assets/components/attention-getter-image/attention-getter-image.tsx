@@ -6,14 +6,14 @@ import "./attention-getter-image.scss";
 // NOTE: Using this component encourages the use of the center-children-by-flex
 // mixin in order to style the sideText containers to a desirable width of the
 // image. This should be done in the parent components stylesheet.
-// 
+//
 // To select it, nest this selector in AttentionGetterImage's parent.
 // Example:
 // div.attention-getter {
 //   @include center-children-by-flex(
-//     $childClassPrefix: <SET THIS>
+//     $childClassPrefix: <SET THIS>,
 //		 $itemWidth: <SET THIS>
-//   ) 
+//   )
 // }
 
 function AttentionGetterImage({
@@ -23,8 +23,7 @@ function AttentionGetterImage({
   imgLink,
   sideText_classPrefix,
   sideText,
-}){
-
+}) {
   //Props
   AttentionGetterImage.propTypes = {
     imgClass: PropTypes.string,
@@ -33,25 +32,22 @@ function AttentionGetterImage({
     imgLink: PropTypes.string,
     sideText_classPrefix: PropTypes.string.isRequired,
     sideText: PropTypes.element.isRequired,
-  }
+  };
 
   return (
-    <div 
-      className="attention-getter"
-    >
-      {imgLink?
-        <a href={imgLink} target="_blank" rel="noreferrer noopener" ><img className={imgClass} src={imgSrc} alt={imgAlt} /></a>
-        :
-        <img className={imgClass} src={imgSrc} alt={imgAlt} />}
-      <div className="sideText-container">
-        <div className={`${sideText_classPrefix}-centering-box`}></div>
-        <div className={`${sideText_classPrefix}-item`}>
+    <div className="attention-getter">
+      {imgLink ? (
+        <a href={imgLink} target="_blank" rel="noreferrer noopener">
+          <img className={imgClass} src={imgSrc} alt={imgAlt} />
+        </a>
+      ) : (
+        <img className={imgClass} src={imgSrc} alt={imgAlt} />
+      )}
+        <div className='sideText-container'>
           {sideText}
         </div>
-        <div className={`${sideText_classPrefix}-centering-box`}></div>
-      </div>
     </div>
-  )
+  );
 }
 
 export default AttentionGetterImage;
