@@ -31,7 +31,7 @@
   @include theme.small-media-query() {
     width: 100%;
     white-space: nowrap;
-    min-width: v.$content-min-width;
+    min-width: v.$min-content-width;
     box-sizing: border-box;
     a {
       width: 100%;
