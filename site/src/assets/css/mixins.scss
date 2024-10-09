@@ -27,7 +27,8 @@
     background-image: url("/static/img/splat-dark.svg");
     background-attachment: fixed;
     transition: background-color 2s;
-    div#content, div#noscript-content {
+    div#content,
+    div#noscript-content {
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -48,7 +49,19 @@
     background: white;
     @include rounded-corners;
   }
-  p {
+  aside {
+    background-color: v.$lightdesertsand;
+    padding: v.$pad;
+    margin: v.$pad 0;
+    @include rounded-corners;
+    color: v.$darkburntsilver;
+    text-align: left;
+    a {
+      color: v.$lightburntsilver;
+    }
+  }
+  p,
+  span {
     font: v.$p-font;
   }
   h1 {
@@ -87,7 +100,7 @@
   }
   button,
   .button {
-    padding: 0.7em;
+    padding: v.$button-padding;
     @include rounded-corners;
     user-select: none;
     -webkit-user-select: none;
@@ -106,7 +119,7 @@
     box-shadow: 0 0 0 6px white;
   }
   hr {
-    @include center-by-margin($w: unset, $topbottom: 4em);
+    @include center-by-margin($w: 100%, $topbottom: 4em);
     margin-top: 4em;
     margin-bottom: 2em;
     background-image: url("/static/img/curlywave.svg");
@@ -146,9 +159,23 @@
     main {
       @include center-by-margin(v.$sm-content-width);
       box-sizing: border-box;
-      article {
-        padding: 1rem;
-      }
+    }
+    footer {
+      box-sizing: border-box;
+      @include center-by-margin(v.$sm-content-width);
+    }
+  }
+  @include micro-media-query() {
+    header {
+      box-sizing: border-box;
+      @include center-by-margin(v.$sm-content-width);
+    }
+    main {
+      @include center-by-margin(v.$sm-content-width);
+      box-sizing: border-box;
+        margin-right: 0;
+        margin-left: 0;
+        padding:1rem;
     }
     footer {
       box-sizing: border-box;
@@ -166,6 +193,11 @@
 }
 @mixin small-media-query() {
   @media (max-width: v.$sm-max-width) {
+    @content;
+  }
+}
+@mixin micro-media-query() {
+  @media (max-width: calc(v.$sm-content-width + v.$pad)) {
     @content;
   }
 }
