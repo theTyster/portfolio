@@ -30,76 +30,106 @@ const MyWork = () => {
           //0
           id: "Fruit Search",
           title: "Fruit Search",
-          onClick: undefined,
           link: ["my-work/fruit-search/", "_blank"],
-          img: ["./static/img/fruit-search-ss.png", "Fruit Search App Screenshot"],
-        },
-        {
-          //1
-          id: "Giphy Search",
-          title: "Giphy Search",
-          onClick: undefined,
-          link: ["my-work/giphy-search/", "_blank"],
-          img: ["./static/img/giphy-search-ss.png", "Giphy Search App Screenshot"],
+          img: (
+            <img
+              src="static/img/fruit-search-ss.png"
+              alt="Fruit Search App Screenshot"
+            />
+          ),
         },
         {
           //2
-          id: "Hacker News Clone",
-          title: "Hacker News Clone",
-          onClick: undefined,
-          link: ["my-work/hacker-news-clone/", "_blank"],
-          img: ["./static/img/hacker-news-clone-ss.png", "Hacker News Clone App Screenshot"],
+          id: "Giphy Search",
+          title: "Giphy Search",
+          link: ["my-work/giphy-search/", "_blank"],
+          img: (
+            <img
+              src="static/img/giphy-search-ss.png"
+              alt="Giphy Search App Screenshot"
+            />
+          ),
         },
         {
           //3
-          id: "Jeopardy",
-          title: "Jeopardy",
-          onClick: undefined,
-          link: ["my-work/jeopardy/", "_blank"],
-          img: ["./static/img/jeopardy-ss.png", "Jeopardy App Screenshot"],
+          id: "Hacker News Clone",
+          title: "Hacker News Clone",
+          link: ["my-work/hacker-news-clone/", "_blank"],
+          img: (
+            <img
+              src="static/img/hacker-news-clone-ss.png"
+              alt="Hacker News Clone App Screenshot"
+            />
+          ),
         },
         {
           //4
-          id: "Meme Generator",
-          title: "Meme Generator",
-          onClick: undefined,
-          link: ["my-work/meme-generator/", "_blank"],
-          img: ["./static/img/meme-generator-ss.png", "Meme Generator App Screenshot"],
+          id: "Jeopardy",
+          title: "Jeopardy",
+          link: ["my-work/jeopardy/", "_blank"],
+          img: (
+            <img
+              src="static/img/jeopardy-ss.png"
+              alt="Jeopardy App Screenshot"
+            />
+          ),
         },
         {
           //5
-          id: "Memory Game",
-          title: "Memory Game",
-          onClick: undefined,
-          link: ["my-work/memory-game/", "_blank"],
-          img: ["./static/img/memory-game-ss.png", "Memory Game App Screenshot"],
+          id: "Meme Generator",
+          title: "Meme Generator",
+          link: ["my-work/meme-generator/", "_blank"],
+          img: (
+            <img
+              src="static/img/meme-generator-ss.png"
+              alt="Meme Generator App Screenshot"
+            />
+          ),
         },
         {
           //6
-          id: "Duck Story",
-          title: "Duck Story",
-          onClick: undefined,
-          link: ["my-work/duck-story-v1/", "_blank"],
-          img: ["./static/img/duck-story-v1-ss.png", "Duck Story App Screenshot"],
+          id: "Memory Game",
+          title: "Memory Game",
+          link: ["my-work/memory-game/", "_blank"],
+          img: (
+            <img
+              src="static/img/memory-game-ss.png"
+              alt="Memory Game App Screenshot"
+            />
+          ),
         },
         {
           //7
+          id: "Duck Story",
+          title: "Duck Story",
+          link: ["my-work/duck-story-v1/", "_blank"],
+          img: (
+            <img
+              src="static/img/duck-story-v1-ss.png"
+              alt="Duck Story App Screenshot"
+            />
+          ),
+        },
+        {
+          //8
           id: "ToDo App",
           title: "ToDo App",
-          onClick: undefined,
           link: ["my-work/todo-app/", "_blank"],
-          img: ["./static/img/todo-app-ss.png", "ToDo App Screenshot"],
+          img: (
+            <img src="static/img/todo-app-ss.png" alt="ToDo App Screenshot" />
+          ),
         },
-      ]
-    ]])
+      ],
+    ],
+  ]);
 
-  return(
+  return (
     <nav>
       <menu className="my-work">
-        <Showcase db={portfolioDB}/>
+        <Showcase db={portfolioDB} />
       </menu>
     </nav>
   );
-}
+};
 
 export default MyWork;
