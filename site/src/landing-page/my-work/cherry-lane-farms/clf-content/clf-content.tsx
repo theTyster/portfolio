@@ -16,10 +16,10 @@ const ClfContent = () => {
 
   return (
     <main>
-      <img className="hero" src="/static/img/mt_fuji.jpg" alt="Oil Painting of Mt. Fuji." />
+      <img className="hero" src="/static/img/mt_fuji.jpg" alt="Painting of Mt. Fuji." />
       <p>
         <a href="https://cherrylanefarmdoodles.com/about/development">
-          Cherry Lane Farm Doodles
+          Cherry Lane Farm Doodles{" "}
         </a>
         is a family-owned and operated business that breeds and raises
         Goldendoodles. This website/webapp was created to help them manage their
