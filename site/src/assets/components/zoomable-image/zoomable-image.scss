@@ -1,0 +1,57 @@
+@use "@css/variables" as v;
+@use "@css/mixins" as theme;
+
+button.zoomable-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: none;
+  margin: v.$button-padding;
+  cursor: pointer;
+  svg {
+    position: absolute;
+    right: calc(v.$button-padding + 4px);
+    top: calc(v.$button-padding + 4px);
+    opacity: 0;
+    height: 0;
+    width: 0;
+    z-index: 0;
+    &:hover {
+      rect {
+        fill: v.$charcoal;
+      }
+      path {
+        fill: white;
+      }
+    }
+    &:active {
+      scale: 0.9;
+    }
+  }
+  p.zoomable-image_clickExpand {
+    font: v.$h4-font;
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    opacity: 0;
+    bottom: 1rem;
+    @include theme.rounded-corners;
+    text-align: center;
+    color: white;
+    background-color: transparentize(black, 0.3);
+    width: 80%;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.2s;
+    &:hover {
+      opacity: 1 !important; // Necessary since the hover styles are partially controlled with JS
+      height: initial;
+    }
+  }
+  &:hover {
+    p.zoomable-image_clickExpand {
+      opacity: 1;
+    }
+  }
+}
