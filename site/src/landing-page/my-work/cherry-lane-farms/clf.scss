@@ -1,0 +1,28 @@
+@use "@css/fonts";
+@use "@css/mixins" as theme;
+@use "@css/variables" as v;
+
+@include theme.foundation;
+
+.gravelle {
+  @include theme.center-children-by-flex(
+    $childClassPrefix: "headshot-text",
+    $itemWidth: 20em
+  );
+}
+
+.hilltop {
+  @include theme.center-children-by-flex(
+    $childClassPrefix: "headshot-text",
+    $itemWidth: 20em
+  );
+}
+
+//div.landing-page{
+//	div.attention-getter {
+//		@include theme.center-children-by-flex(
+//			$childClassPrefix: "headshot-text",
+//			$itemWidth: 20em
+//		);
+//	}
+//}

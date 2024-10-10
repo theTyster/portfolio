@@ -12,22 +12,34 @@ import Showcase from "@components/showcase/showcase";
 //import TodoApp         from "../todo-app/todo-app";
 
 const MyWork = () => {
-
-  const portfolioDB = new Map(
-    [[
+  const portfolioDB: PortfolioDB['Map'] = new Map([
+    [
       {
-        "Fruit Search": 0,
-        "Giphy Search": 1,
-        "Hacker News Clone": 2,
-        "Jeopardy": 3,
-        "Meme Generator": 4,
-        "Memory Game": 5,
-        "Duck Story": 6,
-        "ToDo App": 7,
+        "Cherry Lane Farm Doodles": 0,
+        "Fruit Search": 1,
+        "Giphy Search": 2,
+        "Hacker News Clone": 3,
+        Jeopardy: 4,
+        "Meme Generator": 5,
+        "Memory Game": 6,
+        "Duck Story": 7,
+        "ToDo App": 8,
       },
       [
         {
           //0
+          id: "Cherry Lane Farm Doodles",
+          title: "Cherry Lane Farm Doodles",
+          link: ["my-work/cherry-lane-farms/"],
+          img: (
+            <img
+              src="static/img/cherrylane-farm-ss.png"
+              alt="Cherry Lane Farm App Screenshot"
+            />
+          ),
+        },
+        {
+          //1
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["my-work/fruit-search/", "_blank"],

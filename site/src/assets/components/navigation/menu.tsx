@@ -42,6 +42,7 @@ function Menu({menuState}) {
             <a href="/">Home</a>
             <NewTabLink link="https://www.linkedin.com/in/tyler-d-webdev/">My LinkedIn</NewTabLink>
             <NewTabLink link="https://github.com/thetyster">My Github</NewTabLink>
+            <a href="/my-work/cherry-lane-farms/">🐶 Cherry Lane Farms</a>
             <NewTabLink link="/my-work/fruit-search/">Fruit Search</NewTabLink>
             <NewTabLink link="/my-work/giphy-search/">Giphy Search</NewTabLink>
             <NewTabLink link="/my-work/hacker-news-clone/">Hacker News Clone</NewTabLink>

@@ -1,0 +1,45 @@
+@use "@css/mixins" as theme;
+@use "@css/variables" as v;
+
+#example-sites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  @include theme.rounded-corners;
+}
+
+div.showcase {
+  button {
+    &:first-child {
+      transition: revert;
+    }
+    @include theme.small-media-query {
+      cursor: auto;
+    }
+  }
+  div.currently-showcased {
+    top: 0;
+    z-index: 1;
+    padding-top: v.$pad;
+    &:has(button) {
+      position: sticky;
+      @include theme.small-media-query {
+        display: none;
+      }
+    }
+  }
+}
+
+div.attention-getter {
+  .clf-figma-color-theme {
+    @include theme.rounded-corners;
+  }
+}
