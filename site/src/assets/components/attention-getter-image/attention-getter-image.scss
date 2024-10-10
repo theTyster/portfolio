@@ -24,5 +24,11 @@ div.attention-getter {
 			color: v.$charcoal;
       max-width: 100%;
 	}
+  @include theme.small-media-query {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    text-align: center;
+  }
 }
 
