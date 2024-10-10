@@ -2,12 +2,56 @@
 @use "@css/variables" as v;
 
 div.details {
-  background-color: v.$lightdesertsand;
-  padding: v.$pad;
-  margin: v.$pad;
+  margin: v.$pad 0;
+  padding: 1rem;
+  background-color: v.$burntsilver;
+  color: white;
   @include theme.rounded-corners;
-  color: v.$darkburntsilver;
-  text-align: left;
+  summary {
+    list-style: none;
+    background-image: url("/static/img/splat-wave.svg");
+    background-repeat: no-repeat;
+    /* background-position: 0 6px; */
+    background-size: 60px;
+    cursor: pointer;
+    text-align: right;
+    font: v.$h5-font;
+    &::after {
+      content: "Expand 🡇";
+      @include theme.rounded-corners;
+      background-color: v.$burntsilver;
+      padding: 0 0.5rem;
+      color: white;
+      border: 3px solid v.$lightdesertsand;
+    }
+  }
+  details {
+    padding: v.$pad;
+    transition: all 0.2s;
+    @include theme.rounded-corners;
+    color: v.$desertsand;
+  }
+  details[open] {
+    background-color: v.$lightdesertsand;
+    color: v.$burntsilver;
+    summary {
+      color: v.$burntsilver;
+      &::after {
+        content: "Collapse 🡅";
+        @include theme.rounded-corners;
+        background-color: v.$lightdesertsand;
+        border: 3px solid v.$burntsilver;
+        padding: 0 0.5rem;
+        color: v.$burntsilver;
+      }
+      @include theme.small-media-query {
+        text-align: right;
+      }
+    }
+  }
+  & > * {
+    font: v.$h2-font;
+  }
   a {
     color: v.$lightburntsilver;
   }
