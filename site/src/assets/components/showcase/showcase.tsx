@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 //CSS
 import "./showcase.scss";
 
@@ -19,44 +17,65 @@ import "./showcase.scss";
 //      img: ["./img/image.png", "Example Alt Text."],
 //    }]
 
-const Showcase = ({db}) =>{
+const hasLink = (s: PortfolioDB["Data"]) => {
+  if (!s.className) s.className = "";
+  if (s.link)
+    return (
+      <a
+        className={s.className}
+        key={s.id}
+        data-showcase-item-id={s.id}
+        href={s.link[0]}
+        target={s.link[1] ? s.link[1] : ""}
+        rel={s.link[1] === "_blank" ? "noreferrer noopener" : undefined}
+      >
+        {s.title ? <h3>{s.title}</h3> : ""}
+        {s.img}
+      </a>
+    );
+  else if (s.onClick)
+    return (
+      <button
+        className={s.className}
+        key={s.id}
+        data-showcase-item-id={s.id}
+        onClick={s.onClick}
+      >
+        {s.title ? <h3>{s.title}</h3> : ""}
+        {s.img}
+      </button>
+    );
+  else
+    return (
+      <>
+        {s.title ? <h3>{s.title}</h3> : ""}
+        {s.img}
+      </>
+    );
+};
 
-  //PROPS
-  Showcase.propTypes = {
-    db: PropTypes.object.isRequired,
-  }
-
-
-  const showcaseNamesObj = db.keys().next().value;
-  const showcaseDataArr = db.values().next().value;
+const Showcase = ({ db }: { db: PortfolioDB['Map'] }) => {
+  //const showcaseNamesObj = db.keys().next().value;
+  const showcaseDataArr: PortfolioDB['Data'] = db.values().next().value;
 
   return (
     <div className="showcase">
-      {showcaseDataArr.map(s =>
-          s.link?(
-            <a
-              key={s.id}
-              data-showcase-item-id={s.id}
-              href={s.link[0]}
-              target={s.link[1]?s.link[1]:undefined}
-              rel={s.link[1] === "_blank"?"noreferrer noopener":undefined}
-            >
-              <h3>{s.title}</h3>
-              <img src={s.img[0]} alt={s.img[1]} />
-            </a>
-          ):(
-            <button
-              key={s.id}
-              data-showcase-item-id={s.id}
-              onClick={s.onClick}
-            >
-              <h3>{s.title}</h3>
-              <img src={s.img[0]} alt={s.img[1]} />
-            </button>
-          )
-      )}
+      {showcaseDataArr.map((s, index) => {
+        if (index === 0) {
+          return (
+            <>
+              <div key="showcase_currently-showcased" className="currently-showcased">
+                {hasLink(s)}
+              </div>
+              <hr key="showcase_hr" />
+            </>
+          );
+        } else {
+          return hasLink(s);
+        }
+      })}
     </div>
   );
-}
+};
 
 export default Showcase;

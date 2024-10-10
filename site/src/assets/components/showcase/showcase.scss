@@ -1,54 +1,113 @@
 @use "@css/mixins" as theme;
 @use "@css/variables" as v;
 
-$button-margin: 10px;
+$grid-margin: 20px;
 
 div.showcase {
-	display:flex;
-	flex-wrap: wrap;
-	padding: 0;
-	button, a{
-		position:relative !important;
-		flex: 1 0 calc(33.33% - $button-margin * 2);
-		@include theme.medium-media-query(){flex: 1 0 calc(50% - $button-margin * 2)}
-		@include theme.small-media-query(){flex: 1 0 calc(100% - $button-margin * 2)}
-		text-decoration: none;
-		line-height:0;
-		padding: 0;
-		margin: $button-margin;
-		border: 0;
-		background-color: inherit;
-		h3{
-			@include theme.medium-media-query(){
-				position: static;
-				opacity: 1;
-				width: 100%;
-				height: auto;
-				margin-bottom: calc($button-margin/2);
-				background-color: v.$darkcharcoal;
-			}
-			font: v.$h5-font;
-			display: flex;
-			position: absolute; // relative to button.
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			margin: 0;
-			align-items: center;
-			justify-content: center;
-			background-color: rgba(0, 0, 0, .7);
-			color: white;
-			@include theme.rounded-corners;
-		}
-		&:hover, &:active, &:focus-visible {
-			h3{opacity:1}
-			background-color: inherit;
-		}
-		img{
-			box-sizing: border-box; // sets how the total width and height is calculated. In this case it's calculated by the border box instead of the content box.
-			max-width: 100%;
-			@include theme.rounded-corners;
-			border: 5px solid v.$burntsilver;
-		}
-	}
+  display: flex;
+  flex-wrap: wrap;
+  gap: $grid-margin;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  hr {
+    width: 100%;
+    height: 26px;
+    background-repeat: repeat-x;
+    background-size: 33.33% 100%;
+    background-position-x: left;
+    background-clip: content-box;
+    @include theme.medium-media-query() {
+      background-size: 100% 100%;
+    }
+  }
+  a,
+  button,
+  div.showcase-item {
+    line-height: 0;
+    padding: 0;
+    background-color: inherit;
+    position: relative !important;
+    text-decoration: none;
+    @include theme.rounded-corners;
+    flex: 0 1 calc(33.33% - $grid-margin);
+    &:first-child {
+      /* transition: all 0.2s; */
+      flex: 1 0 calc(100% - $grid-margin);
+      img {
+        transition: all 0.2s;
+        box-shadow: 0px 5px 20px 5px v.$burntsilver;
+        &:hover {
+          box-shadow: 0px 10px 20px 5px v.$burntsilver;
+          transform: translateY(10px);
+        }
+        &:active {
+          box-shadow: revert;
+        }
+      }
+    }
+    @include theme.medium-media-query() {
+      flex: 1 0 calc(50% - $grid-margin * 2);
+    }
+    @include theme.small-media-query() {
+      flex: 1 0 calc(100% - $grid-margin * 2);
+    }
+    h3 {
+      transition: all 0.2s;
+      @include theme.medium-media-query() {
+        position: static;
+        opacity: 1;
+        width: 100%;
+        height: auto;
+        margin-bottom: calc($grid-margin/2);
+        background-color: v.$darkcharcoal;
+      }
+      display: flex;
+      position: absolute; // relative to button.
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      margin: 0;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      @include theme.rounded-corners;
+    }
+    &:hover,
+    &:active,
+    &:focus-visible {
+      h3 {
+        opacity: 1;
+      }
+      background-color: inherit;
+    }
+    img {
+      box-sizing: border-box; // sets how the total width and height is calculated. In this case it's calculated by the border box instead of the content box.
+      max-width: 100%;
+      @include theme.rounded-corners;
+      outline: 5px solid v.$burntsilver;
+      outline-offset: -4px;
+      width: 100%;
+    }
+  }
+  button {
+    padding: 0;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+  }
+  div.currently-showcased {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
+  }
 }
