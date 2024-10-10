@@ -16,7 +16,7 @@ import MyWork from "./my-work/my-work";
 
 const AttentionGetterSideText = () => (
   <>
-    <p>
+    <span>
       <i>
         I like to keep things lean, fast, simple and usable. The web was meant
         to make information accessible to anyone.
@@ -25,7 +25,7 @@ const AttentionGetterSideText = () => (
         <i>&quot;Web pages are designed for people.&quot;</i>
         <p>-Tim Berners-Lee</p>
       </blockquote>
-    </p>
+    </span>
   </>
 );
 
