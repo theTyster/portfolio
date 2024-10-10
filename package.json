@@ -8,6 +8,7 @@
     "deploy": "gh-pages -f -d site/dist"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
     "axios": "^1.6.7",
     "gsap": "^3.12.2",
     "jquery": "^3.7.1",
