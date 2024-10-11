@@ -40,6 +40,24 @@
   }
   header {
     display: block;
+    .home-button {
+      display: block;
+      border-radius: 100%;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.4s;
+      &:hover {
+        transform: translateY(10px);
+      }
+      &:active {
+        transform: translateY(20px);
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
   }
   main {
     position: relative;
@@ -173,9 +191,9 @@
     main {
       @include center-by-margin(v.$sm-content-width);
       box-sizing: border-box;
-        margin-right: 0;
-        margin-left: 0;
-        padding:1rem;
+      margin-right: 0;
+      margin-left: 0;
+      padding: 1rem;
     }
     footer {
       box-sizing: border-box;
