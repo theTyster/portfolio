@@ -51,7 +51,7 @@ const ClfContent = () => {
         <li>
           Successfully created a custom email address for free.
           <p>
-            I learned how to integrate the owner' Gmail accounts with an SMTP
+            I learned how to integrate the owner's Gmail accounts with an SMTP
             server that I connected to their domain.
           </p>
         </li>
