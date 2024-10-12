@@ -41,6 +41,10 @@
   header {
     display: block;
     .home-button {
+      img {
+        max-width: 350px;
+      }
+      width: 100%;
       display: block;
       border-radius: 100%;
       text-align: center;
