@@ -1,5 +1,6 @@
 //COMPONENTS
 import Showcase from "@components/showcase/showcase";
+import SvgNpm from "@img/npm-svg";
 
 //COMPONENTS TODO:
 //import DuckStory       from "../duck-story/duck-story";
@@ -12,18 +13,19 @@ import Showcase from "@components/showcase/showcase";
 //import TodoApp         from "../todo-app/todo-app";
 
 const MyWork = () => {
-  const portfolioDB: PortfolioDB['Map'] = new Map([
+  const portfolioDB: PortfolioDB["Map"] = new Map([
     [
       {
         "Cherry Lane Farm Doodles": 0,
-        "Fruit Search": 1,
-        "Giphy Search": 2,
-        "Hacker News Clone": 3,
-        Jeopardy: 4,
-        "Meme Generator": 5,
-        "Memory Game": 6,
-        "Duck Story": 7,
-        "ToDo App": 8,
+        CripToe: 1,
+        "Fruit Search": 2,
+        "Giphy Search": 3,
+        "Hacker News Clone": 4,
+        Jeopardy: 5,
+        "Meme Generator": 6,
+        "Memory Game": 7,
+        "Duck Story": 8,
+        "ToDo App": 9,
       },
       [
         {
@@ -40,6 +42,21 @@ const MyWork = () => {
         },
         {
           //1
+          id: "CripToe",
+          title: "CripToe.js",
+          link: ["https://www.npmjs.com/package/criptoe", "_blank"],
+          img: (
+            <SvgNpm
+              title="CripToe NPM Package Icon"
+              titleId="criptoe-npm-title"
+              desc="CripToe NPM Package Icon"
+              descId="criptoe-npm-desc"
+              aria-label="CripToe NPM Package Icon"
+            />
+          ),
+        },
+        {
+          //2
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["my-work/fruit-search/", "_blank"],
@@ -51,7 +68,7 @@ const MyWork = () => {
           ),
         },
         {
-          //2
+          //3
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["my-work/giphy-search/", "_blank"],
@@ -63,7 +80,7 @@ const MyWork = () => {
           ),
         },
         {
-          //3
+          //4
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["my-work/hacker-news-clone/", "_blank"],
@@ -75,7 +92,7 @@ const MyWork = () => {
           ),
         },
         {
-          //4
+          //5
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["my-work/jeopardy/", "_blank"],
@@ -87,7 +104,7 @@ const MyWork = () => {
           ),
         },
         {
-          //5
+          //6
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["my-work/meme-generator/", "_blank"],
@@ -99,7 +116,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6
+          //7
           id: "Memory Game",
           title: "Memory Game",
           link: ["my-work/memory-game/", "_blank"],
@@ -111,7 +128,7 @@ const MyWork = () => {
           ),
         },
         {
-          //7
+          //8
           id: "Duck Story",
           title: "Duck Story",
           link: ["my-work/duck-story-v1/", "_blank"],
@@ -123,7 +140,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //9
           id: "ToDo App",
           title: "ToDo App",
           link: ["my-work/todo-app/", "_blank"],

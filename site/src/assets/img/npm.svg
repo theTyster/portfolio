@@ -1,0 +1,8 @@
+<svg viewBox="0 0 804 480" aria-hidden="true">
+  <rect x="0" y="0" rx='20' width="804" height="480" fill='#b02a2a' className='npm-back'></rect>
+  <path
+    fill="#FFFFFF"
+    d="M240,250h100v-50h100V0H240V250z M340,50h50v100h-50V50z M480,0v200h100V50h50v150h50V50h50v150h50V0H480z M0,200h100V50h50v150h50V0H0V200z"
+    transform="translate(35 140) scale(.95)"
+  ></path>
+</svg>
