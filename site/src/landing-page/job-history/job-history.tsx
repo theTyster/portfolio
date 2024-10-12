@@ -38,14 +38,25 @@ const JobHistory = () => {
         </p>
       </>,
       [
-        "How to build an online brand from the ground up.",
-        <>How to do it on a <i>tight</i> budget.</>,
-        "What companies want from a website.",
-        "How to communicate with clients so they can get the site they want in the timeframe they want it.",
-        "How to teach people the basics of maintaining a website.",
-        "How to make websites that are easy to maintain.",
+        "Unit and integration testing with Vitest, Jest, and Jasmine",
+        "Building reusable JSX components with Sass styles",
+        "Using Typescript, SQL and serverless hosting with Cloudflare Pages",
+        "Bootstrapping full-stack sites on a shoestring budget",
+        "Maintaining DNS and Web Application Firewalls",
+        "Setting up an SMTP provider for email marketing",
+        "Managing client needs and expectations",
+        "Cloudflare Workers with R2, D1, and KV storage",
+        "Designing and testing backend systems",
+        "Static site generation with Next.js",
+        "Search engine optimization (SEO)",
+        "Building an online brand from the ground up.",
+        <>
+          Doing it all on a <i>tight</i> budget.
+        </>,
+        "Communicating with clients so they can get the site they want in the timeframe they want it.",
+        "Teaching clients the basics of maintaining a website.",
+        "Creating websites that are easy to maintain.",
         "Lots of graphic design.",
-        "How to abandon my own design preferences for what a client wants without sacrificing accessibility.",
       ]
     ),//}}}
     // Springboard{{{
