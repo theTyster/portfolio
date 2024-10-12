@@ -92,8 +92,8 @@ function LandingPage() {
     [
       {
         "job-history": 0,
-        "my-work": 1,
-        initial: 2,
+        "initial": 1,
+        contributions: 2,
         hobbies: 3,
       },
       [
@@ -105,13 +105,13 @@ function LandingPage() {
         },
         {
           //1
-          id: "my-work",
+          id: "initial",
           component: <MyWork />,
           title: "My Work",
         },
         {
           //2
-          id: "initial",
+          id: "contributions",
           component: <Contributions orgs={orgs} pullRequests={pullRequests} />,
           title: "Contributions",
         },
