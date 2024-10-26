@@ -18,7 +18,7 @@ const ClfContent = () => {
     <main>
       <img className="hero" src="/static/img/mt_fuji.jpg" alt="Painting of Mt. Fuji." />
       <p>
-        <a href="https://cherrylanefarmdoodles.com/about/development">
+        <a href="https://original.cherrylanefarmdoodles.com/about/development">
           Cherry Lane Farm Doodles{" "}
         </a>
         is a family-owned and operated business that breeds and raises
