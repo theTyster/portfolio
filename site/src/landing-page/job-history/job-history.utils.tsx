@@ -1,59 +1,37 @@
-const JobHistoryUtils = {
-  jobHistoryContent: function (
-    id = 0,                // 0
-    title = "",            // "Director of Communications"
-    org = "",              // "Director's Choice"
-    timeframe = {},        // {from: new Date(yyyy, m), to: new Date(yyyy, m)}
-    logo = [],             // [img/src.png, "Alt Text", "Link (optional)"]
-    summary = "",          // "I started at Director's Choice as a Marketing Assistant."
-    responsibilities = []  // ["Maintain Sales Funnel.", "Create Advertisements.", ...]
-){
-    this.id = id;
-    this.title = title;
-    this.org = org;
-    this.timeframe = timeframe;
-    this.logo = logo;
-    this.summary = summary;
-    this.responsibilities = responsibilities;
-  },
+import AttentionGetter from "@components/attention-getter-image/attention-getter-image";
 
-  JobDetails: function ({
-  thumb,
-  summary,
-  list,
-  classInsert,
-}){
+type Timeframe = { from: Date; to: Date } | Record<string, never>;
 
-  return(
-    <>
-      <div
-        className={`jobHistory-${classInsert}-details`}
-      >
-        {thumb}
-        <div className={`jobHistory-${classInsert}-summary`}>
-            {summary}
-          <ul>
-            {list.map(li =><li key={li.toString(36)}>{li}</li>)}
-          </ul>
-        </div>
-      </div>
-    </>
-  )
-},
-
-  AttentionGetterSideText: function ({
-  classInsert,
+function JobEntry({
+  id,
   title,
   org,
-  from,
-  to
+  timeframe,
+  logo,
+  summary,
+  responsibilities,
+}: {
+  id?: number;
+  title?: string;
+  org?: string;
+  timeframe?: Timeframe;
+  logo?: string[];
+  summary?: string | React.ReactNode;
+  responsibilities?: (string | React.ReactNode)[];
 }) {
+  id = id ?? 0;
+  title = title ?? "";
+  org = org ?? "";
+  timeframe = timeframe ?? {};
+  logo = logo ?? [];
+  summary = summary ?? "";
+  responsibilities = responsibilities ?? [];
 
-  const startYear = from.getFullYear()
-  const startMonth = from.getMonth();
+  const startYear = timeframe.from.getFullYear();
+  const startMonth = timeframe.from.getMonth();
 
-  const endYear = to.getFullYear()
-  const endMonth = to.getMonth();
+  const endYear = timeframe.to.getFullYear();
+  const endMonth = timeframe.to.getMonth();
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
@@ -61,38 +39,58 @@ const JobHistoryUtils = {
   let years = endYear - startYear;
   let months = endMonth - startMonth;
 
-  const elapsed = months < 0?
-    {y: --years, m: months += 12}
-    :
-    {y: years,   m: months};
+  const elapsed =
+    months < 0 ? { y: --years, m: (months += 12) } : { y: years, m: months };
 
   const timeFrameString = `
-    ${from.toLocaleString('en', {month: 'long'})}, ${startYear} -
-    ${endMonth === currentMonth?
-      "Present"
-      :
-      `${to.toLocaleString('en', {month: 'long'})}, ${endYear}`
-   }
-  `
-  const elapsedTimeString =`
-    ${elapsed.y? `${elapsed.y} year${elapsed.y > 1? "s":""}` : ""}
-    ${elapsed.y && elapsed.m? "and":""}
-    ${elapsed.m? `${elapsed.m} month${elapsed.m > 1? "s" : ""}` : ""}
+    ${timeframe.from.toLocaleString("en", { month: "long" })}, ${startYear} -
+    ${
+      endMonth === currentMonth
+        ? "Present"
+        : `${timeframe.to.toLocaleString("en", { month: "long" })}, ${endYear}`
+    }
+  `;
+  const elapsedTimeString = `
+    ${elapsed.y ? `${elapsed.y} year${elapsed.y > 1 ? "s" : ""}` : ""}
+    ${elapsed.y && elapsed.m ? "and" : ""}
+    ${elapsed.m ? `${elapsed.m} month${elapsed.m > 1 ? "s" : ""}` : ""}
   `;
 
   return (
     <>
-      <h3 className={`jobHistory-${classInsert}-title`}>{title}</h3>
-      {org?<h4 className={`jobHistory-${classInsert}-org`}>{org}</h4>:undefined}
-      <p className={`jobHistory-${classInsert}-timeframe`}>
-        {timeFrameString}
-      </p>
-      <p className={`jobHistory-${classInsert}-elapsed-time`}>
-        {elapsedTimeString}
-      </p>
+      <div className={`jobHistory-${id}-details`}>
+        <AttentionGetter
+          imgClass={`jobHistory-${id}-logo`}
+          imgSrc={logo[0]}
+          imgAlt={logo[1]}
+          imgLink={logo[2] ? logo[2] : undefined}
+          sideText_classPrefix={`jobHistory-${id}`}
+          sideText={
+            <>
+              <h3 className={`jobHistory-${id}-title`}>{title}</h3>
+              {org ? (
+                <h4 className={`jobHistory-${id}-org`}>{org}</h4>
+              ) : undefined}
+              <p className={`jobHistory-${id}-timeframe`}>{timeFrameString}</p>
+              <p className={`jobHistory-${id}-elapsed-time`}>
+                {elapsedTimeString}
+              </p>
+            </>
+          }
+        />
+        <div className={`jobHistory-${id}-summary`}>
+          {summary}
+          <ul>
+            {responsibilities.map((li) => (
+              <li key={li!.toString()}
+                className={`jobHistory-${id}-responsibilities`}
+              >{li}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
-  }
 }
 
-export default JobHistoryUtils;
+export default JobEntry;

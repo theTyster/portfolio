@@ -1,12 +1,11 @@
 // vim:foldmethod=marker
 import { Fragment } from "react";
-import utils from "./job-history.utils";
+import JobEntry from "./job-history.utils";
 
 //CSS
 import "./job-history.scss";
 
 //Components
-import JobAttentionGetter from "@components/attention-getter-image/attention-getter-image";
 import NewTabLink from "@components/safe-link/new-tab-link";
 
 function Preamble({ children }: { children: string }) {
@@ -16,70 +15,68 @@ function Preamble({ children }: { children: string }) {
 const JobHistory = () => {
   const jobs = [
     //Freelance{{{
-    new utils.jobHistoryContent(
-      3,
-      "Freelance Web Developer",
-      "",
-      {
-        from: new Date(2020, 0),
+    {
+      id: 3,
+      title: "Software Engineer",
+      org: "Cherry Lane Farms Dog Breeding",
+      timeframe: {
+        from: new Date(2024, 2),
         to: new Date(),
       },
-      [
-        "/static/img/freelance-webdev.jpg",
-        "HTML code on a screen",
-        "https://www.linkedin.com/in/tyler-d-webdev/",
+      logo: [
+        "/static/img/cherry-lane-farm-logo.png",
+        "Cherry Lane Farms Logo",
+        "https://cherrylanefarmdoodles.com/about/developmen",
       ],
-      (
+      summary: (
         <>
-          <p>PR and the web go hand-in-hand these days.</p>
           <p>
-            I&apos;ve found that my background in public relations helps
-            tremendously as I help organizations build one of the most publicly
-            facing forms of owned content a business usually has, their website.
-            I have had the privelege to be a part of many new businesses first
-            steps into the internet, and continue to support several of them as
-            they grow. These experiences have taught me so much. Here&apos;s a
-            few to start:
+            I came on board at Cherry Lane to build a maintainable web app that
+            would allow us to sell, track, and advertise puppies. A major goal
+            of this project was minimal cost. I was able to achieve this by
+            using Cloudflare Pages and Workers to host the site and serverless
+            functions. In the end, the only overhead cost was the domain name.
+          </p>
+          <p>
+            I covered just about every aspect of the project. From the front end
+            to the back end, I was the only developer on the team. Some of my
+            responsibilities included:
           </p>
         </>
       ),
-      [
+      responsibilities: [
         "Unit and integration testing with Vitest, Jest, and Jasmine",
         "Building reusable JSX components with Sass styles",
-        "Using Typescript, SQL and serverless hosting with Cloudflare Pages",
+        "Engineering with Typescript and SQL",
+        "Continuous Deployment and Integration with Cloudflare Pages serverless functions",
         "Bootstrapping full-stack sites on a shoestring budget",
-        "Maintaining DNS and Web Application Firewalls",
+        "Maintaining DNS security and Web Application Firewalls",
         "Setting up an SMTP provider for email marketing",
-        "Managing client needs and expectations",
-        "Cloudflare Workers with R2, D1, and KV storage",
+        "Integrating Zoho CRM with Cloudflare Workers",
+        "Engineering with Cloudflare Workers, R2, D1, and KV storage",
         "Designing and testing backend systems",
         "Static site generation with Next.js",
         "Search engine optimization (SEO)",
-        "Building an online brand from the ground up.",
-        <>
-          Doing it all on a <i>tight</i> budget.
-        </>,
-        "Communicating with clients so they can get the site they want in the timeframe they want it.",
-        "Teaching clients the basics of maintaining a website.",
-        "Creating websites that are easy to maintain.",
-        "Lots of graphic design.",
+        "Consistently deploying a fully accessible user interface",
+        "Developing custom NPM packages for internal use",
       ],
-    ), //}}}
+    },
+    //}}}
     // Springboard{{{
-    new utils.jobHistoryContent(
-      2,
-      "Student",
-      "Springboard Boot Camp",
-      {
+    {
+      id: 2,
+      title: "Student",
+      org: "Springboard Boot Camp",
+      timeframe: {
         from: new Date(2023, 9),
         to: new Date(2024, 2),
       },
-      [
+      logo: [
         "/static/img/springboard-logo.svg",
         "Springboard's Logo",
         "https://springboard.com",
       ],
-      (
+      summary: (
         <p>
           Springboard is a bootcamp I decided to team up to further my expertise
           in software development. My track focused on JavaScript, Python, and
@@ -87,7 +84,7 @@ const JobHistory = () => {
           At Springboard I learned:
         </p>
       ),
-      [
+      responsibilities: [
         "Advanced front end development.",
         "Advanced JavaScript.",
         "Advanced Python.",
@@ -95,22 +92,22 @@ const JobHistory = () => {
         "Unit and Integration Testing.",
         "Back end development.",
       ],
-    ), //}}}
+    }, //}}}
     // Director's Choice{{{
-    new utils.jobHistoryContent(
-      1,
-      "Director of Communications",
-      "Director's Choice Tour and Travel",
-      {
+    {
+      id: 1,
+      title: "Director of Communications",
+      org: "Director's Choice Tour and Travel",
+      timeframe: {
         from: new Date(2021, 7),
         to: new Date(2023, 0),
       },
-      [
+      logo: [
         "/static/img/directorschoice-logo.png",
         "Director's Choice Logo",
         "https://directorschoice.com",
       ],
-      (
+      summary: (
         <p>
           Working at Director&apos;s Choice changed me. I realized at
           Director&apos;s choice that I wanted to focus my career more on
@@ -118,7 +115,7 @@ const JobHistory = () => {
           included:
         </p>
       ),
-      [
+      responsibilities: [
         "Maintaining the front-end of the company website.",
         <>
           Ground-up development and maintenance of a{" "}
@@ -136,22 +133,22 @@ const JobHistory = () => {
         "Crisis prevention and management.",
         "Brand Management.",
       ],
-    ), //}}}
+    }, //}}}
     //RaiderComm{{{
-    new utils.jobHistoryContent(
-      0,
-      "Account Manager and Consultant",
-      "RaiderComm Public Relations",
-      {
+    {
+      id: 0,
+      title: "Account Manager and Consultant",
+      org: "RaiderComm Public Relations",
+      timeframe: {
         from: new Date(2020, 2),
         to: new Date(2021, 4),
       },
-      [
+      logo: [
         "/static/img/raidercomm-logo.jpeg",
         "RaiderComm Public Relations Logo",
         "https://raidercommpr.wixsite.com/rcpr",
       ],
-      (
+      summary: (
         <>
           <p>
             RaiderComm is a student run PR Agency that works to help local
@@ -172,7 +169,7 @@ const JobHistory = () => {
           </p>
         </>
       ),
-      [
+      responsibilities: [
         <>
           Experience with lots of:
           <ul>
@@ -190,7 +187,7 @@ const JobHistory = () => {
         "Laws and governances surrounding copyright, fair-use, and how it all works on the web.",
         "Why we should build accessible services that can be used by anyone.",
       ],
-    ), //}}}
+    }, //}}}
   ];
 
   return (
@@ -230,28 +227,14 @@ const JobHistory = () => {
         <Fragment key={j.id}>
           {j.id < jobs.length - 1 ? <hr /> : undefined}
           <article>
-            <utils.JobDetails
+            <JobEntry
+              id={j.id}
+              title={j.title}
+              org={j.org}
+              timeframe={j.timeframe}
+              logo={j.logo}
               summary={j.summary}
-              list={j.responsibilities}
-              classInsert={j.id}
-              thumb={
-                <JobAttentionGetter
-                  imgClass={`jobHistory-${j.id}-logo`}
-                  imgSrc={j.logo[0]}
-                  imgAlt={j.logo[1]}
-                  imgLink={j.logo[2] ? j.logo[2] : undefined}
-                  sideText_classPrefix={`jobHistory-${j.id}`}
-                  sideText={
-                    <utils.AttentionGetterSideText
-                      classInsert={j.id}
-                      title={j.title}
-                      org={j.org}
-                      from={j.timeframe.from}
-                      to={j.timeframe.to}
-                    />
-                  }
-                />
-              }
+              responsibilities={j.responsibilities}
             />
           </article>
         </Fragment>
