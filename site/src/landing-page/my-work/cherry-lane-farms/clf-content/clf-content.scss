@@ -10,12 +10,6 @@
   text-align: center;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  @include theme.rounded-corners;
-}
-
 div.showcase {
   button {
     &:first-child {

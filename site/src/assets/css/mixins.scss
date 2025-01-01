@@ -152,8 +152,17 @@
     background-position-x: center;
   }
   .npm-back {
-        background-color: rgba(176, 42, 42)
+    background-color: rgba(176, 42, 42);
   }
+
+  img.hero {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    @include rounded-corners;
+    margin: 0 auto;
+  }
+
   footer {
     padding-top: v.$pad;
     padding-bottom: v.$pad;
