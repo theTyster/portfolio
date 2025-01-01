@@ -26,7 +26,7 @@ const JobHistory = () => {
       logo: [
         "/static/img/cherry-lane-farm-logo.png",
         "Cherry Lane Farms Logo",
-        "https://cherrylanefarmdoodles.com/about/developmen",
+        "https://cherrylanefarmdoodles.com/about/development",
       ],
       summary: (
         <>
