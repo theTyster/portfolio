@@ -9,6 +9,10 @@ import "./job-history.scss";
 import JobAttentionGetter from "@components/attention-getter-image/attention-getter-image";
 import NewTabLink from "@components/safe-link/new-tab-link";
 
+function Preamble({ children }: { children: string }) {
+  return <p className="preamble">{children}</p>;
+}
+
 const JobHistory = () => {
   const jobs = [
     //Freelance{{{
@@ -191,6 +195,37 @@ const JobHistory = () => {
 
   return (
     <div className="jobHistory">
+      <img
+        className="hero"
+        src="/static/img/freelance-webdev.jpg"
+        alt="HTML code on a screen"
+      />
+      <Preamble>
+        I am a software engineer with a background in public relations and
+        advertising. Engineering dynamic, interactive, engaging, and search
+        engine optimized content is my specialty.
+      </Preamble>
+      <Preamble>
+        Everything I build is lean, fast, secure, and accessible. I am a firm
+        believer in the idea that the internet should be for everyone.
+      </Preamble>
+      <Preamble>
+        Good tests usher good software. I meticulously test everything I build
+        and can use any testing suite.
+      </Preamble>
+      <Preamble>
+        Typescript seems to be what I work with the most, but Python is a close
+        second. My database experience ranges from SQLite to PostgreSQL to
+        NoSQL.
+      </Preamble>
+      <Preamble>
+        Recently, I have taken up creating my own SaaS built on Rust. (The code
+        is not yet open but plans to be in the future.)
+      </Preamble>
+      <Preamble>
+        Flipping between front-end and back-end development is something I am
+        fairly comfortable with, although I tend to work on the front-end more.
+      </Preamble>
       {jobs.map((j) => (
         <Fragment key={j.id}>
           {j.id < jobs.length - 1 ? <hr /> : undefined}
