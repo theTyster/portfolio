@@ -14,9 +14,9 @@ function Preamble({ children }: { children: string }) {
 
 const JobHistory = () => {
   const jobs = [
-    //Freelance{{{
+    //CLF {{{
     {
-      id: 3,
+      id: 4,
       title: "Software Engineer",
       org: "Cherry Lane Farms Dog Breeding",
       timeframe: {
@@ -62,6 +62,37 @@ const JobHistory = () => {
       ],
     },
     //}}}
+    // Clear Horizons LLC {{{
+    {
+      id: 3,
+      title: "WordPress Developer",
+      org: "Clear Horizons LLC",
+      timeframe: {
+        from: new Date(2024, 9),
+        to: new Date(),
+      },
+      logo: [
+        "/static/img/clearhorizons.jpg",
+        "Clear Horizons LLC website backdrop",
+        "https://clearhorizonsllc.com",
+      ],
+      summary: (
+        <>
+          <p>
+            I am currently working at Clear Horizons LLC as a part-time
+            contracted WordPress Developer. My responsibilities include:
+          </p>
+        </>
+      ),
+      responsibilities: [
+        "Rapid deployment of themed WordPress site",
+        "Customizing themes and plugins",
+        "Connecting and integrating business email addresses",
+        "Setting up and maintaining DNS records and SSL certificates",
+        "SEO optimization",
+      ],
+    },
+    // }}}
     // Springboard{{{
     {
       id: 2,
@@ -85,12 +116,12 @@ const JobHistory = () => {
         </p>
       ),
       responsibilities: [
-        "Advanced front end development.",
-        "Advanced JavaScript.",
-        "Advanced Python.",
-        "SQL.",
-        "Unit and Integration Testing.",
-        "Back end development.",
+        "Advanced front end development",
+        "Advanced JavaScript",
+        "Advanced Python",
+        "SQL",
+        "Unit and Integration Testing",
+        "Back end development",
       ],
     }, //}}}
     // Director's Choice{{{
@@ -116,22 +147,22 @@ const JobHistory = () => {
         </p>
       ),
       responsibilities: [
-        "Maintaining the front-end of the company website.",
+        "Maintaining the front-end of the company website",
         <>
           Ground-up development and maintenance of a{" "}
           <NewTabLink link="https://github.com/theTyster/DC-marketing-funneltron">
             sales funnel automation back end
           </NewTabLink>
-          . (Python)
+           (Python)
         </>,
-        "Updating and maintaining the WordPress instance and site theme for the company website.",
-        "Developing and maintaining interactive product pages.",
-        "Writing HTML and CSS for marketing emails.",
-        "Optimizing all digital media for Search Engine crawlers. (SEO)",
-        "Integrating data in Google sheets and HubSpot with various applications. (Python)",
-        "Designing and gathering visual media for marketing and public-facing events. (Adobe)",
-        "Crisis prevention and management.",
-        "Brand Management.",
+        "Updating and maintaining the WordPress instance and site theme for the company website",
+        "Developing and maintaining interactive product pages",
+        "Writing HTML and CSS for marketing emails",
+        "Optimizing all digital media for Search Engine crawlers (SEO)",
+        "Integrating data in Google sheets and HubSpot with various applications (Python)",
+        "Designing and gathering visual media for marketing and public-facing events (Adobe)",
+        "Crisis prevention and management",
+        "Brand Management",
       ],
     }, //}}}
     //RaiderComm{{{
@@ -178,14 +209,14 @@ const JobHistory = () => {
             <li>and deadlines.</li>
           </ul>
         </>,
-        "How to host online events that engage stakeholder audiences effectively.",
-        "How to create attractive and deliverable assets that can be used for a range of purposes.",
-        "What it's like to collaborate with many fast moving companies while simultaneously a college student.",
-        "How to be stressed effectively.",
-        "How to manage a team.",
+        "How to host online events that engage stakeholder audiences effectively",
+        "How to create attractive and deliverable assets that can be used for a range of purposes",
+        "What it's like to collaborate with many fast moving companies while simultaneously a college student",
+        "How to be stressed effectively",
+        "How to manage a team",
         "Why delegation is important",
-        "Laws and governances surrounding copyright, fair-use, and how it all works on the web.",
-        "Why we should build accessible services that can be used by anyone.",
+        "Laws and governances surrounding copyright, fair-use, and how it all works on the web",
+        "Why we should build accessible services that can be used by anyone",
       ],
     }, //}}}
   ];
