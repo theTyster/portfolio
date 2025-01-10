@@ -17,7 +17,7 @@ const JobHistory = () => {
     //CLF {{{
     {
       id: 4,
-      title: "Software Engineer",
+      title: "Senior Software Engineer",
       org: "Cherry Lane Farms Dog Breeding",
       timeframe: {
         from: new Date(2024, 2),
