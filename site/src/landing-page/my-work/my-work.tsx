@@ -35,7 +35,7 @@ const MyWork = () => {
           link: ["my-work/cherry-lane-farms/"],
           img: (
             <img
-              src="static/img/cherrylane-farm-ss.png"
+              src="/static/img/cherrylane-farm-ss.png"
               alt="Cherry Lane Farm App Screenshot"
             />
           ),
@@ -62,7 +62,7 @@ const MyWork = () => {
           link: ["my-work/fruit-search/", "_blank"],
           img: (
             <img
-              src="static/img/fruit-search-ss.png"
+              src="/static/img/fruit-search-ss.png"
               alt="Fruit Search App Screenshot"
             />
           ),
@@ -74,7 +74,7 @@ const MyWork = () => {
           link: ["my-work/giphy-search/", "_blank"],
           img: (
             <img
-              src="static/img/giphy-search-ss.png"
+              src="/static/img/giphy-search-ss.png"
               alt="Giphy Search App Screenshot"
             />
           ),
@@ -86,7 +86,7 @@ const MyWork = () => {
           link: ["my-work/hacker-news-clone/", "_blank"],
           img: (
             <img
-              src="static/img/hacker-news-clone-ss.png"
+              src="/static/img/hacker-news-clone-ss.png"
               alt="Hacker News Clone App Screenshot"
             />
           ),
@@ -98,7 +98,7 @@ const MyWork = () => {
           link: ["my-work/jeopardy/", "_blank"],
           img: (
             <img
-              src="static/img/jeopardy-ss.png"
+              src="/static/img/jeopardy-ss.png"
               alt="Jeopardy App Screenshot"
             />
           ),
@@ -110,7 +110,7 @@ const MyWork = () => {
           link: ["my-work/meme-generator/", "_blank"],
           img: (
             <img
-              src="static/img/meme-generator-ss.png"
+              src="/static/img/meme-generator-ss.png"
               alt="Meme Generator App Screenshot"
             />
           ),
@@ -122,7 +122,7 @@ const MyWork = () => {
           link: ["my-work/memory-game/", "_blank"],
           img: (
             <img
-              src="static/img/memory-game-ss.png"
+              src="/static/img/memory-game-ss.png"
               alt="Memory Game App Screenshot"
             />
           ),
@@ -134,7 +134,7 @@ const MyWork = () => {
           link: ["my-work/duck-story-v1/", "_blank"],
           img: (
             <img
-              src="static/img/duck-story-v1-ss.png"
+              src="/static/img/duck-story-v1-ss.png"
               alt="Duck Story App Screenshot"
             />
           ),
@@ -145,7 +145,7 @@ const MyWork = () => {
           title: "ToDo App",
           link: ["my-work/todo-app/", "_blank"],
           img: (
-            <img src="static/img/todo-app-ss.png" alt="ToDo App Screenshot" />
+            <img src="/static/img/todo-app-ss.png" alt="ToDo App Screenshot" />
           ),
         },
       ],

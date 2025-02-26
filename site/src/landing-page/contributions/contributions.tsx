@@ -65,7 +65,7 @@ function Contributions({ orgs, pullRequests }) {
             </p>
             <ErrorMessageModal
               msg="Github's unauthenticated API rate limit is 60 requests per hour. This may have been exceeded. View my contributions on Github Instead!"
-              imgSrc="static/github-mark.svg"
+              imgSrc="/static/github-mark.svg"
               imgAlt="Github Logo"
               buttonLink={githubHTMLSearch}
               buttonText="Visit Now"

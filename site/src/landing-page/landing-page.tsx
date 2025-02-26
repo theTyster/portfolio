@@ -130,7 +130,7 @@ function LandingPage() {
       <AttetionGetterImage
         imgClass="my-headshot"
         sideText_classPrefix="headshot-text"
-        imgSrc="static/img/me.jpg"
+        imgSrc="/static/img/me.jpg"
         imgAlt="My Face."
         imgLink="https://www.linkedin.com/in/tyler-d-webdev/"
         sideText={<AttentionGetterSideText />}

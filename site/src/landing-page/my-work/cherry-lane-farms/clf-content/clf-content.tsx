@@ -16,7 +16,8 @@ const ClfContent = () => {
 
   return (
     <main>
-      <img className="hero" src="/static/img/mt_fuji.jpg" alt="Painting of Mt. Fuji." />
+      <h2>Project Overview</h2>
+      <img className="hero" src="/static/img/cherrylane-farm-ss.png" alt="Painting of Mt. Fuji." />
       <p>
         <a href="https://original.cherrylanefarmdoodles.com/about/development">
           Cherry Lane Farm Doodles{" "}
