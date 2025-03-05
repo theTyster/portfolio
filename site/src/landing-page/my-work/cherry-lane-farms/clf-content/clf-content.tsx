@@ -17,7 +17,11 @@ const ClfContent = () => {
   return (
     <main>
       <h2>Project Overview</h2>
-      <img className="hero" src="/static/img/cherrylane-farm-ss.png" alt="Painting of Mt. Fuji." />
+      <img
+        className="hero"
+        src="/static/img/cherrylane-farm-ss.png"
+        alt="Screen shot of the front page of The Cherry Lane Farms website."
+      />
       <p>
         <a href="https://original.cherrylanefarmdoodles.com/about/development">
           Cherry Lane Farm Doodles{" "}
@@ -49,6 +53,15 @@ const ClfContent = () => {
       </p>
       <h2>When I started this project, I had never…</h2>
       <ul>
+        <li>
+          Built my own continuous integration and deployment pipeline
+          <p>
+            Test Driven Development is something I have experience with.
+            However, integrating a full-fledged end-to-end testing system into
+            my deployment process was a new concept and actually changed the way
+            I operate as a developer.
+          </p>
+        </li>
         <li>
           Successfully created a custom email address for free.
           <p>
@@ -95,8 +108,8 @@ const ClfContent = () => {
       </p>
       <p>
         In the end, the only cost to build this website was the domain. If the
-        rate of images created stays constant, the only potential cost could
-        be for the SMTP server if the volume of emails sent ever surpasses a few
+        rate of images created stays constant, the only potential cost could be
+        for the SMTP server if the volume of emails sent ever surpasses a few
         thousand in a single day.
       </p>
       <p>

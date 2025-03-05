@@ -46,6 +46,8 @@ const JobHistory = () => {
       ),
       responsibilities: [
         "Unit and integration testing with Vitest, Jest, and Jasmine",
+        "TDD with Cypress End-to-End testing",
+        "CI/CD wiht GitHub Actions, Cypress, Curl, and Cloudflare Wrangler",
         "Building reusable JSX components with Sass styles",
         "Engineering with Typescript and SQL",
         "Continuous Deployment and Integration with Cloudflare Pages serverless functions",
