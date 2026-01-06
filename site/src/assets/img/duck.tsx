@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const SvgDuck = ({props}) => {
 
-  //Props Validation
-  SvgDuck.propTypes = {
-    props:PropTypes.object.isRequired,
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
-  }
+//  //Props Validation
+//  SvgDuck.propTypes = {
+//    props:PropTypes.object.isRequired,
+//    top: PropTypes.string,
+//    bottom: PropTypes.string,
+//    left: PropTypes.string,
+//    right: PropTypes.string,
+//  }
 
   return (
     <svg

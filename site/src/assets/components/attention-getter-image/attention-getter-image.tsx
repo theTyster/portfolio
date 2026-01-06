@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 //CSS
 import "./attention-getter-image.scss";
@@ -24,15 +24,15 @@ function AttentionGetterImage({
   sideText_classPrefix,
   sideText,
 }) {
-  //Props
-  AttentionGetterImage.propTypes = {
-    imgClass: PropTypes.string,
-    imgSrc: PropTypes.string.isRequired,
-    imgAlt: PropTypes.string.isRequired,
-    imgLink: PropTypes.string,
-    sideText_classPrefix: PropTypes.string.isRequired,
-    sideText: PropTypes.element.isRequired,
-  };
+//  //Props
+//  AttentionGetterImage.propTypes = {
+//    imgClass: PropTypes.string,
+//    imgSrc: PropTypes.string.isRequired,
+//    imgAlt: PropTypes.string.isRequired,
+//    imgLink: PropTypes.string,
+//    sideText_classPrefix: PropTypes.string.isRequired,
+//    sideText: PropTypes.element.isRequired,
+//  };
 
   return (
     <div className="attention-getter">

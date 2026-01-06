@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import NewTabLink from "@components/safe-link/new-tab-link";
 
 //SVG
@@ -9,14 +9,14 @@ import SvgExitButton from "@img/exit-button-svg";
 import "./error-msg-modal.scss";
 
 const ErrorMessageModal = ({ msg, imgSrc, imgAlt, buttonLink, buttonText }) => {
-  //Props
-  ErrorMessageModal.propTypes = {
-    msg: PropTypes.string.isRequired,
-    imgSrc: PropTypes.string,
-    imgAlt: PropTypes.string,
-    buttonLink: PropTypes.string,
-    buttonText: PropTypes.string,
-  };
+//  //Props
+//  ErrorMessageModal.propTypes = {
+//    msg: PropTypes.string.isRequired,
+//    imgSrc: PropTypes.string,
+//    imgAlt: PropTypes.string,
+//    buttonLink: PropTypes.string,
+//    buttonText: PropTypes.string,
+//  };
 
   const [isClosed, setClosed] = useState(false);
   const handleClick = () => setClosed(true);

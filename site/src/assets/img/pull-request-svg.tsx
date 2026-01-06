@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const SvgPullRequest = (props) => {
 
-  //PROPS
-  SvgPullRequest.proptypes = {
-    className: PropTypes.string,
-  }
+//  //PROPS
+//  SvgPullRequest.proptypes = {
+//    className: PropTypes.string,
+//  }
 
   return (
   <svg

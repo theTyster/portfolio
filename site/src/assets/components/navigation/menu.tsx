@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Transition } from 'react-transition-group';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import NewTabLink from "@components/safe-link/new-tab-link"
 
@@ -8,9 +8,9 @@ import NewTabLink from "@components/safe-link/new-tab-link"
 function Menu({menuState}) {
 
   // PROPS VALIDATION
-  Menu.propTypes = {
-    menuState: PropTypes.bool,
-  }
+//  Menu.propTypes = {
+//    menuState: PropTypes.bool,
+//  }
 
   const nodeRef = useRef(null);
   const tranDuration = 1000;

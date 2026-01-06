@@ -1,7 +1,7 @@
 //DEV Libraries
 import {useEffect, useRef} from "react";
 //import gsap from "gsap";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import SvgDuck from "./assets/duck";
 import {
 	sleep,
@@ -22,12 +22,12 @@ import "./css/animate_water_flow.scss";
 
 const Pizza = ({setStory, displayFunc, ascii}) => {
 
-  //Props Validation
-  Pizza.propTypes = {
-    setStory: PropTypes.func,
-		displayFunc: PropTypes.func,
-		ascii: PropTypes.obj,
-  }
+//  //Props Validation
+//  Pizza.propTypes = {
+//    setStory: PropTypes.func,
+//		displayFunc: PropTypes.func,
+//		ascii: PropTypes.obj,
+//  }
 
 
 	let page = useRef();

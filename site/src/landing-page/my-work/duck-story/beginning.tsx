@@ -1,7 +1,7 @@
 //DEV Libraries
 import {useLayoutEffect, useEffect, useRef} from "react";
 import gsap from "gsap";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 //Components
 import SvgDuck from "../../../assets/img/duck";
@@ -14,10 +14,10 @@ import "../../../assets/css/duck-animate_rain.scss";
 
 const Beginning = ({setStory}) => {
 
-  //Props Validation
-  Beginning.propTypes = {
-    setStory: PropTypes.func,
-  }
+//  //Props Validation
+//  Beginning.propTypes = {
+//    setStory: PropTypes.func,
+//  }
 
 	//REFS
   const placement_tl = useRef();

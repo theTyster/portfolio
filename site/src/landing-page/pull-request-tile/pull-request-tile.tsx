@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import {normalizeEpochDate} from "@utils/utils.js"
 
 //COMPONENTS
@@ -9,11 +9,11 @@ import "./pull-request-tile.scss";
 
 function PullRequestTile({pr, org}){
 
-  //Props Validation
-  PullRequestTile.propTypes = {
-    pr: PropTypes.object.isRequired,
-    org: PropTypes.object.isRequired,
-  }
+//  //Props Validation
+//  PullRequestTile.propTypes = {
+//    pr: PropTypes.object.isRequired,
+//    org: PropTypes.object.isRequired,
+//  }
 
   //VARIABLES
   const user = pr.user;

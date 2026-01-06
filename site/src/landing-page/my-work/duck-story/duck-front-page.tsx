@@ -1,7 +1,7 @@
 //DEV Libraries
 import {useEffect, useRef} from 'react';
 import gsap from "gsap";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 //CSS
 import './css/front-page.scss';
@@ -12,10 +12,10 @@ import SvgDuck from "./assets/duck";
 
 const DuckStoryFrontPage = ({setStory}) => {
 
-  //Props Validation
-  DuckStoryFrontPage.propTypes = {
-    setStory: PropTypes.func,
-  }
+//  //Props Validation
+//  DuckStoryFrontPage.propTypes = {
+//    setStory: PropTypes.func,
+//  }
 
   //REFS
   const blink_tl = useRef(); 

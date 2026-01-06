@@ -1,16 +1,16 @@
 import {useState} from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 //CSS
 import "./tab-menu.scss";
 
 function TabMenu({menuItems}){
 
-  //PROPS
-  TabMenu.propTypes = {
-    menuItems: PropTypes.object.isRequired,
-    handleTabMenuClick: PropTypes.func,
-  }
+//  //PROPS
+//  TabMenu.propTypes = {
+//    menuItems: PropTypes.object.isRequired,
+//    handleTabMenuClick: PropTypes.func,
+//  }
 
   const menuNamesObj = menuItems.keys().next().value;
   const menuDataArr = menuItems.values().next().value;

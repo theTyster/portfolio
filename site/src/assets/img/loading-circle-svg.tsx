@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const SvgLoadingCircle = (props) => {
 
-  //Props Validation
-  SvgLoadingCircle.propTypes = {
-    className: PropTypes.string,
-  }
+//  //Props Validation
+//  SvgLoadingCircle.propTypes = {
+//    className: PropTypes.string,
+//  }
 
   return(
   <svg

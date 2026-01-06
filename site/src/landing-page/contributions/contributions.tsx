@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import GitHubCalendar from "react-github-calendar";
 
 //Components
@@ -10,11 +10,11 @@ import ErrorMessageModal from "@components/error-msg-modal/error-msg-modal";
 import "./contributions.scss";
 
 function Contributions({ orgs, pullRequests }) {
-  //PROPS
-  Contributions.propTypes = {
-    orgs: PropTypes.object.isRequired,
-    pullRequests: PropTypes.array.isRequired,
-  };
+//  //PROPS
+//  Contributions.propTypes = {
+//    orgs: PropTypes.object.isRequired,
+//    pullRequests: PropTypes.array.isRequired,
+//  };
   const githubHTMLSearch =
     "https://github.com/search?q=author%3Athetyster+type%3Apr";
 

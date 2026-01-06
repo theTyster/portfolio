@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 //Components
 import Menu from "./menu";
 
 function NavButton({onClick, menuState}) {
 
-  // PROPS VALIDATION
-  NavButton.propTypes = {
-    menuState: PropTypes.bool,
-    onClick: PropTypes.func,
-  }
+//  // PROPS VALIDATION
+//  NavButton.propTypes = {
+//    menuState: PropTypes.bool,
+//    onClick: PropTypes.func,
+//  }
 
   return (
     <>

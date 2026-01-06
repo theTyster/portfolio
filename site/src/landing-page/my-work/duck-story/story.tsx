@@ -8,7 +8,7 @@
 //DEV Libraries
 import {useLayoutEffect, useRef} from "react";
 import gsap from "gsap";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 //COMPONENTS
 import SvgDuck from "./assets/duck";
@@ -20,10 +20,10 @@ import "./css/animate_rain.scss";
 
 const Story = ({setStory})=>{
 
-  //Props Validation
-  Story.propTypes = {
-    setStory: PropTypes.func,
-  }
+//  //Props Validation
+//  Story.propTypes = {
+//    setStory: PropTypes.func,
+//  }
 
 
   //ANIMATIONS
