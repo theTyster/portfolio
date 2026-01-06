@@ -3,3 +3,7 @@
 @use "@css/variables" as v;
 
 @include theme.foundation;
+
+.my-headshot {
+  width: 298px;
+}
