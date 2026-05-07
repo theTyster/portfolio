@@ -30,7 +30,9 @@ const AttentionGetterSideText = () => (
 );
 
 function LandingPage() {
-  setTitle("Ty Davis");
+  useEffect(() => {
+    setTitle("Ty Davis");
+  }, []);
 
   // PULL CONTRIBUTIONS DATA
   const githubApiSearch =

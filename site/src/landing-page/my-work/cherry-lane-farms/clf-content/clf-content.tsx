@@ -1,4 +1,5 @@
 // Utilities
+import { useEffect } from "react";
 import { setTitle, sleep } from "@utils/utils.js";
 
 // Components
@@ -12,7 +13,9 @@ import Frontend from "./frontend";
 import "./clf-content.scss";
 
 const ClfContent = () => {
-  setTitle("The Creation of Cherry Lane Farms");
+  useEffect(() => {
+    setTitle("The Creation of Cherry Lane Farms");
+  }, []);
 
   return (
     <main>
