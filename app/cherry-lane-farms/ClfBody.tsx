@@ -5,9 +5,9 @@
 // page; jQuery (if used) is loaded only in the browser via dynamic import.
 // jQuery must NEVER enter the edge runtime bundle
 // (see test_jquery_never_loaded_in_edge_runtime).
+// Chrome (header/nav/footer) is provided by PortfolioShell in page.tsx.
 
 import React, { useEffect } from 'react'
-import Navigation from '@components/navigation/nav'
 import ClfContent from '../../site/src/landing-page/my-work/cherry-lane-farms/clf-content/clf-content'
 
 export default function ClfBody() {
@@ -16,25 +16,5 @@ export default function ClfBody() {
     void import('jquery')
   }, [])
 
-  return (
-    <>
-      <header>
-        <div id="nav">
-          <Navigation />
-        </div>
-        <a className="home-button" href="/">
-          <img src="/static/img/splat-wave.svg" alt="Home" />
-        </a>
-        <h1 className="page-title"></h1>
-      </header>
-      <div id="content">
-        <ClfContent />
-      </div>
-      <footer>
-        <div id="credit">
-          <p>Ty Davis ©️ {new Date().getFullYear()}</p>
-        </div>
-      </footer>
-    </>
-  )
+  return <ClfContent />
 }

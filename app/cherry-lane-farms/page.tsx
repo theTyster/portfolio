@@ -5,9 +5,14 @@
 
 import React from 'react'
 import ClfLoader from './ClfLoader'
+import PortfolioShell from '../_components/PortfolioShell'
 
 export const runtime = 'edge'
 
 export default function CherryLaneFarmsPage() {
-  return <ClfLoader />
+  return (
+    <PortfolioShell>
+      <ClfLoader />
+    </PortfolioShell>
+  )
 }

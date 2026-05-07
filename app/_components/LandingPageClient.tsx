@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Navigation from "@components/navigation/nav";
+import PortfolioShell from "./PortfolioShell";
 import LandingPage from "../../site/src/landing-page/landing-page";
 
 type BlogPost = {
@@ -42,27 +42,9 @@ export default function LandingPageClient({
   blogFeed: BlogFeedResponse | null;
 }) {
   return (
-    <>
-      <header>
-        <div id="nav">
-          <Navigation />
-        </div>
-        <a className="home-button" href="/">
-          <img src="/static/img/splat-wave.svg" alt="Home" />
-        </a>
-        <h1 className="page-title"></h1>
-      </header>
-      <div id="content">
-        <main>
-          <LandingPage />
-          <RecentPosts blogFeed={blogFeed} />
-        </main>
-      </div>
-      <footer>
-        <div id="credit">
-          <p>Ty Davis ©️ {new Date().getFullYear()}</p>
-        </div>
-      </footer>
-    </>
+    <PortfolioShell>
+      <LandingPage />
+      <RecentPosts blogFeed={blogFeed} />
+    </PortfolioShell>
   );
 }
