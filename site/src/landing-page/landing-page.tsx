@@ -10,7 +10,7 @@ import "./landing-page.scss";
 import TabMenu from "@components/tab-menu/tab-menu";
 import AttetionGetterImage from "@components/attention-getter-image/attention-getter-image";
 import JobHistory from "./job-history/job-history";
-import Hobbies from "./hobbies/hobbies";
+import Blog, { type BlogFeedResult } from "./blog/blog";
 import Contributions from "./contributions/contributions";
 import MyWork from "./my-work/my-work";
 
@@ -29,7 +29,7 @@ const AttentionGetterSideText = () => (
   </>
 );
 
-function LandingPage() {
+function LandingPage({ blogFeed }: { blogFeed: BlogFeedResult }) {
   useEffect(() => {
     setTitle("Ty Davis");
   }, []);
@@ -37,8 +37,8 @@ function LandingPage() {
   // PULL CONTRIBUTIONS DATA
   const githubApiSearch =
     "https://api.github.com/search/issues?q=author%3Athetyster+type%3Apr";
-  let [pullRequests, setPullRequests] = useState();
-  let [orgs, setOrgs] = useState();
+  let [pullRequests, setPullRequests] = useState<any[] | undefined>(undefined);
+  let [orgs, setOrgs] = useState<Record<string, any> | undefined>(undefined);
 
   useEffect(() => {
     (async () => {
@@ -96,7 +96,7 @@ function LandingPage() {
         "job-history": 0,
         "initial": 1,
         contributions: 2,
-        hobbies: 3,
+        blog: 3,
       },
       [
         {
@@ -119,9 +119,9 @@ function LandingPage() {
         },
         {
           //3
-          id: "hobbies",
-          component: <Hobbies />,
-          title: "Hobbies",
+          id: "blog",
+          component: <Blog blogFeed={blogFeed} />,
+          title: "Blog",
         },
       ],
     ],

@@ -1,0 +1,38 @@
+div.blog {
+  .blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .blog-post {
+    h3 {
+      margin: 0 0 0.25rem;
+    }
+    a {
+      text-decoration: none;
+    }
+    a:hover h3 {
+      text-decoration: underline;
+    }
+  }
+
+  .blog-date {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+
+  .blog-description {
+    margin: 0.25rem 0 0;
+  }
+
+  .blog-fallback,
+  .blog-more {
+    margin-top: 1rem;
+  }
+}

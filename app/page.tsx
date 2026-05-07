@@ -1,5 +1,6 @@
 import React from 'react'
 import LandingPageClient from './_components/LandingPageClient'
+import type { BlogFeedResult, BlogPost } from '../site/src/landing-page/blog/blog'
 
 // Property p_004: execution_runtime(cloudflare_workers) ∧ runtime_environment(edge)
 // Property p_005: fetch_on_server(blog_page, blog_feed) — server-side data fetch
@@ -7,21 +8,6 @@ import LandingPageClient from './_components/LandingPageClient'
 export const runtime = 'edge'
 
 const BLOG_FEED_URL = 'https://blog.thetyster.dev/api/pages'
-
-export type BlogPost = {
-  title: string
-  date: string
-  description: string
-  permalink: string
-}
-
-export type BlogFeedResult =
-  | { ok: true; pages: BlogPost[] }
-  | {
-      ok: false
-      reason: 'no_token' | 'http_error' | 'network_error' | 'parse_error'
-      status?: number
-    }
 
 async function getBlogFeed(): Promise<BlogFeedResult> {
   const token = process.env.BLOG_API_TOKEN
