@@ -1,0 +1,14 @@
+name = "portfolio"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# Blog API token is stored as a Cloudflare Workers encrypted secret.
+# Set it with: wrangler secret put BLOG_API_TOKEN
+# The token is injected at edge runtime via process.env.BLOG_API_TOKEN
+# and is NEVER exposed to client-side JavaScript (no NEXT_PUBLIC_ prefix).
+#
+# [vars] are for non-secret, non-sensitive config values only.
+# Do NOT add BLOG_API_TOKEN here — use `wrangler secret put` instead.
+[vars]
+BLOG_FEED_URL = "https://blog.thetyster.dev/api/pages"

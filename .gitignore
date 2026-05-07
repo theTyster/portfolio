@@ -5,6 +5,9 @@
 
 # production
 /site/dist
+/.next
+/.vercel
+/next-env.d.ts
 
 .viminfo
 
