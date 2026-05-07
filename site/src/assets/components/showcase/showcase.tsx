@@ -1,3 +1,5 @@
+import React from "react";
+
 //CSS
 import "./showcase.scss";
 
@@ -56,19 +58,19 @@ const hasLink = (s: PortfolioDB["Data"]) => {
 
 const Showcase = ({ db }: { db: PortfolioDB['Map'] }) => {
   //const showcaseNamesObj = db.keys().next().value;
-  const showcaseDataArr: PortfolioDB['Data'] = db.values().next().value;
+  const showcaseDataArr: PortfolioDB['Data'][] = db.values().next().value;
 
   return (
     <div className="showcase">
       {showcaseDataArr.map((s, index) => {
         if (index === 0) {
           return (
-            <>
-              <div key="showcase_currently-showcased" className="currently-showcased">
+            <React.Fragment key={`showcase_${s.id}`}>
+              <div className="currently-showcased">
                 {hasLink(s)}
               </div>
-              <hr key="showcase_hr" />
-            </>
+              <hr />
+            </React.Fragment>
           );
         } else {
           return hasLink(s);
