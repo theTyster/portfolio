@@ -26,7 +26,7 @@ const ClfContent = () => {
         alt="Screen shot of the front page of The Cherry Lane Farms website."
       />
       <a href="https://github.com/theTyster/cherrylanefarmdoodles">
-        <img src="https://github.com/theTyster/cherrylanefarmdoodles/actions/workflows/main.yaml/badge.svg" alt="Cherry Lane Farms Deployment status." />
+        <img src="https://img.shields.io/github/actions/workflow/status/theTyster/cherrylanefarmdoodles/main.yaml" alt="Cherry Lane Farms Deployment status." />
       </a>
       <p>
         <a href="https://original.cherrylanefarmdoodles.com/about/development">
