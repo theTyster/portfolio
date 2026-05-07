@@ -8,35 +8,54 @@ export const runtime = 'edge'
 
 const BLOG_FEED_URL = 'https://blog.thetyster.dev/api/pages'
 
-type BlogPost = {
+export type BlogPost = {
   title: string
   date: string
   description: string
   permalink: string
 }
 
-type BlogFeedResponse = {
-  pages?: BlogPost[]
-}
+export type BlogFeedResult =
+  | { ok: true; pages: BlogPost[] }
+  | {
+      ok: false
+      reason: 'no_token' | 'http_error' | 'network_error' | 'parse_error'
+      status?: number
+    }
 
-async function getBlogFeed(): Promise<BlogFeedResponse | null> {
+async function getBlogFeed(): Promise<BlogFeedResult> {
+  const token = process.env.BLOG_API_TOKEN
+  if (!token) {
+    console.error(`[blog-feed] no_token: BLOG_API_TOKEN unset; ${BLOG_FEED_URL} not fetched`)
+    return { ok: false, reason: 'no_token' }
+  }
+
+  let res: Response
   try {
-    const token = process.env.BLOG_API_TOKEN
-    const headers: Record<string, string> = {
-      'Accept': 'application/json',
-    }
     // Token is injected from Cloudflare Workers secret — never a NEXT_PUBLIC_ var.
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`
-    }
-    const res = await fetch(BLOG_FEED_URL, {
-      headers,
+    res = await fetch(BLOG_FEED_URL, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       next: { revalidate: 3600 },
     })
-    if (!res.ok) return null
-    return res.json() as Promise<BlogFeedResponse>
-  } catch {
-    return null
+  } catch (err) {
+    console.error(`[blog-feed] network_error: ${BLOG_FEED_URL}`, err)
+    return { ok: false, reason: 'network_error' }
+  }
+
+  if (!res.ok) {
+    console.error(`[blog-feed] http_error: ${BLOG_FEED_URL} returned ${res.status}`)
+    return { ok: false, reason: 'http_error', status: res.status }
+  }
+
+  try {
+    const body = (await res.json()) as { pages?: BlogPost[] }
+    return { ok: true, pages: body.pages ?? [] }
+  } catch (err) {
+    console.error(`[blog-feed] parse_error: ${BLOG_FEED_URL}`, err)
+    return { ok: false, reason: 'parse_error' }
   }
 }
 

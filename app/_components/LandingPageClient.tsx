@@ -3,21 +3,44 @@
 import React from "react";
 import PortfolioShell from "./PortfolioShell";
 import LandingPage from "../../site/src/landing-page/landing-page";
+import type { BlogFeedResult } from "../page";
 
-type BlogPost = {
-  title: string;
-  date: string;
-  description: string;
-  permalink: string;
-};
+const BLOG_HOME = "https://blog.thetyster.dev";
 
-type BlogFeedResponse = {
-  pages?: BlogPost[];
-};
+function RecentPosts({ blogFeed }: { blogFeed: BlogFeedResult }) {
+  if (blogFeed.ok === false) {
+    const note =
+      blogFeed.reason === "no_token"
+        ? "Blog feed unavailable in this environment."
+        : "Couldn't load posts right now.";
+    return (
+      <section id="recent-posts" className="recent-posts">
+        <h2>Recent Posts</h2>
+        <p>
+          {note}{" "}
+          <a href={BLOG_HOME} target="_blank" rel="noreferrer noopener">
+            Visit blog.thetyster.dev →
+          </a>
+        </p>
+      </section>
+    );
+  }
 
-function RecentPosts({ blogFeed }: { blogFeed: BlogFeedResponse | null }) {
-  const posts = blogFeed?.pages ?? [];
-  if (posts.length === 0) return null;
+  const posts = blogFeed.pages;
+  if (posts.length === 0) {
+    return (
+      <section id="recent-posts" className="recent-posts">
+        <h2>Recent Posts</h2>
+        <p>
+          No posts yet.{" "}
+          <a href={BLOG_HOME} target="_blank" rel="noreferrer noopener">
+            Visit blog.thetyster.dev →
+          </a>
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section id="recent-posts" className="recent-posts">
       <h2>Recent Posts</h2>
@@ -39,7 +62,7 @@ function RecentPosts({ blogFeed }: { blogFeed: BlogFeedResponse | null }) {
 export default function LandingPageClient({
   blogFeed,
 }: {
-  blogFeed: BlogFeedResponse | null;
+  blogFeed: BlogFeedResult;
 }) {
   return (
     <PortfolioShell>
