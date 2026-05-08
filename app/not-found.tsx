@@ -1,5 +1,7 @@
 import React from 'react'
 import PortfolioShell from './_components/PortfolioShell'
+import SvgLost from '../site/src/assets/img/lost-svg'
+import './not-found.scss'
 
 export const runtime = 'edge'
 
@@ -7,11 +9,10 @@ export default function NotFound() {
   return (
     <PortfolioShell>
       <section id="not-found">
-        <h1>404 — Page Not Found</h1>
-        <p>The page you requested does not exist.</p>
-        <p>
-          <a href="/">Return to the home page →</a>
-        </p>
+        <h2>That doesn&apos;t seem right...</h2>
+        <SvgLost />
+        <p>Try heading back to the home page.</p>
+        <a className="button" href="/">Go Home</a>
       </section>
     </PortfolioShell>
   )
