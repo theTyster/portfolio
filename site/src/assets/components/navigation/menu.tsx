@@ -19,7 +19,9 @@ const ITEMS: Item[] = [
   { kind: "external", href: "https://www.linkedin.com/in/tyler-d-webdev/", label: "My LinkedIn" },
   { kind: "external", href: "https://github.com/thetyster", label: "My Github" },
   { kind: "internal", href: "/cherry-lane-farms", label: "🐶 Cherry Lane Farms" },
-  { kind: "internal", href: "/jeopardy", label: "Jeopardy" },
+  // Jeopardy opens in a new tab — it's a self-contained playable demo, like
+  // the legacy /my-work/* projects.
+  { kind: "external", href: "/jeopardy", label: "Jeopardy" },
   { kind: "external", href: "/my-work/fruit-search/index.html", label: "Fruit Search" },
   { kind: "external", href: "/my-work/giphy-search/index.html", label: "Giphy Search" },
   { kind: "external", href: "/my-work/hacker-news-clone/index.html", label: "Hacker News Clone" },
