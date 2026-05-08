@@ -32,7 +32,7 @@ const MyWork = () => {
           //0
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
-          link: ["my-work/cherry-lane-farms/"],
+          link: ["/cherry-lane-farms"],
           img: (
             <img
               src="/static/img/cherrylane-farm-ss.png"
@@ -59,7 +59,7 @@ const MyWork = () => {
           //2
           id: "Fruit Search",
           title: "Fruit Search",
-          link: ["my-work/fruit-search/", "_blank"],
+          link: ["/my-work/fruit-search/index.html", "_blank"],
           img: (
             <img
               src="/static/img/fruit-search-ss.png"
@@ -71,7 +71,7 @@ const MyWork = () => {
           //3
           id: "Giphy Search",
           title: "Giphy Search",
-          link: ["my-work/giphy-search/", "_blank"],
+          link: ["/my-work/giphy-search/index.html", "_blank"],
           img: (
             <img
               src="/static/img/giphy-search-ss.png"
@@ -83,7 +83,7 @@ const MyWork = () => {
           //4
           id: "Hacker News Clone",
           title: "Hacker News Clone",
-          link: ["my-work/hacker-news-clone/", "_blank"],
+          link: ["/my-work/hacker-news-clone/index.html", "_blank"],
           img: (
             <img
               src="/static/img/hacker-news-clone-ss.png"
@@ -95,7 +95,7 @@ const MyWork = () => {
           //5
           id: "Jeopardy",
           title: "Jeopardy",
-          link: ["my-work/jeopardy/", "_blank"],
+          link: ["/jeopardy", "_blank"],
           img: (
             <img
               src="/static/img/jeopardy-ss.png"
@@ -107,7 +107,7 @@ const MyWork = () => {
           //6
           id: "Meme Generator",
           title: "Meme Generator",
-          link: ["my-work/meme-generator/", "_blank"],
+          link: ["/my-work/meme-generator/index.html", "_blank"],
           img: (
             <img
               src="/static/img/meme-generator-ss.png"
@@ -119,7 +119,7 @@ const MyWork = () => {
           //7
           id: "Memory Game",
           title: "Memory Game",
-          link: ["my-work/memory-game/", "_blank"],
+          link: ["/my-work/memory-game/index.html", "_blank"],
           img: (
             <img
               src="/static/img/memory-game-ss.png"
@@ -131,7 +131,7 @@ const MyWork = () => {
           //8
           id: "Duck Story",
           title: "Duck Story",
-          link: ["my-work/duck-story-v1/", "_blank"],
+          link: ["/my-work/duck-story-v1/index.html", "_blank"],
           img: (
             <img
               src="/static/img/duck-story-v1-ss.png"
@@ -143,7 +143,7 @@ const MyWork = () => {
           //9
           id: "ToDo App",
           title: "ToDo App",
-          link: ["my-work/todo-app/", "_blank"],
+          link: ["/my-work/todo-app/index.html", "_blank"],
           img: (
             <img src="/static/img/todo-app-ss.png" alt="ToDo App Screenshot" />
           ),

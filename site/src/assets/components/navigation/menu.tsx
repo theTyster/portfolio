@@ -42,15 +42,15 @@ function Menu({menuState}) {
             <a href="/">Home</a>
             <NewTabLink link="https://www.linkedin.com/in/tyler-d-webdev/">My LinkedIn</NewTabLink>
             <NewTabLink link="https://github.com/thetyster">My Github</NewTabLink>
-            <a href="/my-work/cherry-lane-farms/">🐶 Cherry Lane Farms</a>
-            <NewTabLink link="/my-work/fruit-search/">Fruit Search</NewTabLink>
-            <NewTabLink link="/my-work/giphy-search/">Giphy Search</NewTabLink>
-            <NewTabLink link="/my-work/hacker-news-clone/">Hacker News Clone</NewTabLink>
-            <NewTabLink link="/my-work/jeopardy/">Jeopardy</NewTabLink>
-            <NewTabLink link="/my-work/meme-generator/">Meme Generator</NewTabLink>
-            <NewTabLink link="/my-work/memory-game/">Memory Game</NewTabLink>
-            <NewTabLink link="/my-work/duck-story-v1/">Duck Story</NewTabLink>
-            <NewTabLink link="/my-work/todo-app/">ToDo App</NewTabLink>
+            <a href="/cherry-lane-farms">🐶 Cherry Lane Farms</a>
+            <a href="/jeopardy">Jeopardy</a>
+            <NewTabLink link="/my-work/fruit-search/index.html">Fruit Search</NewTabLink>
+            <NewTabLink link="/my-work/giphy-search/index.html">Giphy Search</NewTabLink>
+            <NewTabLink link="/my-work/hacker-news-clone/index.html">Hacker News Clone</NewTabLink>
+            <NewTabLink link="/my-work/meme-generator/index.html">Meme Generator</NewTabLink>
+            <NewTabLink link="/my-work/memory-game/index.html">Memory Game</NewTabLink>
+            <NewTabLink link="/my-work/duck-story-v1/index.html">Duck Story</NewTabLink>
+            <NewTabLink link="/my-work/todo-app/index.html">ToDo App</NewTabLink>
           </menu>
         </nav>
       )}
