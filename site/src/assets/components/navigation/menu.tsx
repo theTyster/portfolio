@@ -1,63 +1,70 @@
-import { useRef } from "react";
-import { Transition } from 'react-transition-group';
-//import PropTypes from 'prop-types';
+"use client";
 
-import NewTabLink from "@components/safe-link/new-tab-link"
+import { usePathname } from "next/navigation";
 
+import NewTabLink from "@components/safe-link/new-tab-link";
 
-function Menu({menuState}) {
+type MenuProps = {
+  open: boolean;
+  menuId: string;
+  onClose: () => void;
+};
 
-  // PROPS VALIDATION
-//  Menu.propTypes = {
-//    menuState: PropTypes.bool,
-//  }
+type Item =
+  | { kind: "internal"; href: string; label: string }
+  | { kind: "external"; href: string; label: string };
 
-  const nodeRef = useRef(null);
-  const tranDuration = 1000;
+const ITEMS: Item[] = [
+  { kind: "internal", href: "/", label: "Home" },
+  { kind: "external", href: "https://www.linkedin.com/in/tyler-d-webdev/", label: "My LinkedIn" },
+  { kind: "external", href: "https://github.com/thetyster", label: "My Github" },
+  { kind: "internal", href: "/cherry-lane-farms", label: "🐶 Cherry Lane Farms" },
+  { kind: "internal", href: "/jeopardy", label: "Jeopardy" },
+  { kind: "external", href: "/my-work/fruit-search/index.html", label: "Fruit Search" },
+  { kind: "external", href: "/my-work/giphy-search/index.html", label: "Giphy Search" },
+  { kind: "external", href: "/my-work/hacker-news-clone/index.html", label: "Hacker News Clone" },
+  { kind: "external", href: "/my-work/meme-generator/index.html", label: "Meme Generator" },
+  { kind: "external", href: "/my-work/memory-game/index.html", label: "Memory Game" },
+  { kind: "external", href: "/my-work/duck-story-v1/index.html", label: "Duck Story" },
+  { kind: "external", href: "/my-work/todo-app/index.html", label: "ToDo App" },
+];
 
-  const tranStyle = {
-    entering: {
-      visibility: 'visible',
-      maxHeight: '345px',
-    },
-    entered: {
-      visibility: 'visible',
-      maxHeight: '345px',
-    },
-    exiting: {
-      visibility: 'visible',
-      maxHeight: 0,
-    },
-    exited: {
-      visibility: 'collapse',
-      maxHeight: 0,
-    },
-  }
+function Menu({ open, menuId, onClose }: MenuProps) {
+  const pathname = usePathname();
 
   return (
-    <Transition nodeRef={nodeRef} in={menuState} timeout={tranDuration}>
-      {tranState => (
-        <nav ref={nodeRef} style={{...tranStyle[tranState]}}>
-          <menu>
-            <a href="/">Home</a>
-            <NewTabLink link="https://www.linkedin.com/in/tyler-d-webdev/">My LinkedIn</NewTabLink>
-            <NewTabLink link="https://github.com/thetyster">My Github</NewTabLink>
-            <a href="/cherry-lane-farms">🐶 Cherry Lane Farms</a>
-            <a href="/jeopardy">Jeopardy</a>
-            <NewTabLink link="/my-work/fruit-search/index.html">Fruit Search</NewTabLink>
-            <NewTabLink link="/my-work/giphy-search/index.html">Giphy Search</NewTabLink>
-            <NewTabLink link="/my-work/hacker-news-clone/index.html">Hacker News Clone</NewTabLink>
-            <NewTabLink link="/my-work/meme-generator/index.html">Meme Generator</NewTabLink>
-            <NewTabLink link="/my-work/memory-game/index.html">Memory Game</NewTabLink>
-            <NewTabLink link="/my-work/duck-story-v1/index.html">Duck Story</NewTabLink>
-            <NewTabLink link="/my-work/todo-app/index.html">ToDo App</NewTabLink>
-          </menu>
-        </nav>
-      )}
-    </Transition>
+    <nav
+      id={menuId}
+      className="nav-drawer"
+      data-open={open}
+      aria-hidden={!open}
+    >
+      <ul className="nav-list" role="list">
+        {ITEMS.map((item) => {
+          const isCurrent =
+            item.kind === "internal" && pathname === item.href;
+          if (item.kind === "external") {
+            return (
+              <li key={item.href}>
+                <NewTabLink link={item.href}>{item.label}</NewTabLink>
+              </li>
+            );
+          }
+          return (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                aria-current={isCurrent ? "page" : undefined}
+                onClick={onClose}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
-
 }
-
 
 export default Menu;

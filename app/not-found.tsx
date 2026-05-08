@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <PortfolioShell>
       <section id="not-found">
-        <h2>That doesn&apos;t seem right...</h2>
+        <h1>That doesn&apos;t seem right...</h1>
         <SvgLost />
         <p>Try heading back to the home page.</p>
         <a className="button" href="/">Go Home</a>

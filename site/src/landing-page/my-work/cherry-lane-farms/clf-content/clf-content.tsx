@@ -19,6 +19,7 @@ const ClfContent = () => {
 
   return (
     <main>
+      <h1>The Creation of Cherry Lane Farms</h1>
       <h2>Project Overview</h2>
       <img
         className="hero"

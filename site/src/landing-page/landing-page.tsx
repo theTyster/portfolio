@@ -129,6 +129,7 @@ function LandingPage({ blogFeed }: { blogFeed: BlogFeedResult }) {
 
   return (
     <div className="landing-page">
+      <h1 className="visually-hidden">Ty Davis — web developer portfolio</h1>
       <AttetionGetterImage
         imgClass="my-headshot"
         sideText_classPrefix="headshot-text"

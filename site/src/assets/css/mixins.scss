@@ -23,6 +23,7 @@
     overflow-x: hidden;
   }
   body {
+    margin: 0;
     background-color: v.$citron;
     background-image: url("/static/img/splat-dark.svg");
     background-attachment: fixed;
@@ -34,33 +35,85 @@
       align-items: stretch;
     }
   }
-  .page-title {
-    text-align: center;
-    padding: v.$pad;
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 200;
+    background: white;
+    color: v.$darkcharcoal;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    &:focus {
+      left: 1rem;
+      top: 1rem;
+      outline: 3px solid v.$charcoal;
+    }
   }
   header {
+    position: relative;
+    z-index: 50;
     display: block;
-    .home-button {
-      img {
-        max-width: 350px;
-      }
-      width: 100%;
-      display: block;
-      border-radius: 100%;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.4s;
-      &:hover {
-        transform: translateY(10px);
-      }
-      &:active {
-        transform: translateY(20px);
-      }
-      svg {
-        display: block;
-        width: 100%;
+    background-color: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 56px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: v.$darkcharcoal;
+      transition: transform 0.2s ease;
+      &:hover { transform: translateY(-1px); }
+
+      .brand-logo {
+        width: 44px;
         height: auto;
+        display: block;
       }
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+      .brand-name {
+        font-weight: 800;
+        font-size: 1.15rem;
+      }
+      .brand-role {
+        font-size: 0.78rem;
+        opacity: 0.65;
+        font-weight: 500;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand .brand-text { display: none; }
     }
   }
   main {
@@ -171,11 +224,9 @@
   }
 
   // MEDIA QUERIES
+  // Header now spans the full viewport at every breakpoint; only main/footer
+  // get the narrow centered card treatment.
   @include medium-media-query() {
-    header {
-      box-sizing: border-box;
-      @include center-by-margin(v.$md-content-width);
-    }
     main {
       box-sizing: border-box;
       @include center-by-margin(v.$md-content-width);
@@ -186,10 +237,6 @@
     }
   }
   @include small-media-query() {
-    header {
-      box-sizing: border-box;
-      @include center-by-margin(v.$sm-content-width);
-    }
     main {
       @include center-by-margin(v.$sm-content-width);
       box-sizing: border-box;
@@ -200,10 +247,6 @@
     }
   }
   @include micro-media-query() {
-    header {
-      box-sizing: border-box;
-      @include center-by-margin(v.$sm-content-width);
-    }
     main {
       @include center-by-margin(v.$sm-content-width);
       box-sizing: border-box;

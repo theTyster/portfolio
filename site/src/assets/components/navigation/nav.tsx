@@ -1,32 +1,35 @@
-import {useState, useEffect} from 'react';
-import Gsap from 'gsap';
+"use client";
+
+import { useEffect, useState } from "react";
 
 //Components
-import NavButton from "./nav-button"
+import NavButton from "./nav-button";
 
 //CSS
 import "./nav.scss";
 
+const MENU_ID = "primary-nav-menu";
+
 function Navigation() {
+  const [open, setOpen] = useState(false);
 
-  const [menuState, menuSet] = useState(false);
-  const [hamTl] = useState(Gsap.timeline()); // used to trigger the render.
-
+  // Close on Escape — common drawer-pattern affordance.
   useEffect(() => {
-    hamTl 
-      .to("#ham-top", {duration: 0.4, y: 4})
-      .to("#ham-bottom", {duration: 0.4, y: -4},"<")
-      .reverse();
-  }, [])
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
-  const onClick = () => {
-    hamTl.reversed(!hamTl.reversed()); //toggles the direction of the playhead after every render.
-    menuSet(!menuState);
-  }
-
-
-  return(
-    <NavButton menuState={menuState} onClick={onClick} />
+  return (
+    <NavButton
+      open={open}
+      onToggle={() => setOpen((o) => !o)}
+      onClose={() => setOpen(false)}
+      menuId={MENU_ID}
+    />
   );
 }
 
