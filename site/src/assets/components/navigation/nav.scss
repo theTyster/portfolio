@@ -36,11 +36,9 @@
 }
 
 // MENU DRAWER ───────────────────────────────────────────────────
+// Drawer is in normal flow as a sibling of .header-bar inside <header>, so
+// when it expands it pushes page content downward instead of overlapping it.
 .nav-drawer {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -48,7 +46,6 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.3s ease;
-  z-index: 50;
 
   &[data-open="true"] {
     max-height: 70vh;
@@ -64,7 +61,9 @@
 .nav-list {
   list-style: none;
   margin: 0;
-  padding: 0.5rem 1rem;
+  // Extra bottom padding gives the open drawer breathing room before the
+  // content starts (per the Direction-A redesign tweak).
+  padding: 0.5rem 1rem 1.25rem;
   max-width: 720px;
   margin-inline: auto;
   display: grid;

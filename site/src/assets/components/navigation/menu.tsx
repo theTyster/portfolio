@@ -16,19 +16,10 @@ type Item =
 
 const ITEMS: Item[] = [
   { kind: "internal", href: "/", label: "Home" },
-  { kind: "external", href: "https://www.linkedin.com/in/tyler-d-webdev/", label: "My LinkedIn" },
-  { kind: "external", href: "https://github.com/thetyster", label: "My Github" },
+  { kind: "external", href: "https://www.linkedin.com/in/tyler-d-webdev/", label: "LinkedIn" },
+  { kind: "external", href: "https://github.com/thetyster", label: "Github" },
   { kind: "internal", href: "/cherry-lane-farms", label: "🐶 Cherry Lane Farms" },
-  // Jeopardy opens in a new tab — it's a self-contained playable demo, like
-  // the legacy /my-work/* projects.
-  { kind: "external", href: "/jeopardy", label: "Jeopardy" },
-  { kind: "external", href: "/my-work/fruit-search/index.html", label: "Fruit Search" },
-  { kind: "external", href: "/my-work/giphy-search/index.html", label: "Giphy Search" },
-  { kind: "external", href: "/my-work/hacker-news-clone/index.html", label: "Hacker News Clone" },
-  { kind: "external", href: "/my-work/meme-generator/index.html", label: "Meme Generator" },
-  { kind: "external", href: "/my-work/memory-game/index.html", label: "Memory Game" },
-  { kind: "external", href: "/my-work/duck-story-v1/index.html", label: "Duck Story" },
-  { kind: "external", href: "/my-work/todo-app/index.html", label: "ToDo App" },
+  { kind: "external", href: "https://blog.thetyster.dev", label: "Blog" },
 ];
 
 function Menu({ open, menuId, onClose }: MenuProps) {
