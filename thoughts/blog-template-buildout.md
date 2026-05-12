@@ -313,7 +313,7 @@ styling decisions required from the author.**
 
 ### Phase E — Playwright audit scaffold (creation only; runs are post-loop)
 
-- [ ] **E1.** Create `.article-audit.mjs` at the repo root. Playwright
+- [x] ~~**E1.** Create `.article-audit.mjs` at the repo root. Playwright
   script that: starts at `http://localhost:3000/blog/template` (the
   TEMPLATE.mdx rendered as a real route via D4's generateStaticParams),
   takes a full-page screenshot to `/tmp/portfolio-article/template.png`,
@@ -325,7 +325,7 @@ styling decisions required from the author.**
   [...] }`. Idempotent on re-run. Mirror the structure of `.explore.mjs`
   so it feels native. Do NOT run it in this tick — `pnpm dev` isn't
   running. Just commit the script. Commit:
-  `blog-buildout: E1 add .article-audit.mjs Playwright audit script`.
+  `blog-buildout: E1 add .article-audit.mjs Playwright audit script`.~~
 
 - [ ] **E2.** Final compatibility sweep. Verify no regressions to
   existing routes by re-reading `.explore.mjs`, `.link-audit.mjs`,
