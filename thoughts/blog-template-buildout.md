@@ -150,7 +150,7 @@ styling decisions required from the author.**
   `--prose-border`, `--prose-link`. Commit:
   `blog-buildout: A3 create _prose.scss with article element styles`.
 
-- [ ] **A4.** Add monospace defaults to the variable layer. In
+- [x] **A4.** Add monospace defaults to the variable layer. In
   `site/src/assets/css/variables.scss`: add `$mono-font-family: "JetBrains
   Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;`
   and `$code-font: 14px/1.55 #{$mono-font-family};`. Commit:
