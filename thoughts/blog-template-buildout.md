@@ -177,7 +177,7 @@ styling decisions required from the author.**
 
 ### Phase C — MDX + Shiki plumbing
 
-- [ ] **C1.** Install MDX + Shiki dependencies. From the portfolio root
+- [x] **C1.** Install MDX + Shiki dependencies. From the portfolio root
   (`~/Projects/mine/portfolio/`):
   `pnpm add @next/mdx@^16 @mdx-js/loader@^3 @mdx-js/react@^3 rehype-pretty-code@^0.14 shiki@^4`.
   This rolls up `package.json` and `pnpm-lock.yaml`. The pre-existing
