@@ -121,7 +121,7 @@ styling decisions required from the author.**
   nothing breaks while migration is in flight). Verify `pnpm build` is
   green. Commit: `blog-buildout: A1 split foundation mixin into chrome+portfolio`.
 
-- [ ] **A2.** Create `@mixin foundation-article()` in the same file. Body:
+- [x] **A2.** Create `@mixin foundation-article()` in the same file. Body:
   neutralize the citron card aesthetic for article routes — `main` with
   `max-width: 70ch` (prose) / opt-in `max-width: 90ch` (wide) /
   `max-width: none` (full-bleed) via a `data-article-width` attribute

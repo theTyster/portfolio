@@ -273,6 +273,60 @@
   }
 }
 
+// `foundation-article()` is the article-route counterpart to
+// `foundation-portfolio()`. It neutralizes the citron card aesthetic in
+// favor of a prose container: neutral warm background, prose-width main,
+// quieter heading scale, list reset, and a calmer focus ring scoped to
+// `.prose`. Not called from anywhere yet — `ArticleShell` (D1) will
+// activate it on article routes.
+@mixin foundation-article() {
+  body[data-route="article"] {
+    background: var(--article-bg, #fbf8f3);
+    background-image: none;
+  }
+  body[data-route="article"] main {
+    position: relative;
+    flex-grow: 1;
+    @include center-by-margin(70ch);
+    padding: v.$pad;
+    background: transparent;
+  }
+  body[data-route="article"] main[data-article-width="wide"],
+  body[data-route="article"] article[data-article-width="wide"] {
+    max-width: 90ch;
+  }
+  body[data-route="article"] main[data-article-width="full-bleed"],
+  body[data-route="article"] article[data-article-width="full-bleed"] {
+    max-width: none;
+  }
+  body[data-route="article"] .prose {
+    h1 {
+      font-size: 2rem;
+      line-height: 2.6rem;
+      margin: 1.5rem 0 1rem;
+    }
+    h2 {
+      font-size: 1.6rem;
+      line-height: 2.1rem;
+      margin: 1.25rem 0 0.85rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      line-height: 1.75rem;
+      margin: 1rem 0 0.7rem;
+    }
+    li,
+    ul,
+    ol {
+      font: inherit;
+    }
+    :focus-visible {
+      outline: 2px solid currentColor;
+      box-shadow: none;
+    }
+  }
+}
+
 // Backward-compat wrapper: existing callers of `foundation()` continue to
 // get the full chrome+portfolio bundle they always did. New article routes
 // will instead `@include foundation-chrome; @include foundation-article;`.
