@@ -29,9 +29,13 @@ async function getBlogFeed(): Promise<BlogFeedResult> {
 
   let res: Response
   try {
+    // Same-origin static asset emitted at build by scripts/build-pages-json.mjs.
+    // `cache: 'no-store'` is intentional: the file changes only at build time
+    // (so the cost of skipping the cache is negligible) and Next's ISR cache
+    // otherwise serves stale data when a draft post is hidden between builds.
     res = await fetch(url, {
       headers: { Accept: 'application/json' },
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
   } catch (err) {
     console.error(`[blog-feed] network_error: ${url}`, err)
