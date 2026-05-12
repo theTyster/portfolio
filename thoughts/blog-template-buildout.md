@@ -158,7 +158,7 @@ styling decisions required from the author.**
 
 ### Phase B — JetBrains Mono self-host
 
-- [ ] **B1.** Download JetBrains Mono variable web fonts to
+- [x] **B1.** Download JetBrains Mono variable web fonts to
   `public/static/fonts/`. Required files (woff2 only — woff is dead
   weight in 2026): `JetBrainsMono[wght].woff2` (variable, regular) and
   `JetBrainsMono-Italic[wght].woff2` (variable, italic). Source URL:
