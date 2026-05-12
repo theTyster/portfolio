@@ -290,7 +290,7 @@ styling decisions required from the author.**
   a real image lands. This is a prereq for D4 unblocking. Commit:
   `blog-buildout: C5 add remark-frontmatter to MDX pipeline (D4 prereq)`.~~
 
-- [ ] **D4.** Create `app/blog/[slug]/page.tsx` (the post page). Server
+- [x] ~~**D4.** Create `app/blog/[slug]/page.tsx` (the post page). Server
   component, `runtime = 'edge'`. Dynamically imports
   `content/blog/<slug>.mdx`, extracts frontmatter, renders inside
   `<ArticleShell {...frontmatter}>`. Must export
@@ -298,17 +298,7 @@ styling decisions required from the author.**
   pre-built at compile time and the route is fully static). Also
   export `generateMetadata({ params })` to set per-post page title +
   description. Commit:
-  `blog-buildout: D4 add app/blog/[slug]/page.tsx with generateStaticParams`.
-  > NOTE: visual gate failed — template-able — `/blog/template` renders
-  > the frontmatter `---` block as MDX body content (an `<hr/>` plus an
-  > `<h2>` containing `title: "..." date: "..." …`) because the C2 MDX
-  > pipeline lacks `remark-frontmatter` + `remark-mdx-frontmatter`. The
-  > slug route itself is correct (status 200, ArticleShell chrome, prose
-  > typography, Shiki highlighting all green) but every future post
-  > would inherit the duplicate-frontmatter render. Fix belongs in a new
-  > tick that extends `next.config.js` remarkPlugins, then D4 can re-run
-  > unchanged. Also note: `/static/example.png` 404 from TEMPLATE.mdx is
-  > a separate D2 placeholder issue, not blocking on its own.
+  `blog-buildout: D4 add app/blog/[slug]/page.tsx with generateStaticParams`.~~
 
 - [ ] **D5.** Add a build-time emitted `pages.json` for cross-link
   consumption (the Blog tab on `/` currently fetches a `pages.json`
