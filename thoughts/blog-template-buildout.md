@@ -221,7 +221,7 @@ styling decisions required from the author.**
 
 ### Phase D — ArticleShell + content scaffold
 
-- [ ] **D1.** Create `app/_components/ArticleShell.tsx`. Client
+- [x] ~~**D1.** Create `app/_components/ArticleShell.tsx`. Client
   component, wraps `<PortfolioShell>`, accepts props:
   `{ title: string; date: string; description?: string; tags?: string[];
   noindex?: boolean; width?: 'prose' | 'wide' | 'full-bleed';
@@ -238,7 +238,7 @@ styling decisions required from the author.**
   content="noindex,nofollow">` via Next's `<Head>` or a server
   component variant — pick whichever approach matches `app/` router
   conventions (probably a server-side metadata export from the parent
-  page). Commit: `blog-buildout: D1 add ArticleShell wrapping PortfolioShell with prose container`.
+  page). Commit: `blog-buildout: D1 add ArticleShell wrapping PortfolioShell with prose container`.~~
 
 - [ ] **D2.** Create the content directory and the template/style files.
   Make `content/blog/` (empty so far). Inside it, create two files:
