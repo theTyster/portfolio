@@ -17,6 +17,11 @@ date: string           # required; ISO-8601 (YYYY-MM-DD), used for sorting
 description: string    # optional; shown as the lede + meta description
 tags: string[]         # optional; short, lowercase, hyphen-separated
 slug: string           # required; matches the filename, used in the URL
+draft: boolean         # optional; if true, the post is hidden from
+                       # /blog and /api/pages.json listings. The direct
+                       # URL /blog/<slug> still resolves so fixtures (like
+                       # TEMPLATE.mdx) stay reachable for the article-audit
+                       # script; the post just doesn't appear in any feed.
 ```
 
 ## What to do

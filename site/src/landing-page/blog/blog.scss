@@ -20,6 +20,11 @@ div.blog {
     }
   }
 
+  .blog-post + .blog-post {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding-top: 1.25rem;
+  }
+
   .blog-date {
     display: block;
     font-size: 0.85rem;

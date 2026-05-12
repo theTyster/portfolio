@@ -71,6 +71,9 @@ async function main() {
     const raw = await fs.readFile(path.join(CONTENT_DIR, filename), 'utf8');
     const fm = parseFrontmatter(raw);
     if (!fm) continue;
+    // `draft: true` hides the post from the static feed. The /blog/<slug>
+    // route still resolves directly (article-audit fixtures stay reachable).
+    if (fm.draft === 'true' || fm.draft === true) continue;
     const slugFromFile = filename.replace(/\.mdx$/i, '');
     const slug = typeof fm.slug === 'string' && fm.slug.length > 0 ? fm.slug : slugFromFile;
     const title = typeof fm.title === 'string' ? fm.title : slug;

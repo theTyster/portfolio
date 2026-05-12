@@ -2,6 +2,7 @@ import React from 'react'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import PortfolioShell from '../_components/PortfolioShell'
+import './blog-index.scss'
 
 // Per D3: server component, reads content/blog/*.mdx at build time.
 // Frontmatter is parsed manually (no gray-matter dep) so the bundle surface
@@ -75,12 +76,13 @@ async function loadPosts(): Promise<BlogIndexEntry[]> {
   const mdxFiles = files.filter((name) => name.toLowerCase().endsWith('.mdx'))
   const entries: BlogIndexEntry[] = []
   for (const filename of mdxFiles) {
-    // TEMPLATE.mdx is the canonical example — surfaced in the index just like
-    // any other post so D4's [slug] route has something to render until real
-    // posts land.
     const raw = await fs.readFile(path.join(CONTENT_DIR, filename), 'utf8')
     const fm = parseFrontmatter(raw)
     if (!fm) continue
+    // Frontmatter `draft: true` hides the post from the index. The /blog/<slug>
+    // route still resolves (so the article-audit fixture stays reachable), but
+    // it is unlisted.
+    if (fm.draft === 'true' || fm.draft === true) continue
     const slugFromFile = filename.replace(/\.mdx$/i, '')
     const slug = typeof fm.slug === 'string' && fm.slug.length > 0 ? fm.slug : slugFromFile
     const title = typeof fm.title === 'string' ? fm.title : slug
