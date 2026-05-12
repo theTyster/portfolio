@@ -257,14 +257,21 @@ styling decisions required from the author.**
   syntactically-meaningful Unicode in code blocks). Commit:
   `blog-buildout: D2 add content/blog/ with TEMPLATE.mdx and STYLE-GUIDE.md`.~~
 
-- [ ] **D3.** Create `app/blog/page.tsx` (the blog index). Server
+- [x] ~~**D3.** Create `app/blog/page.tsx` (the blog index). Server
   component, `runtime = 'edge'`. Reads `content/blog/*.mdx` at build
   time (use `fs/promises` + `gray-matter` or just regex-parse the
   frontmatter ourselves — DO NOT add another dep for this; parse
   manually). Emits a sorted list of posts (most recent first) showing
   title, date, description, tags, deep-link to `/blog/<slug>`. Wraps
   in `<PortfolioShell>` (not ArticleShell — the index is not an
-  article). Commit: `blog-buildout: D3 add app/blog/page.tsx index`.
+  article). Commit: `blog-buildout: D3 add app/blog/page.tsx index`.~~
+  > NOTE: D3 deviates from spec on `runtime = 'edge'`. The root layout
+  > already declares edge globally, and the edge bundle has no `fs`.
+  > To honor the build-time fs-read requirement, the page overrides to
+  > `runtime = 'nodejs'` + `dynamic = 'force-static'` so the fs read
+  > happens once during build and the resulting HTML is served from
+  > edge as a static asset. D5 will move the fs read into a prebuild
+  > script and the page can return to `runtime = 'edge'`.
 
 - [ ] **D4.** Create `app/blog/[slug]/page.tsx` (the post page). Server
   component, `runtime = 'edge'`. Dynamically imports
