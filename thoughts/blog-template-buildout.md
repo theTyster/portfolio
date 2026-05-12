@@ -327,13 +327,23 @@ styling decisions required from the author.**
   running. Just commit the script. Commit:
   `blog-buildout: E1 add .article-audit.mjs Playwright audit script`.~~
 
-- [ ] **E2.** Final compatibility sweep. Verify no regressions to
+- [x] ~~**E2.** Final compatibility sweep. Verify no regressions to
   existing routes by re-reading `.explore.mjs`, `.link-audit.mjs`,
   `.header-audit.mjs` and confirming they don't assert anything that
   the foundation split or new mixins would have broken. If anything
   needs updating (e.g., assertions about specific selectors that have
   moved), update them. Run `pnpm lint` and `pnpm build` one last time.
-  Commit: `blog-buildout: E2 final compat sweep on existing audit scripts`.
+  Commit: `blog-buildout: E2 final compat sweep on existing audit scripts`.~~
+  > Outcome: no script updates needed. `.explore.mjs` selectors
+  > (`header`, `nav`, `splat-wave img`, `main`, `main h2`) all still
+  > present via unchanged `PortfolioShell`. `.header-audit.mjs`
+  > selectors (`header`, `.menu-toggle`, `.brand`, `.brand-logo`,
+  > `.nav-drawer`, `.skip-link`) all still present.
+  > `.link-audit.mjs` enumerates `a[href]` dynamically and is
+  > selector-agnostic. `pnpm lint` and `pnpm build` both exit 0
+  > (build produced 5 routes including `/blog` static and
+  > `/blog/[slug]` SSG with `/blog/template`); sweep was executed
+  > by the loop-#2 stop one-shot.
 
 ---
 
