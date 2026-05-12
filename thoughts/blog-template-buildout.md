@@ -208,7 +208,7 @@ styling decisions required from the author.**
   file is required by `@next/mdx@^16` to enable App Router MDX. Commit:
   `blog-buildout: C3 add mdx-components.tsx at project root`.
 
-- [ ] **C4.** Add the Shiki theme CSS variables and prose mono-font
+- [x] **C4.** Add the Shiki theme CSS variables and prose mono-font
   wiring. In `_prose.scss` (created in A3), define `--prose-mono` to
   reference `$mono-font-family`. Add CSS for `figure[data-rehype-pretty-code-figure]`,
   `pre[data-language]`, `code[data-line-numbers]` — the elements

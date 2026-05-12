@@ -15,7 +15,7 @@
   .prose {
     // Theming surface — override these in a parent scope to retheme
     // without forking selectors.
-    --prose-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --prose-mono: #{v.$mono-font-family};
     --prose-bg-code: rgba(0, 0, 0, 0.05);
     --prose-fg-muted: #{v.$lightcharcoal};
     --prose-border: rgba(0, 0, 0, 0.12);
@@ -131,6 +131,46 @@
 
     h4 {
       margin-top: 1.25em;
+    }
+
+    // rehype-pretty-code emitted elements. Shiki injects CSS variables
+    // (`--shiki-light`, `--shiki-dark`, `--shiki-light-bg`,
+    // `--shiki-dark-bg`) per-token; the rules below map those to readable
+    // defaults. Light/dark theme variants are deferred — for now we render
+    // the dark theme unconditionally with a hard-coded fallback bg.
+    figure[data-rehype-pretty-code-figure] {
+      margin: 1.5em 0;
+      text-align: left;
+    }
+
+    pre[data-language] {
+      color: var(--shiki-dark);
+      background: var(--shiki-dark-bg, #22272e);
+      font-family: var(--prose-mono);
+      padding: 1em 1.25em;
+      border-radius: var(--radius, 7px);
+      overflow-x: auto;
+
+      code {
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        color: inherit;
+      }
+    }
+
+    code[data-line-numbers] {
+      counter-reset: line;
+
+      > [data-line]::before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        width: 1.5em;
+        margin-right: 1em;
+        text-align: right;
+        color: var(--prose-fg-muted);
+      }
     }
   }
 }
