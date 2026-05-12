@@ -167,7 +167,7 @@ styling decisions required from the author.**
   check that download succeeded; variable fonts are ~150 KB typically).
   Commit: `blog-buildout: B1 self-host JetBrains Mono variable woff2`.
 
-- [ ] **B2.** Add `@font-face` declarations to
+- [x] **B2.** Add `@font-face` declarations to
   `site/src/assets/css/fonts.scss` for the two JetBrains Mono variable
   fonts. Use `font-weight: 100 900;` (the variable range) for each.
   `font-display: swap`. Reference paths
