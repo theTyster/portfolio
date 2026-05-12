@@ -199,7 +199,7 @@ styling decisions required from the author.**
   (CommonJS). Verify `pnpm build` is green. Commit:
   `blog-buildout: C2 wire MDX + rehype-pretty-code into next.config.js`.
 
-- [ ] **C3.** Create `mdx-components.tsx` at the project root (Next.js
+- [x] **C3.** Create `mdx-components.tsx` at the project root (Next.js
   App Router convention). Export a `useMDXComponents` function that
   returns component overrides — minimal for now: just typed identity
   passthrough so MDX renders standard HTML elements. (Component
