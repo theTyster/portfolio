@@ -15,7 +15,17 @@
 // tags with a class like `.theme--themename` to a different theme.
 
 // MAIN THEME
-@mixin foundation() {
+//
+// `foundation()` is preserved as a compatibility wrapper so existing routes
+// continue to behave exactly as before. The body is now split into two
+// concerns:
+//   - `foundation-chrome()` — universal, applies to every route (portfolio
+//     AND article). HTML/body resets, accessibility primitives, header,
+//     footer, focus ring.
+//   - `foundation-portfolio()` — the narrow citron-card aesthetic that the
+//     existing landing-page + project routes rely on. Article routes will
+//     swap this out for `foundation-article()` (added in A2).
+@mixin foundation-chrome() {
   /* {margin: 0;} */
   html {
     max-height: 100%vh;
@@ -116,6 +126,19 @@
       .brand .brand-text { display: none; }
     }
   }
+  footer {
+    padding-top: v.$pad;
+    padding-bottom: v.$pad;
+    text-align: center;
+    /* white-space: nowrap; */
+  }
+  :focus-visible {
+    outline: 9px double black;
+    box-shadow: 0 0 0 6px white;
+  }
+}
+
+@mixin foundation-portfolio() {
   main {
     position: relative;
     flex-grow: 1;
@@ -189,10 +212,6 @@
       }
     }
   }
-  :focus-visible {
-    outline: 9px double black;
-    box-shadow: 0 0 0 6px white;
-  }
   hr {
     @include center-by-margin($w: 100%, $topbottom: 4em);
     margin-top: 4em;
@@ -214,13 +233,6 @@
     height: auto;
     @include rounded-corners;
     margin: 0 auto;
-  }
-
-  footer {
-    padding-top: v.$pad;
-    padding-bottom: v.$pad;
-    text-align: center;
-    /* white-space: nowrap; */
   }
 
   // MEDIA QUERIES
@@ -259,6 +271,14 @@
       @include center-by-margin(v.$sm-content-width);
     }
   }
+}
+
+// Backward-compat wrapper: existing callers of `foundation()` continue to
+// get the full chrome+portfolio bundle they always did. New article routes
+// will instead `@include foundation-chrome; @include foundation-article;`.
+@mixin foundation() {
+  @include foundation-chrome;
+  @include foundation-portfolio;
 }
 
 // MIXINS
