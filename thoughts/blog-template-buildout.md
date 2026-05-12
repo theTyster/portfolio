@@ -273,6 +273,23 @@ styling decisions required from the author.**
   > edge as a static asset. D5 will move the fs read into a prebuild
   > script and the page can return to `runtime = 'edge'`.
 
+- [x] ~~**C5.** Extend the C2 MDX pipeline with frontmatter handling.
+  Install `remark-frontmatter` and `remark-mdx-frontmatter` (or the
+  equivalents the loop-#2 visual gate on D4 demonstrated were missing).
+  In `next.config.js`, add them to the `remarkPlugins` array on the
+  `@next/mdx` config (note: `rehype-pretty-code` stays in
+  `rehypePlugins`, this is the **remark** side). Verify by reading
+  `content/blog/TEMPLATE.mdx` through the dev server at
+  `/blog/template` — the frontmatter `---` block must NOT render as
+  an `<hr/>` + `<h2>` in the page body; it should be stripped from
+  the rendered output entirely (the page's `<ArticleShell title=…>`
+  receives the values via the MDX module's default export, not via
+  rendered prose). Also fix the `/static/example.png` 404 surfaced
+  in D4's NOTE — either replace the reference in TEMPLATE.mdx with
+  an existing static asset path, or remove the figure block until
+  a real image lands. This is a prereq for D4 unblocking. Commit:
+  `blog-buildout: C5 add remark-frontmatter to MDX pipeline (D4 prereq)`.~~
+
 - [ ] **D4.** Create `app/blog/[slug]/page.tsx` (the post page). Server
   component, `runtime = 'edge'`. Dynamically imports
   `content/blog/<slug>.mdx`, extracts frontmatter, renders inside
@@ -282,6 +299,16 @@ styling decisions required from the author.**
   export `generateMetadata({ params })` to set per-post page title +
   description. Commit:
   `blog-buildout: D4 add app/blog/[slug]/page.tsx with generateStaticParams`.
+  > NOTE: visual gate failed — template-able — `/blog/template` renders
+  > the frontmatter `---` block as MDX body content (an `<hr/>` plus an
+  > `<h2>` containing `title: "..." date: "..." …`) because the C2 MDX
+  > pipeline lacks `remark-frontmatter` + `remark-mdx-frontmatter`. The
+  > slug route itself is correct (status 200, ArticleShell chrome, prose
+  > typography, Shiki highlighting all green) but every future post
+  > would inherit the duplicate-frontmatter render. Fix belongs in a new
+  > tick that extends `next.config.js` remarkPlugins, then D4 can re-run
+  > unchanged. Also note: `/static/example.png` 404 from TEMPLATE.mdx is
+  > a separate D2 placeholder issue, not blocking on its own.
 
 - [ ] **D5.** Add a build-time emitted `pages.json` for cross-link
   consumption (the Blog tab on `/` currently fetches a `pages.json`
