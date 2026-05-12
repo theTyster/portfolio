@@ -1,0 +1,136 @@
+@use "variables" as v;
+
+// `prose()` styles prose-specific elements scoped under a `.prose` parent
+// class. Activated by `ArticleShell` (added in D1), which wraps article
+// content in `<article className="prose">`. The CSS variables defined at
+// the top of the mixin let downstream callers retheme without touching
+// the structural selectors.
+//
+// This file is a Sass partial (note the leading underscore) and exposes
+// only the `prose()` mixin. It is intentionally not called from anywhere
+// yet — wiring lives in the ArticleShell + foundation-article activation
+// path.
+
+@mixin prose() {
+  .prose {
+    // Theming surface — override these in a parent scope to retheme
+    // without forking selectors.
+    --prose-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --prose-bg-code: rgba(0, 0, 0, 0.05);
+    --prose-fg-muted: #{v.$lightcharcoal};
+    --prose-border: rgba(0, 0, 0, 0.12);
+    --prose-link: #{v.$lightburntsilver};
+
+    a {
+      color: var(--prose-link);
+      text-decoration: underline;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--prose-border);
+      padding-left: 1em;
+      margin: 1.25em 0 1.25em 0.5em;
+      font-style: italic;
+      color: var(--prose-fg-muted);
+    }
+
+    code {
+      font-family: var(--prose-mono);
+      background: var(--prose-bg-code);
+      padding: 0.1em 0.35em;
+      border-radius: 0.2em;
+    }
+
+    pre {
+      font-family: var(--prose-mono);
+      padding: 1em 1.25em;
+      border-radius: var(--radius, 7px);
+      overflow-x: auto;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    figure {
+      margin: 1.5em auto;
+      text-align: center;
+    }
+
+    figcaption {
+      font-size: 0.85em;
+      color: var(--prose-fg-muted);
+      text-align: center;
+      margin-top: 0.5em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+
+      th,
+      td {
+        padding: 0.5em 0.75em;
+        border: 1px solid var(--prose-border);
+        text-align: left;
+      }
+
+      thead tr,
+      th {
+        background: var(--prose-bg-code);
+      }
+    }
+
+    dl {
+      margin: 1.25em 0;
+    }
+
+    dt {
+      font-weight: 600;
+      margin-top: 0.75em;
+    }
+
+    dd {
+      margin: 0.25em 0 0.75em 1.5em;
+    }
+
+    kbd {
+      font-family: var(--prose-mono);
+      font-size: 0.85em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--prose-border);
+      border-bottom-width: 2px;
+      border-radius: 0.25em;
+      background: var(--prose-bg-code);
+    }
+
+    mark {
+      background: rgba(228, 206, 122, 0.45);
+      padding: 0 0.2em;
+      border-radius: 0.15em;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--prose-border);
+      margin: 2em 0;
+      height: 0;
+      background: none;
+    }
+
+    h2 {
+      margin-top: 1.75em;
+    }
+
+    h3 {
+      margin-top: 1.5em;
+    }
+
+    h4 {
+      margin-top: 1.25em;
+    }
+  }
+}

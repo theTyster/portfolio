@@ -133,7 +133,7 @@ styling decisions required from the author.**
   Do not call this from anywhere yet. Commit:
   `blog-buildout: A2 add foundation-article mixin (unused, will be activated by ArticleShell)`.
 
-- [ ] **A3.** Create `site/src/assets/css/_prose.scss` (note leading
+- [x] **A3.** Create `site/src/assets/css/_prose.scss` (note leading
   underscore — Sass partial). Contents: a single `@mixin prose()` that
   styles prose-specific elements scoped under a `.prose` parent class.
   Include: `blockquote` (left border 4px, italic, indented, muted
