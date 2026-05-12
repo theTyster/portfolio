@@ -186,7 +186,7 @@ styling decisions required from the author.**
   (the new deps don't affect the build until C2 wires them in).
   Commit: `blog-buildout: C1 add MDX + Shiki dependencies (folds in pre-existing Playwright addition)`.
 
-- [ ] **C2.** Configure `next.config.js` for MDX with rehype-pretty-code.
+- [x] **C2.** Configure `next.config.js` for MDX with rehype-pretty-code.
   The existing TS strictness change (removed
   `typescript.ignoreBuildErrors`) stays intact — this layers on top.
   Required changes:
