@@ -300,7 +300,7 @@ styling decisions required from the author.**
   description. Commit:
   `blog-buildout: D4 add app/blog/[slug]/page.tsx with generateStaticParams`.~~
 
-- [ ] **D5.** Add a build-time emitted `pages.json` for cross-link
+- [x] ~~**D5.** Add a build-time emitted `pages.json` for cross-link
   consumption (the Blog tab on `/` currently fetches a `pages.json`
   remote feed — collapsing to one origin, it should now read from a
   static file co-located on the same site). Approach: a `scripts/
@@ -309,7 +309,7 @@ styling decisions required from the author.**
   `package.json` as a `prebuild` script. Update
   `site/src/landing-page/blog/blog.tsx` and `app/page.tsx` to read
   `/api/pages.json` (same origin, no Bearer token needed). Commit:
-  `blog-buildout: D5 emit static pages.json at build, drop Bearer token requirement`.
+  `blog-buildout: D5 emit static pages.json at build, drop Bearer token requirement`.~~
 
 ### Phase E — Playwright audit scaffold (creation only; runs are post-loop)
 

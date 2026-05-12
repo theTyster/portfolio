@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/build-pages-json.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "npx tsc --noEmit",

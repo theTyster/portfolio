@@ -1,0 +1,10 @@
+{
+  "pages": [
+    {
+      "title": "Template post — copy this when starting a new entry",
+      "date": "2026-05-12",
+      "description": "A canonical example post showing the expected frontmatter, prose, and code-block conventions for thetyster.dev.",
+      "permalink": "/blog/template"
+    }
+  ]
+}
