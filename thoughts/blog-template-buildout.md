@@ -240,7 +240,7 @@ styling decisions required from the author.**
   conventions (probably a server-side metadata export from the parent
   page). Commit: `blog-buildout: D1 add ArticleShell wrapping PortfolioShell with prose container`.~~
 
-- [ ] **D2.** Create the content directory and the template/style files.
+- [x] ~~**D2.** Create the content directory and the template/style files.
   Make `content/blog/` (empty so far). Inside it, create two files:
   (a) `TEMPLATE.mdx` — a self-contained example post showing the
   expected frontmatter (`title`, `date`, `description`, `tags`, `slug`),
@@ -255,7 +255,7 @@ styling decisions required from the author.**
   inline styles, no `<div>` for layout — use semantic tags, no
   emojis unless the post is explicitly about them, no
   syntactically-meaningful Unicode in code blocks). Commit:
-  `blog-buildout: D2 add content/blog/ with TEMPLATE.mdx and STYLE-GUIDE.md`.
+  `blog-buildout: D2 add content/blog/ with TEMPLATE.mdx and STYLE-GUIDE.md`.~~
 
 - [ ] **D3.** Create `app/blog/page.tsx` (the blog index). Server
   component, `runtime = 'edge'`. Reads `content/blog/*.mdx` at build
