@@ -35,53 +35,69 @@
   }
 }
 
-// MENU DRAWER ───────────────────────────────────────────────────
-// Drawer is in normal flow as a sibling of .header-bar inside <header>, so
-// when it expands it pushes page content downward instead of overlapping it.
+// FLOATING DROPDOWN ────────────────────────────────────────────
+// Absolutely positioned against <header> (which is position: relative),
+// the drawer overlays content below the header without pushing it. GSAP
+// owns the open/close animation; CSS provides only the closed initial
+// state and a no-JS / reduced-motion fallback.
 .nav-drawer {
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: min(560px, calc(100% - 1.5rem));
+  z-index: 50;
+
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 16px 32px rgba(46, 52, 58, 0.45),
+    0 4px 8px rgba(0, 0, 0, 0.18);
   overflow: hidden;
+
+  // Initial (closed) state. GSAP overrides these on open.
+  opacity: 0;
+  visibility: hidden;
   max-height: 0;
-  transition: max-height 0.3s ease;
 
-  &[data-open="true"] {
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-
-  // Skip the slide animation for users who don't want it.
+  // Reduced-motion users get a tiny CSS fade instead of GSAP.
   @media (prefers-reduced-motion: reduce) {
-    transition: none;
+    transition:
+      opacity 0.15s ease,
+      visibility 0.15s ease,
+      max-height 0.15s ease;
+    &[data-open="true"] {
+      opacity: 1;
+      visibility: visible;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
   }
 }
 
 .nav-list {
   list-style: none;
   margin: 0;
-  // Extra bottom padding gives the open drawer breathing room before the
-  // content starts (per the Direction-A redesign tweak).
-  padding: 0.5rem 1rem 1.25rem;
-  max-width: 720px;
-  margin-inline: auto;
+  padding: 0.7rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.4rem;
 
-  li {
-    margin: 0;
-  }
+  li { margin: 0; }
 
   a {
     display: block;
-    padding: 0.7rem 1rem;
+    padding: 0.65rem 0.85rem;
     text-decoration: none;
     color: v.$darkcharcoal;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 7px;
-    transition: background 0.15s ease, transform 0.15s ease;
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 10px;
+    transition: background 0.18s ease, transform 0.18s ease;
     font-weight: 600;
 
     &:hover {
@@ -89,14 +105,12 @@
       transform: translateY(-1px);
     }
 
-    // External links get a small ↗ marker.
     &[target="_blank"]::after {
       content: " ↗";
       opacity: 0.55;
       font-weight: 400;
     }
 
-    // Active route is highlighted distinctly from hover.
     &[aria-current="page"] {
       background: v.$darkcitron;
       color: v.$darkcharcoal;

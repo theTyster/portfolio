@@ -49,10 +49,14 @@ const hasLink = (s: PortfolioDB["Data"]) => {
     );
   else
     return (
-      <>
+      <div
+        className={`showcase-item ${s.className ?? ""}`.trim()}
+        key={s.id}
+        data-showcase-item-id={s.id}
+      >
         {s.title ? <h3>{s.title}</h3> : ""}
         {s.img}
-      </>
+      </div>
     );
 };
 

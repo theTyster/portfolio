@@ -1,6 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 import NewTabLink from "@components/safe-link/new-tab-link";
 
@@ -16,17 +19,88 @@ type Item =
 
 const ITEMS: Item[] = [
   { kind: "internal", href: "/", label: "Home" },
-  { kind: "external", href: "https://www.linkedin.com/in/tyler-d-webdev/", label: "LinkedIn" },
-  { kind: "external", href: "https://github.com/thetyster", label: "Github" },
-  { kind: "internal", href: "/cherry-lane-farms", label: "🐶 Cherry Lane Farms" },
-  { kind: "external", href: "https://blog.thetyster.dev", label: "Blog" },
+  { kind: "internal", href: "/blog", label: "Blog" },
+  { kind: "internal", href: "/cherry-lane-farms", label: "Cherry Lane Farms" },
+  { kind: "external", href: "https://github.com/theTyster/orbital", label: "Orbital" },
 ];
 
 function Menu({ open, menuId, onClose }: MenuProps) {
   const pathname = usePathname();
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const isFirstRender = useRef(true);
+
+  useGSAP(
+    () => {
+      const drawer = drawerRef.current;
+      if (!drawer) return;
+
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Skip animation on initial mount; CSS holds the closed state.
+      if (isFirstRender.current) {
+        isFirstRender.current = false;
+        return;
+      }
+
+      if (prefersReducedMotion) {
+        gsap.set(drawer, {
+          autoAlpha: open ? 1 : 0,
+          maxHeight: open ? "70vh" : 0,
+          y: 0,
+          scale: 1,
+        });
+        return;
+      }
+
+      if (open) {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          drawer,
+          {
+            autoAlpha: 0,
+            y: -20,
+            scale: 0.96,
+            maxHeight: 0,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            maxHeight: "70vh",
+            duration: 0.55,
+            ease: "power3.out",
+          },
+        ).fromTo(
+          drawer.querySelectorAll("li"),
+          { autoAlpha: 0, y: 10 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+            stagger: 0.06,
+          },
+          "-=0.35",
+        );
+      } else {
+        gsap.to(drawer, {
+          autoAlpha: 0,
+          y: -8,
+          scale: 0.97,
+          maxHeight: 0,
+          duration: 0.28,
+          ease: "power2.in",
+        });
+      }
+    },
+    { dependencies: [open], scope: drawerRef },
+  );
 
   return (
     <nav
+      ref={drawerRef}
       id={menuId}
       className="nav-drawer"
       data-open={open}

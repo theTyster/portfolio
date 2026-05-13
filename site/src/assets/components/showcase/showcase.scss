@@ -104,10 +104,20 @@ div.showcase {
   div.currently-showcased {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
+    flex: 1 0 calc(100% - #{$grid-margin});
     img {
       width: 100%;
+      transition: all 0.2s;
+      box-shadow: 0px 5px 20px 5px v.$burntsilver;
+      &:hover {
+        box-shadow: 0px 10px 20px 5px v.$burntsilver;
+        transform: translateY(10px);
+      }
+      &:active {
+        box-shadow: revert;
+      }
     }
   }
 }
