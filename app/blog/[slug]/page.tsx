@@ -8,12 +8,12 @@ import ArticleShell from '../../_components/ArticleShell'
 // Per D4: server component, renders the MDX post inside <ArticleShell />.
 //
 // Runtime note: D3 already documents why the blog routes override the
-// layout-level `runtime = 'edge'` declaration — the edge bundle has no `fs`,
+// layout-level `runtime = 'edge'` declaration; the edge bundle has no `fs`,
 // but we need `fs` to discover slugs in `generateStaticParams` and to read
 // frontmatter for `generateMetadata`. The page is forced static
 // (`dynamic = 'force-static'`), so the build runs the fs reads once during
 // `next build` and the resulting HTML is served from the edge as a static
-// asset — preserving the spec's edge-delivery intent without requiring `fs`
+// asset, preserving the spec's edge-delivery intent without requiring `fs`
 // in the edge worker bundle. The D5 prebuild script will eventually move
 // the fs reads out of the route entirely.
 export const runtime = 'nodejs'
@@ -119,11 +119,11 @@ export async function generateMetadata(
   const { slug } = await params
   const post = await findPostBySlug(slug)
   if (!post) {
-    return { title: 'Post not found — Ty Davis' }
+    return { title: 'Post not found, Ty Davis' }
   }
   const { title, description } = post.frontmatter
   return {
-    title: `${title} — Ty Davis`,
+    title: `${title}, Ty Davis`,
     description: description ?? undefined,
     robots: 'noindex,nofollow',
   }

@@ -13,7 +13,7 @@ const MENU_ID = "primary-nav-menu";
 function Navigation() {
   const [open, setOpen] = useState(false);
 
-  // Close on Escape — common drawer-pattern affordance.
+  // Close on Escape: common drawer-pattern affordance.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {

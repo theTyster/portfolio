@@ -5,7 +5,7 @@ import React from 'react'
 export const runtime = 'edge'
 
 export const metadata = {
-  title: 'Ty Davis — Portfolio',
+  title: 'Ty Davis, Portfolio',
   description: 'Full-stack software engineer portfolio',
 }
 

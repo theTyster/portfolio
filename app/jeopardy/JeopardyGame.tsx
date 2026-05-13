@@ -1,6 +1,6 @@
 'use client'
 
-// Jeopardy game body — loaded via next/dynamic({ssr:false}) so that this
+// Jeopardy game body: loaded via next/dynamic({ssr:false}) so that this
 // module (and its jQuery import graph) is excluded from the Cloudflare Worker
 // edge bundle. See test_jquery_never_loaded_in_edge_runtime.
 

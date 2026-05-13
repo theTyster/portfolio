@@ -4,13 +4,13 @@ import LandingPageClient from './_components/LandingPageClient'
 import type { BlogFeedResult, BlogPost } from '../site/src/landing-page/blog/blog'
 
 // Property p_004: execution_runtime(cloudflare_workers) ∧ runtime_environment(edge)
-// Property p_005: fetch_on_server(blog_page, blog_feed) — server-side data fetch
+// Property p_005: fetch_on_server(blog_page, blog_feed): server-side data fetch
 // This Server Component runs on the Cloudflare Workers edge runtime.
 export const runtime = 'edge'
 
 // D5: the blog feed is now a same-origin static asset emitted at build time
 // by scripts/build-pages-json.mjs (wired as `prebuild` in package.json).
-// No Bearer token, no remote origin — the file lives at /api/pages.json on
+// No Bearer token, no remote origin; the file lives at /api/pages.json on
 // the same domain. We still go through `fetch` (rather than reading from
 // disk) because this route is `runtime = 'edge'` and the edge bundle has no
 // `fs`; the same-origin static asset is served by Cloudflare Pages and the

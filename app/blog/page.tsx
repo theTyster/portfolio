@@ -11,7 +11,7 @@ import './blog-index.scss'
 // Runtime note: this segment overrides the layout-level `runtime = 'edge'`
 // declaration because the edge bundle has no `fs`. The page is forced static
 // (`dynamic = 'force-static'`), so the fs read happens once during build
-// (Node) and the resulting HTML is served from the edge as a static asset —
+// (Node) and the resulting HTML is served from the edge as a static asset,
 // preserving the spec's edge-delivery intent without requiring `fs` in the
 // edge worker bundle. The eventual D5 build-script approach will move this
 // off `fs` entirely and let the page return to `runtime = 'edge'`.

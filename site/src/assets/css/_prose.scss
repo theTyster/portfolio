@@ -8,12 +8,12 @@
 //
 // This file is a Sass partial (note the leading underscore) and exposes
 // only the `prose()` mixin. It is intentionally not called from anywhere
-// yet — wiring lives in the ArticleShell + foundation-article activation
+// yet; wiring lives in the ArticleShell + foundation-article activation
 // path.
 
 @mixin prose() {
   .prose {
-    // Theming surface — override these in a parent scope to retheme
+    // Theming surface: override these in a parent scope to retheme
     // without forking selectors.
     --prose-mono: #{v.$mono-font-family};
     --prose-bg-code: rgba(0, 0, 0, 0.05);
@@ -136,7 +136,7 @@
     // rehype-pretty-code emitted elements. Shiki injects CSS variables
     // (`--shiki-light`, `--shiki-dark`, `--shiki-light-bg`,
     // `--shiki-dark-bg`) per-token; the rules below map those to readable
-    // defaults. Light/dark theme variants are deferred — for now we render
+    // defaults. Light/dark theme variants are deferred; for now we render
     // the dark theme unconditionally with a hard-coded fallback bg.
     figure[data-rehype-pretty-code-figure] {
       margin: 1.5em 0;
