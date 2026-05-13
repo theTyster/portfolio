@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120" role="img" aria-label="Stack of four prose lines representing essays, with a closing mark">
+  <defs>
+    <radialGradient id="tile-bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#fbf5ee"/>
+      <stop offset="100%" stop-color="#f0dcc6"/>
+    </radialGradient>
+  </defs>
+  <style>
+    svg { color: #655649; }
+    @media (prefers-color-scheme: dark) { svg { color: #A39080; } }
+  </style>
+  <rect width="200" height="120" fill="url(#tile-bg)"/>
+  <line x1="40" y1="25" x2="160" y2="25" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <line x1="40" y1="50" x2="140" y2="50" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <line x1="40" y1="75" x2="160" y2="75" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <line x1="40" y1="100" x2="120" y2="100" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="135" cy="100" r="6" fill="#b4a461"/>
+  <circle cx="135" cy="100" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+</svg>

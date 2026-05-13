@@ -18,7 +18,7 @@ const AttentionGetterSideText = () => (
   <>
     <span>
       <i>
-        I like to keep things lean, fast, simple and usable. The web was meant
+        I like to keep things lean, fast, simple and usable. The web, and software in general, are meant
         to make information accessible to anyone.
       </i>
       <blockquote>
@@ -129,13 +129,13 @@ function LandingPage({ blogFeed }: { blogFeed: BlogFeedResult }) {
 
   return (
     <div className="landing-page">
-      <h1 className="visually-hidden">Ty Davis — web developer portfolio</h1>
+      <h1 className="visually-hidden">Ty Davis, web developer portfolio</h1>
       <AttetionGetterImage
         imgClass="my-headshot"
         sideText_classPrefix="headshot-text"
         imgSrc="/static/img/me.jpg"
         imgAlt="My Face."
-        imgLink="https://www.linkedin.com/in/tyler-d-webdev/"
+        imgLink="https://www.linkedin.com/in/tyler-davis-dev"
         sideText={<AttentionGetterSideText />}
       />
 

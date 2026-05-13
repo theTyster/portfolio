@@ -1,0 +1,22 @@
+<svg version="1.1" viewBox="0 0 200 120" width="200" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spacecraft on a dashed orbital trajectory around a planet">
+  <defs>
+    <radialGradient id="tile-bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#fbf5ee"/>
+      <stop offset="100%" stop-color="#f0dcc6"/>
+    </radialGradient>
+  </defs>
+  <style>svg { color: #655649; }
+    @media (prefers-color-scheme: dark) { svg { color: #A39080; } }</style>
+  <rect width="200" height="120" fill="url(#tile-bg)"/>
+  <g transform="translate(40 0) scale(0.9375)">
+    <circle cx="63.239" cy="65.582" r="28" fill="#b4a461"/>
+    <ellipse transform="rotate(13.081)" cx="76.839" cy="59.792" rx="52" ry="14" fill="none" stroke="#767676" stroke-dasharray="3, 5" stroke-width="2.5" style="paint-order:normal"/>
+    <path d="m64.109 54.954a52 14 0 0 0-27.549 2.127 28 28 0 0 0-1.3223 8.5 28 28 0 0 0 4.8809 15.795 52 14 0 0 0 23.99 1.5781 52 14 0 0 0 22.074-1.3242 28 28 0 0 0 5.0547-16.049 28 28 0 0 0-1.416-8.7949 52 14 0 0 0-25.713-1.832z" fill="#b4a461"/>
+    <g transform="rotate(39.742 -67.821 53.199)" fill="currentColor">
+      <polygon points="0 -13 -4 -2 4 -2"/>
+      <rect x="-4" y="-2" width="8" height="8"/>
+      <polygon points="-4 11 -4 4 -8 11"/>
+      <polygon points="4 11 4 4 8 11"/>
+    </g>
+  </g>
+</svg>

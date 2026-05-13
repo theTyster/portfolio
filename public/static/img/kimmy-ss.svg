@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120" role="img" aria-label="Stopwatch dial with a single hand and citron pivot, representing a time-tracking tool">
+  <defs>
+    <radialGradient id="tile-bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#fbf5ee"/>
+      <stop offset="100%" stop-color="#f0dcc6"/>
+    </radialGradient>
+  </defs>
+  <style>
+    svg { color: #655649; }
+    @media (prefers-color-scheme: dark) { svg { color: #A39080; } }
+  </style>
+  <rect width="200" height="120" fill="url(#tile-bg)"/>
+  <circle cx="100" cy="60" r="42" stroke="currentColor" stroke-width="3" fill="none"/>
+  <line x1="100" y1="20" x2="100" y2="30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <line x1="132" y1="60" x2="142" y2="60" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="100" y1="90" x2="100" y2="100" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="58" y1="60" x2="68" y2="60" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="100" y1="60" x2="78" y2="38" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="100" cy="60" r="6" fill="#b4a461"/>
+  <circle cx="100" cy="60" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+</svg>

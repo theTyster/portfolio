@@ -14,6 +14,68 @@ function Preamble({ children }: { children: string }) {
 
 const JobHistory = () => {
   const jobs = [
+    //FortyAU {{{
+    {
+      id: 5,
+      title: "Engineer II",
+      org: "FortyAU",
+      timeframe: {
+        from: new Date(2025, 2),
+        to: new Date(),
+      },
+      logo: [
+        "/static/img/fortyau-logo.svg",
+        "FortyAU Logo",
+        "https://fortyau.com",
+      ],
+      summary: (
+        <>
+          <p>
+            I am an Engineer II at FortyAU, a software consultancy. My primary
+            client engagement has been backend feature work for enterprise
+            insurance carriers.
+          </p>
+          <p>
+            Alongside that client work, I originated{" "}
+            <NewTabLink link="https://github.com/theTyster/orbital">
+              Orbital Shifting
+            </NewTabLink>
+            , a methodology that uses Prolog and Lean 4 to keep LLM-generated
+            specifications logically coherent and free of self-contradiction.
+            The framework ships as a four-plugin Claude Code marketplace I
+            maintain and continue to develop. Some of my responsibilities at
+            FortyAU include:
+          </p>
+        </>
+      ),
+      responsibilities: [
+        "Backend feature engineering for enterprise insurance systems: claims processing, document export, eligibility verification, and member communications",
+        "Originator of Orbital Shifting, a formal-verification and AI-augmented SDLC methodology",
+        <>
+          Maintaining the{" "}
+          <NewTabLink link="https://github.com/theTyster/orbital">
+            orbital marketplace
+          </NewTabLink>
+          : four Claude Code plugins (shifting, scaffolding, trajectory, telemetry)
+        </>,
+        <>
+          Building <a href="/artemis">Artemis</a>, a treatment-vs-control LLM
+          benchmark harness for measuring whether formal scaffolding changes
+          generation quality
+        </>,
+        "Internal AI-SDLC tooling: prompt orchestration, multi-agent verification pipelines, calibrated abstention, evidence-grounded model evaluation",
+        <>
+          Authoring{" "}
+          <a href="/context-focused-agents">context-focused-agents</a>: a pair
+          of compiled BAML agents (locator + summarizer) that replace generic
+          context tools with intent-driven alternatives
+        </>,
+        "Encoding software specifications as Prolog facts and Lean 4 theorems; refutation-driven testing against formal invariants",
+        "Engineering with TypeScript, Python, Prolog, Lean 4, and Bun",
+        "Code review and PR feedback at scale",
+      ],
+    },
+    //}}}
     //CLF {{{
     {
       id: 4,
@@ -231,30 +293,26 @@ const JobHistory = () => {
         alt="HTML code on a screen"
       />
       <Preamble>
-        I am a software engineer with a background in public relations and
-        advertising. Engineering dynamic, interactive, engaging, and search
-        engine optimized content is my specialty.
+        I am a software engineer working at the intersection of formal
+        verification, AI-augmented development, and backend engineering. I
+        created Orbital Shifting, a methodology that uses formal verification
+        and logic-oriented languages (Prolog, Lean 4) to help LLMs generate
+        specifications that don&apos;t contradict themselves. I structure LLM
+        reasoning as a logical debate with humans and theorem provers, so the
+        resulting concepts align with what humans intend rather than drifting
+        on training-set defaults.
       </Preamble>
       <Preamble>
-        Everything I build is lean, fast, secure, and accessible. I am a firm
-        believer in the idea that the internet should be for everyone.
+        Good specifications usher good software. I follow a test-driven
+        development discipline anchored to formal specifications, generated
+        through a logical reasoning pipeline with LLM assistance.
       </Preamble>
       <Preamble>
-        Good tests usher good software. I meticulously test everything I build
-        and can use any testing suite.
-      </Preamble>
-      <Preamble>
-        Typescript seems to be what I work with the most, but Python is a close
-        second. My database experience ranges from SQLite to PostgreSQL to
-        NoSQL.
-      </Preamble>
-      <Preamble>
-        Recently, I have taken up creating my own SaaS built on Rust. (The code
-        is not yet open but plans to be in the future.)
-      </Preamble>
-      <Preamble>
-        Flipping between front-end and back-end development is something I am
-        fairly comfortable with, although I tend to work on the front-end more.
+        My day-to-day stack these days is Markdown, Prolog, and Lean 4. I
+        read TypeScript, Python, and SQL fluently and have working familiarity
+        with several others. I work across both backend and frontend, adapting
+        my theorem-proving languages and reasoning to whatever the tech stack
+        calls for.
       </Preamble>
       {jobs.map((j) => (
         <Fragment key={j.id}>
