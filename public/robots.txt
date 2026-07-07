@@ -1,0 +1,79 @@
+# Anti-discovery firewall (see mind-map project_blog_launch).
+#
+# Two layers here:
+#   1. AI/LLM training + answer-engine crawlers are disallowed site-wide.
+#      The concern is training-set absorption and summarization of the
+#      philosophy content, which the blog is written to resist. A summary
+#      that flattens orbital shifting into "formal verification bolted onto
+#      an LLM" is the exact misadoption this firewall exists to prevent.
+#   2. Every other agent (search indexers included) is disallowed from
+#      /blog/* only. The portfolio at / remains fully crawlable so it can
+#      serve as the single discoverable on-ramp.
+#
+# robots.txt is advisory — a hint, not enforcement. The edge-level
+# X-Robots-Tag in _headers and the Cloudflare WAF UA rules (configured in
+# the dashboard) are the enforced layers. This file is the polite request
+# that well-behaved agents will honor.
+
+# --- AI / LLM training and answer-engine crawlers: blocked site-wide ---
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+# --- Everyone else (search indexers included): blog is off-limits ---
+User-agent: *
+Disallow: /blog
+Disallow: /blog/
