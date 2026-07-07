@@ -2,3 +2,10 @@ name = "portfolio"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+# Non-secret feed origin for the Bludit-backed blog list on the landing page.
+# The Bearer token (BLOG_API_TOKEN) is a SECRET — set it in the Cloudflare
+# Pages dashboard (Settings → Variables → encrypt), NOT here in the committed
+# config.
+BLOG_FEED_URL = "https://blog.thetyster.dev/api/pages"
