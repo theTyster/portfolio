@@ -1,5 +1,23 @@
 import {useLayoutEffect} from "react";
 
+export const themeColors = {
+  lightcharcoal: "#4a4a4a",
+};
+
+export const setTitle = (title: string) => {
+  document.title = title;
+};
+
+export const sleep = (time: number): Promise<void> => new Promise(resolve => setTimeout(resolve, time * 1000));
+
+export const calcAge = (birthYear: string): number => {
+  return new Date().getFullYear() - parseInt(birthYear);
+};
+
+export const normalizeEpochDate = (dateString: string): string => {
+  return new Date(dateString).toLocaleDateString();
+};
+
 export const Utils = () => {
 
 //  //constructor used for showing and hiding objects. Uses the computed transition time as the timer for sleeping the integrated promise.
@@ -138,22 +156,21 @@ export const Utils = () => {
 //  };
 
   //declares the object for easter egg features.
-  const bonusLevel = {}
+  const bonusLevel: { enabled?: boolean } = {}
 
   //function to invert styles if easter egg is activated.
   const bonusEgg = function(){
     if (bonusLevel.enabled){
       const invert = "invert(100%)";
-      page.border.style.background = "MidnightBlue";
       const selectorTexts = document.querySelectorAll(".bonus_egg");
       for (let i of selectorTexts)
-        i.style.filter = invert;
+        (i as HTMLElement).style.filter = invert;
     }
   }
 
   // Listens for Enter to be pressed before continuing.
   const listen4Enter = function(){
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       document.addEventListener("keyup", function enterInputListener(event){
         if (event.key === "Enter"){
           document.removeEventListener("keyup", enterInputListener);
@@ -168,7 +185,7 @@ export const Utils = () => {
     if (navigator.languages && navigator.languages.length) {
       return navigator.languages[0];
     } else {
-      return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+      return (navigator as any).userLanguage || navigator.language || (navigator as any).browserLanguage || 'en';
     }
   }
 
@@ -187,7 +204,7 @@ export const Utils = () => {
   }
 
 
-  const shuffle = function fisherYatesArrayShuffler(inputArr){
+  const shuffle = function fisherYatesArrayShuffler(inputArr: number[]){
     let applyShuffler = () => {
       let len = inputArr.length;
       while (len){
@@ -196,24 +213,26 @@ export const Utils = () => {
       }
       return inputArr;
     }
-    return applyShuffler(...inputArr);
+    return applyShuffler();
   }
 
 
 
-  const makeItRain = function(storminess) { // remember that the arg is a range 1-100.
+  const makeItRain = function(storminess: number) { // remember that the arg is a range 1-100.
     const hiddenRaindrops = 20;
     storminess = Math.floor(hiddenRaindrops*(storminess/100));
-    const rainArray = shuffle(makeArray(storminess));
+    const rainArray = shuffle(makeArray(storminess, false));
     const shuffledDrops = shuffle(makeArray(hiddenRaindrops, "Add 1"));
 
     let delayedRain = async () => {
       try {
         for (let rDropIteration = rainArray.length - 1; rDropIteration > -1; rDropIteration--){
           await sleep(1.77);
-          let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`);
-          rainSelector.style.display = "unset";
-          rainSelector.style.opacity = 1;
+          let rainSelector = document.querySelector(`#rain_${shuffledDrops[rainArray[rDropIteration]]}`) as HTMLElement | null;
+          if (rainSelector) {
+            rainSelector.style.display = "unset";
+            (rainSelector.style as unknown as { opacity: number }).opacity = 1;
+          }
         }
       }
       catch (e){

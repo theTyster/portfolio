@@ -47,6 +47,10 @@
   "exclude": [
     "node_modules",
     "site/dist",
-    ".next"
+    ".next",
+    "site/src/landing-page/my-work/duck-story/beginning.tsx",
+    "site/src/landing-page/my-work/duck-story/story.tsx",
+    "site/src/landing-page/my-work/duck-story/pizza.tsx",
+    "site/src/landing-page/my-work/duck-story/duck-front-page.tsx"
   ]
 }

@@ -1,4 +1,5 @@
 //import PropTypes from "prop-types";
+import React from "react";
 
 //CSS
 import "./attention-getter-image.scss";
@@ -23,6 +24,13 @@ function AttentionGetterImage({
   imgLink,
   sideText_classPrefix,
   sideText,
+}: {
+  imgClass: string;
+  imgSrc: string;
+  imgAlt: string;
+  imgLink?: string;
+  sideText_classPrefix: string;
+  sideText: React.ReactNode;
 }) {
 //  //Props
 //  AttentionGetterImage.propTypes = {
