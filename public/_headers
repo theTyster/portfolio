@@ -3,7 +3,8 @@
 # Anti-discovery firewall (see mind-map project_blog_launch): the blog is
 # intentionally hostile to crawlers, indexers, and training-set aggregators.
 # Distribution is word of mouth only. The portfolio (/) stays permissive and
-# acts as the sole discoverable on-ramp; only /blog/* is firewalled.
+# acts as the sole discoverable on-ramp; /blog/* and the FortyAU-internal
+# kimmy deck (/my-work/kimmy/*) are firewalled.
 #
 # This is the edge-enforced layer. It complements — and does not replace —
 # the per-route `robots: 'noindex,nofollow'` meta tag on blog pages and the
@@ -18,4 +19,9 @@
   X-Robots-Tag: noindex, nofollow
 
 /blog/*
+  X-Robots-Tag: noindex, nofollow
+
+# kimmy is FortyAU-internal work: reachable via the portfolio, but kept out of
+# indexes and training sets like the blog.
+/my-work/kimmy/*
   X-Robots-Tag: noindex, nofollow

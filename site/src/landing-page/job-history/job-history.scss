@@ -45,6 +45,27 @@ div.jobHistory {
       &[class$='responsibilities'] {
         text-indent: 0;
       }
+      // Nested client-engagement subsection (e.g. HoggWood via FortyAU):
+      // an indented block set off from the parent role.
+      section[class$="client-engagement"] {
+        margin: 1em 0 0 1.5em;
+        padding-left: 1em;
+        border-left: 2px solid v.$burntsilver;
+        text-indent: 0;
+        p {
+          text-indent: 0;
+        }
+        h5[class$="client-title"] {
+          line-height: v.$h5-line-height;
+          margin: 0;
+        }
+        p[class$="client-timeframe"] {
+          font-weight: v.$font-weight-light;
+          font-size: calc(v.$p-font-size * 0.8);
+          line-height: v.$p-line-height;
+          margin: 0 0 0.5em;
+        }
+      }
       div.attention-getter {
         @include theme.center-children-by-flex(
           $childClassPrefix: "jobHistory",

@@ -31,14 +31,12 @@ const JobHistory = () => {
       summary: (
         <>
           <p>
-            I am an Engineer II at FortyAU, a software consultancy. My current
-            client engagement is as a Formal Methods Engineer on HoggWood
-            Health&apos;s COBRA benefits-administration platform, a .NET 6 / C#
-            system where I formalize, specify, and verify the components I
-            engineer in Lean 4.
+            I am an Engineer II at FortyAU, a software consultancy. My work here
+            runs on two tracks: client engineering delivered through FortyAU, and
+            the Orbital Shifting methodology I originated and continue to develop.
           </p>
           <p>
-            Alongside that client work, I originated{" "}
+            I originated{" "}
             <NewTabLink link="https://github.com/theTyster/orbital">
               Orbital Shifting
             </NewTabLink>
@@ -48,19 +46,49 @@ const JobHistory = () => {
             maintain and continue to develop. Some of my responsibilities at
             FortyAU include:
           </p>
+          <section className="jobHistory-5-client-engagement">
+            <h5 className="jobHistory-5-client-title">
+              Formal Methods Engineer &mdash; HoggWood Health (COBRA Web
+              Application)
+            </h5>
+            <p className="jobHistory-5-client-timeframe">
+              January 2026 &ndash; Present &middot; via FortyAU
+            </p>
+            <p>
+              Backend feature engineering on HoggWood Health&apos;s COBRA
+              benefits-administration platform, a .NET 6 / C# system where I
+              formalize, specify, and verify the components I engineer in Lean 4.
+            </p>
+            <ul>
+              <li className="jobHistory-5-responsibilities">
+                Backend feature engineering on a .NET 6 / C#
+                benefits-administration platform (ASP.NET Web API, React
+                frontend, Azure DevOps, Azure App Service); components formally
+                specified and verified in Lean 4
+              </li>
+              <li className="jobHistory-5-responsibilities">
+                Built an HTML-to-PDF invoice generation pipeline with Playwright
+                (headless Chromium) and Handlebars templating: Azure Blob
+                archival with an audit footer and three-variant dispatch
+                (physical mail via LOB, SendGrid email attachment, canonical
+                archive); 24 new tests, with the Chromium runtime Dockerized
+              </li>
+              <li className="jobHistory-5-responsibilities">
+                Diagnosed and fixed an intermittent production logout by
+                analyzing HAR captures and decoded JWTs; added a MultiFactor
+                claim to the refresh token plus a conditional security guard,
+                with unit coverage
+              </li>
+              <li className="jobHistory-5-responsibilities">
+                Production incident triage and root-cause analysis across
+                Cloudflare WAF 403s, a frontend refresh/retry storm, and an EF
+                Core migration column-collision that crashed the UAT environment
+              </li>
+            </ul>
+          </section>
         </>
       ),
       responsibilities: [
-        "Backend feature engineering on a .NET 6 / C# benefits-administration platform (ASP.NET Web API, React frontend, Azure DevOps, Azure App Service); components formally specified and verified in Lean 4",
-        <>
-          Built an HTML-to-PDF invoice generation pipeline with Playwright
-          (headless Chromium) and Handlebars templating: Azure Blob archival
-          with an audit footer and three-variant dispatch (physical mail via
-          LOB, SendGrid email attachment, canonical archive); 24 new tests, with
-          the Chromium runtime Dockerized
-        </>,
-        "Diagnosed and fixed an intermittent production logout by analyzing HAR captures and decoded JWTs; added a MultiFactor claim to the refresh token plus a conditional security guard, with unit coverage",
-        "Production incident triage and root-cause analysis across Cloudflare WAF 403s, a frontend refresh/retry storm, and an EF Core migration column-collision that crashed the UAT environment",
         "Originator of Orbital Shifting, a formal-verification and AI-augmented SDLC methodology",
         <>
           Maintaining the{" "}

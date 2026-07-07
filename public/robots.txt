@@ -73,7 +73,12 @@ Disallow: /
 User-agent: Omgilibot
 Disallow: /
 
-# --- Everyone else (search indexers included): blog is off-limits ---
+# --- Everyone else (search indexers included): blog + kimmy deck off-limits ---
+# (The AI crawlers above are already blocked site-wide, so /my-work/kimmy is
+# covered for them too; this keeps general indexers off the FortyAU-internal
+# deck as well.)
 User-agent: *
 Disallow: /blog
 Disallow: /blog/
+Disallow: /my-work/kimmy
+Disallow: /my-work/kimmy/
