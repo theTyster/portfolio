@@ -17,21 +17,22 @@ const MyWork = () => {
     [
       {
         Orbital: 0,
-        Artemis: 1,
-        "context-focused-agents": 2,
-        kimmy: 3,
-        "Philosophy & Methodology Essays": 4,
-        "Cherry Lane Farm Doodles": 5,
-        CripToe: 6,
-        Jeopardy: 7,
-        "Duck Story": 8,
+        Sagittarius: 1,
+        Artemis: 2,
+        "context-focused-agents": 3,
+        kimmy: 4,
+        "Philosophy & Methodology Essays": 5,
+        "Cherry Lane Farm Doodles": 6,
+        CripToe: 7,
+        Jeopardy: 8,
+        "Duck Story": 9,
         // ── Early Work ───────────────────────────────────────────
-        "Fruit Search": 9,
-        "Giphy Search": 10,
-        "Hacker News Clone": 11,
-        "Meme Generator": 12,
-        "Memory Game": 13,
-        "ToDo App": 14,
+        "Fruit Search": 10,
+        "Giphy Search": 11,
+        "Hacker News Clone": 12,
+        "Meme Generator": 13,
+        "Memory Game": 14,
+        "ToDo App": 15,
       },
       [
         {
@@ -47,9 +48,22 @@ const MyWork = () => {
           ),
         },
         {
-          //1:Artemis benchmark harness (no public link yet)
+          //1:Sagittarius verification pipeline
+          id: "Sagittarius",
+          title: "Sagittarius",
+          link: ["https://github.com/theTyster/sagittarius", "_blank"],
+          img: (
+            <img
+              src="/static/img/sagittarius-ss.svg"
+              alt="An arrow drawn along a dashed orbital arc toward a target"
+            />
+          ),
+        },
+        {
+          //2:Artemis benchmark harness
           id: "Artemis",
           title: "Artemis",
+          link: ["https://github.com/theTyster/artemis", "_blank"],
           img: (
             <img
               src="/static/img/artemis-ss.svg"
@@ -58,9 +72,10 @@ const MyWork = () => {
           ),
         },
         {
-          //2:context-focused-agents (no public link yet)
+          //3:context-focused-agents
           id: "context-focused-agents",
           title: "context-focused-agents",
+          link: ["https://github.com/theTyster/context-focused-agents", "_blank"],
           img: (
             <img
               src="/static/img/context-focused-agents-ss.svg"
@@ -69,9 +84,10 @@ const MyWork = () => {
           ),
         },
         {
-          //3:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; details pending OSS conversation)
+          //4:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
           id: "kimmy",
           title: "kimmy",
+          link: ["/my-work/kimmy/index.html", "_blank"],
           img: (
             <img
               src="/static/img/kimmy-ss.svg"
@@ -80,7 +96,7 @@ const MyWork = () => {
           ),
         },
         {
-          //4:philosophy + methodology essays (will land on the blog)
+          //5:philosophy + methodology essays (will land on the blog)
           id: "Philosophy & Methodology Essays",
           title: "Philosophy & Methodology Essays",
           link: ["/blog/"],
@@ -92,7 +108,7 @@ const MyWork = () => {
           ),
         },
         {
-          //5:Cherry Lane Farms (demoted from featured)
+          //6:Cherry Lane Farms (demoted from featured)
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
           link: ["/cherry-lane-farms"],
@@ -104,7 +120,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6
+          //7
           id: "CripToe",
           title: "CripToe.js",
           link: ["https://www.npmjs.com/package/criptoe", "_blank"],
@@ -119,7 +135,7 @@ const MyWork = () => {
           ),
         },
         {
-          //7
+          //8
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["/jeopardy", "_blank"],
@@ -131,7 +147,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //9
           id: "Duck Story",
           title: "Duck Story",
           link: ["/my-work/duck-story-v1/index.html", "_blank"],
@@ -144,7 +160,7 @@ const MyWork = () => {
         },
         // ── Early Work ─────────────────────────────────────────
         {
-          //9
+          //10
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["/my-work/fruit-search/index.html", "_blank"],
@@ -156,7 +172,7 @@ const MyWork = () => {
           ),
         },
         {
-          //10
+          //11
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["/my-work/giphy-search/index.html", "_blank"],
@@ -168,7 +184,7 @@ const MyWork = () => {
           ),
         },
         {
-          //11
+          //12
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["/my-work/hacker-news-clone/index.html", "_blank"],
@@ -180,7 +196,7 @@ const MyWork = () => {
           ),
         },
         {
-          //12
+          //13
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["/my-work/meme-generator/index.html", "_blank"],
@@ -192,7 +208,7 @@ const MyWork = () => {
           ),
         },
         {
-          //13
+          //14
           id: "Memory Game",
           title: "Memory Game",
           link: ["/my-work/memory-game/index.html", "_blank"],
@@ -204,7 +220,7 @@ const MyWork = () => {
           ),
         },
         {
-          //14
+          //15
           id: "ToDo App",
           title: "ToDo App",
           link: ["/my-work/todo-app/index.html", "_blank"],

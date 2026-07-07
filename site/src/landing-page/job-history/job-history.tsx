@@ -31,9 +31,11 @@ const JobHistory = () => {
       summary: (
         <>
           <p>
-            I am an Engineer II at FortyAU, a software consultancy. My primary
-            client engagement has been backend feature work for enterprise
-            insurance carriers.
+            I am an Engineer II at FortyAU, a software consultancy. My current
+            client engagement is as a Formal Methods Engineer on HoggWood
+            Health&apos;s COBRA benefits-administration platform, a .NET 6 / C#
+            system where I formalize, specify, and verify the components I
+            engineer in Lean 4.
           </p>
           <p>
             Alongside that client work, I originated{" "}
@@ -49,7 +51,16 @@ const JobHistory = () => {
         </>
       ),
       responsibilities: [
-        "Backend feature engineering for enterprise insurance systems: claims processing, document export, eligibility verification, and member communications",
+        "Backend feature engineering on a .NET 6 / C# benefits-administration platform (ASP.NET Web API, React frontend, Azure DevOps, Azure App Service); components formally specified and verified in Lean 4",
+        <>
+          Built an HTML-to-PDF invoice generation pipeline with Playwright
+          (headless Chromium) and Handlebars templating: Azure Blob archival
+          with an audit footer and three-variant dispatch (physical mail via
+          LOB, SendGrid email attachment, canonical archive); 24 new tests, with
+          the Chromium runtime Dockerized
+        </>,
+        "Diagnosed and fixed an intermittent production logout by analyzing HAR captures and decoded JWTs; added a MultiFactor claim to the refresh token plus a conditional security guard, with unit coverage",
+        "Production incident triage and root-cause analysis across Cloudflare WAF 403s, a frontend refresh/retry storm, and an EF Core migration column-collision that crashed the UAT environment",
         "Originator of Orbital Shifting, a formal-verification and AI-augmented SDLC methodology",
         <>
           Maintaining the{" "}
@@ -57,6 +68,16 @@ const JobHistory = () => {
             orbital marketplace
           </NewTabLink>
           : four Claude Code plugins (shifting, scaffolding, trajectory, telemetry)
+        </>,
+        <>
+          Building{" "}
+          <NewTabLink link="https://github.com/theTyster/sagittarius">
+            Sagittarius
+          </NewTabLink>
+          , the methodology&apos;s seven-stage verification pipeline as a single
+          deterministic workflow script: independent specialist agents plus
+          adversarial gates, backed by 25 axiom-free Lean theorems and a 32-test
+          property/regression suite
         </>,
         <>
           Building <a href="/artemis">Artemis</a>, a treatment-vs-control LLM
