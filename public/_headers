@@ -28,3 +28,9 @@
 # indexes and training sets like the blog.
 /my-work/kimmy/*
   X-Robots-Tag: noindex, nofollow
+
+# The orbital-shifting deck carries the philosophy content the firewall exists
+# to protect from training-set absorption and flattening. Reachable via the
+# portfolio hero tile, but kept out of indexes and training sets.
+/my-work/orbital-shifting/*
+  X-Robots-Tag: noindex, nofollow

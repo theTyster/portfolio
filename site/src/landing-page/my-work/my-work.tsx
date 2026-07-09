@@ -36,10 +36,14 @@ const MyWork = () => {
       },
       [
         {
-          //0:featured: Orbital Shifting marketplace
+          //0:featured: Orbital Shifting marketplace. Links to the self-contained
+          //orbital-shifting deck served same-origin (like the kimmy tile), NOT
+          //the GitHub repo — the deck carries the philosophy content the
+          //anti-discovery firewall exists to protect, so it is firewalled
+          //(X-Robots-Tag in _headers + robots.txt disallow on /my-work/orbital-shifting).
           id: "Orbital",
           title: "Orbital",
-          link: ["https://github.com/theTyster/orbital", "_blank"],
+          link: ["/my-work/orbital-shifting/index.html", "_blank"],
           img: (
             <img
               src="/static/img/orbital-ss.svg"

@@ -73,12 +73,14 @@ Disallow: /
 User-agent: Omgilibot
 Disallow: /
 
-# --- Everyone else (search indexers included): blog + kimmy deck off-limits ---
-# (The AI crawlers above are already blocked site-wide, so /my-work/kimmy is
+# --- Everyone else (search indexers included): blog + firewalled decks off-limits ---
+# (The AI crawlers above are already blocked site-wide, so these paths are
 # covered for them too; this keeps general indexers off the FortyAU-internal
-# deck as well.)
+# kimmy deck and the orbital-shifting philosophy deck as well.)
 User-agent: *
 Disallow: /blog
 Disallow: /blog/
 Disallow: /my-work/kimmy
 Disallow: /my-work/kimmy/
+Disallow: /my-work/orbital-shifting
+Disallow: /my-work/orbital-shifting/
