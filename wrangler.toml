@@ -5,7 +5,9 @@ pages_build_output_dir = ".vercel/output/static"
 
 [vars]
 # Non-secret feed origin for the Bludit-backed blog list on the landing page.
-# The Bearer token (BLOG_API_TOKEN) is a SECRET — set it in the Cloudflare
-# Pages dashboard (Settings → Variables → encrypt), NOT here in the committed
-# config.
+# NOTE: this var is documentation only — the code hardcodes the origin and
+# nothing reads BLOG_FEED_URL. The API token (BLOG_API_TOKEN) is a SECRET,
+# passed by the code as a `?token=` query param; set it in the Cloudflare Pages
+# dashboard (Settings → Variables and Secrets → encrypt), NOT here in the
+# committed config.
 BLOG_FEED_URL = "https://blog.thetyster.dev/api/pages"
