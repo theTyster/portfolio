@@ -19,7 +19,7 @@ const MyWork = () => {
         Orbital: 0,
         Sagittarius: 1,
         Artemis: 2,
-        "context-focused-agents": 3,
+        locator: 3,
         kimmy: 4,
         "Philosophy & Methodology Essays": 5,
         "Cherry Lane Farm Doodles": 6,
@@ -76,10 +76,10 @@ const MyWork = () => {
           ),
         },
         {
-          //3:context-focused-agents
-          id: "context-focused-agents",
-          title: "context-focused-agents",
-          link: ["https://github.com/theTyster/context-focused-agents", "_blank"],
+          //3:locator (formerly context-focused-agents)
+          id: "locator",
+          title: "locator",
+          link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
           img: (
             <img
               src="/static/img/context-focused-agents-ss.svg"
