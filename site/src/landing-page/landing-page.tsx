@@ -135,7 +135,7 @@ function LandingPage({ blogFeed }: { blogFeed: BlogFeedResult }) {
         sideText_classPrefix="headshot-text"
         imgSrc="/static/img/me.jpg"
         imgAlt="My Face."
-        imgLink="https://www.linkedin.com/in/tyler-davis-dev"
+        imgLink="https://github.com/thetyster"
         sideText={<AttentionGetterSideText />}
       />
 

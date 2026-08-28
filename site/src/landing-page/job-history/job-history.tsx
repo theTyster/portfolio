@@ -115,9 +115,11 @@ const JobHistory = () => {
         "Internal AI-SDLC tooling: prompt orchestration, multi-agent verification pipelines, calibrated abstention, evidence-grounded model evaluation",
         <>
           Authoring{" "}
-          <a href="/context-focused-agents">context-focused-agents</a>: a pair
-          of compiled BAML agents (locator + summarizer) that replace generic
-          context tools with intent-driven alternatives
+          <NewTabLink link="https://github.com/theTyster/context-focused-locator">
+            context-focused-locator
+          </NewTabLink>
+          : a pair of compiled BAML agents (locator + summarizer) that replace
+          generic context tools with intent-driven alternatives
         </>,
         "Encoding software specifications as Prolog facts and Lean 4 theorems; refutation-driven testing against formal invariants",
         "Engineering with TypeScript, Python, Prolog, Lean 4, and Bun",

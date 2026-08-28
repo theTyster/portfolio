@@ -7,7 +7,7 @@ $ghpurple: #8957e5;
 $center-items-spacing: 2em;
 
 div.pull-request-tile{
-	border: 1px solid v.$darkdesertsand;
+	border: 3px solid v.$darkdesertsand;
 	padding: v.$pad;
 	@include theme.rounded-corners;
 	@include theme.medium-media-query(){
@@ -29,16 +29,29 @@ div.pull-request-tile{
 	}
 	div.prt-visual-aid{
 		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		margin-top: $center-items-spacing;
+		a.prt-org-link, a.prt-user-link {
+			display: block;
+			flex: 0 0 30%;
+			max-width: 510px;
+      border: 1px solid v.$darkdesertsand;
+      border-radius: 100%;
+		}
 		img[class$=-avatar]{
-			border-radius: 100%;
+			display: block;
 			width: 100%;
+			aspect-ratio: 1 / 1;
+			height: auto;
+			object-fit: cover;
+			border-radius: 100%;
 		}
 		a:has(svg) {
-			flex: 1 0 auto;
-			width: 15%;
-			height: 15%;
+			flex: 0 0 15%;
+			aspect-ratio: 1 / 1;
+			height: auto;
 			margin: 0 8px;
 		}
 		svg, img[class$=-avatar] {

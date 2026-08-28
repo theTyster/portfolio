@@ -82,7 +82,7 @@ const MyWork = () => {
           link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
           img: (
             <img
-              src="/static/img/context-focused-agents-ss.svg"
+              src="/static/img/context-focused-locator-ss.svg"
               alt="Two overlapping circles meeting at a single focal point"
             />
           ),

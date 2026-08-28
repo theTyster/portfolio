@@ -8,7 +8,7 @@ const EXPECTED_NEW_ASSETS = [
   '/static/img/fortyau-logo.svg',
   '/static/img/orbital-ss.svg',
   '/static/img/artemis-ss.svg',
-  '/static/img/context-focused-agents-ss.svg',
+  '/static/img/context-focused-locator-ss.svg',
   '/static/img/philosophy-essays-ss.svg',
 ];
 

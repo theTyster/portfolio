@@ -7,6 +7,11 @@ import SvgPullRequest from "@img/pull-request-svg";
 //CSS
 import "./pull-request-tile.scss";
 
+function sizedAvatar(url, size = 200){
+  if(!url) return url;
+  return `${url}${url.includes("?")?"&":"?"}s=${size}`;
+}
+
 function PullRequestTile({pr, org}){
 
 //  //Props Validation
@@ -54,8 +59,10 @@ function PullRequestTile({pr, org}){
         >
           <img
             className="prt-org-avatar"
-            src={org.owner.avatar_url}
-            alt={`${org.login}'s profile.`}
+            src={sizedAvatar(org.owner.avatar_url)}
+            width={200}
+            height={200}
+            alt={`${org.owner.login}'s profile.`}
           />
         </a>
 
@@ -77,7 +84,9 @@ function PullRequestTile({pr, org}){
         >
           <img
             className="prt-user-avatar"
-            src={user.avatar_url}
+            src={sizedAvatar(user.avatar_url)}
+            width={200}
+            height={200}
             alt="My Github user profile."
           />
         </a>
