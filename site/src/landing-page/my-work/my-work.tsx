@@ -22,18 +22,17 @@ const MyWork = () => {
         Artemis: 3,
         locator: 4,
         kimmy: 5,
-        "Philosophy & Methodology Essays": 6,
-        "Cherry Lane Farm Doodles": 7,
-        CripToe: 8,
-        Jeopardy: 9,
-        "Duck Story": 10,
+        "Cherry Lane Farm Doodles": 6,
+        CripToe: 7,
+        Jeopardy: 8,
+        "Duck Story": 9,
         // ── Early Work ───────────────────────────────────────────
-        "Fruit Search": 11,
-        "Giphy Search": 12,
-        "Hacker News Clone": 13,
-        "Meme Generator": 14,
-        "Memory Game": 15,
-        "ToDo App": 16,
+        "Fruit Search": 10,
+        "Giphy Search": 11,
+        "Hacker News Clone": 12,
+        "Meme Generator": 13,
+        "Memory Game": 14,
+        "ToDo App": 15,
       },
       [
         {
@@ -113,19 +112,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6:philosophy + methodology essays (will land on the blog)
-          id: "Philosophy & Methodology Essays",
-          title: "Philosophy & Methodology Essays",
-          link: ["/blog/"],
-          img: (
-            <img
-              src="/static/img/philosophy-essays-ss.svg"
-              alt="Stack of four prose lines with a closing accent mark"
-            />
-          ),
-        },
-        {
-          //7:Cherry Lane Farms (demoted from featured)
+          //6:Cherry Lane Farms (demoted from featured)
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
           link: ["/cherry-lane-farms"],
@@ -137,7 +124,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //7
           id: "CripToe",
           title: "CripToe.js",
           link: ["https://www.npmjs.com/package/criptoe", "_blank"],
@@ -152,7 +139,7 @@ const MyWork = () => {
           ),
         },
         {
-          //9
+          //8
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["/jeopardy", "_blank"],
@@ -164,7 +151,7 @@ const MyWork = () => {
           ),
         },
         {
-          //10
+          //9
           id: "Duck Story",
           title: "Duck Story",
           link: ["/my-work/duck-story-v1/index.html", "_blank"],
@@ -177,7 +164,7 @@ const MyWork = () => {
         },
         // ── Early Work ─────────────────────────────────────────
         {
-          //11
+          //10
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["/my-work/fruit-search/index.html", "_blank"],
@@ -189,7 +176,7 @@ const MyWork = () => {
           ),
         },
         {
-          //12
+          //11
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["/my-work/giphy-search/index.html", "_blank"],
@@ -201,7 +188,7 @@ const MyWork = () => {
           ),
         },
         {
-          //13
+          //12
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["/my-work/hacker-news-clone/index.html", "_blank"],
@@ -213,7 +200,7 @@ const MyWork = () => {
           ),
         },
         {
-          //14
+          //13
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["/my-work/meme-generator/index.html", "_blank"],
@@ -225,7 +212,7 @@ const MyWork = () => {
           ),
         },
         {
-          //15
+          //14
           id: "Memory Game",
           title: "Memory Game",
           link: ["/my-work/memory-game/index.html", "_blank"],
@@ -237,7 +224,7 @@ const MyWork = () => {
           ),
         },
         {
-          //16
+          //15
           id: "ToDo App",
           title: "ToDo App",
           link: ["/my-work/todo-app/index.html", "_blank"],

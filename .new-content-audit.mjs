@@ -9,7 +9,6 @@ const EXPECTED_NEW_ASSETS = [
   '/static/img/orbital-ss.svg',
   '/static/img/artemis-ss.svg',
   '/static/img/context-focused-locator-ss.svg',
-  '/static/img/philosophy-essays-ss.svg',
   '/static/img/lean-lib-ss.svg',
 ];
 
