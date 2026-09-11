@@ -17,22 +17,23 @@ const MyWork = () => {
     [
       {
         Orbital: 0,
-        Sagittarius: 1,
-        Artemis: 2,
-        locator: 3,
-        kimmy: 4,
-        "Philosophy & Methodology Essays": 5,
-        "Cherry Lane Farm Doodles": 6,
-        CripToe: 7,
-        Jeopardy: 8,
-        "Duck Story": 9,
+        "lean-lib": 1,
+        Sagittarius: 2,
+        Artemis: 3,
+        locator: 4,
+        kimmy: 5,
+        "Philosophy & Methodology Essays": 6,
+        "Cherry Lane Farm Doodles": 7,
+        CripToe: 8,
+        Jeopardy: 9,
+        "Duck Story": 10,
         // ── Early Work ───────────────────────────────────────────
-        "Fruit Search": 10,
-        "Giphy Search": 11,
-        "Hacker News Clone": 12,
-        "Meme Generator": 13,
-        "Memory Game": 14,
-        "ToDo App": 15,
+        "Fruit Search": 11,
+        "Giphy Search": 12,
+        "Hacker News Clone": 13,
+        "Meme Generator": 14,
+        "Memory Game": 15,
+        "ToDo App": 16,
       },
       [
         {
@@ -52,7 +53,19 @@ const MyWork = () => {
           ),
         },
         {
-          //1:Sagittarius verification pipeline
+          //1:lean-lib, a deterministic Lean 4 scaffolder for shared-library projects
+          id: "lean-lib",
+          title: "lean-lib",
+          link: ["https://github.com/theTyster/lean-lib", "_blank"],
+          img: (
+            <img
+              src="/static/img/lean-lib-ss.svg"
+              alt="Three small bodies orbiting a single shared core"
+            />
+          ),
+        },
+        {
+          //2:Sagittarius verification pipeline
           id: "Sagittarius",
           title: "Sagittarius",
           link: ["https://github.com/theTyster/sagittarius", "_blank"],
@@ -64,7 +77,7 @@ const MyWork = () => {
           ),
         },
         {
-          //2:Artemis benchmark harness
+          //3:Artemis benchmark harness
           id: "Artemis",
           title: "Artemis",
           link: ["https://github.com/theTyster/artemis", "_blank"],
@@ -76,7 +89,7 @@ const MyWork = () => {
           ),
         },
         {
-          //3:locator (formerly context-focused-agents)
+          //4:locator (formerly context-focused-agents)
           id: "locator",
           title: "locator",
           link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
@@ -88,7 +101,7 @@ const MyWork = () => {
           ),
         },
         {
-          //4:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
+          //5:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
           id: "kimmy",
           title: "kimmy",
           link: ["/my-work/kimmy/index.html", "_blank"],
@@ -100,7 +113,7 @@ const MyWork = () => {
           ),
         },
         {
-          //5:philosophy + methodology essays (will land on the blog)
+          //6:philosophy + methodology essays (will land on the blog)
           id: "Philosophy & Methodology Essays",
           title: "Philosophy & Methodology Essays",
           link: ["/blog/"],
@@ -112,7 +125,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6:Cherry Lane Farms (demoted from featured)
+          //7:Cherry Lane Farms (demoted from featured)
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
           link: ["/cherry-lane-farms"],
@@ -124,7 +137,7 @@ const MyWork = () => {
           ),
         },
         {
-          //7
+          //8
           id: "CripToe",
           title: "CripToe.js",
           link: ["https://www.npmjs.com/package/criptoe", "_blank"],
@@ -139,7 +152,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //9
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["/jeopardy", "_blank"],
@@ -151,7 +164,7 @@ const MyWork = () => {
           ),
         },
         {
-          //9
+          //10
           id: "Duck Story",
           title: "Duck Story",
           link: ["/my-work/duck-story-v1/index.html", "_blank"],
@@ -164,7 +177,7 @@ const MyWork = () => {
         },
         // ── Early Work ─────────────────────────────────────────
         {
-          //10
+          //11
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["/my-work/fruit-search/index.html", "_blank"],
@@ -176,7 +189,7 @@ const MyWork = () => {
           ),
         },
         {
-          //11
+          //12
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["/my-work/giphy-search/index.html", "_blank"],
@@ -188,7 +201,7 @@ const MyWork = () => {
           ),
         },
         {
-          //12
+          //13
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["/my-work/hacker-news-clone/index.html", "_blank"],
@@ -200,7 +213,7 @@ const MyWork = () => {
           ),
         },
         {
-          //13
+          //14
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["/my-work/meme-generator/index.html", "_blank"],
@@ -212,7 +225,7 @@ const MyWork = () => {
           ),
         },
         {
-          //14
+          //15
           id: "Memory Game",
           title: "Memory Game",
           link: ["/my-work/memory-game/index.html", "_blank"],
@@ -224,7 +237,7 @@ const MyWork = () => {
           ),
         },
         {
-          //15
+          //16
           id: "ToDo App",
           title: "ToDo App",
           link: ["/my-work/todo-app/index.html", "_blank"],
