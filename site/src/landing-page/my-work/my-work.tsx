@@ -17,7 +17,7 @@ const MyWork = () => {
     [
       {
         Orbital: 0,
-        "lean-lib": 1,
+        sharlean: 1,
         Sagittarius: 2,
         Artemis: 3,
         locator: 4,
@@ -52,13 +52,13 @@ const MyWork = () => {
           ),
         },
         {
-          //1:lean-lib, a deterministic Lean 4 scaffolder for shared-library projects
-          id: "lean-lib",
-          title: "lean-lib",
-          link: ["https://github.com/theTyster/lean-lib", "_blank"],
+          //1:sharlean, a deterministic Lean 4 scaffolder for shared-library projects
+          id: "sharlean",
+          title: "sharlean",
+          link: ["https://github.com/theTyster/sharlean", "_blank"],
           img: (
             <img
-              src="/static/img/lean-lib-ss.svg"
+              src="/static/img/sharlean-ss.svg"
               alt="Three small bodies orbiting a single shared core"
             />
           ),
