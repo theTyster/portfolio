@@ -17,22 +17,23 @@ const MyWork = () => {
     [
       {
         Orbital: 0,
-        sharlean: 1,
-        Sagittarius: 2,
-        Artemis: 3,
-        locator: 4,
-        kimmy: 5,
-        "Cherry Lane Farm Doodles": 6,
-        CripToe: 7,
-        Jeopardy: 8,
-        "Duck Story": 9,
+        "COBRA Eligibility": 1,
+        sharlean: 2,
+        Sagittarius: 3,
+        Artemis: 4,
+        locator: 5,
+        kimmy: 6,
+        "Cherry Lane Farm Doodles": 7,
+        CripToe: 8,
+        Jeopardy: 9,
+        "Duck Story": 10,
         // ── Early Work ───────────────────────────────────────────
-        "Fruit Search": 10,
-        "Giphy Search": 11,
-        "Hacker News Clone": 12,
-        "Meme Generator": 13,
-        "Memory Game": 14,
-        "ToDo App": 15,
+        "Fruit Search": 11,
+        "Giphy Search": 12,
+        "Hacker News Clone": 13,
+        "Meme Generator": 14,
+        "Memory Game": 15,
+        "ToDo App": 16,
       },
       [
         {
@@ -52,7 +53,22 @@ const MyWork = () => {
           ),
         },
         {
-          //1:sharlean, a deterministic Lean 4 scaffolder for shared-library projects
+          //1:COBRA eligibility matrix (HoggWood Health client work via FortyAU).
+          //Self-contained deck served same-origin like the kimmy tile, but
+          //deliberately NOT firewalled: the client's code stays private and the
+          //deck itself is meant to be discoverable. See public/_headers.
+          id: "COBRA Eligibility",
+          title: "COBRA Eligibility",
+          link: ["/my-work/cobra-eligibility/index.html", "_blank"],
+          img: (
+            <img
+              src="/static/img/cobra-eligibility-ss.svg"
+              alt="A grid in which every cell is filled, with a single narrow outlet on one edge"
+            />
+          ),
+        },
+        {
+          //2:sharlean, a deterministic Lean 4 scaffolder for shared-library projects
           id: "sharlean",
           title: "sharlean",
           link: ["https://github.com/theTyster/sharlean", "_blank"],
@@ -64,7 +80,7 @@ const MyWork = () => {
           ),
         },
         {
-          //2:Sagittarius verification pipeline
+          //3:Sagittarius verification pipeline
           id: "Sagittarius",
           title: "Sagittarius",
           link: ["https://github.com/theTyster/sagittarius", "_blank"],
@@ -76,7 +92,7 @@ const MyWork = () => {
           ),
         },
         {
-          //3:Artemis benchmark harness
+          //4:Artemis benchmark harness
           id: "Artemis",
           title: "Artemis",
           link: ["https://github.com/theTyster/artemis", "_blank"],
@@ -88,7 +104,7 @@ const MyWork = () => {
           ),
         },
         {
-          //4:locator (formerly context-focused-agents)
+          //5:locator (formerly context-focused-agents)
           id: "locator",
           title: "locator",
           link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
@@ -100,7 +116,7 @@ const MyWork = () => {
           ),
         },
         {
-          //5:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
+          //6:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
           id: "kimmy",
           title: "kimmy",
           link: ["/my-work/kimmy/index.html", "_blank"],
@@ -112,7 +128,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6:Cherry Lane Farms (demoted from featured)
+          //7:Cherry Lane Farms (demoted from featured)
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
           link: ["/cherry-lane-farms"],
@@ -124,7 +140,7 @@ const MyWork = () => {
           ),
         },
         {
-          //7
+          //8
           id: "CripToe",
           title: "CripToe.js",
           link: ["https://www.npmjs.com/package/criptoe", "_blank"],
@@ -139,7 +155,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //9
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["/jeopardy", "_blank"],
@@ -151,7 +167,7 @@ const MyWork = () => {
           ),
         },
         {
-          //9
+          //10
           id: "Duck Story",
           title: "Duck Story",
           link: ["/my-work/duck-story-v1/index.html", "_blank"],
@@ -164,7 +180,7 @@ const MyWork = () => {
         },
         // ── Early Work ─────────────────────────────────────────
         {
-          //10
+          //11
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["/my-work/fruit-search/index.html", "_blank"],
@@ -176,7 +192,7 @@ const MyWork = () => {
           ),
         },
         {
-          //11
+          //12
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["/my-work/giphy-search/index.html", "_blank"],
@@ -188,7 +204,7 @@ const MyWork = () => {
           ),
         },
         {
-          //12
+          //13
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["/my-work/hacker-news-clone/index.html", "_blank"],
@@ -200,7 +216,7 @@ const MyWork = () => {
           ),
         },
         {
-          //13
+          //14
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["/my-work/meme-generator/index.html", "_blank"],
@@ -212,7 +228,7 @@ const MyWork = () => {
           ),
         },
         {
-          //14
+          //15
           id: "Memory Game",
           title: "Memory Game",
           link: ["/my-work/memory-game/index.html", "_blank"],
@@ -224,7 +240,7 @@ const MyWork = () => {
           ),
         },
         {
-          //15
+          //16
           id: "ToDo App",
           title: "ToDo App",
           link: ["/my-work/todo-app/index.html", "_blank"],

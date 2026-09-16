@@ -61,6 +61,25 @@ const JobHistory = () => {
             </p>
             <ul>
               <li className="jobHistory-5-responsibilities">
+                Designed and verified the COBRA eligibility matrix and algorithm,
+                the platform&apos;s core business logic, which every user flows
+                through. The eligibility model is formalized in Lean 4, its state
+                transitions model-checked in TLA+, and its constraint obligations
+                discharged with Z3 and cvc5, with a closed-world Prolog fact base
+                separating what is known about a record from what is provable in
+                general. The model is total over malformed input, so a record with
+                unverifiable identity data still reaches a defined, justified
+                outcome instead of being orphaned or misattributed.{" "}
+                <a
+                  href="/my-work/cobra-eligibility/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Read the deck
+                </a>
+                .
+              </li>
+              <li className="jobHistory-5-responsibilities">
                 Backend feature engineering on a .NET 6 / C#
                 benefits-administration platform (ASP.NET Web API, React
                 frontend, Azure DevOps, Azure App Service); components formally

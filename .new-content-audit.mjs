@@ -10,6 +10,7 @@ const EXPECTED_NEW_ASSETS = [
   '/static/img/artemis-ss.svg',
   '/static/img/context-focused-locator-ss.svg',
   '/static/img/sharlean-ss.svg',
+  '/static/img/cobra-eligibility-ss.svg',
 ];
 
 const browser = await chromium.launch();
