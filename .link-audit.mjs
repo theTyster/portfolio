@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 
 const BASE = 'http://localhost:3000';
-const ROUTES = ['/', '/cherry-lane-farms', '/jeopardy', '/does-not-exist'];
+const ROUTES = ['/', '/cherry-lane-farms', '/jeopardy', '/my-work/cobra-eligibility/index.html', '/does-not-exist'];
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });

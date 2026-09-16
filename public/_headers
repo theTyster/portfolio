@@ -34,3 +34,11 @@
 # portfolio hero tile, but kept out of indexes and training sets.
 /my-work/orbital-shifting/*
   X-Robots-Tag: noindex, nofollow
+
+# The COBRA eligibility deck (/my-work/cobra-eligibility/*) is deliberately NOT
+# listed here. It describes client work at the level of method and guarantee
+# only: no client code, no schema, no business rules, and the client is named by
+# its pseudonym throughout. It is meant to be the one work-project page a
+# stranger can find on their own, so general indexers are allowed. The AI/LLM
+# training crawlers are still blocked site-wide by robots.txt. Leaving this
+# comment so the absence of a rule reads as a decision rather than an oversight.

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COBRA eligibility — what it is guaranteed for</title>
+<meta name="description" content="A COBRA eligibility matrix and algorithm, formally modeled and verified. What the guarantees actually cover, and where they stop.">
+<style>
+  :root {
+    --bg: #0e1116;
+    --bg-soft: #11151c;
+    --fg: #e6edf3;
+    --muted: #8b949e;
+    --dim: #6e7681;
+    --accent: #f0a868;
+    --accent-hot: #ff7b54;
+    --accent2: #7ee787;
+    --accent3: #79c0ff;
+    --code-bg: #161b22;
+    --border: #30363d;
+    --shipped: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    overflow: hidden;
+  }
+  .deck { position: relative; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    padding: 4vh 6vw 7vh 6vw;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .slide.active { display: flex; }
+  .slide h1 {
+    font-size: clamp(28px, 3.4vw, 52px);
+    margin: 0 0 0.4em 0;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+  .slide h1 .accent { color: var(--accent); }
+  .slide h1 .accent2 { color: var(--accent2); }
+  .slide h1 .accent3 { color: var(--accent3); }
+  .slide h2 {
+    font-size: clamp(20px, 1.6vw, 28px);
+    color: var(--muted); font-weight: 500;
+    margin: 0 0 1.4em 0;
+    line-height: 1.35;
+  }
+  .slide p, .slide li {
+    font-size: clamp(16px, 1.25vw, 22px);
+    line-height: 1.55;
+  }
+  .slide ul, .slide ol { padding-left: 1.4em; }
+  .slide li { margin-bottom: 0.6em; }
+  .slide li strong { color: var(--accent2); }
+  code, pre {
+    font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: clamp(13px, 1.0vw, 17px);
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    line-height: 1.45;
+  }
+  code { color: var(--accent); }
+  pre code { color: var(--fg); }
+  .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 1em;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 1em 0;
+    padding: 6px 18px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: clamp(17px, 1.4vw, 24px);
+  }
+  blockquote.pull {
+    background: var(--bg-soft);
+    color: var(--fg);
+    font-style: normal;
+    padding: 18px 24px;
+    border-radius: 4px;
+  }
+  .stat {
+    display: inline-block;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 8px 12px 8px 0;
+    vertical-align: top;
+  }
+  .stat .n { font-size: clamp(22px, 2.4vw, 36px); color: var(--accent2); font-weight: 600; display: block; line-height: 1.05; }
+  .stat .lbl { display: block; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+  .stat.accent .n { color: var(--accent); }
+  .stat.accent3 .n { color: var(--accent3); }
+  .stat.hot .n { color: var(--accent-hot); }
+  .pill {
+    display: inline-block;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 10px;
+    color: var(--muted);
+    font-size: 13px;
+    margin-right: 6px;
+  }
+  .pill.shipped { color: var(--shipped); border-color: var(--shipped); }
+  .pill.accent { color: var(--accent); border-color: var(--accent); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .three-col > div, .two-col > div.panel {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .three-col h3, .two-col .panel h3 {
+    color: var(--accent);
+    margin: 0 0 0.4em 0;
+    font-size: clamp(15px, 1.15vw, 19px);
+  }
+  .three-col p, .two-col .panel p {
+    font-size: clamp(13px, 0.95vw, 16px);
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .commit {
+    color: var(--accent3);
+    font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+
+  .slide.bridge {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .slide.bridge h1 {
+    font-size: clamp(36px, 5vw, 76px);
+    line-height: 1.05;
+    max-width: 22ch;
+    letter-spacing: -0.01em;
+  }
+  .slide.bridge .kicker { margin-bottom: 2em; }
+
+  .footer {
+    position: fixed;
+    bottom: 10px; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 24px;
+    color: var(--muted);
+    font-size: 13px;
+    gap: 14px;
+    z-index: 50;
+    pointer-events: none;
+  }
+  .footer > * { pointer-events: auto; }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    transition: color 120ms ease;
+  }
+  .footer-link .fl-ico { display: inline-flex; color: var(--accent); }
+  .footer-link .fl-ico svg { width: 15px; height: 15px; display: block; }
+  .footer-link .fl-hi { color: var(--accent); font-weight: 600; }
+  .footer-link:hover { color: var(--fg); }
+  .footer-link:hover .fl-hi { text-decoration: underline; text-underline-offset: 2px; }
+  .nav { display: flex; gap: 6px; }
+  .nav button {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .nav button:hover { color: var(--fg); border-color: var(--accent); }
+  #counter { font-family: "JetBrains Mono", Menlo, Consolas, monospace; }
+  #counter.hidden { visibility: hidden; }
+
+  .feature-list { list-style: none; padding-left: 0; }
+  .feature-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: clamp(14px, 1.05vw, 18px);
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-list strong { color: var(--accent2); display: inline-block; min-width: 180px; }
+/* Hero brand orbit motif */
+.brand-orbit {
+  position: absolute;
+  bottom: 13vh;
+  right: 8vw;
+  width: 25vh;
+  height: 25vh;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+.brand-orbit svg { width: 100%; height: 100%; display: block; }
+
+/* Chapter mark behind bridge slides */
+.chapter-mark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  width: 78vmin;
+  max-width: 680px;
+}
+.chapter-mark svg { width: 100%; height: auto; display: block; }
+.slide.bridge > *:not(.chapter-mark) { position: relative; z-index: 1; }
+
+  /* --- COBRA deck additions --- */
+  .tool-table { display: grid; grid-template-columns: max-content 1fr; gap: 10px 22px; margin: 0.4em 0 1.2em 0; align-items: baseline; }
+  .tool-table .tool {
+    font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: clamp(13px, 1.0vw, 17px);
+    color: var(--accent3); white-space: nowrap;
+  }
+  .tool-table .job { font-size: clamp(14px, 1.1vw, 19px); color: var(--fg); line-height: 1.5; }
+  .lede { color: var(--fg); max-width: 62ch; }
+  .slide p.lede + p.lede { margin-top: 0.9em; }
+  .aside { color: var(--muted); max-width: 62ch; }
+  .matrix-fig { margin: 0.6em 0 0 0; }
+  .matrix-fig svg { width: min(74vw, 620px); height: auto; display: block; }
+  .caption { color: var(--dim); font-size: clamp(12px, 0.9vw, 15px); margin-top: 0.5em; }
+  .limits li strong { color: var(--accent); }
+  @media (max-width: 760px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .tool-table { grid-template-columns: 1fr; gap: 4px 0; }
+    .tool-table .job { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<section class="slide" id="T1">
+<div class="brand-orbit">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="50" cy="50" rx="46" ry="20" fill="none" stroke="#f0a868" stroke-width="0.7"/>
+  <ellipse cx="50" cy="50" rx="46" ry="20" fill="none" stroke="#79c0ff" stroke-width="0.7" transform="rotate(60 50 50)"/>
+  <ellipse cx="50" cy="50" rx="46" ry="20" fill="none" stroke="#7ee787" stroke-width="0.7" transform="rotate(120 50 50)"/>
+  <circle cx="50" cy="50" r="2.5" fill="#f0a868"/>
+</svg>
+</div>
+
+  <div class="kicker">Client work &middot; HoggWood Health, via FortyAU</div>
+  <h1>COBRA <span class="accent">eligibility</span></h1>
+  <h2>A matrix and an algorithm that every single user of the platform passes through.</h2>
+  <p class="lede" style="margin-top:1em">The coolest thing about it is not what it can do or how it was built, but what it's guaranteed for.</p>
+  <p class="aside">This deck is about the guarantees. What they actually cover, how they were established, and where they stop.</p>
+  <p style="margin-top:1.4em">
+    <span class="pill accent">Lean 4</span>
+    <span class="pill">TLA+</span>
+    <span class="pill">Z3</span>
+    <span class="pill">cvc5</span>
+  </p>
+  <p style="margin-top:auto; padding-top:2em; color:var(--muted); font-size:14px;">Press <code style="color:var(--accent3)">&rarr;</code> to walk the deck. The client's code is private, so there's no source here. The reasoning is the thing worth showing anyway.</p>
+</section>
+
+<section class="slide" id="T2">
+  <div class="kicker">The domain</div>
+  <h1>What an eligibility decision actually is</h1>
+  <h2>Federal law, and then a lot of conditions.</h2>
+  <p class="lede">You lose your job. Your hours get cut. You get divorced, or a kid ages off the plan. COBRA is the federal rule that says you can keep the group health coverage you already had, for a while, if you pay for it yourself.</p>
+  <p class="lede">That "if" is doing a lot of work. Whether a given person qualifies, for which plans, starting on what date, and for how long, all of that is one decision. That decision is eligibility.</p>
+  <p class="aside">The statute is public. What follows is about the shape of the problem, not about any client's particular rules.</p>
+</section>
+
+<section class="slide" id="T3">
+  <div class="kicker">Why it matters here</div>
+  <h1>Everything downstream depends on it</h1>
+  <h2>Eligibility isn't a feature sitting off to the side. It's the core business logic.</h2>
+  <p class="lede">Every user flows through it. If the eligibility decision is wrong, then the notices are wrong, the premium is wrong, the file we send the carrier is wrong, and the person's actual coverage is wrong.</p>
+  <p class="lede">So it's basically the one place in the system where being approximately right is worth nothing.</p>
+</section>
+
+<section class="slide bridge" id="T4">
+  <div class="kicker">The thesis</div>
+  <h1>It's not what it does.<br>It's what it's <span class="accent">guaranteed for</span>.</h1>
+</section>
+
+<section class="slide" id="T5">
+  <div class="kicker">The problem &middot; 1 of 3</div>
+  <h1>Healthcare data is bad on arrival</h1>
+  <h2>Not "needs a cleanup pass" bad. Bad as a steady-state condition.</h2>
+  <p class="lede">The healthcare world is plagued by terrible data quality. Names don't match between two systems that describe the same person. Dates don't line up. A record shows up from the carrier one way and from the employer another way, and both of them are confident.</p>
+  <p class="lede">You can write a validator that rejects all of it. Then you've built something that refuses to enroll real people who really do qualify. That isn't a win.</p>
+</section>
+
+<section class="slide" id="T6">
+  <div class="kicker">The problem &middot; 2 of 3</div>
+  <h1>Some of it you can't fix, ever</h1>
+  <h2>The part where you don't get to be the authority.</h2>
+  <p class="lede">A carrier hands us a Social Security number. A user attests to one. We can't independently verify either of them, because we're not the government and we never will be.</p>
+  <p class="lede">So the number might be right. It might be a typo. It might be someone entering it wrong on purpose. From inside the system those three cases look exactly the same, and I think that's the important part. There's no clever check that separates them.</p>
+  <p class="aside">The design question stops being "how do we validate this" and becomes "how do we behave correctly while holding a value we know we cannot trust".</p>
+</section>
+
+<section class="slide" id="T7">
+  <div class="kicker">The problem &middot; 3 of 3</div>
+  <h1>What a bad state actually looks like</h1>
+  <h2>Three ways to fail a person whose data we're holding.</h2>
+  <ul class="feature-list">
+    <li><strong>Orphaned</strong> the record still exists but nothing reaches it from the person it belongs to. They're in the system and also not in the system.</li>
+    <li><strong>Lost</strong> we took something in and it isn't anywhere anymore.</li>
+    <li><strong>Misattributed</strong> the record got attached to the wrong person.</li>
+  </ul>
+  <p class="lede">Which one is worst? Misattribution, and it isn't close. Orphaning is recoverable, because the data is still there and an admin can go find it. Handing one person's health information to a different person is not recoverable. You can't un-disclose it.</p>
+</section>
+
+<section class="slide" id="T8">
+  <div class="kicker">The property</div>
+  <h1>Permissive going in. Restrictive coming out.</h1>
+  <h2>As perfectly permissive with what it can accept and restrictive with what it distributes as formally possible.</h2>
+  <p class="lede">That's the shape of the whole thing. Take almost anything at the door, because real people arrive with malformed records and they still deserve their coverage. Then be strict about what leaves, because that's where the damage happens.</p>
+  <p class="lede">Stated as a property rather than a slogan: the algorithm is total over malformed input, and every outbound attribution carries a justification. No one gets orphaned or put into a bad state, no matter how malformed their data is.</p>
+</section>
+
+<section class="slide" id="T9">
+  <div class="kicker">The principle</div>
+  <h1>Every value we hold has to be answerable</h1>
+  <h2>Nobody should ever be told "the system says so, and we can't tell you why".</h2>
+  <p class="lede">It's engineered around the idea that humans should have access to as much information about their health and coverage data as possible. So the constraint I held it to was this: there shouldn't be a situation where a question about any data value we handle for an individual can't be definitively answered.</p>
+  <p class="lede">An admin can answer it in the worst case, on the weird edge records. A user can answer it themselves in the common case, which is most of the time.</p>
+</section>
+
+<section class="slide bridge" id="T10">
+  <div class="kicker">So</div>
+  <h1>How do you <span class="accent2">guarantee</span> any of that?</h1>
+</section>
+
+<section class="slide" id="T11">
+  <div class="kicker">The guarantees &middot; division of labor</div>
+  <h1>Three tools, because they answer different questions</h1>
+  <h2>Reaching for more than one prover isn't thoroughness for its own sake. Each is bad at what the next one is good at, and each sits at a different point in the process.</h2>
+  <div class="tool-table">
+    <div class="tool">Z3 &amp; cvc5</div>
+    <div class="job">Go first, before any specification exists. Bound the logical shape of the problem and find the combinations of field values a human would never write a test for.</div>
+    <div class="tool">TLA+</div>
+    <div class="job">Specify the states a record can reach as it moves through the process, and which ones it must never reach. Independent of any implementation.</div>
+    <div class="tool">Lean 4</div>
+    <div class="job">Does double duty. One model states what must be true. A second models the implementation as built. A later phase proves the second satisfies the first.</div>
+  </div>
+  <p class="aside">The rest of this act takes them one at a time, and says what each one's result does and does not cover.</p>
+</section>
+
+<section class="slide" id="T12">
+  <div class="kicker">The guarantees &middot; Lean 4</div>
+  <h1>Lean proves things about models</h1>
+  <h2>Plural, and it's worth being precise about which one.</h2>
+  <p class="lede">The requirements model comes first. Eligibility gets written down as well-typed propositions saying what must hold, and it's explicitly not allowed to prescribe how any of it gets built. Totality is the one that matters most here. Every input the model admits maps to a defined outcome, so there's no fall-through case for a malformed record to land in.</p>
+  <p class="lede">One distinction I keep visible: a Lean declaration whose proof body is still <code>sorry</code> has type-checked, and that means it's admitted, not proven. Those get inventoried rather than quietly counted as done. It's an easy place to accidentally overclaim.</p>
+  <p class="aside">Why Lean and not just tests? Well, tests check the cases you thought of. A proof covers the ones you didn't, which is exactly the population malformed healthcare data lives in.</p>
+</section>
+
+<section class="slide" id="T13">
+  <div class="kicker">The guarantees &middot; TLA+</div>
+  <h1>TLA+ covers the states, not the formulas</h1>
+  <h2>Eligibility isn't one calculation. It's a record moving.</h2>
+  <p class="lede">A person's record enters, gets matched or fails to match, gets attributed, gets amended when better information turns up later, and can be corrected after the fact. That's a state machine, and the failures that worry me are transitions, not arithmetic.</p>
+  <p class="lede">So the safety properties go here: orphaned is unreachable, misattributed is unreachable, and a record that came in can't quietly stop existing. The specification also has to carry the fail-closed paths, the retry and restart behavior, and any partial-deployment state that could affect correctness. A missing transition is the real risk, and a high model-run count doesn't compensate for one.</p>
+  <p class="aside">The scoping caveat: model checking is bounded. A clean run means no counterexample was found under that configuration and those bounds. That's strong evidence, and it is not the same claim as a proof.</p>
+</section>
+
+<section class="slide" id="T14">
+  <div class="kicker">The guarantees &middot; Z3 and cvc5</div>
+  <h1>The solvers go first, not last</h1>
+  <h2>Before there's a specification to check, there's a question about what's even possible.</h2>
+  <p class="lede">Some obligations are just constraint questions. Given these field-level conditions, can a record exist that satisfies all of them at once and still lands somewhere we said was impossible? A human writes maybe a dozen combinations. A solver enumerates the space.</p>
+  <p class="lede">Two solvers instead of one, because they don't agree on everything. Different heuristics, different things they time out on. When both discharge an obligation I have more confidence than either gives me alone, and when they disagree that's a finding worth chasing.</p>
+  <p class="lede">The rule that keeps this honest: an unsat result doesn't get credited to the requirement I had in mind unless deleting or weakening that requirement actually changes the answer. Otherwise I've just proven that my encoding asserts its own conclusion.</p>
+</section>
+
+<section class="slide" id="T15">
+  <div class="kicker">The artifact</div>
+  <h1>Why a matrix instead of a pile of conditionals</h1>
+  <h2>The shape of the thing is doing most of the work.</h2>
+  <p class="lede">A cascade of if-statements has an implicit last branch, and that branch is where records go to get orphaned. A matrix doesn't have one. Every combination of inputs is a cell, and a cell is either filled in or the thing doesn't compile.</p>
+  <div class="matrix-fig">
+  <svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A grid in which every cell is filled, with a single narrow outlet on the right edge">
+    <g fill="none" stroke="#30363d" stroke-width="1">
+      <rect x="40" y="26" width="360" height="138" rx="6"/>
+    </g>
+    <g stroke="#30363d" stroke-width="1">
+      <line x1="40" y1="60" x2="400" y2="60"/><line x1="40" y1="95" x2="400" y2="95"/><line x1="40" y1="129" x2="400" y2="129"/>
+      <line x1="112" y1="26" x2="112" y2="164"/><line x1="184" y1="26" x2="184" y2="164"/>
+      <line x1="256" y1="26" x2="256" y2="164"/><line x1="328" y1="26" x2="328" y2="164"/>
+    </g>
+    <g fill="#7ee787">
+      <circle cx="76" cy="43" r="4"/><circle cx="148" cy="43" r="4"/><circle cx="220" cy="43" r="4"/><circle cx="292" cy="43" r="4"/><circle cx="364" cy="43" r="4"/>
+      <circle cx="76" cy="77" r="4"/><circle cx="148" cy="77" r="4"/><circle cx="220" cy="77" r="4"/><circle cx="292" cy="77" r="4"/><circle cx="364" cy="77" r="4"/>
+      <circle cx="76" cy="112" r="4"/><circle cx="148" cy="112" r="4"/><circle cx="220" cy="112" r="4"/><circle cx="292" cy="112" r="4"/><circle cx="364" cy="112" r="4"/>
+      <circle cx="76" cy="146" r="4"/><circle cx="148" cy="146" r="4"/><circle cx="220" cy="146" r="4"/><circle cx="292" cy="146" r="4"/><circle cx="364" cy="146" r="4"/>
+    </g>
+    <g stroke="#8b949e" stroke-width="1.4" fill="none">
+      <path d="M8 95 L36 95"/><path d="M28 89 L36 95 L28 101"/>
+    </g>
+    <text x="8" y="82" fill="#8b949e" font-family="monospace" font-size="11">in</text>
+    <g stroke="#f0a868" stroke-width="1.6" fill="none">
+      <path d="M404 95 L470 95"/><path d="M462 88 L470 95 L462 102"/>
+    </g>
+    <circle cx="437" cy="95" r="7" fill="none" stroke="#f0a868" stroke-width="1.6"/>
+    <text x="482" y="92" fill="#f0a868" font-family="monospace" font-size="11">out,</text>
+    <text x="482" y="106" fill="#f0a868" font-family="monospace" font-size="11">justified</text>
+  </svg>
+  </div>
+  <p class="caption">Illustrative, not the real matrix. The point is that no cell is empty and there is exactly one way out.</p>
+</section>
+
+<section class="slide" id="T16">
+  <div class="kicker">The artifact</div>
+  <h1>Total by construction</h1>
+  <h2>Every input lands somewhere on purpose.</h2>
+  <p class="lede">"Handles any malformed data object" sounds like a boast until you notice it's the weaker of the two claims. Accepting bad input is easy. The hard claim is that nothing you accept can end up nowhere.</p>
+  <p class="lede">That's what totality buys. A record with a Social Security number we can't verify gets a defined outcome, and that outcome carries its own reason for being what it is. We can promise that we won't orphan, lose, or misattribute the data given to us, even in cases where we don't have all of the pieces. Incomplete is a state the system knows how to be in, rather than a state it falls into.</p>
+</section>
+
+<section class="slide" id="T17">
+  <div class="kicker">The boundary</div>
+  <h1>Where the proof stops and the C# starts</h1>
+  <h2>This is the question I'd ask first if someone told me what I just told you.</h2>
+  <p class="lede">There are two Lean models here, not one, and keeping them apart is the whole mechanism. The first says what must be true, and it gets written without reference to any implementation. The second models the implementation as it was actually built, after the code exists.</p>
+  <p class="lede">Then a later phase discharges two obligations that are deliberately kept separate. One is that the implementation model satisfies the requirements model, and that one is a proof. The other is that the production code conforms to the implementation model, and that one is bounded evidence. Collapsing those two into a single sentence is the mistake I'm trying not to make.</p>
+  <p class="lede">A rule I hold myself to: an implementation model isn't accurate just because I wrote it after reading the code. It has to be shown to correspond, and if that evidence is empirical then the conclusion stays empirical too.</p>
+  <p class="lede">So the sentence I'm actually entitled to is that the implementation model satisfies the requirements model, and the production implementation conforms to the implementation model within a stated boundary. That's narrower than saying the system is formally verified, and it's the version that survives a sharp question.</p>
+</section>
+
+<section class="slide" id="T18">
+  <div class="kicker">The boundary</div>
+  <h1>What this does not prove</h1>
+  <h2>The limits, stated plainly, because a guarantee with no stated edges isn't a guarantee.</h2>
+  <ul class="feature-list limits">
+    <li><strong>Not the compiler</strong> the proofs are about the models. The .NET runtime, the database, and the hosting are all trusted, not verified.</li>
+    <li><strong>Not the inputs</strong> nothing here makes a wrong Social Security number right. It makes the system behave correctly while holding one.</li>
+    <li><strong>Not unbounded</strong> the TLA+ and solver results hold under their stated configurations and bounds. The Lean results are the ones that hold for all inputs.</li>
+    <li><strong>Not the rules themselves</strong> if the specification of who qualifies is wrong, it will be wrong consistently and provably. Formal methods make you precise, they don't make you correct about the world.</li>
+  </ul>
+  <p class="lede">My own process keeps a list of sentences that need more evidence than a model result can give, and "the implementation is formally verified" is on it. I'd rather be held to that list than get caught by it.</p>
+</section>
+
+<section class="slide" id="T19">
+  <div class="kicker">The boundary</div>
+  <h1>A passing check that couldn't have failed</h1>
+  <h2>This is the failure mode nobody talks about, and it's the one I worry about most.</h2>
+  <p class="lede">A conditional property can pass because the thing it describes is true. It can also pass because its precondition is never reachable, so the check never really ran. Both look green. So a conditional requirement doesn't count as satisfied here until something shows the precondition is actually inhabited.</p>
+  <p class="lede">The other half is deliberately breaking things to see whether the evidence notices. Weaken a requirement, remove an assumption, introduce a defect on purpose, and write down what you expect to happen before you run it. If a change that should have flipped the verdict doesn't flip it, the check isn't discriminating and it doesn't get to discharge the claim.</p>
+  <p class="aside">Worth separating two words that get mixed up: a counterexample shows a violation in the thing you're evaluating. A counterfactual tests whether your evidence can tell two situations apart at all. Only one of them is bad news, and it isn't the second one.</p>
+</section>
+
+<section class="slide bridge" id="T20">
+  <div class="kicker">The method</div>
+  <h1>Built on an AI development life cycle<br>of my own design.</h1>
+</section>
+
+<section class="slide" id="T21">
+  <div class="kicker">The method</div>
+  <h1>How much rigor is itself a decision</h1>
+  <h2>And it gets decided on risk, not on how fast I want to move.</h2>
+  <p class="lede">The lifecycle has three rigor tiers. The lightest is prose requirements, tests, adversarial validation, and close-out. The heaviest runs all nine phases. Choosing between them is an explicit step with someone's name attached, not a mood I was in that week.</p>
+  <p class="lede">The selection rule is the part I'd defend hardest. Tier comes from complexity and potential harm, never from desired development speed. It can be raised at any point. Lowering it once work has started takes written rationale and a sign-off, because otherwise it would quietly get lowered every time a date moved.</p>
+  <p class="lede">Eligibility ran at the top tier. All nine phases, which is what the next slide walks through.</p>
+</section>
+
+<section class="slide" id="T22">
+  <div class="kicker">The method</div>
+  <h1>The nine phases, in order</h1>
+  <h2>The order is the argument. Each one is only allowed to claim what it actually established.</h2>
+  <ul class="feature-list">
+    <li><strong>1 &middot; Logical exploration</strong> solvers bound the shape of the problem and pin down a root cause, before any specification exists.</li>
+    <li><strong>2 &middot; Specification model</strong> required states, transitions, invariants, and liveness in TLA+, independent of any implementation.</li>
+    <li><strong>3 &middot; Requirements model</strong> the same requirements as well-typed Lean propositions. Says what must be true; forbidden from prescribing how.</li>
+    <li><strong>4 &middot; Test generation</strong> requirements become executable tests, written before the production code they're going to test.</li>
+    <li><strong>5 &middot; Implementation</strong> the production change, built against those tests. It may not redefine a requirement to match code that already exists.</li>
+    <li><strong>6 &middot; Implementation model</strong> the second Lean model, of the code as actually built.</li>
+    <li><strong>7 &middot; Satisfaction and conformance</strong> the two obligations from the boundary slide, discharged separately.</li>
+    <li><strong>8 &middot; Adversarial validation</strong> concurrency, retries, partial deployment, malformed data, authorization. Reviewed by someone who didn't write the implementation.</li>
+    <li><strong>9 &middot; Close-out</strong> evidence, rollout, rollback, monitoring, and whatever residual risk is being accepted on purpose.</li>
+  </ul>
+</section>
+
+<section class="slide" id="T23">
+  <div class="kicker">The method</div>
+  <h1>Why this problem earned the top tier</h1>
+  <h2>I wouldn't do this to a CRUD form, to be clear.</h2>
+  <p class="lede">There's a list of indicators that push work up to the heaviest tier. I wrote that list before this project, and eligibility just happens to hit most of it at once.</p>
+  <ul class="feature-list">
+    <li><strong>Identity resolution</strong> working out which human a record belongs to, which is basically the entire problem here.</li>
+    <li><strong>Security and privacy</strong> the way it fails is by disclosing health information to the wrong person.</li>
+    <li><strong>Compliance impact</strong> the rules are federal, and getting them wrong has consequences well past the software.</li>
+    <li><strong>Safe and unsafe states you can't tell apart from the data you have</strong> which is the unverifiable Social Security number from earlier, stated generally.</li>
+  </ul>
+  <p class="lede">When that many are true at once, proving things is actually the cheap option. The expensive option is finding out in production.</p>
+</section>
+
+<section class="slide" id="T24">
+  <div class="kicker">The method</div>
+  <h1>Compliance as an obligation, not a checklist</h1>
+  <h2>A checklist is a list of things somebody remembered.</h2>
+  <p class="lede">The usual way compliance shows up in software is as a document, and then some tests that correspond to the document by convention and by someone's memory. Nothing structurally connects the two, so the document drifts.</p>
+  <p class="lede">Writing the compliance requirements as proof obligations closes that gap. The requirement isn't satisfied because a person ticked a box. It's satisfied because an obligation is discharged, and if the model changes underneath it the obligation fails and somebody has to go look.</p>
+</section>
+
+<section class="slide" id="T25">
+  <div class="kicker">The point of it</div>
+  <h1>People should be able to see their own coverage</h1>
+  <h2>The part I'd want to be remembered for if the proofs all turned out to be table stakes.</h2>
+  <p class="lede">Health coverage is one of the few things where a person's ability to answer a question about themselves is materially the product. Whether you're covered, since when, for how much longer, and why the system thinks so.</p>
+  <p class="lede">A lot of the verification work exists to make that answerable. You can't promise someone a definitive answer about their own data if your system has states where the answer is "we don't know how this record got here". Removing those states is what the guarantees are for.</p>
+</section>
+
+<section class="slide" id="T26">
+  <div class="kicker">Ty Davis</div>
+  <h1>Thanks for reading</h1>
+  <h2>Formal verification, AI-augmented development, and backend engineering.</h2>
+  <p class="lede">The eligibility work is client software and stays private, so this deck is the artifact. If you want to see what else I've built, most of it is open.</p>
+  <ul class="feature-list">
+    <li><strong>Portfolio</strong> <a href="https://portfolio.thetyster.dev">portfolio.thetyster.dev</a></li>
+    <li><strong>Orbital</strong> <a href="https://github.com/theTyster/orbital">github.com/theTyster/orbital</a>, an earlier methodology of mine, packaged as a Claude Code plugin marketplace</li>
+    <li><strong>GitHub</strong> <a href="https://github.com/thetyster">github.com/thetyster</a></li>
+    <li><strong>Email</strong> <a href="mailto:ty@mail.thetyster.dev">ty@mail.thetyster.dev</a></li>
+  </ul>
+</section>
+
+</div>
+
+<div class="footer">
+  <a class="footer-link" href="https://docs.google.com/presentation/d/1v1UWJGidZhQPf3KzKlO06QYufQX37gmoEdAWOKVtXp8/" target="_blank" rel="noopener"><span class="fl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></span>Behind this: <span class="fl-hi">the wrong-spec problem</span></a>
+  <div class="nav">
+    <button id="prev" title="Previous (&larr;)">&larr;</button>
+    <button id="next" title="Next (&rarr;)">&rarr;</button>
+  </div>
+  <div id="counter">1 / 26</div>
+</div>
+
+<script>
+(function(){
+  // Linear deck. Same navigation contract as the kimmy and orbital-shifting
+  // decks (arrow keys / PageUp / PageDown / space, Home, End, hash routing),
+  // without their trunk-and-branch tree since this deck has no detours.
+  const SLIDES = Array.from(document.querySelectorAll('.slide')).map(s => s.id);
+  const indexOf = {};
+  SLIDES.forEach((id, i) => { indexOf[id] = i; });
+
+  const counter = document.getElementById('counter');
+  let current = null;
+
+  function show(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    document.querySelectorAll('.slide').forEach(s => s.classList.toggle('active', s.id === id));
+    current = id;
+    counter.textContent = (indexOf[id] + 1) + ' / ' + SLIDES.length;
+    const newHash = '#' + id;
+    if (location.hash !== newHash) {
+      history.replaceState(null, '', newHash);
+    }
+    el.scrollTop = 0;
+  }
+
+  function go(direction) {
+    if (current === null) return;
+    const i = indexOf[current];
+    const target = direction === 'next' ? SLIDES[i + 1] : SLIDES[i - 1];
+    if (target) show(target);
+  }
+
+  function fromHash() {
+    const m = (location.hash || '').match(/#(.+)$/);
+    if (m && Object.prototype.hasOwnProperty.call(indexOf, m[1])) {
+      show(m[1]);
+    } else {
+      show(SLIDES[0]);
+    }
+  }
+
+  document.getElementById('prev').addEventListener('click', () => go('prev'));
+  document.getElementById('next').addEventListener('click', () => go('next'));
+
+  window.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { go('next'); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go('prev'); e.preventDefault(); }
+    else if (e.key === 'Home') { show(SLIDES[0]); }
+    else if (e.key === 'End') { show(SLIDES[SLIDES.length - 1]); }
+  });
+
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>

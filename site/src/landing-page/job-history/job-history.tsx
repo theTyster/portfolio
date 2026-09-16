@@ -33,18 +33,20 @@ const JobHistory = () => {
           <p>
             I am an Engineer II at FortyAU, a software consultancy. My work here
             runs on two tracks: client engineering delivered through FortyAU, and
-            the Orbital Shifting methodology I originated and continue to develop.
+            the AI development life cycle I designed and work in.
           </p>
           <p>
-            I originated{" "}
+            That life cycle runs nine phases across three rigor tiers. Its core
+            move is keeping two models apart: one says what must be true, and a
+            second describes the implementation as it was actually built. A later
+            phase then proves the second satisfies the first, and shows that
+            production code conforms to it within a stated boundary. An earlier
+            methodology of mine,{" "}
             <NewTabLink link="https://github.com/theTyster/orbital">
               Orbital Shifting
             </NewTabLink>
-            , a methodology that uses Prolog and Lean 4 to keep LLM-generated
-            specifications logically coherent and free of self-contradiction.
-            The framework ships as a four-plugin Claude Code marketplace I
-            maintain and continue to develop. Some of my responsibilities at
-            FortyAU include:
+            , ships as a four-plugin Claude Code marketplace. Some of my
+            responsibilities at FortyAU include:
           </p>
           <section className="jobHistory-5-client-engagement">
             <h5 className="jobHistory-5-client-title">
@@ -60,6 +62,25 @@ const JobHistory = () => {
               formalize, specify, and verify the components I engineer in Lean 4.
             </p>
             <ul>
+              <li className="jobHistory-5-responsibilities">
+                Designed and verified the COBRA eligibility matrix and algorithm,
+                the platform&apos;s core business logic, which every user flows
+                through. The eligibility model is formalized in Lean 4, its state
+                transitions model-checked in TLA+, and its constraint obligations
+                discharged with Z3 and cvc5, with a closed-world Prolog fact base
+                separating what is known about a record from what is provable in
+                general. The model is total over malformed input, so a record with
+                unverifiable identity data still reaches a defined, justified
+                outcome instead of being orphaned or misattributed.{" "}
+                <a
+                  href="/my-work/cobra-eligibility/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Read the deck
+                </a>
+                .
+              </li>
               <li className="jobHistory-5-responsibilities">
                 Backend feature engineering on a .NET 6 / C#
                 benefits-administration platform (ASP.NET Web API, React
@@ -89,7 +110,8 @@ const JobHistory = () => {
         </>
       ),
       responsibilities: [
-        "Originator of Orbital Shifting, a formal-verification and AI-augmented SDLC methodology",
+        "Designed the nine-phase, three-tier AI development life cycle I work in, pairing a Lean requirements model with a separate model of the implementation as built",
+        "Originator of Orbital Shifting, an earlier formal-verification and AI-augmented SDLC methodology",
         <>
           Maintaining the{" "}
           <NewTabLink link="https://github.com/theTyster/orbital">
@@ -346,12 +368,13 @@ const JobHistory = () => {
       <Preamble>
         I am a software engineer working at the intersection of formal
         verification, AI-augmented development, and backend engineering. I
-        created Orbital Shifting, a methodology that uses formal verification
-        and logic-oriented languages (Prolog, Lean 4) to help LLMs generate
-        specifications that don&apos;t contradict themselves. I structure LLM
-        reasoning as a logical debate with humans and theorem provers, so the
-        resulting concepts align with what humans intend rather than drifting
-        on training-set defaults.
+        designed and practice my own AI development life cycle, which uses
+        Lean 4, TLA+, and SMT solvers to keep AI-assisted code accountable to
+        specifications. It separates the model of what must be true from the
+        model of what the code actually does, so a correctness claim never
+        outruns the evidence behind it. An earlier methodology of mine, Orbital
+        Shifting, structured LLM reasoning as a logical debate with humans and
+        theorem provers, and it still ships as an open-source marketplace.
       </Preamble>
       <Preamble>
         Good specifications usher good software. I follow a test-driven
