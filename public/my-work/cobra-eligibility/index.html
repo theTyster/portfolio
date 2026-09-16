@@ -282,7 +282,6 @@
     <span class="pill">TLA+</span>
     <span class="pill">Z3</span>
     <span class="pill">cvc5</span>
-    <span class="pill">Prolog</span>
   </p>
   <p style="margin-top:auto; padding-top:2em; color:var(--muted); font-size:14px;">Press <code style="color:var(--accent3)">&rarr;</code> to walk the deck. The client's code is private, so there's no source here. The reasoning is the thing worth showing anyway.</p>
 </section>
@@ -361,57 +360,47 @@
 
 <section class="slide" id="T11">
   <div class="kicker">The guarantees &middot; division of labor</div>
-  <h1>Four tools, because they answer different questions</h1>
-  <h2>Reaching for more than one prover isn't thoroughness for its own sake. Each one is bad at what the next one is good at.</h2>
+  <h1>Three tools, because they answer different questions</h1>
+  <h2>Reaching for more than one prover isn't thoroughness for its own sake. Each is bad at what the next one is good at, and each sits at a different point in the process.</h2>
   <div class="tool-table">
-    <div class="tool">Lean 4</div>
-    <div class="job">The properties that have to hold for every input, forever. Proofs about the eligibility model itself, checked by the kernel.</div>
-    <div class="tool">TLA+</div>
-    <div class="job">The states a record can actually reach as it moves through the process, and which ones it must never reach.</div>
     <div class="tool">Z3 &amp; cvc5</div>
-    <div class="job">The specific combinations of field values I would never have thought to write a test for. The solver goes looking for them.</div>
-    <div class="tool">Prolog</div>
-    <div class="job">What is actually known about a record right now, under closed-world assumptions, kept separate from what is provable in general.</div>
+    <div class="job">Go first, before any specification exists. Bound the logical shape of the problem and find the combinations of field values a human would never write a test for.</div>
+    <div class="tool">TLA+</div>
+    <div class="job">Specify the states a record can reach as it moves through the process, and which ones it must never reach. Independent of any implementation.</div>
+    <div class="tool">Lean 4</div>
+    <div class="job">Does double duty. One model states what must be true. A second models the implementation as built. A later phase proves the second satisfies the first.</div>
   </div>
   <p class="aside">The rest of this act takes them one at a time, and says what each one's result does and does not cover.</p>
 </section>
 
 <section class="slide" id="T12">
   <div class="kicker">The guarantees &middot; Lean 4</div>
-  <h1>Lean proves things about the model</h1>
-  <h2>And it's worth being precise about what "the model" means here.</h2>
-  <p class="lede">The eligibility logic gets written down as a mathematical object first. Not pseudocode, an actual definition with a type. Then the properties I care about get stated as theorems over that definition, and Lean's kernel checks the proofs.</p>
-  <p class="lede">So when I say a property is proven, the honest sentence is: the property holds for the formal model of eligibility, for all inputs, with no unproven steps left in. Totality is the one that matters most. Every input the model admits maps to a defined outcome, which means there is no "and then it falls through" case for a malformed record to land in.</p>
-  <p class="aside">Why Lean and not just tests? Well, tests check the cases you thought of. A proof covers the ones you didn't, which is exactly the population that malformed healthcare data lives in.</p>
+  <h1>Lean proves things about models</h1>
+  <h2>Plural, and it's worth being precise about which one.</h2>
+  <p class="lede">The requirements model comes first. Eligibility gets written down as well-typed propositions saying what must hold, and it's explicitly not allowed to prescribe how any of it gets built. Totality is the one that matters most here. Every input the model admits maps to a defined outcome, so there's no fall-through case for a malformed record to land in.</p>
+  <p class="lede">One distinction I keep visible: a Lean declaration whose proof body is still <code>sorry</code> has type-checked, and that means it's admitted, not proven. Those get inventoried rather than quietly counted as done. It's an easy place to accidentally overclaim.</p>
+  <p class="aside">Why Lean and not just tests? Well, tests check the cases you thought of. A proof covers the ones you didn't, which is exactly the population malformed healthcare data lives in.</p>
 </section>
 
 <section class="slide" id="T13">
   <div class="kicker">The guarantees &middot; TLA+</div>
   <h1>TLA+ covers the states, not the formulas</h1>
   <h2>Eligibility isn't one calculation. It's a record moving.</h2>
-  <p class="lede">A person's record enters, gets matched or fails to match, gets attributed, gets amended when better information shows up later, and can get corrected after the fact. That's a state machine, and the failures that worry me are transitions, not arithmetic.</p>
-  <p class="lede">So the safety properties go into TLA+: orphaned is unreachable, misattributed is unreachable, and a record that came in can't quietly stop existing. The model checker explores the reachable state space and tries to produce a trace that violates one of them.</p>
-  <p class="aside">The scoping caveat: model checking is bounded. It explores the state space of the spec, at the sizes you give it. A clean run means no counterexample was found within those bounds, which is strong evidence and is not the same claim as a Lean proof.</p>
+  <p class="lede">A person's record enters, gets matched or fails to match, gets attributed, gets amended when better information turns up later, and can be corrected after the fact. That's a state machine, and the failures that worry me are transitions, not arithmetic.</p>
+  <p class="lede">So the safety properties go here: orphaned is unreachable, misattributed is unreachable, and a record that came in can't quietly stop existing. The specification also has to carry the fail-closed paths, the retry and restart behavior, and any partial-deployment state that could affect correctness. A missing transition is the real risk, and a high model-run count doesn't compensate for one.</p>
+  <p class="aside">The scoping caveat: model checking is bounded. A clean run means no counterexample was found under that configuration and those bounds. That's strong evidence, and it is not the same claim as a proof.</p>
 </section>
 
 <section class="slide" id="T14">
   <div class="kicker">The guarantees &middot; Z3 and cvc5</div>
-  <h1>The solvers find the cases I wouldn't have written</h1>
-  <h2>This is the part that actually changed my mind about SMT.</h2>
+  <h1>The solvers go first, not last</h1>
+  <h2>Before there's a specification to check, there's a question about what's even possible.</h2>
   <p class="lede">Some obligations are just constraint questions. Given these field-level conditions, can a record exist that satisfies all of them at once and still lands somewhere we said was impossible? A human writes maybe a dozen combinations. A solver enumerates the space.</p>
-  <p class="lede">Two solvers instead of one, because they don't agree on everything. They use different heuristics and they time out on different things, so when both discharge an obligation I have more confidence than either alone would give me. When they disagree, that disagreement is itself a finding worth chasing down.</p>
-  <p class="aside">A solver returning unsat is a proof of the constraint question you asked. It says nothing about the question you forgot to ask, which is why this layer sits underneath Lean rather than replacing it.</p>
+  <p class="lede">Two solvers instead of one, because they don't agree on everything. Different heuristics, different things they time out on. When both discharge an obligation I have more confidence than either gives me alone, and when they disagree that's a finding worth chasing.</p>
+  <p class="lede">The rule that keeps this honest: an unsat result doesn't get credited to the requirement I had in mind unless deleting or weakening that requirement actually changes the answer. Otherwise I've just proven that my encoding asserts its own conclusion.</p>
 </section>
 
 <section class="slide" id="T15">
-  <div class="kicker">The guarantees &middot; Prolog</div>
-  <h1>Prolog holds what's known, not what's true</h1>
-  <h2>A small role, and an important one.</h2>
-  <p class="lede">There's a real difference between "this is false" and "we have no record of this". Healthcare data lives in the second category constantly, and collapsing the two is how you end up denying someone coverage over a missing field.</p>
-  <p class="lede">A closed-world fact base keeps that distinction explicit. It says what we currently know about a record and is honest about the boundary of that knowledge. The open-world proofs about eligibility in general stay in Lean, where they belong. This split is the same one underneath Orbital Shifting, the methodology I work in.</p>
-</section>
-
-<section class="slide" id="T16">
   <div class="kicker">The artifact</div>
   <h1>Why a matrix instead of a pile of conditionals</h1>
   <h2>The shape of the thing is doing most of the work.</h2>
@@ -447,7 +436,7 @@
   <p class="caption">Illustrative, not the real matrix. The point is that no cell is empty and there is exactly one way out.</p>
 </section>
 
-<section class="slide" id="T17">
+<section class="slide" id="T16">
   <div class="kicker">The artifact</div>
   <h1>Total by construction</h1>
   <h2>Every input lands somewhere on purpose.</h2>
@@ -455,26 +444,36 @@
   <p class="lede">That's what totality buys. A record with a Social Security number we can't verify gets a defined outcome, and that outcome carries its own reason for being what it is. We can promise that we won't orphan, lose, or misattribute the data given to us, even in cases where we don't have all of the pieces. Incomplete is a state the system knows how to be in, rather than a state it falls into.</p>
 </section>
 
-<section class="slide" id="T18">
+<section class="slide" id="T17">
   <div class="kicker">The boundary</div>
   <h1>Where the proof stops and the C# starts</h1>
   <h2>This is the question I'd ask first if someone told me what I just told you.</h2>
-  <p class="lede">The proofs range over the model. The thing in production is a .NET service. Those are two different objects, and no amount of Lean makes the second one automatically inherit the properties of the first.</p>
-  <p class="lede">What bridges them is discipline rather than magic. The model is written first and the implementation is built to match it, annotation by annotation. Obligations that came out of the formal layer become tests against the real code. The refutation work happens against the spec before anything gets written, so the code is answering a question that has already survived attack.</p>
-  <p class="lede">So the accurate claim is: the eligibility model is verified, and the implementation is built and tested against that verified model. That's a strong position. It isn't end-to-end code extraction, and I'd rather say so than have someone find out by asking a sharp question.</p>
+  <p class="lede">There are two Lean models here, not one, and keeping them apart is the whole mechanism. The first says what must be true, and it gets written without reference to any implementation. The second models the implementation as it was actually built, after the code exists.</p>
+  <p class="lede">Then a later phase discharges two obligations that are deliberately kept separate. One is that the implementation model satisfies the requirements model, and that one is a proof. The other is that the production code conforms to the implementation model, and that one is bounded evidence. Collapsing those two into a single sentence is the mistake I'm trying not to make.</p>
+  <p class="lede">A rule I hold myself to: an implementation model isn't accurate just because I wrote it after reading the code. It has to be shown to correspond, and if that evidence is empirical then the conclusion stays empirical too.</p>
+  <p class="lede">So the sentence I'm actually entitled to is that the implementation model satisfies the requirements model, and the production implementation conforms to the implementation model within a stated boundary. That's narrower than saying the system is formally verified, and it's the version that survives a sharp question.</p>
 </section>
 
-<section class="slide" id="T19">
+<section class="slide" id="T18">
   <div class="kicker">The boundary</div>
   <h1>What this does not prove</h1>
   <h2>The limits, stated plainly, because a guarantee with no stated edges isn't a guarantee.</h2>
   <ul class="feature-list limits">
-    <li><strong>Not the compiler</strong> the proofs are about the model. The .NET runtime, the database, and the hosting are all trusted, not verified.</li>
+    <li><strong>Not the compiler</strong> the proofs are about the models. The .NET runtime, the database, and the hosting are all trusted, not verified.</li>
     <li><strong>Not the inputs</strong> nothing here makes a wrong Social Security number right. It makes the system behave correctly while holding one.</li>
-    <li><strong>Not unbounded</strong> the TLA+ results are model-checked within bounds. The Lean results are the ones that hold for all inputs.</li>
+    <li><strong>Not unbounded</strong> the TLA+ and solver results hold under their stated configurations and bounds. The Lean results are the ones that hold for all inputs.</li>
     <li><strong>Not the rules themselves</strong> if the specification of who qualifies is wrong, it will be wrong consistently and provably. Formal methods make you precise, they don't make you correct about the world.</li>
   </ul>
-  <p class="aside">That last one is the wrong-spec problem, which is the thing most of my other work is about.</p>
+  <p class="lede">My own process keeps a list of sentences that need more evidence than a model result can give, and "the implementation is formally verified" is on it. I'd rather be held to that list than get caught by it.</p>
+</section>
+
+<section class="slide" id="T19">
+  <div class="kicker">The boundary</div>
+  <h1>A passing check that couldn't have failed</h1>
+  <h2>This is the failure mode nobody talks about, and it's the one I worry about most.</h2>
+  <p class="lede">A conditional property can pass because the thing it describes is true. It can also pass because its precondition is never reachable, so the check never really ran. Both look green. So a conditional requirement doesn't count as satisfied here until something shows the precondition is actually inhabited.</p>
+  <p class="lede">The other half is deliberately breaking things to see whether the evidence notices. Weaken a requirement, remove an assumption, introduce a defect on purpose, and write down what you expect to happen before you run it. If a change that should have flipped the verdict doesn't flip it, the check isn't discriminating and it doesn't get to discharge the claim.</p>
+  <p class="aside">Worth separating two words that get mixed up: a counterexample shows a violation in the thing you're evaluating. A counterfactual tests whether your evidence can tell two situations apart at all. Only one of them is bad news, and it isn't the second one.</p>
 </section>
 
 <section class="slide bridge" id="T20">
@@ -484,33 +483,42 @@
 
 <section class="slide" id="T21">
   <div class="kicker">The method</div>
-  <h1>The spec gets attacked before the code exists</h1>
-  <h2>Which is the whole trick, and it's a scheduling decision more than a technical one.</h2>
-  <p class="lede">The normal order is write the spec, write the code, then find out the spec was ambiguous. With an LLM in the loop that gets worse, because the model will confidently fill an ambiguity with whatever its training set suggests and the output will read beautifully either way.</p>
-  <p class="lede">So the order is inverted. Claims get written down and decomposed. Then there's an adversarial pass whose only job is to refute them. Whatever survives becomes a proof obligation, and only then does anything get implemented.</p>
-  <p class="aside">The eligibility work is the largest thing I've run through this cycle on real client software.</p>
+  <h1>How much rigor is itself a decision</h1>
+  <h2>And it gets decided on risk, not on how fast I want to move.</h2>
+  <p class="lede">The lifecycle has three rigor tiers. The lightest is prose requirements, tests, adversarial validation, and close-out. The heaviest runs all nine phases. Choosing between them is an explicit step with someone's name attached, not a mood I was in that week.</p>
+  <p class="lede">The selection rule is the part I'd defend hardest. Tier comes from complexity and potential harm, never from desired development speed. It can be raised at any point. Lowering it once work has started takes written rationale and a sign-off, because otherwise it would quietly get lowered every time a date moved.</p>
+  <p class="lede">Eligibility ran at the top tier. All nine phases, which is what the next slide walks through.</p>
 </section>
 
 <section class="slide" id="T22">
   <div class="kicker">The method</div>
-  <h1>What each layer catches</h1>
-  <h2>They're ordered by how expensive the mistake gets if it slips past.</h2>
+  <h1>The nine phases, in order</h1>
+  <h2>The order is the argument. Each one is only allowed to claim what it actually established.</h2>
   <ul class="feature-list">
-    <li><strong>Fact modeling</strong> what do we actually know, and what are we assuming? Closed-world, in Prolog, so the gaps are visible instead of implied.</li>
-    <li><strong>Claim decomposition</strong> the English requirement gets broken into claims that can individually be true or false. Vague ones die here.</li>
-    <li><strong>Refutation</strong> an adversarial pass tries to break each surviving claim. This is the step that catches the LLM agreeing with me too easily.</li>
-    <li><strong>Proof obligation</strong> what's left gets stated formally and sent to whichever tool suits it, per the division of labor earlier.</li>
-    <li><strong>Realization</strong> implementation and tests, written against obligations, not against a paragraph someone typed into a ticket.</li>
+    <li><strong>1 &middot; Logical exploration</strong> solvers bound the shape of the problem and pin down a root cause, before any specification exists.</li>
+    <li><strong>2 &middot; Specification model</strong> required states, transitions, invariants, and liveness in TLA+, independent of any implementation.</li>
+    <li><strong>3 &middot; Requirements model</strong> the same requirements as well-typed Lean propositions. Says what must be true; forbidden from prescribing how.</li>
+    <li><strong>4 &middot; Test generation</strong> requirements become executable tests, written before the production code they're going to test.</li>
+    <li><strong>5 &middot; Implementation</strong> the production change, built against those tests. It may not redefine a requirement to match code that already exists.</li>
+    <li><strong>6 &middot; Implementation model</strong> the second Lean model, of the code as actually built.</li>
+    <li><strong>7 &middot; Satisfaction and conformance</strong> the two obligations from the boundary slide, discharged separately.</li>
+    <li><strong>8 &middot; Adversarial validation</strong> concurrency, retries, partial deployment, malformed data, authorization. Reviewed by someone who didn't write the implementation.</li>
+    <li><strong>9 &middot; Close-out</strong> evidence, rollout, rollback, monitoring, and whatever residual risk is being accepted on purpose.</li>
   </ul>
 </section>
 
 <section class="slide" id="T23">
   <div class="kicker">The method</div>
-  <h1>Why it was worth it on this problem</h1>
+  <h1>Why this problem earned the top tier</h1>
   <h2>I wouldn't do this to a CRUD form, to be clear.</h2>
-  <p class="lede">Formal methods cost real time up front, so the question is always whether a problem earns it. This one does, and I think it's worth saying why.</p>
-  <p class="lede">Every user flows through eligibility, so the blast radius is everybody on the platform. The way it fails is by disclosing health information to the wrong person, and you can't take that back. On top of that we're holding values we've been told are true and can't check, which makes the input adversarial whether or not anyone intends it to be.</p>
-  <p class="lede">When that's the situation, proving things is actually the cheap option. The expensive option is finding out in production.</p>
+  <p class="lede">There's a list of indicators that push work up to the heaviest tier. I wrote that list before this project, and eligibility just happens to hit most of it at once.</p>
+  <ul class="feature-list">
+    <li><strong>Identity resolution</strong> working out which human a record belongs to, which is basically the entire problem here.</li>
+    <li><strong>Security and privacy</strong> the way it fails is by disclosing health information to the wrong person.</li>
+    <li><strong>Compliance impact</strong> the rules are federal, and getting them wrong has consequences well past the software.</li>
+    <li><strong>Safe and unsafe states you can't tell apart from the data you have</strong> which is the unverifiable Social Security number from earlier, stated generally.</li>
+  </ul>
+  <p class="lede">When that many are true at once, proving things is actually the cheap option. The expensive option is finding out in production.</p>
 </section>
 
 <section class="slide" id="T24">
@@ -533,10 +541,10 @@
   <div class="kicker">Ty Davis</div>
   <h1>Thanks for reading</h1>
   <h2>Formal verification, AI-augmented development, and backend engineering.</h2>
-  <p class="lede">The eligibility work is client software and stays private, so this deck is the artifact. If you want the methodology underneath it, that's open source and there's a lot more of it.</p>
+  <p class="lede">The eligibility work is client software and stays private, so this deck is the artifact. If you want to see what else I've built, most of it is open.</p>
   <ul class="feature-list">
     <li><strong>Portfolio</strong> <a href="https://portfolio.thetyster.dev">portfolio.thetyster.dev</a></li>
-    <li><strong>Orbital Shifting</strong> <a href="https://github.com/theTyster/orbital">github.com/theTyster/orbital</a>, the methodology as a Claude Code plugin marketplace</li>
+    <li><strong>Orbital</strong> <a href="https://github.com/theTyster/orbital">github.com/theTyster/orbital</a>, an earlier methodology of mine, packaged as a Claude Code plugin marketplace</li>
     <li><strong>GitHub</strong> <a href="https://github.com/thetyster">github.com/thetyster</a></li>
     <li><strong>Email</strong> <a href="mailto:ty@mail.thetyster.dev">ty@mail.thetyster.dev</a></li>
   </ul>
@@ -545,7 +553,7 @@
 </div>
 
 <div class="footer">
-  <a class="footer-link" href="/my-work/orbital-shifting/index.html" target="_blank" rel="noopener"><span class="fl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></span>The methodology underneath: <span class="fl-hi">orbital shifting</span></a>
+  <a class="footer-link" href="https://docs.google.com/presentation/d/1v1UWJGidZhQPf3KzKlO06QYufQX37gmoEdAWOKVtXp8/" target="_blank" rel="noopener"><span class="fl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></span>Behind this: <span class="fl-hi">the wrong-spec problem</span></a>
   <div class="nav">
     <button id="prev" title="Previous (&larr;)">&larr;</button>
     <button id="next" title="Next (&rarr;)">&rarr;</button>
