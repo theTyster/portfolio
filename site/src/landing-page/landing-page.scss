@@ -7,3 +7,13 @@
 .my-headshot {
   width: 298px;
 }
+
+// Collapsed group for beginner-era projects on the My Work tab.
+details.early-work {
+  margin-top: 1.5rem;
+  summary {
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}

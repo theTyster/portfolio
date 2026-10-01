@@ -60,14 +60,22 @@ const hasLink = (s: PortfolioDB["Data"]) => {
     );
 };
 
-const Showcase = ({ db }: { db: PortfolioDB['Map'] }) => {
+// `featured` (default true) renders the first entry large, above a divider.
+// Pass featured={false} for a plain, evenly sized grid.
+const Showcase = ({
+  db,
+  featured = true,
+}: {
+  db: PortfolioDB['Map'];
+  featured?: boolean;
+}) => {
   //const showcaseNamesObj = db.keys().next().value;
   const showcaseDataArr: PortfolioDB['Data'][] = db.values().next().value;
 
   return (
-    <div className="showcase">
+    <div className={featured ? "showcase" : "showcase showcase-plain"}>
       {showcaseDataArr.map((s, index) => {
-        if (index === 0) {
+        if (featured && index === 0) {
           return (
             <React.Fragment key={`showcase_${s.id}`}>
               <div className="currently-showcased">

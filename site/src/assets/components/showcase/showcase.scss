@@ -92,6 +92,24 @@ div.showcase {
       width: 100%;
     }
   }
+  // Plain grid (featured={false}): the first tile is sized like the rest.
+  &.showcase-plain {
+    a:first-child,
+    button:first-child,
+    div.showcase-item:first-child {
+      flex: 0 1 calc(33.33% - $grid-margin);
+      @include theme.medium-media-query() {
+        flex: 1 0 calc(50% - $grid-margin * 2);
+      }
+      @include theme.small-media-query() {
+        flex: 1 0 calc(100% - $grid-margin * 2);
+      }
+      img {
+        box-shadow: none;
+        transform: none;
+      }
+    }
+  }
   button {
     padding: 0;
     background-color: inherit;

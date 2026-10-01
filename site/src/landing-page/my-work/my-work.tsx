@@ -19,21 +19,11 @@ const MyWork = () => {
         Orbital: 0,
         "COBRA Eligibility": 1,
         sharlean: 2,
-        Sagittarius: 3,
-        Artemis: 4,
-        locator: 5,
-        kimmy: 6,
-        "Cherry Lane Farm Doodles": 7,
-        CripToe: 8,
-        Jeopardy: 9,
-        "Duck Story": 10,
-        // ── Early Work ───────────────────────────────────────────
-        "Fruit Search": 11,
-        "Giphy Search": 12,
-        "Hacker News Clone": 13,
-        "Meme Generator": 14,
-        "Memory Game": 15,
-        "ToDo App": 16,
+        Artemis: 3,
+        locator: 4,
+        kimmy: 5,
+        "Cherry Lane Farm Doodles": 6,
+        CripToe: 7,
       },
       [
         {
@@ -80,19 +70,7 @@ const MyWork = () => {
           ),
         },
         {
-          //3:Sagittarius verification pipeline
-          id: "Sagittarius",
-          title: "Sagittarius",
-          link: ["https://github.com/theTyster/sagittarius", "_blank"],
-          img: (
-            <img
-              src="/static/img/sagittarius-ss.svg"
-              alt="An arrow drawn along a dashed orbital arc toward a target"
-            />
-          ),
-        },
-        {
-          //4:Artemis benchmark harness
+          //3:Artemis benchmark harness
           id: "Artemis",
           title: "Artemis",
           link: ["https://github.com/theTyster/artemis", "_blank"],
@@ -104,7 +82,7 @@ const MyWork = () => {
           ),
         },
         {
-          //5:locator (formerly context-focused-agents)
+          //4:locator (formerly context-focused-agents)
           id: "locator",
           title: "locator",
           link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
@@ -116,7 +94,7 @@ const MyWork = () => {
           ),
         },
         {
-          //6:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
+          //5:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
           id: "kimmy",
           title: "kimmy",
           link: ["/my-work/kimmy/index.html", "_blank"],
@@ -128,7 +106,7 @@ const MyWork = () => {
           ),
         },
         {
-          //7:Cherry Lane Farms (demoted from featured)
+          //6:Cherry Lane Farms (demoted from featured)
           id: "Cherry Lane Farm Doodles",
           title: "Cherry Lane Farm Doodles",
           link: ["/cherry-lane-farms"],
@@ -140,7 +118,7 @@ const MyWork = () => {
           ),
         },
         {
-          //8
+          //7
           id: "CripToe",
           title: "CripToe.js",
           link: ["https://www.npmjs.com/package/criptoe", "_blank"],
@@ -154,8 +132,26 @@ const MyWork = () => {
             />
           ),
         },
+      ],
+    ],
+  ]);
+
+  // Beginner and bootcamp-era projects, kept but demoted behind a collapsed group.
+  const earlyWorkDB: PortfolioDB["Map"] = new Map([
+    [
+      {
+        Jeopardy: 0,
+        "Duck Story": 1,
+        "Fruit Search": 2,
+        "Giphy Search": 3,
+        "Hacker News Clone": 4,
+        "Meme Generator": 5,
+        "Memory Game": 6,
+        "ToDo App": 7,
+      },
+      [
         {
-          //9
+          //0
           id: "Jeopardy",
           title: "Jeopardy",
           link: ["/jeopardy", "_blank"],
@@ -167,7 +163,7 @@ const MyWork = () => {
           ),
         },
         {
-          //10
+          //1
           id: "Duck Story",
           title: "Duck Story",
           link: ["/my-work/duck-story-v1/index.html", "_blank"],
@@ -178,9 +174,8 @@ const MyWork = () => {
             />
           ),
         },
-        // ── Early Work ─────────────────────────────────────────
         {
-          //11
+          //2
           id: "Fruit Search",
           title: "Fruit Search",
           link: ["/my-work/fruit-search/index.html", "_blank"],
@@ -192,7 +187,7 @@ const MyWork = () => {
           ),
         },
         {
-          //12
+          //3
           id: "Giphy Search",
           title: "Giphy Search",
           link: ["/my-work/giphy-search/index.html", "_blank"],
@@ -204,7 +199,7 @@ const MyWork = () => {
           ),
         },
         {
-          //13
+          //4
           id: "Hacker News Clone",
           title: "Hacker News Clone",
           link: ["/my-work/hacker-news-clone/index.html", "_blank"],
@@ -216,7 +211,7 @@ const MyWork = () => {
           ),
         },
         {
-          //14
+          //5
           id: "Meme Generator",
           title: "Meme Generator",
           link: ["/my-work/meme-generator/index.html", "_blank"],
@@ -228,7 +223,7 @@ const MyWork = () => {
           ),
         },
         {
-          //15
+          //6
           id: "Memory Game",
           title: "Memory Game",
           link: ["/my-work/memory-game/index.html", "_blank"],
@@ -240,7 +235,7 @@ const MyWork = () => {
           ),
         },
         {
-          //16
+          //7
           id: "ToDo App",
           title: "ToDo App",
           link: ["/my-work/todo-app/index.html", "_blank"],
@@ -256,6 +251,10 @@ const MyWork = () => {
     <nav>
       <menu className="my-work">
         <Showcase db={portfolioDB} />
+        <details className="early-work">
+          <summary>Early work</summary>
+          <Showcase db={earlyWorkDB} featured={false} />
+        </details>
       </menu>
     </nav>
   );

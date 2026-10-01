@@ -81,8 +81,8 @@ function JobEntry({
         <div className={`jobHistory-${id}-summary`}>
           {summary}
           <ul>
-            {responsibilities.map((li) => (
-              <li key={li!.toString()}
+            {responsibilities.map((li, i) => (
+              <li key={i}
                 className={`jobHistory-${id}-responsibilities`}
               >{li}</li>
             ))}
