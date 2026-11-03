@@ -1,0 +1,44 @@
+/* Shared design tokens for Ty Davis's portfolio and project sites.
+   Canonical copy. The portfolio compiles these from site/src/assets/css/tokens.scss;
+   each microsite (sagittarius, stratify, sharlean) inlines this block with a
+   "source: portfolio/design/tokens.css" comment. Palette derives from the
+   Sagittarius deck (sagittarius/site/index.html). Dark is the default. */
+:root {
+  color-scheme: dark;
+  --bg: #060a18; --bg2: #0c1534;
+  --surface: #0b1230; --surface2: #101a3e; --code: #070c20;
+  --fg: #e8edff; --muted: #aab5d8; --line: #2b3a6c;
+  --accent: #62e3f7; --amber: #ffb454; --good: #74e8ae; --mid: #b9adff; --bad: #ff9a9a;
+  --onaccent: #06111f;
+  --starc: rgba(255,255,255,.95); --star-op: .55;
+  --neb1: rgba(70,100,230,.26); --neb2: rgba(0,200,220,.12); --neb3: rgba(255,160,70,.07);
+  --shadow: rgba(0,0,0,.35);
+  --body: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --radius: 14px; --radius-sm: 6px;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: #f1f4fb; --bg2: #e4eaf8;
+    --surface: #ffffff; --surface2: #f7f9fe; --code: #eef2fb;
+    --fg: #121a36; --muted: #475274; --line: #c6d0e8;
+    --accent: #0a6a88; --amber: #8a5200; --good: #17703f; --mid: #5645c4; --bad: #a82828;
+    --onaccent: #ffffff;
+    --starc: rgba(40,60,140,.45); --star-op: .35;
+    --neb1: rgba(90,120,230,.14); --neb2: rgba(0,170,200,.08); --neb3: rgba(255,170,80,.08);
+    --shadow: rgba(30,40,90,.12);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f1f4fb; --bg2: #e4eaf8;
+  --surface: #ffffff; --surface2: #f7f9fe; --code: #eef2fb;
+  --fg: #121a36; --muted: #475274; --line: #c6d0e8;
+  --accent: #0a6a88; --amber: #8a5200; --good: #17703f; --mid: #5645c4; --bad: #a82828;
+  --onaccent: #ffffff;
+  --starc: rgba(40,60,140,.45); --star-op: .35;
+  --neb1: rgba(90,120,230,.14); --neb2: rgba(0,170,200,.08); --neb3: rgba(255,170,80,.08);
+  --shadow: rgba(30,40,90,.12);
+}

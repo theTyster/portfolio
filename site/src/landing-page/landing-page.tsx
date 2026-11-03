@@ -1,148 +1,54 @@
-//DEV LIBRARIES
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { setTitle, sleep } from "@utils/utils.js";
+"use client";
 
-//CSS
+import { useMemo } from "react";
 import "./landing-page.scss";
-
-//COMPONENTS
-import TabMenu from "@components/tab-menu/tab-menu";
-import AttetionGetterImage from "@components/attention-getter-image/attention-getter-image";
+import Viewpoints, { type Viewpoint } from "./viewpoints/viewpoints";
 import JobHistory from "./job-history/job-history";
 import Blog, { type BlogFeedResult } from "./blog/blog";
 import Contributions from "./contributions/contributions";
 import MyWork from "./my-work/my-work";
 
-const AttentionGetterSideText = () => (
-  <>
-    <span>
-      <i>
-        I like to keep things lean, fast, simple and usable. The web, and software in general, are meant
-        to make information accessible to anyone.
-      </i>
-      <blockquote>
-        <i>&quot;Web pages are designed for people.&quot;</i>
-        <p>-Tim Berners-Lee</p>
-      </blockquote>
-    </span>
-  </>
-);
+function Hero() {
+  return (
+    <div className="hero">
+      <h1>Ty Davis</h1>
+      <p className="lede">
+        I build backend systems for enterprise benefits and insurance carriers on .NET, C#, and Azure.
+      </p>
+      <p className="sub">
+        I keep AI-assisted code accountable to its specifications. Lean 4, TLA+, and SMT solvers check what must be
+        true separately from what the code actually does.
+      </p>
+      <div className="contact">
+        <a className="btn primary" href="mailto:ty@mail.thetyster.dev">
+          Email
+        </a>
+        <a className="btn" href="https://github.com/thetyster">
+          GitHub
+        </a>
+        <a className="btn" href="https://www.linkedin.com/in/tyler-davis-dev">
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  );
+}
 
 function LandingPage({ blogFeed }: { blogFeed: BlogFeedResult }) {
-  useEffect(() => {
-    setTitle("Ty Davis");
-  }, []);
-
-  // PULL CONTRIBUTIONS DATA
-  const githubApiSearch =
-    "https://api.github.com/search/issues?q=author%3Athetyster+type%3Apr";
-  let [pullRequests, setPullRequests] = useState<any[] | undefined>(undefined);
-  let [orgs, setOrgs] = useState<Record<string, any> | undefined>(undefined);
-
-  useEffect(() => {
-    (async () => {
-      // GET PULL REQUEST DATA
-      let search;
-      while (!search) {
-        try {
-          const resp = await axios(githubApiSearch);
-          search = resp.data.items;
-        } catch (error) {
-          console.warn("API Error. Trying Again. ", error);
-          await sleep(120);
-        }
-      }
-
-      // FILTER OUT MY OWN PULL REQUESTS.
-      const pullRequests = search.filter(
-        (pr) =>
-          (pr.author_association === "CONTRIBUTOR" &&
-            pr.pull_request.merged_at &&
-            pr.state === "closed") ||
-          pr.state === "open",
-      );
-
-      // GET ARRAY OF ORGS CONTRIBUTED TO.
-      const prOrgsUrls = Array.from(
-        new Set(pullRequests.map((pr) => pr.repository_url)),
-      );
-
-      // GET ASSOCIATED DATA OF ORGS
-      let orgData = {};
-      while (Object.keys(orgData).length === 0) {
-        try {
-          await axios
-            .all(prOrgsUrls.map((url) => axios(url)))
-            // move data into an object with the url set as the key for each org.
-            .then((resps) =>
-              [...resps].map((resp) => (orgData[resp.data.url] = resp.data)),
-            );
-        } catch (error) {
-          console.warn("API Error. Trying Again. ", error);
-          await sleep(120);
-        }
-      }
-
-      setPullRequests(pullRequests);
-      setOrgs(orgData);
-    })();
-  }, []);
-
-  // TAB MENU DATA
-  const menuItems = new Map([
-    [
-      {
-        "job-history": 0,
-        "initial": 1,
-        contributions: 2,
-        blog: 3,
-      },
-      [
-        {
-          //0
-          id: "job-history",
-          component: <JobHistory />,
-          title: "Job History",
-        },
-        {
-          //1
-          id: "initial",
-          component: <MyWork />,
-          title: "My Work",
-        },
-        {
-          //2
-          id: "contributions",
-          component: <Contributions orgs={orgs} pullRequests={pullRequests} />,
-          title: "Contributions",
-        },
-        {
-          //3
-          id: "blog",
-          component: <Blog blogFeed={blogFeed} />,
-          title: "Blog",
-        },
-      ],
+  const views: Viewpoint[] = useMemo(
+    () => [
+      { id: "work", label: "Work", color: "var(--accent)", kind: "ring", content: <MyWork /> },
+      { id: "experience", label: "Experience", color: "var(--amber)", kind: "bands", content: <JobHistory /> },
+      { id: "contributions", label: "Contributions", color: "var(--good)", kind: "moon", content: <Contributions /> },
+      { id: "writing", label: "Writing", color: "var(--mid)", kind: "", content: <Blog blogFeed={blogFeed} /> },
     ],
-  ]);
+    [blogFeed],
+  );
 
   return (
-    <div className="landing-page">
-      <h1 className="visually-hidden">Ty Davis, software engineer portfolio</h1>
-      <AttetionGetterImage
-        imgClass="my-headshot"
-        sideText_classPrefix="headshot-text"
-        imgSrc="/static/img/me.jpg"
-        imgAlt="My Face."
-        imgLink="https://github.com/thetyster"
-        sideText={<AttentionGetterSideText />}
-      />
-
-      <hr />
-
-      <TabMenu menuItems={menuItems} />
-    </div>
+    <Viewpoints views={views} headshot={<img src="/static/img/me.jpg" alt="Ty Davis" width={136} height={136} />}>
+      <Hero />
+    </Viewpoints>
   );
 }
 

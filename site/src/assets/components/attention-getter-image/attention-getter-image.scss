@@ -1,34 +1,24 @@
 @use "@css/mixins" as theme;
-@use "@css/variables" as v;
 
 div.attention-getter {
-	display: flex;
-	align-content: space-between;
-	flex-wrap: nowrap;
-  gap: 1em;
-	a>img{
-		&:hover{box-shadow: 3px 3px 10px black}
-		&:active{box-shadow:unset}
-		transition: box-shadow .1s;
-	}
-	img {
-		/* flex: 0 1 auto; */
-		border-radius: 100%;
-	}
-	div.sideText-container{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 20px 0;
+  img {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+  }
+  div.sideText-container {
     display: flex;
     flex-direction: column;
-    justify-items: space-around;
     justify-content: center;
-    /* flex: 1 1 auto; */
-			color: v.$charcoal;
-      max-width: 100%;
-	}
+    color: var(--muted);
+    max-width: 100%;
+  }
   @include theme.small-media-query {
     flex-direction: column;
-    gap: 1em;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
   }
 }
-

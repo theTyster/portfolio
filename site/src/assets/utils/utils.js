@@ -134,36 +134,6 @@
 //  };}}}
 
 
-//COLORS{{{
-export const themeColors = {
-  // Primary
-  darkcitron: "#b4a461",
-  citron: "#e1ce7a",
-  lightcitron: "#e7d794",
-
-  //Secondary
-  darkcharcoal: "#2e343a",
-  charcoal: "#424b54",
-  lightcharcoal: "#545d65",
-  ultralightcharcoal: "#878D93",
-
-  darkdesertsand: "#e0b68a",
-  desertsand: "#ebcfb2",
-  lightdesertsand: "#f0dcc6",
-  ultralightdesertsand: "#fbf5ee",
-
-  darkburntsilver: "#56493e",
-  burntsilver: "#655649",
-  lightburntsilver: "#836f5e",
-  ultralightburntsilver: "#A39080",
-
-  //SHADES OF gray
-  bw3to1: "#949494",
-
-
-  errormessage: "#9f0000",
-  errorbackground: "#ffeeee",
-}//}}}
 
 
 // Calculates age  in years from an anniversary date.{{{
@@ -229,7 +199,7 @@ export const normalizeEpochDate = dateString=>{
 
 
 // Sets the page Title based on String inputted.{{{
-export const setTitle = title => Array.from(document.querySelectorAll(".page-title")).forEach(e => e.innerText = title);//}}}
+export const setTitle = title => { document.title = title; };//}}}
 
 
 // DUCK STORY UTILITIES{{{

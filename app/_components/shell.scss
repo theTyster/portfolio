@@ -1,0 +1,6 @@
+// Global styles for every route: fonts, tokens, backdrop, header, footer and
+// the shared UI pieces. Route stylesheets add only their own layout.
+@use "@css/fonts";
+@use "@css/mixins" as theme;
+
+@include theme.foundation;

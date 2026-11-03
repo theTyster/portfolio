@@ -23,8 +23,8 @@ function FallbackLink({ note }: { note: string }) {
   return (
     <p className="blog-fallback">
       {note}{" "}
-      <a href={BLOG_HOME} target="_blank" rel="noreferrer noopener">
-        Visit blog.thetyster.dev directly →
+      <a href={BLOG_HOME}>
+        Visit blog.thetyster.dev
       </a>
     </p>
   );
@@ -36,7 +36,7 @@ function formatDate(date: string): string {
   if (Number.isNaN(parsed.getTime())) return date;
   return parsed.toLocaleDateString(undefined, {
     year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
   });
 }
@@ -68,14 +68,14 @@ function Blog({ blogFeed }: { blogFeed: BlogFeedResult }) {
       <ul className="blog-list">
         {posts.map((post) => (
           <li key={post.permalink} className="blog-post">
-            <a href={post.permalink} target="_blank" rel="noreferrer noopener">
-              <h3>{post.title}</h3>
-            </a>
             {post.date ? (
               <time dateTime={post.date} className="blog-date">
                 {formatDate(post.date)}
               </time>
             ) : null}
+            <h3>
+              <a href={post.permalink}>{post.title}</a>
+            </h3>
             {post.description ? (
               <p className="blog-description">{post.description}</p>
             ) : null}
@@ -83,9 +83,7 @@ function Blog({ blogFeed }: { blogFeed: BlogFeedResult }) {
         ))}
       </ul>
       <p className="blog-more">
-        <a href={BLOG_HOME} target="_blank" rel="noreferrer noopener">
-          More on blog.thetyster.dev →
-        </a>
+        <a href={BLOG_HOME}>All posts on the blog</a>
       </p>
     </div>
   );

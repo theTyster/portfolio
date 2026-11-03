@@ -1,263 +1,289 @@
-//COMPONENTS
-import Showcase from "@components/showcase/showcase";
-import SvgNpm from "@img/npm-svg";
+"use client";
 
-//COMPONENTS TODO:
-//import DuckStory       from "../duck-story/duck-story";
-//import FruitSearch     from "../fruit-search/fruit-search";
-//import GiphySearch     from "../giphy-search/giphy-search";
-//import HackerNewsClone from "../hacker-news-clone/hacker-news-clone";
-//import Jeopardy        from "../jeopardy/jeopardy";
-//import MemeGenerator   from "../meme-generator/meme-generator";
-//import MemoryGame      from "../memory-game/memory-game";
-//import TodoApp         from "../todo-app/todo-app";
+import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import ProjectLink from "@components/project-link/project-link";
+import { PROJECTS, type ProjectId } from "./projects";
+import {
+  Allocator,
+  ArtemisArt,
+  Caption,
+  GradeFlow,
+  GradientBars,
+  HarnessSpec,
+  KbExample,
+  LocatorArt,
+  NiceCurve,
+  PipelineOrbits,
+  SagittariusArt,
+  ScopeScoring,
+  SharleanArt,
+  StratifyArt,
+  TerminalOutput,
+  TicketChart,
+  useAllocator,
+} from "./visuals";
 
-const MyWork = () => {
-  const portfolioDB: PortfolioDB["Map"] = new Map([
-    [
-      {
-        Orbital: 0,
-        "COBRA Eligibility": 1,
-        sharlean: 2,
-        Artemis: 3,
-        locator: 4,
-        kimmy: 5,
-        "Cherry Lane Farm Doodles": 6,
-        CripToe: 7,
-      },
-      [
-        {
-          //0:featured: Orbital Shifting marketplace. Links to the self-contained
-          //orbital-shifting deck served same-origin (like the kimmy tile), NOT
-          //the GitHub repo — the deck carries the philosophy content the
-          //anti-discovery firewall exists to protect, so it is firewalled
-          //(X-Robots-Tag in _headers + robots.txt disallow on /my-work/orbital-shifting).
-          id: "Orbital",
-          title: "Orbital",
-          link: ["/my-work/orbital-shifting/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/orbital-ss.svg"
-              alt="An object shifting along an orbital path, with a fading trail of prior positions"
-            />
-          ),
-        },
-        {
-          //1:COBRA eligibility matrix (HoggWood Health client work via FortyAU).
-          //Self-contained deck served same-origin like the kimmy tile, but
-          //deliberately NOT firewalled: the client's code stays private and the
-          //deck itself is meant to be discoverable. See public/_headers.
-          id: "COBRA Eligibility",
-          title: "COBRA Eligibility",
-          link: ["/my-work/cobra-eligibility/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/cobra-eligibility-ss.svg"
-              alt="A grid in which every cell is filled, with a single narrow outlet on one edge"
-            />
-          ),
-        },
-        {
-          //2:sharlean, a deterministic Lean 4 scaffolder for shared-library projects
-          id: "sharlean",
-          title: "sharlean",
-          link: ["https://github.com/theTyster/sharlean", "_blank"],
-          img: (
-            <img
-              src="/static/img/sharlean-ss.svg"
-              alt="Three small bodies orbiting a single shared core"
-            />
-          ),
-        },
-        {
-          //3:Artemis benchmark harness
-          id: "Artemis",
-          title: "Artemis",
-          link: ["https://github.com/theTyster/artemis", "_blank"],
-          img: (
-            <img
-              src="/static/img/artemis-ss.svg"
-              alt="Spacecraft on a dashed orbital trajectory around a planet"
-            />
-          ),
-        },
-        {
-          //4:locator (formerly context-focused-agents)
-          id: "locator",
-          title: "locator",
-          link: ["https://github.com/theTyster/context-focused-locator", "_blank"],
-          img: (
-            <img
-              src="/static/img/context-focused-locator-ss.svg"
-              alt="Two overlapping circles meeting at a single focal point"
-            />
-          ),
-        },
-        {
-          //5:kimmy (FortyAU internal Python CLI wrapping Kimai time-tracker; links to the self-contained deck served same-origin)
-          id: "kimmy",
-          title: "kimmy",
-          link: ["/my-work/kimmy/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/kimmy-ss.svg"
-              alt="Stopwatch dial with a single hand and citron pivot"
-            />
-          ),
-        },
-        {
-          //6:Cherry Lane Farms (demoted from featured)
-          id: "Cherry Lane Farm Doodles",
-          title: "Cherry Lane Farm Doodles",
-          link: ["/cherry-lane-farms"],
-          img: (
-            <img
-              src="/static/img/cherrylane-farm-ss.png"
-              alt="Cherry Lane Farm App Screenshot"
-            />
-          ),
-        },
-        {
-          //7
-          id: "CripToe",
-          title: "CripToe.js",
-          link: ["https://www.npmjs.com/package/criptoe", "_blank"],
-          img: (
-            <SvgNpm
-              title="CripToe NPM Package Icon"
-              titleId="criptoe-npm-title"
-              desc="CripToe NPM Package Icon"
-              descId="criptoe-npm-desc"
-              aria-label="CripToe NPM Package Icon"
-            />
-          ),
-        },
-      ],
-    ],
-  ]);
+type Tab = { label: string; body: ReactNode };
 
-  // Beginner and bootcamp-era projects, kept but demoted behind a collapsed group.
-  const earlyWorkDB: PortfolioDB["Map"] = new Map([
-    [
-      {
-        Jeopardy: 0,
-        "Duck Story": 1,
-        "Fruit Search": 2,
-        "Giphy Search": 3,
-        "Hacker News Clone": 4,
-        "Meme Generator": 5,
-        "Memory Game": 6,
-        "ToDo App": 7,
-      },
-      [
-        {
-          //0
-          id: "Jeopardy",
-          title: "Jeopardy",
-          link: ["/jeopardy", "_blank"],
-          img: (
-            <img
-              src="/static/img/jeopardy-ss.png"
-              alt="Jeopardy App Screenshot"
-            />
-          ),
-        },
-        {
-          //1
-          id: "Duck Story",
-          title: "Duck Story",
-          link: ["/my-work/duck-story-v1/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/duck-story-v1-ss.png"
-              alt="Duck Story App Screenshot"
-            />
-          ),
-        },
-        {
-          //2
-          id: "Fruit Search",
-          title: "Fruit Search",
-          link: ["/my-work/fruit-search/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/fruit-search-ss.png"
-              alt="Fruit Search App Screenshot"
-            />
-          ),
-        },
-        {
-          //3
-          id: "Giphy Search",
-          title: "Giphy Search",
-          link: ["/my-work/giphy-search/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/giphy-search-ss.png"
-              alt="Giphy Search App Screenshot"
-            />
-          ),
-        },
-        {
-          //4
-          id: "Hacker News Clone",
-          title: "Hacker News Clone",
-          link: ["/my-work/hacker-news-clone/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/hacker-news-clone-ss.png"
-              alt="Hacker News Clone App Screenshot"
-            />
-          ),
-        },
-        {
-          //5
-          id: "Meme Generator",
-          title: "Meme Generator",
-          link: ["/my-work/meme-generator/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/meme-generator-ss.png"
-              alt="Meme Generator App Screenshot"
-            />
-          ),
-        },
-        {
-          //6
-          id: "Memory Game",
-          title: "Memory Game",
-          link: ["/my-work/memory-game/index.html", "_blank"],
-          img: (
-            <img
-              src="/static/img/memory-game-ss.png"
-              alt="Memory Game App Screenshot"
-            />
-          ),
-        },
-        {
-          //7
-          id: "ToDo App",
-          title: "ToDo App",
-          link: ["/my-work/todo-app/index.html", "_blank"],
-          img: (
-            <img src="/static/img/todo-app-ss.png" alt="ToDo App Screenshot" />
-          ),
-        },
-      ],
-    ],
-  ]);
-
+function ProjectLinks({ id }: { id: ProjectId }) {
+  const p = PROJECTS[id];
   return (
-    <nav>
-      <menu className="my-work">
-        <Showcase db={portfolioDB} />
-        <details className="early-work">
-          <summary>Early work</summary>
-          <Showcase db={earlyWorkDB} featured={false} />
-        </details>
-      </menu>
-    </nav>
+    <div className="links">
+      {p.site ? <a href={p.site.url}>{p.site.label}</a> : null}
+      {p.repo ? <a href={p.repo}>Source on GitHub</a> : null}
+    </div>
   );
-};
+}
 
-export default MyWork;
+function FeaturedProject({
+  id,
+  art,
+  pitch,
+  tabs,
+  builtWith,
+}: {
+  id: ProjectId;
+  art: ReactNode;
+  pitch: ReactNode;
+  tabs: Tab[];
+  builtWith: string;
+}) {
+  const p = PROJECTS[id];
+  const uid = useId();
+  const [sel, setSel] = useState(0);
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const select = (i: number, focus = false) => {
+    const j = ((i % tabs.length) + tabs.length) % tabs.length;
+    setSel(j);
+    if (focus) refs.current[j]?.focus();
+  };
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const keys: Record<string, number> = { ArrowRight: sel + 1, ArrowLeft: sel - 1, Home: 0, End: tabs.length - 1 };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    select(keys[e.key], true);
+  };
+  return (
+    <article className="feat" id={`project-${id}`} style={{ "--tone": p.color } as React.CSSProperties}>
+      <div className="feat-head">
+        {art}
+        <div>
+          <h3>{p.name}</h3>
+          <p className="pitch">{pitch}</p>
+        </div>
+      </div>
+      <div className="text-tabs" role="tablist" aria-label={`${p.name} views`} onKeyDown={onKeyDown}>
+        {tabs.map((t, i) => (
+          <button
+            key={t.label}
+            ref={(el) => {
+              refs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`${uid}-t${i}`}
+            aria-selected={i === sel}
+            aria-controls={`${uid}-p${i}`}
+            tabIndex={i === sel ? 0 : -1}
+            onClick={() => select(i)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {tabs.map((t, i) => (
+        <div
+          key={t.label}
+          className="feat-view"
+          role="tabpanel"
+          id={`${uid}-p${i}`}
+          aria-labelledby={`${uid}-t${i}`}
+          hidden={i !== sel}
+        >
+          {t.body}
+        </div>
+      ))}
+      <p className="built">
+        <b>Built with</b> {builtWith}
+      </p>
+      <ProjectLinks id={id} />
+    </article>
+  );
+}
+
+function Stratify() {
+  const alloc = useAllocator();
+  return (
+    <FeaturedProject
+      id="stratify"
+      art={<StratifyArt />}
+      pitch="Shares one Claude rate limit fairly between every session that's running."
+      builtWith="Lean 4 (no Mathlib) and a Claude Code skill"
+      tabs={[
+        {
+          label: "Try the allocator",
+          body: (
+            <>
+              <Allocator s={alloc} />
+              <Caption>
+                The same arithmetic the Lean binary runs: whole numbers on a 1000-weight scale, a 90% ceiling, and
+                sleeps between one minute and one hour.
+              </Caption>
+            </>
+          ),
+        },
+        {
+          label: "Terminal",
+          body: (
+            <>
+              <TerminalOutput />
+              <Caption>
+                Every reading says where it came from: measured, estimated, or unknown. The sessions it is balancing
+                here are mostly <ProjectLink id="sagittarius" /> work.
+              </Caption>
+            </>
+          ),
+        },
+        {
+          label: "Priority curve",
+          body: (
+            <>
+              <NiceCurve nice={alloc.nice} />
+              <Caption>
+                weight = 1000 · 2<sup>−nice/10</sup>. That is a 14.9× spread instead of the roughly 5900× in Linux, so
+                a session that yields still makes progress. Your setting from the allocator is in green.
+              </Caption>
+            </>
+          ),
+        },
+      ]}
+    />
+  );
+}
+
+function Card({ id, art, children }: { id: ProjectId; art: ReactNode; children: ReactNode }) {
+  const p = PROJECTS[id];
+  return (
+    <article className="card" id={`project-${id}`} style={{ "--tone": p.color } as React.CSSProperties}>
+      {art}
+      <h4>{p.name}</h4>
+      <p>{children}</p>
+      <ProjectLinks id={id} />
+    </article>
+  );
+}
+
+function Row({ id, children }: { id: ProjectId; children: ReactNode }) {
+  const p = PROJECTS[id];
+  return (
+    <div className="row" id={`project-${id}`} style={{ "--tone": p.color } as React.CSSProperties}>
+      <b>{p.name}</b>
+      <span>{children}</span>
+      {p.site ? <a href={p.site.url}>{p.site.label}</a> : null}
+    </div>
+  );
+}
+
+export default function MyWork() {
+  return (
+    <div className="work">
+      <FeaturedProject
+        id="sagittarius"
+        art={<SagittariusArt />}
+        pitch="How I get an AI coding agent and me to agree on the spec before it writes code."
+        builtWith="Markdown, SWI-Prolog, Lean 4, Python and Bash"
+        tabs={[
+          {
+            label: "The gradient",
+            body: (
+              <>
+                <GradientBars />
+                <Caption>
+                  Shift up on a signal. Lean back when it is resolved. Each step costs more time, so the agent only
+                  climbs when something tells it to.
+                </Caption>
+              </>
+            ),
+          },
+          {
+            label: "One ticket",
+            body: (
+              <>
+                <TicketChart />
+                <Caption>
+                  One ticket, left to right. The agent only climbs when something signals a problem, and it comes back
+                  down as soon as the problem is settled.
+                </Caption>
+              </>
+            ),
+          },
+          {
+            label: "A knowledge base",
+            body: (
+              <>
+                <KbExample />
+                <Caption>
+                  A real test fixture. The two claims contradict each other, and the knowledge base is where that shows
+                  up before any code is written.
+                </Caption>
+              </>
+            ),
+          },
+        ]}
+      />
+
+      <FeaturedProject
+        id="artemis"
+        art={<ArtemisArt />}
+        pitch="A harness that tests whether formal methods make AI-written code better on real tickets."
+        builtWith="TypeScript on Bun, BAML and SWI-Prolog"
+        tabs={[
+          {
+            label: "Two pipelines",
+            body: (
+              <>
+                <PipelineOrbits />
+                <GradeFlow />
+                <Caption>
+                  The treatment runs <ProjectLink id="sagittarius" />; the control runs one research and plan step. Same
+                  ticket, two git worktrees, and neither pipeline can see the other&apos;s changes.
+                </Caption>
+              </>
+            ),
+          },
+          { label: "Scoring", body: <ScopeScoring /> },
+          {
+            label: "The spec",
+            body: (
+              <>
+                <HarnessSpec />
+                <Caption>
+                  I wrote the harness down in Prolog before writing it in TypeScript. The constraints run every time
+                  the file loads.
+                </Caption>
+              </>
+            ),
+          },
+        ]}
+      />
+
+      <Stratify />
+
+      <h3 className="sec">More projects</h3>
+      <div className="cards">
+        <Card id="sharlean" art={<SharleanArt />}>
+          A Lean 4 command-line tool that lets every Lean project share one installed copy of Mathlib, instead of each
+          one downloading and building its own. I use it every day, and the <ProjectLink id="sagittarius" /> deck
+          points to it for Lean proof work.
+        </Card>
+        <Card id="locator" art={<LocatorArt />}>
+          Two compiled BAML agents, a locator and a summarizer, that find just the code context a task needs.
+        </Card>
+      </div>
+      <div className="rows">
+        <Row id="cherry-lane-farms">A full-stack Next.js app on Cloudflare for a dog breeder.</Row>
+        <Row id="criptoe">A small wrapper for the browser's crypto.subtle API, focused on AES-GCM, published on npm.</Row>
+      </div>
+    </div>
+  );
+}

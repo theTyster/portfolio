@@ -1,49 +1,127 @@
 @use "variables" as v;
+@use "tokens";
 
-// Data communicates information.
-// Art communicates Emotion.
-
-//TODO make the theme of colors changeable.
-//Idea:
-// use `&--themename` to set color themes in scss
-// change the theme color variables to be something like:
-// -$primary
-// -$secondary
-// -$accent
+// THEME
 //
-// The end result should be the ability to toggle the theme by changing all
-// tags with a class like `.theme--themename` to a different theme.
+// `foundation()` is included once per route stylesheet. It is split into:
+//   - `foundation-chrome()`: tokens, base type, the space backdrop, header,
+//     footer, focus ring, and the small shared UI pieces (buttons, text tabs,
+//     code windows) every route uses.
+//   - `foundation-portfolio()`: the solid content panel and prose styles that
+//     secondary pages (case study, 404) render inside.
+// Colours come only from the CSS custom properties in tokens.scss, so both
+// themes work everywhere.
 
-// MAIN THEME
-//
-// `foundation()` is preserved as a compatibility wrapper so existing routes
-// continue to behave exactly as before. The body is now split into two
-// concerns:
-//   - `foundation-chrome()`: universal, applies to every route (portfolio
-//     AND article). HTML/body resets, accessibility primitives, header,
-//     footer, focus ring.
-//   - `foundation-portfolio()`: the narrow citron-card aesthetic that the
-//     existing landing-page + project routes rely on. Article routes will
-//     swap this out for `foundation-article()` (added in A2).
 @mixin foundation-chrome() {
-  /* {margin: 0;} */
+  @include tokens.tokens;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
   html {
-    max-height: 100%vh;
-    max-width: 100%vw;
-    overflow-x: hidden;
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
   body {
     margin: 0;
-    background-color: v.$citron;
-    background-image: url("/static/img/splat-dark.svg");
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--fg);
+    font: 18px/1.6 var(--body);
+    background-color: var(--bg);
+    background:
+      radial-gradient(ellipse 70% 45% at 85% -8%, var(--neb1), transparent 70%),
+      radial-gradient(ellipse 60% 40% at -5% 105%, var(--neb2), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 60% 110%, var(--neb3), transparent 70%),
+      linear-gradient(180deg, var(--bg), var(--bg2) 160%);
     background-attachment: fixed;
-    transition: background-color 2s;
-    div#content,
-    div#noscript-content {
+    div#content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: stretch;
     }
+  }
+  // Starfield: four tiled radial-gradient layers, dimmer than the deck's.
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: var(--star-op);
+    background:
+      radial-gradient(1px 1px at 23px 41px, var(--starc), transparent) 0 0/197px 173px,
+      radial-gradient(1.4px 1.4px at 91px 12px, var(--starc), transparent) 0 0/251px 229px,
+      radial-gradient(1px 1px at 140px 120px, rgba(180, 220, 255, 0.8), transparent) 0 0/313px 277px,
+      radial-gradient(1.8px 1.8px at 60px 200px, rgba(255, 226, 180, 0.9), transparent) 0 0/409px 383px;
+    animation: twinkle 9s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from {
+      opacity: calc(var(--star-op) * 0.6);
+    }
+    to {
+      opacity: var(--star-op);
+    }
+  }
+  .orbit-motif {
+    position: fixed;
+    right: -22vmin;
+    bottom: -26vmin;
+    width: 92vmin;
+    height: 92vmin;
+    opacity: 0.16;
+    z-index: 0;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::before {
+      animation: none;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--display);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  a {
+    color: var(--accent);
+    text-underline-offset: 0.2em;
+    &:hover {
+      color: var(--fg);
+    }
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  code,
+  kbd,
+  .mono {
+    font-family: var(--mono);
+    font-size: 0.9em;
   }
   .visually-hidden {
     position: absolute;
@@ -61,315 +139,301 @@
     left: -9999px;
     top: 0;
     z-index: 200;
-    background: white;
-    color: v.$darkcharcoal;
+    background: var(--surface);
+    color: var(--fg);
+    border: 1px solid var(--accent);
     padding: 0.5rem 1rem;
-    border-radius: 7px;
+    border-radius: var(--radius-sm);
     text-decoration: none;
     font-weight: 600;
     &:focus {
       left: 1rem;
       top: 1rem;
-      outline: 3px solid v.$charcoal;
     }
   }
-  header {
+  .grad {
+    background: linear-gradient(100deg, var(--fg) 45%, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  // Header
+  .site-header {
     position: relative;
     z-index: 50;
-    display: block;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-
-    .header-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.6rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: 56px;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    @include small-media-query {
+      padding: 0 16px;
     }
-
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 32px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 12px;
+      min-height: 44px;
       text-decoration: none;
-      color: v.$darkcharcoal;
-      transition: transform 0.2s ease;
-      &:hover { transform: translateY(-1px); }
-
-      .brand-logo {
-        width: 44px;
-        height: auto;
-        display: block;
-      }
-      .brand-text {
+      color: var(--fg);
+      font-weight: 700;
+      font-size: 19px;
+    }
+    nav {
+      flex: 1 1 320px;
+      ul {
         display: flex;
-        flex-direction: column;
-        line-height: 1.1;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0 26px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
       }
-      .brand-name {
-        font-weight: 800;
-        font-size: 1.15rem;
-      }
-      .brand-role {
-        font-size: 0.78rem;
-        opacity: 0.65;
-        font-weight: 500;
-      }
-    }
-
-    .header-social {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-left: auto;
-
       a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        color: v.$darkcharcoal;
+        display: inline-block;
+        padding: 10px 2px;
+        color: var(--muted);
         text-decoration: none;
-        transition:
-          background-color 0.2s ease,
-          transform 0.2s ease,
-          color 0.2s ease;
-
-        &:hover {
-          background-color: v.$lightcitron;
-          transform: translateY(-1px);
-        }
-
-        &:focus-visible {
-          outline: 2px solid v.$darkcitron;
-          outline-offset: 2px;
-        }
-
-        svg {
-          width: 20px;
-          height: 20px;
-          display: block;
+        font-weight: 500;
+        font-size: 16px;
+        &:hover,
+        &[aria-current="page"] {
+          color: var(--fg);
+          text-decoration: underline;
         }
       }
     }
-
-    @media (max-width: 380px) {
-      .brand .brand-text { display: none; }
+    @include small-media-query {
+      .bar {
+        gap: 0 16px;
+      }
+      nav {
+        order: 3;
+        flex-basis: 100%;
+        ul {
+          justify-content: flex-start;
+          gap: 0 20px;
+        }
+      }
+      .theme-toggle {
+        margin-left: auto;
+      }
     }
   }
-  footer {
-    padding-top: v.$pad;
-    padding-bottom: v.$pad;
-    text-align: center;
-    /* white-space: nowrap; */
+
+  // Footer
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    @include small-media-query {
+      padding: 0 16px;
+    }
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 24px;
+      padding: 24px 0 40px;
+      border-top: 1px solid var(--line);
+      font-size: 16px;
+      color: var(--muted);
+    }
   }
-  :focus-visible {
-    outline: 9px double black;
-    box-shadow: 0 0 0 6px white;
+
+  // Shared UI
+  .iconbtn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--fg);
+    cursor: pointer;
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--fg);
+    text-decoration: none;
+    font: 600 16px/1.2 var(--body);
+    cursor: pointer;
+    &:hover {
+      border-color: var(--accent);
+      color: var(--fg);
+    }
+    &.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--onaccent);
+      &:hover {
+        color: var(--onaccent);
+        filter: brightness(1.08);
+      }
+    }
+  }
+  // Underlined text tabs (the in-card "lens" and the case study tabs).
+  .text-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 26px;
+    border-bottom: 1px solid var(--line);
+    button {
+      min-height: 44px;
+      padding: 0 2px;
+      margin-bottom: -1px;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font: 600 16px/1.2 var(--body);
+      cursor: pointer;
+      &:hover {
+        color: var(--fg);
+      }
+      &[aria-selected="true"] {
+        color: var(--fg);
+        border-bottom-color: var(--tone, var(--accent));
+      }
+    }
+  }
+  .codewin {
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--code);
+    overflow: hidden;
+    .codebar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--line);
+      font: 500 14px/1.3 var(--mono);
+      color: var(--muted);
+    }
+    pre {
+      margin: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font: 400 14px/1.65 var(--mono);
+      color: var(--fg);
+      white-space: pre;
+    }
+    .k {
+      color: var(--accent);
+    }
+    .s {
+      color: var(--good);
+    }
+    .c {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .v {
+      color: var(--amber);
+    }
   }
 }
 
 @mixin foundation-portfolio() {
-  main {
+  // The solid reading panel secondary pages render in.
+  main.page {
     position: relative;
-    flex-grow: 1;
-    @include center-by-margin(800px);
-    margin-top: 2.5rem;
-    padding: v.$pad;
-    background: white;
-    @include rounded-corners;
-  }
-  aside {
-    background-color: v.$lightdesertsand;
-    padding: v.$pad;
-    margin: v.$pad 0;
-    @include rounded-corners;
-    color: v.$darkburntsilver;
-    text-align: left;
-    a {
-      color: v.$lightburntsilver;
+    z-index: 1;
+    width: calc(100% - 80px);
+    max-width: 1000px;
+    margin: 40px auto 64px;
+    padding: 40px 48px 48px;
+    border-radius: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 60px var(--shadow);
+    @include small-media-query {
+      width: calc(100% - 32px);
+      margin: 20px auto 40px;
+      padding: 24px 20px 32px;
     }
-  }
-  p,
-  span {
-    font: v.$p-font;
-  }
-  h1 {
-    font: v.$h1-font;
-    margin: v.$h1-margin;
-  }
-  h2 {
-    font: v.$h2-font;
-    margin: calc(v.$h1-margin * 0.8);
-  }
-  h3 {
-    font: v.$h3-font;
-    margin: calc(v.$h1-margin * 0.6);
-  }
-  h4 {
-    font: v.$h4-font;
-    margin: calc(v.$h1-margin * 0.4);
-  }
-  h5 {
-    font: v.$h5-font;
-    margin: calc(v.$h1-margin * 0.2);
-  }
-  button,
-  .button,
-  li,
-  ul,
-  a {
-    font: bold v.$p-font;
-  }
-  a button,
-  .button {
-    text-decoration: none;
-  }
-  a {
-    color: v.$lightburntsilver;
-  }
-  button,
-  .button {
-    padding: v.$button-padding;
-    @include rounded-corners;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    color: white;
-    background-color: v.$charcoal;
-    &:hover {
-      background-color: v.$lightcharcoal;
-      &:active {
-        background-color: v.$darkcharcoal;
-      }
-    }
-  }
-  hr {
-    @include center-by-margin($w: 100%, $topbottom: 4em);
-    margin-top: 4em;
-    margin-bottom: 2em;
-    background-image: url("/static/img/curlywave.svg");
-    background-size: contain;
-    border: none;
-    height: 52px;
-    background-repeat: no-repeat;
-    background-position-x: center;
-  }
-  .npm-back {
-    background-color: rgba(176, 42, 42);
-  }
-
-  img.hero {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    @include rounded-corners;
-    margin: 0 auto;
-  }
-
-  // MEDIA QUERIES
-  // Header now spans the full viewport at every breakpoint; only main/footer
-  // get the narrow centered card treatment.
-  @include medium-media-query() {
-    main {
-      box-sizing: border-box;
-      @include center-by-margin(v.$md-content-width);
-    }
-    footer {
-      box-sizing: border-box;
-      @include center-by-margin(v.$md-content-width);
-    }
-  }
-  @include small-media-query() {
-    main {
-      @include center-by-margin(v.$sm-content-width);
-      box-sizing: border-box;
-    }
-    footer {
-      box-sizing: border-box;
-      @include center-by-margin(v.$sm-content-width);
-    }
-  }
-  @include micro-media-query() {
-    main {
-      @include center-by-margin(v.$sm-content-width);
-      box-sizing: border-box;
-      margin-right: 0;
-      margin-left: 0;
-      padding: 1rem;
-    }
-    footer {
-      box-sizing: border-box;
-      @include center-by-margin(v.$sm-content-width);
-    }
-  }
-}
-
-// `foundation-article()` is the article-route counterpart to
-// `foundation-portfolio()`. It neutralizes the citron card aesthetic in
-// favor of a prose container: neutral warm background, prose-width main,
-// quieter heading scale, list reset, and a calmer focus ring scoped to
-// `.prose`. Not called from anywhere yet; `ArticleShell` (D1) will
-// activate it on article routes.
-@mixin foundation-article() {
-  body[data-route="article"] {
-    background: var(--article-bg, #fbf8f3);
-    background-image: none;
-  }
-  body[data-route="article"] main {
-    position: relative;
-    flex-grow: 1;
-    @include center-by-margin(70ch);
-    padding: v.$pad;
-    background: transparent;
-  }
-  body[data-route="article"] main[data-article-width="wide"],
-  body[data-route="article"] article[data-article-width="wide"] {
-    max-width: 90ch;
-  }
-  body[data-route="article"] main[data-article-width="full-bleed"],
-  body[data-route="article"] article[data-article-width="full-bleed"] {
-    max-width: none;
-  }
-  body[data-route="article"] .prose {
     h1 {
-      font-size: 2rem;
-      line-height: 2.6rem;
-      margin: 1.5rem 0 1rem;
+      font-size: clamp(34px, 4vw + 10px, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
     }
     h2 {
-      font-size: 1.6rem;
-      line-height: 2.1rem;
-      margin: 1.25rem 0 0.85rem;
+      font-size: 30px;
+      margin: 40px 0 12px;
     }
     h3 {
-      font-size: 1.3rem;
-      line-height: 1.75rem;
-      margin: 1rem 0 0.7rem;
+      font-size: 23px;
+      margin: 28px 0 8px;
     }
-    li,
+    h4 {
+      font-size: 19px;
+      margin: 20px 0 6px;
+    }
+    h5 {
+      font-size: 17px;
+      margin: 16px 0 4px;
+    }
+    p,
+    li {
+      max-width: 68ch;
+    }
     ul,
     ol {
-      font: inherit;
+      padding-left: 1.4rem;
     }
-    :focus-visible {
-      outline: 2px solid currentColor;
-      box-shadow: none;
+    li {
+      margin: 6px 0;
+    }
+    li::marker {
+      color: var(--accent);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 40px 0;
+    }
+    img.hero {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      margin: 16px 0;
+    }
+    aside {
+      margin: 24px 0;
+      padding-left: 18px;
+      border-left: 2px solid var(--line);
+      color: var(--muted);
     }
   }
 }
 
-// Backward-compat wrapper: existing callers of `foundation()` continue to
-// get the full chrome+portfolio bundle they always did. New article routes
-// will instead `@include foundation-chrome; @include foundation-article;`.
 @mixin foundation() {
   @include foundation-chrome;
   @include foundation-portfolio;
@@ -394,28 +458,16 @@
 }
 
 @mixin rounded-corners() {
-  border-radius: 7px;
+  border-radius: 10px;
 }
 
-@mixin button-click($shadow: 3px 3px 10px) {
+@mixin button-click($shadow: 0 0 0 1px) {
   &:hover {
-    filter: drop-shadow($shadow #b4a461);
-    background-color: v.$lightcitron;
-    background: white;
-    &:active {
-      background-color: v.$darkcitron;
-      filter: none;
-      color: white;
-    }
+    box-shadow: $shadow var(--accent);
   }
 }
 
-@mixin center-by-margin(
-  $w: fit-content,
-  $top: 0,
-  $bottom: 0,
-  $topbottom: null
-) {
+@mixin center-by-margin($w: fit-content, $top: 0, $bottom: 0, $topbottom: null) {
   @if not $topbottom {
     margin-top: $top;
     margin-bottom: $bottom;
@@ -426,25 +478,4 @@
   }
   display: block;
   max-width: $w;
-}
-
-@mixin center-children-by-flex(
-  $childTag: #{div},
-  $childClassPrefix: flex,
-  $itemWidth: auto
-) {
-  display: flex;
-  #{$childTag}[class^="#{$childClassPrefix}"][class$="item"] {
-    flex: 1 0 $itemWidth;
-    max-width: v.$sm-max-width;
-    @include medium-media-query() {
-      max-width: 500px;
-    }
-    @include small-media-query() {
-      max-width: 250px;
-    }
-  }
-  #{$childTag}[class^="#{$childClassPrefix}"][class$="centering-box"] {
-    flex: 1;
-  }
 }

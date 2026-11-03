@@ -1,54 +1,71 @@
-import {useState} from "react";
-//import PropTypes from "prop-types";
+import { useId, useRef, useState, type KeyboardEvent } from "react";
 
 //CSS
 import "./tab-menu.scss";
 
-function TabMenu({menuItems}){
-
-//  //PROPS
-//  TabMenu.propTypes = {
-//    menuItems: PropTypes.object.isRequired,
-//    handleTabMenuClick: PropTypes.func,
-//  }
-
+// Accessible text tabs. `menuItems` keeps its original shape: a Map with one
+// entry whose key maps ids to indexes and whose value is the list of
+// { id, title, component } items. The item with id "initial" opens first.
+function TabMenu({ menuItems }) {
   const menuNamesObj = menuItems.keys().next().value;
   const menuDataArr = menuItems.values().next().value;
+  const uid = useId();
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const [menuState, setMenuState] = useState("initial");
-  const currentSelected = menuDataArr[menuNamesObj[menuState]];
+  const selectedIndex = menuNamesObj[menuState] ?? 0;
+  const currentSelected = menuDataArr[selectedIndex];
 
-  const handleTabMenuClick = event =>
-    setMenuState(
-      menuDataArr[+(
-        event.target.dataset.tabmenuItemId? 
-        event.target.dataset.tabmenuItemId
-        :
-        event.target.parentNode.dataset.tabmenuItemId
-      )].id);
+  const select = (index: number, focus = false) => {
+    const n = menuDataArr.length;
+    const i = ((index % n) + n) % n;
+    setMenuState(menuDataArr[i].id);
+    if (focus) tabRefs.current[i]?.focus();
+  };
 
-  return(
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const keys: Record<string, number> = {
+      ArrowRight: selectedIndex + 1,
+      ArrowLeft: selectedIndex - 1,
+      Home: 0,
+      End: menuDataArr.length - 1,
+    };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    select(keys[e.key], true);
+  };
+
+  return (
     <div className="tabmenu">
-      <menu onClick={handleTabMenuClick}> 
-        {menuDataArr.map(item =>(
-          <button 
-            key={menuNamesObj[item.id]}
-            aria-label={item.title}
-            data-tabmenu-item-id={menuNamesObj[item.id]}
-            className={item === currentSelected? "selected":""}
-            onClick={item.buttonClick?item.buttonClick:undefined}
+      <div className="text-tabs" role="tablist" onKeyDown={onKeyDown}>
+        {menuDataArr.map((item, i) => (
+          <button
+            key={item.id}
+            ref={(el) => {
+              tabRefs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`${uid}-tab-${i}`}
+            aria-selected={i === selectedIndex}
+            aria-controls={`${uid}-panel`}
+            tabIndex={i === selectedIndex ? 0 : -1}
+            onClick={item.buttonClick ?? (() => select(i))}
           >
-            <h2 className={`tabmenu-item-title${item.titleClass?`-${item.titleClass}`:""}`}>
-              {item.title}
-            </h2>
+            {item.title}
           </button>
         ))}
-      </menu>
-      <div className="menu-content">
+      </div>
+      <div
+        className="menu-content"
+        role="tabpanel"
+        id={`${uid}-panel`}
+        aria-labelledby={`${uid}-tab-${selectedIndex}`}
+      >
         {currentSelected.component}
       </div>
     </div>
-  )
+  );
 }
 
 export default TabMenu;

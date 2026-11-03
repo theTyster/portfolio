@@ -1,9 +1,5 @@
 import {useLayoutEffect} from "react";
 
-export const themeColors = {
-  lightcharcoal: "#4a4a4a",
-};
-
 export const setTitle = (title: string) => {
   document.title = title;
 };

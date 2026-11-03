@@ -1,19 +1,678 @@
-@use "@css/fonts";
 @use "@css/mixins" as theme;
-@use "@css/variables" as v;
 
-@include theme.foundation;
+// Home page layout: the "sun" column (orbit tabs, name, contact) beside the
+// panel for the selected section. Ported from the approved design canvas.
 
-.my-headshot {
-  width: 298px;
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 44px 40px 72px;
+  @include theme.small-media-query {
+    padding: 20px 16px 48px;
+    gap: 24px;
+  }
 }
 
-// Collapsed group for beginner-era projects on the My Work tab.
-details.early-work {
-  margin-top: 1.5rem;
-  summary {
-    cursor: pointer;
+// --- The sun ----------------------------------------------------------------
+.sun {
+  flex: 1 1 420px;
+  max-width: 470px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  @media (min-width: 1000px) {
+    position: sticky;
+    top: 20px;
+  }
+  @include theme.medium-media-query {
+    max-width: none;
+  }
+}
+
+.orbit-stage {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  aspect-ratio: 440 / 320;
+  align-self: center;
+  .orbit-rings {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .headshot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 31%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--amber);
+      box-shadow:
+        0 0 0 8px color-mix(in srgb, var(--amber) 14%, transparent),
+        0 0 48px color-mix(in srgb, var(--amber) 35%, transparent);
+    }
+  }
+  .planets {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.planet-tab {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  opacity: var(--o);
+  transform: translate(-50%, -50%) scale(var(--s));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 15px/1.1 var(--body);
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow:
+    0 1px 3px var(--bg),
+    0 0 8px var(--bg);
+  &:hover {
+    color: var(--fg);
+  }
+  &[aria-selected="true"] {
+    color: var(--fg);
+    font-weight: 700;
+    opacity: 1;
+  }
+}
+
+.planet {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 30%,
+    color-mix(in srgb, var(--pc) 30%, white) 0%,
+    var(--pc) 42%,
+    color-mix(in srgb, var(--pc) 40%, black) 100%
+  );
+  box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.35);
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    box-shadow 0.3s ease;
+  &.ring::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%;
+    height: 44%;
+    border: 1.5px solid color-mix(in srgb, var(--pc) 60%, white);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    opacity: 0.85;
+  }
+  &.moon::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    right: -38%;
+    top: -14%;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--pc) 35%, white);
+  }
+  &.bands {
+    background:
+      linear-gradient(
+        170deg,
+        transparent 30%,
+        color-mix(in srgb, var(--pc) 55%, black) 31% 36%,
+        transparent 37% 58%,
+        color-mix(in srgb, var(--pc) 55%, black) 59% 63%,
+        transparent 64%
+      ),
+      radial-gradient(
+        circle at 34% 30%,
+        color-mix(in srgb, var(--pc) 30%, white) 0%,
+        var(--pc) 42%,
+        color-mix(in srgb, var(--pc) 40%, black) 100%
+      );
+  }
+}
+.planet-tab[aria-selected="true"] .planet {
+  width: 36px;
+  height: 36px;
+  box-shadow:
+    inset -4px -4px 9px rgba(0, 0, 0, 0.35),
+    0 0 18px color-mix(in srgb, var(--pc) 60%, transparent);
+}
+
+.orbit-hint {
+  margin: -6px 0 0;
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+}
+html:not(.js) .planets,
+html:not(.js) .orbit-hint {
+  display: none;
+}
+
+// Phones and narrow tablets: the planets leave the orbit and become a strip
+// that sticks to the top while the panel scrolls.
+@include theme.medium-media-query {
+  .orbit-stage {
+    width: 100%;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    .orbit-rings {
+      display: none;
+    }
+    .headshot {
+      position: static;
+      transform: none;
+      width: 112px;
+    }
+    .planets {
+      position: static;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      width: 100%;
+    }
+  }
+  .planet-tab {
+    position: static;
+    transform: none;
+    opacity: 1;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 6px 2px;
+    font-size: 14px;
+  }
+  .orbit-hint {
+    display: none;
+  }
+  .sun {
+    gap: 16px;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  h1 {
+    margin: 0;
+    font-size: clamp(42px, 3vw + 18px, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+  }
+  .lede {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .sub {
+    margin: 0;
+    color: var(--muted);
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 6px;
+  }
+  @include theme.medium-media-query {
     text-align: center;
-    margin-bottom: 1rem;
+    align-items: center;
+    .contact {
+      justify-content: center;
+    }
+  }
+}
+
+// --- Panels -------------------------------------------------------------------
+.panels {
+  flex: 999 1 640px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.panel {
+  scroll-margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 44px 48px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 60px var(--shadow);
+  animation: panelIn 0.45s ease both;
+  > h2 {
+    margin: 0;
+    font-size: clamp(34px, 2vw + 20px, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  @include theme.small-media-query {
+    padding: 24px 18px 32px;
+    border-radius: 14px;
+  }
+}
+html.js .panel:not(.is-active) {
+  display: none;
+}
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+// Mentions of other projects.
+.project-link {
+  font-weight: 600;
+}
+
+// --- Work ---------------------------------------------------------------------
+.work {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  .sec {
+    margin: 10px 0 0;
+    font-size: 20px;
+  }
+}
+
+.feat,
+.card,
+.row {
+  scroll-margin-top: 90px;
+  &.flash {
+    animation: flash 1.8s ease;
+  }
+}
+@keyframes flash {
+  0%,
+  60% {
+    outline: 3px solid var(--tone, var(--accent));
+    outline-offset: 4px;
+  }
+  100% {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+  }
+}
+
+.feat {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px 30px 30px;
+  border-radius: var(--radius);
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  @include theme.small-media-query {
+    padding: 20px 16px 22px;
+  }
+  .feat-head {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    svg {
+      flex: none;
+    }
+    h3 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    @include theme.small-media-query {
+      gap: 14px;
+      svg {
+        width: 56px;
+        height: 56px;
+      }
+      h3 {
+        font-size: 25px;
+      }
+    }
+  }
+  .pitch {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 58ch;
+  }
+  .feat-view {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: panelIn 0.35s ease both;
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+.cap,
+.readout {
+  margin: 0;
+  max-width: 66ch;
+}
+.cap {
+  font-size: 16px;
+  color: var(--muted);
+}
+.readout {
+  font-size: 18px;
+}
+.built {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+  b {
+    color: var(--fg);
+    font-weight: 600;
+  }
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  a {
+    font-weight: 700;
+  }
+}
+.chart {
+  width: 100%;
+  height: auto;
+}
+// Wide diagrams keep a readable size on phones and scroll sideways instead.
+.chart-scroll {
+  overflow-x: auto;
+  @include theme.small-media-query {
+    .chart {
+      min-width: 620px;
+    }
+  }
+}
+
+// Sagittarius: rising bars.
+.levels {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+  padding-top: 34px;
+  .levels-arrow {
+    position: absolute;
+    left: 6%;
+    top: 0;
+    width: 88%;
+    height: 26px;
+  }
+  .lvl {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .col {
+      border-radius: 6px 6px 2px 2px;
+      opacity: 0.9;
+    }
+    b {
+      font: 700 16px/1.25 var(--display);
+    }
+    span {
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+  }
+  @include theme.small-media-query {
+    gap: 8px;
+    .lvl b {
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .lvl span {
+      display: none;
+    }
+  }
+}
+
+// Artemis: grade flow and scoring.
+.merge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  font-size: 16px;
+  b {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-weight: 600;
+  }
+  i {
+    font-style: normal;
+    color: var(--muted);
+  }
+}
+.ctl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 14px 20px;
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 15px;
+    color: var(--muted);
+    b {
+      color: var(--fg);
+      font-weight: 700;
+    }
+  }
+  input[type="range"] {
+    width: 100%;
+    min-height: 28px;
+    accent-color: var(--tone, var(--accent));
+  }
+}
+.hrow {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr) 64px;
+  gap: 12px;
+  align-items: center;
+  font-size: 16px;
+  > span:last-child {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  @include theme.small-media-query {
+    grid-template-columns: 1fr 64px;
+    > span:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+.hbar {
+  position: relative;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--line);
+  overflow: hidden;
+  i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+    transition: width 0.25s ease;
+  }
+}
+
+// Stratify: allocator and curve.
+.stack {
+  display: flex;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  div {
+    height: 100%;
+    transition: width 0.25s ease;
+  }
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 15px;
+  color: var(--muted);
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  i {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+}
+.tl {
+  position: relative;
+  height: 18px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--line) 45%, transparent);
+  div {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    border-radius: 2px;
+    background: var(--good);
+  }
+}
+.axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--muted);
+}
+.curve {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 150px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line);
+  div {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: var(--accent);
+    opacity: 0.4;
+    &.zero {
+      opacity: 0.75;
+    }
+    &.you {
+      background: var(--good);
+      opacity: 1;
+    }
+  }
+}
+
+// Cards and rows.
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 22px 24px;
+  border-radius: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  .card-art {
+    width: 100%;
+    height: 110px;
+  }
+  h4 {
+    margin: 0;
+    font-size: 21px;
+  }
+  p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+}
+.rows {
+  border-bottom: 1px solid var(--line);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  b {
+    font: 700 17px/1.3 var(--display);
+    min-width: 210px;
+  }
+  span {
+    flex: 1 1 300px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+  a {
+    font-weight: 700;
   }
 }

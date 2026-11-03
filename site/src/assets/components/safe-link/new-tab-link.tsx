@@ -8,7 +8,7 @@ function NewTabLink({ link, children }){
 //  }
   return (
     <a href={ link }
-    rel="noreferrer noopenner"
+    rel="noreferrer noopener"
     target="_blank"
   >
     { children }

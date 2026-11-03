@@ -1,23 +1,13 @@
-@use "@css/mixins" as theme;
-@use "@css/variables" as v;
-
 div.pre {
-  display: flex;
-  box-sizing: border-box;
-  overflow-x: scroll;
-  overflow-y: hidden;
   width: 100%;
-  background-color: v.$darkburntsilver;
-  @include theme.rounded-corners;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--code);
   pre {
-    box-sizing: border-box;
-    max-width: v.$md-content-width;
     margin: 0;
-    // If you want different 'padding' add more padding characters.
-    padding: 0;
-    color: white;
-    @include theme.medium-media-query() {
-      max-width: 0px;
-    }
+    padding: 14px 16px;
+    color: var(--fg);
+    font: 14px/1.65 var(--mono);
   }
 }

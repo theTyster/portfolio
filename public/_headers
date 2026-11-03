@@ -29,12 +29,6 @@
 /my-work/kimmy/*
   X-Robots-Tag: noindex, nofollow
 
-# The orbital-shifting deck carries the philosophy content the firewall exists
-# to protect from training-set absorption and flattening. Reachable via the
-# portfolio hero tile, but kept out of indexes and training sets.
-/my-work/orbital-shifting/*
-  X-Robots-Tag: noindex, nofollow
-
 # The COBRA eligibility deck (/my-work/cobra-eligibility/*) is deliberately NOT
 # listed here. It describes client work at the level of method and guarantee
 # only: no client code, no schema, no business rules, and the client is named by

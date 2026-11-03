@@ -18,7 +18,7 @@ const ClfContent = () => {
   }, []);
 
   return (
-    <main>
+    <div className="clf">
       <h1>The Creation of Cherry Lane Farms</h1>
       <h2>Project Overview</h2>
       <img
@@ -26,7 +26,7 @@ const ClfContent = () => {
         src="/static/img/cherrylane-farm-ss.png"
         alt="Screen shot of the front page of The Cherry Lane Farms website."
       />
-      <a href="https://github.com/theTyster/cherrylanefarmdoodles">
+      <a className="status-badge" href="https://github.com/theTyster/cherrylanefarmdoodles">
         <img src="https://img.shields.io/github/actions/workflow/status/theTyster/cherrylanefarmdoodles/main.yaml" alt="Cherry Lane Farms Deployment status." />
       </a>
       <p>
@@ -163,7 +163,7 @@ const ClfContent = () => {
           ])
         }
       />
-    </main>
+    </div>
   );
 };
 export default ClfContent;

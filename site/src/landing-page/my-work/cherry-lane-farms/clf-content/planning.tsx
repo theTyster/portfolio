@@ -18,7 +18,6 @@ function Planning() {
         <ol>
           <li>
             What does the site do? What should users be able to accomplish?
-          </li>
           <p>
             The site should allow people to view puppies and their parents as
             well as past litters from parents. The focus should be on informing
@@ -26,6 +25,7 @@ function Planning() {
             users fill out a form to apply for a puppy or sign up to be notified
             about the next litter.
           </p>
+          </li>
           <li>
             What are some similar sites that you like? How about ones you don’t
             like?

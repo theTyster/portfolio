@@ -4,7 +4,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx tsc --noEmit",
-    "deploy": "npx @cloudflare/next-on-pages && wrangler pages deploy .vercel/output/static"
+    "deploy": "npx @cloudflare/next-on-pages && wrangler pages deploy .vercel/output/static",
+    "test": "node --experimental-strip-types --no-warnings --test tests/*.test.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",

@@ -13,7 +13,7 @@ function Details({
     <div className="details">
       {heading ? heading : ""}
       <details {...props}>
-        <summary>{""}</summary>
+        <summary aria-label="Show or hide details" />
         {children}
       </details>
     </div>

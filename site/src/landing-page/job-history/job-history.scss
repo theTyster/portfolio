@@ -1,82 +1,86 @@
-@use "@css/mixins" as theme;
-@use "@css/variables" as v;
-
-//Default Styles
-div.jobHistory {
-  p.preamble {
-    text-indent: calc(v.$p-font-size * 1.5);
+ol.dates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--line);
   }
-  p.preamble:last-of-type {
-    margin-bottom: 2em;
-  }
-  article {
-    [class^="jobHistory"] {
-      img[class$="logo"] {
-        width: 100%;
-      }
-      a:has([class$="logo"]) {
-        width: 200px;
-      }
-      &[class$="details"] {
-      }
-      &[class$="summary"] {
-        text-indent: calc(v.$p-font-size * 1.5);
-      }
-      &[class$="title"] {
-        line-height: v.$h5-line-height;
-        padding: 0.3em;
-      }
-      &[class$="org"] {
-        line-height: v.$h5-line-height;
-        padding: 0.3em;
-      }
-      &[class$="timeframe"] {
-        font-weight: v.$font-weight-light;
-        font-size: v.$p-font-size;
-        line-height: v.$p-line-height;
-        margin: 0;
-      }
-      &[class$="elapsed-time"] {
-        font-weight: v.$font-weight-light;
-        font-size: calc(v.$p-font-size * 0.7);
-        line-height: calc(v.$p-line-height * 0.7);
-        margin: 0;
-      }
-      &[class$='responsibilities'] {
-        text-indent: 0;
-      }
-      // Nested client-engagement subsection (e.g. HoggWood via FortyAU):
-      // an indented block set off from the parent role.
-      section[class$="client-engagement"] {
-        margin: 1em 0 0 1.5em;
-        padding-left: 1em;
-        border-left: 2px solid v.$burntsilver;
-        text-indent: 0;
-        p {
-          text-indent: 0;
-        }
-        h5[class$="client-title"] {
-          line-height: v.$h5-line-height;
-          margin: 0;
-        }
-        p[class$="client-timeframe"] {
-          font-weight: v.$font-weight-light;
-          font-size: calc(v.$p-font-size * 0.8);
-          line-height: v.$p-line-height;
-          margin: 0 0 0.5em;
-        }
-      }
-      div.attention-getter {
-        @include theme.center-children-by-flex(
-          $childClassPrefix: "jobHistory",
-          $itemWidth: 25em
-        );
-      }
-      div.sideText-container * {
-        text-align: center;
-      }
+  > li {
+    position: relative;
+    padding-left: 40px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--tone, var(--accent));
+    }
+    &.now::before {
+      background: var(--amber);
+      border-color: var(--amber);
+      box-shadow: 0 0 12px var(--amber);
     }
   }
-  @include theme.medium-media-query() {
+  .when {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--amber);
+  }
+  .role {
+    margin: 2px 0;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .org {
+    margin: 0;
+    color: var(--muted);
+  }
+  .summary p {
+    margin: 10px 0 0;
+    max-width: 66ch;
+  }
+  .bul {
+    margin: 12px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 66ch;
+    li::marker {
+      color: var(--accent);
+    }
+  }
+  .client {
+    margin-top: 16px;
+    padding-left: 18px;
+    border-left: 2px solid var(--line);
+    h4 {
+      margin: 0;
+      font-size: 17px;
+    }
+  }
+  .client-when {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .client-after {
+    margin: 22px 0 0;
+    font-size: 17px;
   }
 }

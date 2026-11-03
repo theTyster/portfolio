@@ -11,7 +11,7 @@ export default function LandingPageClient({
   blogFeed: BlogFeedResult;
 }) {
   return (
-    <PortfolioShell>
+    <PortfolioShell bare>
       <LandingPage blogFeed={blogFeed} />
     </PortfolioShell>
   );
