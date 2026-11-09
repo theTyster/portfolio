@@ -12,12 +12,10 @@ function Hero() {
   return (
     <div className="hero">
       <h1>Ty Davis</h1>
-      <p className="lede">
-        I build backend systems for enterprise benefits and insurance carriers on .NET, C#, and Azure.
-      </p>
+      <p className="lede">I ship like a small team using AI agents, and specs and proofs keep it correct.</p>
       <p className="sub">
-        I keep AI-assisted code accountable to its specifications. Lean 4, TLA+, and SMT solvers check what must be
-        true separately from what the code actually does.
+        Lean 4, TLA+, and SMT solvers check what must be true separately from what the code actually does. In
+        production, that means backend systems for enterprise benefits and insurance carriers on .NET, C#, and Azure.
       </p>
       <p className="cred">
         <a href="https://www.credly.com/badges/69096ac6-b14d-47e3-8d9e-9ebf6f121acc">

@@ -5,7 +5,7 @@ import React from 'react'
 export const runtime = 'edge'
 
 const description =
-  'Ty Davis builds backend systems for enterprise benefits and insurance carriers, and keeps AI-assisted code accountable to its specifications with Lean 4, TLA+ and SMT solvers.'
+  'Ty Davis ships like a small team using AI agents, and specs and proofs keep it correct: backend systems for enterprise benefits and insurance carriers, checked with Lean 4, TLA+ and SMT solvers.'
 
 export const metadata = {
   metadataBase: new URL('https://portfolio.thetyster.dev'),

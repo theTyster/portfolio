@@ -38,12 +38,12 @@ const JOBS: Job[] = [
     ),
     client: {
       title: "Client: HoggWood Health (COBRA platform)",
-      when: "January 2026 to now",
+      when: "October 2025 to now",
       items: [
         <>
-          Designed the COBRA eligibility matrix and algorithm, the platform&apos;s core business logic, which every user
-          flows through. Requirements are stated in Lean 4, state transitions are model-checked in TLA+, and
-          constraints are explored with Z3 and cvc5. Read the <ProjectLink id="cobra" />.
+          Formally verified the COBRA eligibility model, the matrix and algorithm behind the platform&apos;s core
+          business logic, which every user flows through. Requirements are stated in Lean 4, state transitions are
+          model-checked in TLA+, and constraints are explored with Z3 and cvc5. Read the <ProjectLink id="cobra" />.
         </>,
         "Made the eligibility model total over malformed input, so a record with identity data we cannot independently verify still reaches a defined, justified outcome instead of being orphaned, lost, or misattributed. A separate Lean model of the implementation as built satisfies the requirements model, and the production code conforms to it within a stated boundary.",
         "Built an HTML-to-PDF invoice generation pipeline with Playwright (headless Chromium) and Handlebars templating: Azure Blob archival with an audit footer and three-variant dispatch (physical mail via LOB, SendGrid email attachment, canonical archive); 24 new tests, with the Chromium runtime Dockerized.",
