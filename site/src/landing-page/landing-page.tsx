@@ -13,11 +13,18 @@ function Hero() {
     <div className="hero">
       <h1>Ty Davis</h1>
       <p className="lede">
-        I build backend systems for enterprise benefits and insurance carriers on .NET, C#, and Azure.
+        I ship reliable software with AI agents, and formal specifications and proofs check what they deliver.
       </p>
       <p className="sub">
-        I keep AI-assisted code accountable to its specifications. Lean 4, TLA+, and SMT solvers check what must be
-        true separately from what the code actually does.
+        So people get what they actually need, not just what they asked for. In production, that means backend
+        systems for enterprise benefits and insurance carriers on .NET, C#, and Azure, checked with Lean 4, TLA+, and
+        SMT solvers.
+      </p>
+      <p className="cred">
+        <a href="https://www.credly.com/badges/69096ac6-b14d-47e3-8d9e-9ebf6f121acc">
+          Claude Certified Architect – Professional
+        </a>{" "}
+        (Anthropic, 2026)
       </p>
       <div className="contact">
         <a className="btn primary" href="mailto:ty@mail.thetyster.dev">

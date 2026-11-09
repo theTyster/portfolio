@@ -38,12 +38,12 @@ const JOBS: Job[] = [
     ),
     client: {
       title: "Client: HoggWood Health (COBRA platform)",
-      when: "January 2026 to now",
+      when: "October 2025 to now",
       items: [
         <>
-          Designed the COBRA eligibility matrix and algorithm, the platform&apos;s core business logic, which every user
-          flows through. Requirements are stated in Lean 4, state transitions are model-checked in TLA+, and
-          constraints are explored with Z3 and cvc5. Read the <ProjectLink id="cobra" />.
+          Formally verified the COBRA eligibility model, the matrix and algorithm behind the platform&apos;s core
+          business logic, which every user flows through. Requirements are stated in Lean 4, state transitions are
+          model-checked in TLA+, and constraints are explored with Z3 and cvc5. Read the <ProjectLink id="cobra" />.
         </>,
         "Made the eligibility model total over malformed input, so a record with identity data we cannot independently verify still reaches a defined, justified outcome instead of being orphaned, lost, or misattributed. A separate Lean model of the implementation as built satisfies the requirements model, and the production code conforms to it within a stated boundary.",
         "Built an HTML-to-PDF invoice generation pipeline with Playwright (headless Chromium) and Handlebars templating: Azure Blob archival with an audit footer and three-variant dispatch (physical mail via LOB, SendGrid email attachment, canonical archive); 24 new tests, with the Chromium runtime Dockerized.",
@@ -111,8 +111,45 @@ const JOBS: Job[] = [
   },
 ];
 
+type Cert = { name: string; issued: string; expires: string; url: string };
+
+// Both proctored exams, issued by Anthropic. Mirrors CERTIFICATIONS in Resume.md.
+export const CERTS: Cert[] = [
+  {
+    name: "Claude Certified Architect – Professional",
+    issued: "September 21, 2026",
+    expires: "September 21, 2027",
+    url: "https://www.credly.com/badges/69096ac6-b14d-47e3-8d9e-9ebf6f121acc",
+  },
+  {
+    name: "Claude Certified Developer – Foundations",
+    issued: "September 14, 2026",
+    expires: "September 14, 2027",
+    url: "https://www.credly.com/badges/a38475ab-59bf-4700-ae25-6336281c3a0f",
+  },
+];
+
+function Certifications() {
+  return (
+    <section className="certs" aria-labelledby="certs-h">
+      <h3 id="certs-h">Certifications</h3>
+      <ul>
+        {CERTS.map((c) => (
+          <li key={c.url}>
+            <a href={c.url}>{c.name}</a>
+            <span>
+              Anthropic. Issued {c.issued}, valid to {c.expires}.
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function JobHistory() {
   return (
+    <>
     <ol className="dates">
       {JOBS.map((j) => (
         <li key={j.id} className={j.to ? undefined : "now"} style={{ "--tone": j.tone } as React.CSSProperties}>
@@ -140,5 +177,7 @@ export default function JobHistory() {
         </li>
       ))}
     </ol>
+    <Certifications />
+    </>
   );
 }
