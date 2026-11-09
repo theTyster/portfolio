@@ -111,8 +111,45 @@ const JOBS: Job[] = [
   },
 ];
 
+type Cert = { name: string; issued: string; expires: string; url: string };
+
+// Both proctored exams, issued by Anthropic. Mirrors CERTIFICATIONS in Resume.md.
+export const CERTS: Cert[] = [
+  {
+    name: "Claude Certified Architect – Professional",
+    issued: "September 21, 2026",
+    expires: "September 21, 2027",
+    url: "https://www.credly.com/badges/69096ac6-b14d-47e3-8d9e-9ebf6f121acc",
+  },
+  {
+    name: "Claude Certified Developer – Foundations",
+    issued: "September 14, 2026",
+    expires: "September 14, 2027",
+    url: "https://www.credly.com/badges/a38475ab-59bf-4700-ae25-6336281c3a0f",
+  },
+];
+
+function Certifications() {
+  return (
+    <section className="certs" aria-labelledby="certs-h">
+      <h3 id="certs-h">Certifications</h3>
+      <ul>
+        {CERTS.map((c) => (
+          <li key={c.url}>
+            <a href={c.url}>{c.name}</a>
+            <span>
+              Anthropic. Issued {c.issued}, valid to {c.expires}.
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function JobHistory() {
   return (
+    <>
     <ol className="dates">
       {JOBS.map((j) => (
         <li key={j.id} className={j.to ? undefined : "now"} style={{ "--tone": j.tone } as React.CSSProperties}>
@@ -140,5 +177,7 @@ export default function JobHistory() {
         </li>
       ))}
     </ol>
+    <Certifications />
+    </>
   );
 }

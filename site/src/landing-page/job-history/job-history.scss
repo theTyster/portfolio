@@ -84,3 +84,33 @@ ol.dates {
     font-size: 17px;
   }
 }
+
+.certs {
+  margin-top: 44px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+  ul {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  a {
+    font-weight: 600;
+  }
+  span {
+    color: var(--muted);
+    font-size: 16px;
+  }
+}

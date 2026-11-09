@@ -247,6 +247,14 @@ html:not(.js) .orbit-hint {
     margin: 0;
     color: var(--muted);
   }
+  .cred {
+    margin: 0;
+    font-size: 16px;
+    color: var(--muted);
+    a {
+      font-weight: 600;
+    }
+  }
   .contact {
     display: flex;
     flex-wrap: wrap;

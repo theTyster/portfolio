@@ -19,6 +19,12 @@ function Hero() {
         I keep AI-assisted code accountable to its specifications. Lean 4, TLA+, and SMT solvers check what must be
         true separately from what the code actually does.
       </p>
+      <p className="cred">
+        <a href="https://www.credly.com/badges/69096ac6-b14d-47e3-8d9e-9ebf6f121acc">
+          Claude Certified Architect – Professional
+        </a>{" "}
+        (Anthropic, 2026)
+      </p>
       <div className="contact">
         <a className="btn primary" href="mailto:ty@mail.thetyster.dev">
           Email
